@@ -1,765 +1,1111 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Historia de las Instituciones Jurídicas — Cartillaas de Estudio</title>
-  <style>
-    :root {
-      --verde:       #1b6e3d;
-      --verde-oscuro:#145230;
-      --verde-claro: #e8f5ee;
-      --verde-med:   #2e8b57;
-      --borde:       #c8e6d0;
-      --sup2:        #f0faf4;
-      --texto:       #1a2e22;
-      --gris:        #5a7363;
-      --blanco:      #ffffff;
-      --sombra:      0 2px 12px rgba(27,110,61,.13);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia de las Instituciones Jurídicas</title>
+<style>
+  :root {
+    --verde1: #1b6e3d;
+    --verde2: #2e8b57;
+    --verde3: #e8f5ee;
+    --verde4: #c8e6d4;
+    --verde5: #a8d5b8;
+    --verde6: #155d32;
+    --blanco: #ffffff;
+    --gris1: #f4f9f6;
+    --gris2: #5a7363;
+    --texto: #1a2e22;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gris1); color: var(--texto); min-height: 100vh; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ── HEADER ── */
+  .app-header { background: linear-gradient(135deg, var(--verde1), var(--verde2)); color: #fff; padding: 1rem 1.5rem; display: flex; flex-direction: column; gap: .4rem; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+  .app-header h1 { font-size: 1.05rem; font-weight: 700; letter-spacing: .3px; }
+  .app-header p  { font-size: .78rem; opacity: .85; }
+  .modo-tabs { display: flex; gap: .5rem; margin-top: .4rem; }
+  .modo-btn { padding: .35rem .9rem; border: 2px solid rgba(255,255,255,.5); background: transparent; color: #fff; border-radius: 20px; font-size: .8rem; cursor: pointer; transition: all .2s; }
+  .modo-btn.activo { background: #fff; color: var(--verde1); font-weight: 700; border-color: #fff; }
 
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #f4faf6;
-      color: var(--texto);
-      min-height: 100vh;
-    }
+  /* ── VISTAS ── */
+  .vista { display: none; }
+  .vista.activa { display: block; }
 
-    /* ══ PORTADA ══ */
-    .portada-app {
-      background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde-med) 100%);
-      color: white;
-      text-align: center;
-      padding: 2.5rem 1.5rem 2rem;
-    }
-    .portada-app h1 { font-size: clamp(1.2rem,4vw,1.8rem); font-weight: 800; letter-spacing:-.5px; }
-    .portada-app p  { font-size: .9rem; opacity: .85; margin-top:.5rem; }
-    .portada-app .sub { font-size: .8rem; opacity: .7; margin-top:.3rem; }
+  /* ── CARTILLAS ── */
+  #vistaCartillas { padding: .8rem; max-width: 700px; margin: 0 auto; }
+  .prog-wrap { display: flex; align-items: center; gap: .6rem; margin-bottom: .7rem; }
+  .prog-bar-bg { flex: 1; height: 7px; background: var(--verde4); border-radius: 4px; overflow: hidden; }
+  .prog-bar { height: 100%; background: var(--verde2); border-radius: 4px; transition: width .3s; }
+  .prog-text { font-size: .78rem; color: var(--gris2); white-space: nowrap; }
 
-    /* ══ BARRA DE MODO ══ */
-    .modo-bar {
-      display: flex;
-      background: white;
-      border-bottom: 2px solid var(--borde);
-      position: sticky; top: 0; z-index: 50;
-    }
-    .modo-btn {
-      flex: 1; padding: .8rem .5rem; border: none;
-      background: none; cursor: pointer;
-      font-size: .85rem; font-weight: 600; color: var(--gris);
-      transition: all .2s; border-bottom: 3px solid transparent;
-    }
-    .modo-btn.activo { color: var(--verde); border-bottom-color: var(--verde); background: var(--verde-claro); }
+  .cartilla { display: none; background: #fff; border-radius: 14px; box-shadow: 0 2px 12px rgba(27,110,61,.1); overflow: hidden; }
+  .cartilla.activa { display: block; }
 
-    /* ══ VISTAS ══ */
-    .vista { display: none; }
-    .vista.activa { display: block; }
+  /* portada de unidad */
+  .cartilla.portada .card-body { background: linear-gradient(135deg, var(--verde1) 0%, var(--verde2) 100%); color: #fff; text-align: center; padding: 2.5rem 1.5rem; }
+  .cartilla.portada h2 { font-size: 1.6rem; margin-bottom: .5rem; }
+  .cartilla.portada .subtitulo { font-size: 1rem; opacity: .9; }
 
-    /* ══ CARTILLAS ══ */
-    #vistaCartillas { padding: 1rem; max-width: 760px; margin: 0 auto; }
+  /* cartilla normal */
+  .card-header { background: linear-gradient(90deg, var(--verde1), var(--verde2)); color: #fff; padding: .6rem 1rem; font-size: .78rem; font-weight: 600; letter-spacing: .5px; }
+  .card-body { padding: 1.2rem 1.1rem; }
+  .card-body h2 { font-size: 1.15rem; color: var(--verde1); margin-bottom: .8rem; border-bottom: 2px solid var(--verde4); padding-bottom: .4rem; }
+  .card-body h3 { font-size: .95rem; color: var(--verde6); margin: .9rem 0 .4rem; }
+  .card-body p  { font-size: .88rem; line-height: 1.65; margin-bottom: .6rem; color: #2a3e30; }
+  .card-body ul, .card-body ol { padding-left: 1.3rem; margin-bottom: .6rem; }
+  .card-body li { font-size: .87rem; line-height: 1.6; margin-bottom: .2rem; }
+  .card-body .destacado { background: var(--verde3); border-left: 4px solid var(--verde2); padding: .6rem .9rem; border-radius: 0 8px 8px 0; margin: .7rem 0; font-size: .87rem; }
+  .card-body .cita { font-style: italic; color: var(--gris2); font-size: .85rem; border-left: 3px solid var(--verde5); padding-left: .8rem; margin: .6rem 0; }
+  .card-body table { width: 100%; border-collapse: collapse; font-size: .83rem; margin: .7rem 0; }
+  .card-body th { background: var(--verde2); color: #fff; padding: .4rem .6rem; text-align: left; }
+  .card-body td { padding: .35rem .6rem; border-bottom: 1px solid var(--verde4); }
+  .card-body tr:nth-child(even) td { background: var(--verde3); }
+  .tag { display: inline-block; background: var(--verde3); color: var(--verde1); padding: .2rem .6rem; border-radius: 12px; font-size: .73rem; font-weight: 700; margin-bottom: .5rem; }
 
-    .progress-bar-wrap { background: var(--borde); border-radius: 8px; height: 6px; margin-bottom:.5rem; }
-    .progress-bar      { background: var(--verde); height: 6px; border-radius: 8px; transition: width .3s; }
-    .progress-text     { font-size: .78rem; color: var(--gris); text-align:right; margin-bottom:.8rem; }
+  /* quiz */
+  .quiz-section { margin-top: 1rem; border-top: 2px dashed var(--verde4); padding-top: .9rem; }
+  .quiz-label { font-size: .8rem; font-weight: 700; color: var(--verde1); margin-bottom: .5rem; }
+  .quiz-pregunta { font-size: .88rem; margin-bottom: .6rem; font-weight: 600; }
+  .quiz-btn { display: block; width: 100%; text-align: left; padding: .5rem .8rem; margin: .3rem 0; border: 1.5px solid var(--verde4); border-radius: 8px; background: #fff; cursor: pointer; font-size: .84rem; transition: all .15s; }
+  .quiz-btn:hover { border-color: var(--verde2); background: var(--verde3); }
+  .quiz-btn.correcto { background: #d4edda; border-color: #28a745; color: #155724; font-weight: 700; }
+  .quiz-btn.incorrecto { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+  .quiz-feedback { font-size: .83rem; margin-top: .4rem; font-weight: 600; min-height: 1.2em; }
+  .quiz-btn-reset { margin-top: .5rem; padding: .3rem .7rem; background: var(--verde3); border: 1.5px solid var(--verde2); color: var(--verde1); border-radius: 8px; font-size: .78rem; cursor: pointer; display: none; }
+  .quiz-btn-reset.visible { display: inline-block; }
 
-    .cartilla {
-      display: none;
-      background: white;
-      border-radius: 14px;
-      box-shadow: var(--sombra);
-      padding: 1.4rem 1.5rem;
-      margin-bottom: .5rem;
-      border-top: 4px solid var(--verde);
-      animation: slideIn .25s ease;
-    }
-    .cartilla.activa { display: block; }
-    @keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  /* nav */
+  .nav-buttons { display: flex; gap: .5rem; justify-content: center; margin-top: 1rem; padding-bottom: 1.5rem; }
+  .btn-nav { padding: .5rem 1.2rem; background: var(--verde2); color: #fff; border: none; border-radius: 8px; font-size: .88rem; cursor: pointer; transition: background .2s; }
+  .btn-nav:hover { background: var(--verde1); }
+  .btn-nav:disabled { background: #ccc; cursor: default; }
 
-    .cartilla-header {
-      display: flex; align-items: flex-start; gap: .8rem; margin-bottom: 1rem;
-    }
-    .num-cartilla {
-      background: var(--verde); color: white;
-      font-weight: 800; font-size: .8rem;
-      padding: .35rem .6rem; border-radius: 8px;
-      white-space: nowrap; min-width: 2.2rem;
-      text-align: center; flex-shrink: 0;
-      letter-spacing: .5px;
-    }
-    .cartilla-header h2 {
-      font-size: 1.05rem; font-weight: 700;
-      color: var(--verde-oscuro); line-height: 1.3;
-    }
+  /* índice */
+  .menu-toggle { position: fixed; bottom: 1.2rem; right: 1.2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--verde1); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,.3); z-index: 100; display: none; }
+  .indice-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 200; }
+  .indice-overlay.visible { display: block; }
+  .indice-panel { position: fixed; top: 0; left: -320px; width: 300px; height: 100vh; background: #fff; z-index: 300; overflow-y: auto; transition: left .3s; box-shadow: 3px 0 15px rgba(0,0,0,.2); }
+  .indice-panel.abierto { left: 0; }
+  .indice-titulo { background: var(--verde1); color: #fff; padding: 1rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; }
+  .btn-cerrar-indice { background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
+  .indice-item { display: block; width: 100%; text-align: left; padding: .55rem .8rem; border: none; background: none; cursor: pointer; font-size: .83rem; border-bottom: 1px solid var(--verde4); transition: background .15s; }
+  .indice-item:hover { background: var(--verde3); }
+  .indice-item.activo { background: var(--verde3); color: var(--verde1); font-weight: 700; }
+  .indice-item.indice-portada { background: var(--verde1); color: #fff; font-weight: 700; font-size: .85rem; }
+  .indice-item.indice-portada:hover { background: var(--verde6); }
+  .indice-num { color: var(--gris2); margin-right: .4rem; font-size: .75rem; }
+  .indice-item.indice-portada .indice-num { color: rgba(255,255,255,.7); }
 
-    .cartilla p  { font-size: .9rem; line-height: 1.65; color: #2d4a38; margin-bottom: .7rem; }
-    .cartilla ul { margin: .5rem 0 .7rem 1.2rem; }
-    .cartilla li { font-size: .9rem; line-height: 1.6; color: #2d4a38; margin-bottom: .3rem; }
-
-    .concepto-clave {
-      background: var(--verde-claro);
-      border-left: 4px solid var(--verde);
-      border-radius: 0 10px 10px 0;
-      padding: .8rem 1rem;
-      margin: .8rem 0;
-      font-size: .88rem; line-height: 1.6;
-    }
-    .concepto-clave .etiqueta {
-      font-weight: 700; color: var(--verde); font-size: .78rem;
-      text-transform: uppercase; letter-spacing: .8px; margin-bottom: .3rem;
-    }
-
-    .tabla-comp {
-      width: 100%; border-collapse: collapse;
-      font-size: .84rem; margin: .75rem 0;
-    }
-    .tabla-comp th {
-      background: var(--verde); color: white;
-      padding: .4rem .6rem; text-align: left;
-    }
-    .tabla-comp td {
-      padding: .4rem .6rem; border-bottom: 1px solid var(--borde);
-      vertical-align: top;
-    }
-    .tabla-comp tr:nth-child(even) td { background: var(--sup2); }
-
-    /* QUIZ */
-    .quiz-section {
-      background: #f7fdf9; border: 1px solid var(--borde);
-      border-radius: 10px; padding: 1rem; margin-top: 1.1rem;
-    }
-    .quiz-titulo  { font-weight: 700; font-size: .82rem; color: var(--verde); margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .6px; }
-    .quiz-pregunta{ font-size: .9rem; font-weight: 600; color: var(--texto); margin-bottom: .6rem; line-height: 1.5; }
-    .quiz-opciones { display: flex; flex-direction: column; gap: .4rem; }
-    .quiz-btn {
-      text-align: left; padding: .5rem .8rem;
-      background: white; border: 1.5px solid var(--borde);
-      border-radius: 8px; cursor: pointer; font-size: .85rem;
-      transition: all .15s; color: var(--texto);
-    }
-    .quiz-btn:hover  { background: var(--verde-claro); border-color: var(--verde); }
-    .quiz-btn.correcto{ background: #d4edda; border-color: #28a745; color: #155724; font-weight: 600; }
-    .quiz-btn.incorrecto{ background: #f8d7da; border-color: #dc3545; color: #721c24; }
-    .quiz-feedback { font-size: .84rem; margin-top: .55rem; min-height: 1.2em; font-style: italic; color: var(--gris); }
-    .quiz-btn-reset {
-      margin-top: .6rem; padding: .35rem .9rem;
-      background: none; border: 1px solid var(--verde);
-      color: var(--verde); border-radius: 6px; cursor: pointer;
-      font-size: .8rem; font-weight: 600; display: none;
-    }
-    .quiz-btn-reset.visible { display: inline-block; }
-
-    /* NAV */
-    .nav-buttons {
-      display: flex; gap: .6rem; margin-top: 1rem; justify-content: center; flex-wrap: wrap;
-    }
-    .btn-nav {
-      padding: .6rem 1.4rem; border-radius: 8px; border: none;
-      cursor: pointer; font-weight: 700; font-size: .88rem;
-      background: var(--verde); color: white; transition: background .2s;
-    }
-    .btn-nav:disabled { background: #b2d8c0; cursor: not-allowed; }
-    .btn-nav:not(:disabled):hover { background: var(--verde-oscuro); }
-
-    /* ÍNDICE */
-    .indice-overlay {
-      display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:200;
-    }
-    .indice-overlay.visible { display:block; }
-    .indice-panel {
-      position: fixed; top:0; right:-320px; width:300px; height:100%;
-      background: white; z-index:300; overflow-y:auto;
-      box-shadow: -3px 0 20px rgba(0,0,0,.15);
-      transition: right .3s ease; padding-bottom: 2rem;
-    }
-    .indice-panel.abierto { right: 0; }
-    .indice-titulo {
-      padding: 1rem; font-weight: 700; font-size: .95rem;
-      color: var(--verde); border-bottom: 2px solid var(--borde);
-      display: flex; justify-content: space-between; align-items: center;
-      position: sticky; top: 0; background: white;
-    }
-    .btn-cerrar-indice {
-      background: none; border: none; cursor: pointer;
-      font-size: 1.1rem; color: var(--gris);
-    }
-    .indice-item {
-      display: block; width: 100%; text-align: left;
-      background: none; border: none;
-      padding: .45rem .6rem; border-radius: 6px;
-      cursor: pointer; font-size: .82rem;
-      color: var(--texto); line-height: 1.35; transition: background .15s;
-    }
-    .indice-item:hover { background: var(--verde-claro); }
-    .indice-item.activo { background: var(--verde); color: white; font-weight: 600; }
-    .indice-item.activo .indice-num { color: rgba(255,255,255,.75); }
-    .indice-item.indice-portada {
-      font-weight: 700; font-size: .84rem; color: var(--verde);
-      border-top: 2px solid var(--verde); margin-top: .25rem;
-      background: rgba(27,110,61,.05);
-    }
-    .indice-item.indice-portada.activo { background: var(--verde); color: white; }
-    .indice-num { font-size: .72rem; color: var(--gris); margin-right: .4rem; }
-
-    .menu-toggle {
-      position: fixed; bottom: 1.2rem; right: 1.2rem;
-      width: 48px; height: 48px; border-radius: 50%;
-      background: var(--verde); color: white; border: none;
-      font-size: 1.3rem; cursor: pointer; z-index: 100;
-      box-shadow: 0 3px 12px rgba(27,110,61,.4);
-    }
-
-    /* ══ MODO EXAMEN ══ */
-    #vistaExamen { padding: 1rem; max-width: 700px; margin: 0 auto; }
-    .examen-config {
-      background: white; border-radius: 14px; box-shadow: var(--sombra);
-      padding: 1.5rem; text-align: center;
-    }
-    .examen-config h3 { color: var(--verde); margin-bottom: 1rem; font-size: 1.1rem; }
-    .btn-num-wrap { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 1rem; }
-    .btn-num {
-      padding: .45rem 1rem; border-radius: 8px;
-      border: 2px solid var(--verde); background: white;
-      color: var(--verde); font-weight: 700; cursor: pointer;
-      font-size: .88rem; transition: all .15s;
-    }
-    .btn-num:hover, .btn-num.sel { background: var(--verde); color: white; }
-    .btn-iniciar {
-      padding: .6rem 2rem; background: var(--verde); color: white;
-      border: none; border-radius: 10px; font-weight: 700;
-      font-size: .95rem; cursor: pointer;
-    }
-    .btn-iniciar:hover { background: var(--verde-oscuro); }
-
-    .examen-activo { display: none; }
-    .examen-activo.visible {
-      display: block; background: white;
-      border-radius: 14px; box-shadow: var(--sombra);
-      padding: 1.5rem;
-    }
-    .ex-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: .5rem; }
-    .ex-contador { font-size: .85rem; font-weight: 700; color: var(--verde); }
-    .ex-puntaje  { font-size: .85rem; color: var(--gris); }
-    .ex-progbar-wrap { background: var(--borde); border-radius: 4px; height: 5px; margin-bottom: 1.2rem; }
-    .ex-progbar  { background: var(--verde); height: 5px; border-radius: 4px; transition: width .3s; }
-    .ex-pregunta { font-size: .97rem; font-weight: 600; color: var(--texto); margin-bottom: 1rem; line-height: 1.55; }
-    .ex-tag      { font-size: .76rem; color: var(--gris); margin-bottom: .8rem; font-style: italic; }
-    .ex-opciones { display: flex; flex-direction: column; gap: .45rem; }
-    .ex-btn {
-      text-align: left; padding: .55rem .9rem;
-      background: white; border: 1.5px solid var(--borde);
-      border-radius: 8px; cursor: pointer; font-size: .87rem;
-      transition: all .15s; color: var(--texto);
-    }
-    .ex-btn:hover:not(:disabled) { background: var(--verde-claro); border-color: var(--verde); }
-    .ex-btn:disabled { cursor: default; }
-    .ex-btn.ex-correcto  { background: #d4edda; border-color: #28a745; color: #155724; font-weight: 600; }
-    .ex-btn.ex-incorrecto{ background: #f8d7da; border-color: #dc3545; color: #721c24; }
-    .ex-explicacion {
-      margin-top: .8rem; padding: .6rem .9rem;
-      background: var(--verde-claro); border-left: 3px solid var(--verde);
-      border-radius: 0 8px 8px 0; font-size: .84rem;
-      color: #2d4a38; display: none;
-    }
-    .ex-explicacion.visible { display: block; }
-    .ex-siguiente {
-      margin-top: 1rem; padding: .55rem 1.6rem;
-      background: var(--verde); color: white; border: none;
-      border-radius: 8px; font-weight: 700; cursor: pointer;
-      display: none;
-    }
-    .ex-siguiente.visible { display: inline-block; }
-    .ex-siguiente:hover { background: var(--verde-oscuro); }
-
-    /* Resultado final */
-    .ex-resultado {
-      display: none; text-align: center;
-      background: white; border-radius: 14px;
-      box-shadow: var(--sombra); padding: 2rem 1.5rem;
-    }
-    .ex-resultado.visible { display: block; }
-    .ex-score-num { font-size: 3rem; font-weight: 900; color: var(--verde); }
-    .ex-score-txt { font-size: 1.1rem; color: var(--gris); margin-bottom: 1.5rem; }
-    .ex-detalle   { text-align: left; margin-bottom: 1.5rem; }
-    .ex-detalle-item { padding: .5rem; border-radius: 6px; font-size: .85rem; margin-bottom: .35rem; }
-    .ex-detalle-item.ok  { background: #d4edda; color: #155724; }
-    .ex-detalle-item.mal { background: #f8d7da; color: #721c24; }
-    .btn-reiniciar-ex {
-      padding: .6rem 2rem; background: var(--verde); color: white;
-      border: none; border-radius: 10px; font-weight: 700;
-      font-size: .9rem; cursor: pointer;
-    }
-    .btn-reiniciar-ex:hover { background: var(--verde-oscuro); }
-
-    @media(max-width:480px) {
-      .portada-app h1 { font-size: 1.1rem; }
-      .cartilla { padding: 1rem; }
-    }
-  </style>
+  /* ── MODO EXAMEN ── */
+  #vistaExamen { max-width: 680px; margin: 0 auto; padding: 1rem; }
+  .examen-config { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(27,110,61,.1); text-align: center; }
+  .examen-config h3 { color: var(--verde1); font-size: 1.2rem; margin-bottom: .4rem; }
+  .btn-num-wrap { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 1rem; }
+  .btn-num { padding: .4rem .9rem; border: 2px solid var(--verde4); background: #fff; border-radius: 20px; cursor: pointer; font-size: .88rem; transition: all .15s; }
+  .btn-num.sel, .btn-num:hover { background: var(--verde2); color: #fff; border-color: var(--verde2); }
+  .btn-iniciar { background: var(--verde1); color: #fff; border: none; padding: .7rem 2rem; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: 700; }
+  .examen-activo { display: none; background: #fff; border-radius: 14px; padding: 1.2rem; box-shadow: 0 2px 12px rgba(27,110,61,.1); }
+  .examen-activo.visible { display: block; }
+  .ex-header { display: flex; justify-content: space-between; margin-bottom: .5rem; font-size: .83rem; color: var(--gris2); font-weight: 600; }
+  .ex-progbar-wrap { height: 6px; background: var(--verde4); border-radius: 3px; margin-bottom: .8rem; }
+  .ex-progbar { height: 100%; background: var(--verde2); border-radius: 3px; transition: width .3s; }
+  .ex-tag { font-size: .75rem; font-weight: 700; color: var(--verde2); margin-bottom: .4rem; }
+  .ex-pregunta { font-size: .95rem; font-weight: 700; margin-bottom: .9rem; line-height: 1.5; }
+  .ex-btn { display: block; width: 100%; text-align: left; padding: .55rem .9rem; margin: .35rem 0; border: 1.5px solid var(--verde4); border-radius: 9px; background: #fff; cursor: pointer; font-size: .85rem; transition: all .15s; }
+  .ex-btn:hover:not(:disabled) { border-color: var(--verde2); background: var(--verde3); }
+  .ex-btn.ex-correcto { background: #d4edda; border-color: #28a745; color: #155724; font-weight: 700; }
+  .ex-btn.ex-incorrecto { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+  .ex-explicacion { display: none; background: var(--verde3); border-left: 4px solid var(--verde2); padding: .6rem .9rem; border-radius: 0 8px 8px 0; font-size: .83rem; margin-top: .6rem; }
+  .ex-explicacion.visible { display: block; }
+  .ex-siguiente { display: none; margin-top: .8rem; padding: .5rem 1.4rem; background: var(--verde1); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: .9rem; font-weight: 700; }
+  .ex-siguiente.visible { display: inline-block; }
+  .ex-resultado { display: none; background: #fff; border-radius: 14px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(27,110,61,.1); }
+  .ex-resultado.visible { display: block; }
+  .ex-score-num { font-size: 3rem; font-weight: 900; color: var(--verde1); }
+  .ex-score-txt { font-size: 1.1rem; color: var(--gris2); margin-bottom: 1rem; }
+  .ex-detalle { text-align: left; max-height: 300px; overflow-y: auto; margin-bottom: 1rem; }
+  .ex-detalle-item { padding: .35rem .5rem; font-size: .82rem; border-bottom: 1px solid var(--verde4); }
+  .ex-detalle-item.ok  { color: #155724; }
+  .ex-detalle-item.mal { color: #721c24; }
+  .btn-reiniciar-ex { background: var(--verde1); color: #fff; border: none; padding: .6rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 700; }
+</style>
 </head>
 <body>
 
-<div class="portada-app">
+<div class="app-header">
   <h1>Historia de las Instituciones Jurídicas</h1>
-  <p>Cartillas de Estudio — Unidades I al V</p>
-  <p class="sub">Prof. Dra. Ana de la Luz Cuellar · UNA FDCS · 2025</p>
+  <p>Fac. de Derecho y Ciencias Sociales · UNA · Prof. Dra. Ana de la Luz Cuellar</p>
+  <div class="modo-tabs">
+    <button class="modo-btn activo" data-vista="vistaCartillas">📚 Cartillas</button>
+    <button class="modo-btn" data-vista="vistaExamen">🧠 Examen</button>
+  </div>
 </div>
 
-<div class="modo-bar">
-  <button class="modo-btn activo" data-vista="vistaCartillas">📚 Cartillas</button>
-  <button class="modo-btn"       data-vista="vistaExamen">🧠 Modo Examen</button>
-</div>
-
-<!-- ════ VISTA CARTILLAS ════ -->
 <div id="vistaCartillas" class="vista activa">
-  <div style="max-width:760px;margin:0 auto;padding:1rem 1rem 0;">
-    <div class="progress-bar-wrap"><div class="progress-bar" id="pBar"></div></div>
-    <div class="progress-text" id="pText"></div>
-  </div>
-
-
-  <!-- ══ UNIDAD I ══ -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla" style="background:#145230;">U1</span>
-      <h2>Unidad I — Sociedad, Instituciones y Estado</h2>
-    </div>
-    <div class="concepto-clave">
-      <div class="etiqueta">Temas de esta unidad</div>
-      Concepto de <strong>sociedad</strong>, grupos sociales, estructura social, <strong>instituciones</strong>, cultura, <strong>Nación</strong> y <strong>Estado</strong> (definición, elementos, gobierno).
-    </div>
-    <ul>
-      <li><strong>Sociedad</strong>: conjunto de personas que interactúan en un espacio determinado compartiendo una cultura (Macionis y Plummer).</li>
-      <li><strong>Grupos sociales</strong>: dos o más personas con identidad reconocida y vínculos entre sí. Ej: familia, trabajo, universidad, iglesia.</li>
-      <li><strong>Instituciones</strong>: asociaciones con roles diferenciados, regidas por normas derivadas de la costumbre. Son relaciones sistematizadas entre personas.</li>
-      <li><strong>Cultura</strong>: conjunto de bienes materiales y espirituales transmitidos de generación en generación (lengua, costumbres, valores, conocimiento).</li>
-    </ul>
-  </div>
-
-  <!-- 1 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">1</span>
-      <h2>Nación y Estado: definiciones y elementos</h2>
-    </div>
-    <p><strong>Nación</strong> (Martyniuk): conjunto de individuos que comparten raza, idioma, religión, costumbres, tradiciones e ideales, vinculados por un pasado histórico y aspiraciones comunes — la <em>conciencia nacional</em>.</p>
-    <p><strong>Estado</strong> (Martyniuk): sociedad humana fijada en un espacio geográfico, jurídicamente organizada mediante una autoridad que regula la convivencia social.</p>
-    <div class="concepto-clave">
-      <div class="etiqueta">Los 3 elementos del Estado</div>
-      <strong>1. Territorio</strong>: porción geográfica donde se asienta la población.<br>
-      <strong>2. Población</strong>: habitantes del país (nacionales y extranjeros).<br>
-      <strong>3. Poder / Soberanía</strong>: autoridad soberana que gobierna según el ordenamiento jurídico. La soberanía es el poder supremo, máximo e inderogable, interno y externo.
-    </div>
-    <p>El concepto de <strong>Estado</strong> apareció en el Renacimiento con Maquiavelo (<em>El Príncipe</em>) usando la palabra <em>stato</em>. Antes se llamó polis (Grecia), civitas, imperio, república (Roma).</p>
-    <div class="quiz-section" data-correcta="2">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Cuáles son los tres elementos constitutivos del Estado según Martyniuk?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">Nación, soberanía y lengua</button>
-        <button class="quiz-btn" data-idx="1">Gobierno, cultura y religión</button>
-        <button class="quiz-btn" data-idx="2">Territorio, población y poder soberano</button>
-        <button class="quiz-btn" data-idx="3">Constitución, leyes y ciudadanos</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
+  <div style="max-width:700px;margin:0 auto;padding:.8rem .8rem 0">
+    <div class="prog-wrap">
+      <div class="prog-bar-bg"><div class="prog-bar" id="pBar" style="width:2%"></div></div>
+      <span class="prog-text" id="pText">1 / 1</span>
     </div>
   </div>
 
-  <!-- ══ UNIDAD II ══ -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla" style="background:#145230;">U2</span>
-      <h2>Unidad II — La Prehistoria y el Nacimiento de las Instituciones</h2>
-    </div>
-    <div class="concepto-clave">
-      <div class="etiqueta">Temas de esta unidad</div>
-      La <strong>línea del tiempo</strong> histórica, la Prehistoria (Paleolítico y Neolítico), la revolución agrícola, la Edad de los Metales, el concepto de <strong>Historia</strong> y el nacimiento de las primeras instituciones jurídicas.
-    </div>
-    <ul>
-      <li><strong>Prehistoria</strong>: desde la aparición del hombre (~2.500.000 a.C.) hasta la invención de la escritura (~3500 a.C.).</li>
-      <li><strong>Paleolítico</strong>: cazadores-recolectores nómadas, dominio del fuego, pinturas rupestres (Altamira, Lascaux).</li>
-      <li><strong>Neolítico</strong>: primera gran revolución — la <em>agricultura</em>. Sedentarización, estratificación social, especialización del trabajo.</li>
-      <li><strong>Edad de los Metales</strong>: cobre (3500 a.C.) → bronce → hierro.</li>
-    </ul>
+<div class="cartilla portada">
+  <div class="card-body">
+    <h2>UNIDAD I</h2>
+    <div class="subtitulo">Sociedad, Cultura, Nación y Estado</div>
   </div>
+</div>
 
-  <!-- 2 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">2</span>
-      <h2>La Revolución Neolítica y sus consecuencias</h2>
-    </div>
-    <p>Hacia el <strong>10.000 a.C.</strong> se produjo la primera gran revolución de la humanidad: la <strong>agricultura</strong>. Transformó la economía humana dando al hombre control sobre su abastecimiento.</p>
-    <table class="tabla-comp">
-      <thead><tr><th>Consecuencia</th><th>Descripción</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Sedentarización</strong></td><td>Aldeas fijas; fin del nomadismo</td></tr>
-        <tr><td><strong>Estratificación social</strong></td><td>División del trabajo; autoridad civil y religiosa</td></tr>
-        <tr><td><strong>Crecimiento demográfico</strong></td><td>Menor mortalidad; cuidado de enfermos y ancianos</td></tr>
-        <tr><td><strong>Nuevos oficios</strong></td><td>Alfarería, textilería, agricultura especializada</td></tr>
-        <tr><td><strong>Nacimiento de instituciones</strong></td><td>Familia, organización política, justicia</td></tr>
-      </tbody>
-    </table>
-    <div class="concepto-clave">
-      <div class="etiqueta">El nacimiento de las instituciones</div>
-      La convivencia en aldeas fijas obligó a crear organizaciones sociales: la <strong>familia</strong>, la <strong>justicia</strong> (inicialmente la venganza de sangre), y la <strong>organización política</strong> para dirigir obras colectivas y resolver desacuerdos.
-    </div>
-    <div class="quiz-section" data-correcta="1">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Cuál fue la primera gran revolución de la humanidad que transformó la economía?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">El dominio del fuego en el Paleolítico</button>
-        <button class="quiz-btn" data-idx="1">La agricultura en el Neolítico (~10.000 a.C.)</button>
-        <button class="quiz-btn" data-idx="2">La metalurgia del cobre en 3500 a.C.</button>
-        <button class="quiz-btn" data-idx="3">La invención de la escritura en Sumeria</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD I · Sociedad y Grupos Sociales</div>
+  <div class="card-body">
+    <h2>Sociedad y Grupos Sociales</h2>
+    <p><b>Sociedad</b> es el conjunto de personas que interactúa en un espacio determinado y comparte una misma cultura, relacionándose según reglas jurídicas y costumbres. <span style="font-size:.8rem;color:#5a7363">(Macionis & Plummer)</span></p>
+<h3>Grupos Sociales</h3>
+<p>Grupo de dos o más personas con identidad reconocida mutuamente y algún tipo de vínculo entre sí.</p>
+<div class="destacado">Ejemplos: la familia, el trabajo, la universidad, la iglesia.</div>
+<h3>Estructura Social</h3>
+<p>Conjunto de formas en que grupos e individuos se organizan y relacionan dentro de una sociedad. Incluye la "constelación especial" de castas, estamentos y clases.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué es un grupo social según Macionis y Plummer?</div>
+  <button class="quiz-btn" data-idx="0">Un conjunto de personas sin vínculos formales</button>
+<button class="quiz-btn" data-idx="1">Grupo de dos o más personas con identidad reconocida y vínculo entre sí</button>
+<button class="quiz-btn" data-idx="2">Una institución del Estado</button>
+<button class="quiz-btn" data-idx="3">Una organización exclusivamente laboral</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 3 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">3</span>
-      <h2>Historia: concepto e importancia para el Derecho</h2>
-    </div>
-    <p>La <strong>Historia</strong> (McNall Burns): registro e interpretación de las realizaciones, frustraciones, luchas y triunfos del hombre. Sirve para entender el presente y planificar el futuro.</p>
-    <div class="concepto-clave">
-      <div class="etiqueta">Historia y Derecho</div>
-      <strong>Cecilio Báez</strong> destaca la importancia del análisis histórico para el estudio de las ciencias jurídicas.<br><br>
-      <strong>Gayo</strong>: "Habiendo de interpretar las leyes antiguas, he juzgado necesario remontarme antes a los principios de Roma… el principio es la parte más principal de cualquier cosa. Solo conociendo la historia se puede conocer el Derecho."
-    </div>
-    <p>La Historia comienza con la invención de la <strong>escritura cuneiforme</strong> por los sumerios (~3500 a.C. en tablillas de arcilla), que permitió registrar leyes, órdenes y contratos.</p>
-    <div class="quiz-section" data-correcta="0">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Qué pueblo inventó la escritura cuneiforme y en qué año aproximado?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">Los sumerios, ~3500 a.C.</button>
-        <button class="quiz-btn" data-idx="1">Los egipcios, ~2500 a.C.</button>
-        <button class="quiz-btn" data-idx="2">Los hebreos, ~1500 a.C.</button>
-        <button class="quiz-btn" data-idx="3">Los griegos, ~800 a.C.</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD I · Instituciones y Cultura</div>
+  <div class="card-body">
+    <h2>Instituciones y Cultura</h2>
+    <h3>Instituciones</h3>
+<p>Son <b>"asociaciones"</b> que se forman a partir de su propia dinámica, donde cada miembro cumple un rol diferente y todos se rigen por normas derivadas de la costumbre y la naturaleza de las relaciones humanas.</p>
+<div class="destacado">Son relaciones entre personas sistematizadas en una estructura más o menos formal. Ej.: la familia.</div>
+<h3>Cultura</h3>
+<p>Conjunto de <b>bienes materiales y espirituales</b> de un grupo social, transmitidos de generación en generación para orientar prácticas individuales y colectivas. Incluye: lengua, costumbres, tradiciones, valores, herramientas y conocimiento.</p>
+<p class="cita">"La cultura se ha ido formando conforme el ser humano se ha desarrollado en un entorno específico."</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué caracteriza principalmente a las instituciones sociales?</div>
+  <button class="quiz-btn" data-idx="0">Son organismos exclusivamente estatales</button>
+<button class="quiz-btn" data-idx="1">Cada miembro cumple un rol y se rigen por normas de la costumbre</button>
+<button class="quiz-btn" data-idx="2">Son grupos informales sin estructura</button>
+<button class="quiz-btn" data-idx="3">Solo existen en sociedades modernas</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- ══ UNIDAD III ══ -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla" style="background:#145230;">U3</span>
-      <h2>Unidad III — Primeras Civilizaciones: Mesopotamia, India, Egipto y Hebreos</h2>
-    </div>
-    <div class="concepto-clave">
-      <div class="etiqueta">Temas de esta unidad</div>
-      Las primeras civilizaciones de la antigüedad: <strong>Mesopotamia</strong> (sumerios, Babilonia, Código de Hammurabi), <strong>India</strong> (castas, Código de Manú), <strong>Egipto</strong> (faraón, gobierno teocrático), <strong>Hebreos</strong> (Torá, Decálogo, Derecho hebreo).
-    </div>
-    <ul>
-      <li><strong>Mesopotamia</strong>: "tierra entre ríos" (Tigris y Éufrates), actual Irak. Sumerios (~4000 a.C.): primeras ciudades-Estado, escritura cuneiforme.</li>
-      <li><strong>India</strong>: civilización del Indo (Mohenjo-Daro, Harappa, ~2500 a.C.). Sistema de castas: sacerdotes, comerciantes, sirvientes/campesinos, parias.</li>
-      <li><strong>Egipto</strong>: gobierno teocrático del Faraón. Sociedad estratificada: Familia real → Nobleza → Artesanos → Esclavos.</li>
-      <li><strong>Hebreos</strong>: Fuente del Derecho: la Biblia/Torá (Génesis, Éxodo, Levítico, Números, Deuteronomio).</li>
-    </ul>
+<div class="cartilla">
+  <div class="card-header">UNIDAD I · Nación y Estado</div>
+  <div class="card-body">
+    <h2>Nación y Estado</h2>
+    <h3>Nación</h3>
+<p class="cita">"Conjunto de individuos que habitan o no un mismo territorio, vinculados por caracteres comunes (raza, idioma, religión, costumbres) y por un pasado histórico y aspiraciones comunes — conciencia nacional." (Martyniuk, 2003)</p>
+<h3>Estado</h3>
+<p>El término <b>Estado</b> aparece en el Renacimiento con Maquiavelo (<i>El Príncipe</i>): «STATO» = organización política suprema. Antes se llamaba Polis (Grecia), Civitas/Imperio/República (Roma).</p>
+<p class="cita">"Sociedad humana fijada en un espacio geográfico, jurídicamente organizada mediante una autoridad que regula la convivencia social." (Martyniuk, 2003)</p>
+<h3>Elementos del Estado</h3>
+<ul>
+  <li><b>Territorio:</b> porción geográfica donde se asienta la población.</li>
+  <li><b>Población:</b> habitantes del país (nacionales y extranjeros).</li>
+  <li><b>Poder:</b> autoridad soberana que gobierna según el ordenamiento jurídico. La <b>soberanía</b> = poder supremo, máximo y superior, interno y externo.</li>
+</ul>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuáles son los 3 elementos del Estado?</div>
+  <button class="quiz-btn" data-idx="0">Gobierno, leyes y ciudadanos</button>
+<button class="quiz-btn" data-idx="1">Territorio, población y poder</button>
+<button class="quiz-btn" data-idx="2">Nación, idioma y cultura</button>
+<button class="quiz-btn" data-idx="3">Constitución, ejército y justicia</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 4 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">4</span>
-      <h2>El Código de Hammurabi (~1760 a.C.)</h2>
-    </div>
-    <p>Hammurabi, rey de Babilonia (~1750 a.C.), estableció el primer <strong>código escrito de leyes</strong> de la civilización occidental. Su aporte más importante fue entregar al <strong>Estado</strong> la responsabilidad por el cumplimiento de la ley, suprimiendo el derecho de venganza privada.</p>
-    <table class="tabla-comp">
-      <thead><tr><th>Rama</th><th>Contenido</th></tr></thead>
-      <tbody>
-        <tr><td>Derecho Civil</td><td>Derecho de familia, matrimonio, herencia (la mujer tiene derecho a la mitad de bienes adquiridos)</td></tr>
-        <tr><td>Derecho de Propiedad</td><td>Catastro, propiedad territorial</td></tr>
-        <tr><td>Derecho Privado</td><td>Compraventa, préstamos, contratos de depósito, prenda</td></tr>
-        <tr><td>Derecho Penal</td><td>Muy riguroso: <strong>Ley del Talión</strong> ("ojo por ojo") y Ordalías (juicios de Dios)</td></tr>
-      </tbody>
-    </table>
-    <div class="concepto-clave">
-      <div class="etiqueta">Ley del Talión</div>
-      "Ojo por ojo, diente por diente": pena igual a la ofensa entre personas de igual posición social. Para personas de categoría inferior, compensación en dinero.
-    </div>
-    <div class="quiz-section" data-correcta="2">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Cuál fue el aporte más importante del Código de Hammurabi a la civilización?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">Inventar la escritura cuneiforme</button>
-        <button class="quiz-btn" data-idx="1">Establecer el sistema de castas</button>
-        <button class="quiz-btn" data-idx="2">Entregar al Estado la responsabilidad de hacer cumplir la ley, suprimiendo la venganza privada</button>
-        <button class="quiz-btn" data-idx="3">Crear el gobierno teocrático</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD I · Gobierno</div>
+  <div class="card-body">
+    <h2>Gobierno</h2>
+    <p>El <b>gobierno</b> es el modo en que se expresa, concreta y organiza el Poder del Estado. No puede existir ni funcionar sin órganos.</p>
+<div class="destacado">Comprende tres poderes: <b>Ejecutivo · Legislativo · Judicial</b></div>
+<p>Desde el gobierno se ejerce el poder político sobre la sociedad, ejecutando las leyes, legislando y administrando justicia.</p>
+    
+<div class="quiz-section" data-correcta="2">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuántos y cuáles son los poderes del gobierno?</div>
+  <button class="quiz-btn" data-idx="0">Dos: ejecutivo y legislativo</button>
+<button class="quiz-btn" data-idx="1">Cuatro: ejecutivo, legislativo, judicial y militar</button>
+<button class="quiz-btn" data-idx="2">Tres: ejecutivo, legislativo y judicial</button>
+<button class="quiz-btn" data-idx="3">Uno: el poder soberano</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 5 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">5</span>
-      <h2>Código de Manú (India) y Derecho Hebreo</h2>
-    </div>
-    <p>El <strong>Código de Manú</strong> (India) es una colección de preceptos religiosos, morales, sociales y jurídicos. Establecía normas de gobierno, administración de justicia, organización del ejército, del comercio y la condición de la mujer. Consagró la separación inamovible de las <strong>castas</strong>.</p>
-    <div class="concepto-clave">
-      <div class="etiqueta">Derecho Hebreo — Fuentes</div>
-      La fuente del Derecho hebreo es la <strong>Biblia o Antiguo Testamento</strong>, especialmente la <strong>Torá</strong> (cinco libros del Pentateuco). Sus principales cuerpos jurídicos son:
-      <ul style="margin-top:.4rem; margin-left:1rem;">
-        <li><strong>Decálogo</strong>: las diez leyes escritas por Dios (Derecho positivo y natural hebreo)</li>
-        <li><strong>Código de la Alianza</strong>: Derecho penal y civil</li>
-        <li><strong>Código Deuteronomio</strong>: Derecho penal, familiar y social</li>
-        <li><strong>Código de Sanidad</strong>: leyes de carácter moral y ritual</li>
-      </ul>
-    </div>
-    <p>El Derecho civil hebreo era <strong>patriarcal</strong>. La institución del <strong>Levirato</strong> permitía al hermano del marido fallecido tomar a la viuda como esposa. El primogénito gozaba de privilegio (doble herencia).</p>
-    <div class="quiz-section" data-correcta="0">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Cuál es la fuente principal del Derecho hebreo?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">La Biblia/Torá (Pentateuco)</button>
-        <button class="quiz-btn" data-idx="1">El Código de Manú</button>
-        <button class="quiz-btn" data-idx="2">Las Doce Tablas</button>
-        <button class="quiz-btn" data-idx="3">El Código de Hammurabi</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla portada">
+  <div class="card-body">
+    <h2>UNIDAD II</h2>
+    <div class="subtitulo">Prehistoria, Historia e Instituciones Primitivas</div>
   </div>
+</div>
 
-  <!-- ══ UNIDAD IV ══ -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla" style="background:#145230;">U4</span>
-      <h2>Unidad IV — Grecia: Instituciones Políticas y Jurídicas</h2>
-    </div>
-    <div class="concepto-clave">
-      <div class="etiqueta">Temas de esta unidad</div>
-      La <strong>Antigua Grecia</strong>: Polis, Atenas vs. Esparta, evolución política (monarquía → aristocracia → democracia), reformas de Solón, Clístenes y Pericles. Los Sofistas, Sócrates, Platón, Aristóteles.
-    </div>
-    <ul>
-      <li>Grecia: cuna de los ideales de <strong>justicia, libertad, régimen constitucional y respeto al Derecho</strong>.</li>
-      <li><strong>Atenas</strong> (jonios): democrática, filosófica, individualista. <strong>Esparta</strong> (dorios): militar, guerrera, patriótica.</li>
-      <li>Evolución política: Monarquía → Oligarquía de eupátridas → Aristocracia → <strong>Democracia</strong> (demos + kratos).</li>
-      <li><strong>Licurgo</strong>: legislador de Esparta; estableció la Constitución llamada <em>Retar</em>.</li>
-    </ul>
+<div class="cartilla">
+  <div class="card-header">UNIDAD II · Línea del Tiempo</div>
+  <div class="card-body">
+    <h2>Línea del Tiempo General</h2>
+    <table>
+<tr><th>Período</th><th>Tiempo aprox.</th><th>Hito clave</th></tr>
+<tr><td>Paleolítico</td><td>4.000.000 – 10.000 a.C.</td><td>Dominio del fuego, cazadores nómadas</td></tr>
+<tr><td>Neolítico</td><td>10.000 – 6.000 a.C.</td><td>Agricultura, sedentarización</td></tr>
+<tr><td>Edad de los Metales</td><td>6.000 – 3.500 a.C.</td><td>Cobre → Bronce → Hierro</td></tr>
+<tr><td>Invención escritura</td><td>~3.500 a.C.</td><td>Inicio de la Historia</td></tr>
+<tr><td>Edad Antigua</td><td>3.500 a.C. – 476 d.C.</td><td>Civilizaciones, Grecia, Roma</td></tr>
+</table>
+<div class="destacado">La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3.500 a.C.).</div>
+    
+<div class="quiz-section" data-correcta="2">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué marca el inicio de la Historia (fin de la Prehistoria)?</div>
+  <button class="quiz-btn" data-idx="0">La aparición del fuego</button>
+<button class="quiz-btn" data-idx="1">La invención de la agricultura</button>
+<button class="quiz-btn" data-idx="2">El descubrimiento de la escritura (~3.500 a.C.)</button>
+<button class="quiz-btn" data-idx="3">La fundación de Roma</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 6 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">6</span>
-      <h2>La Democracia Ateniense: Solón, Clístenes y Pericles</h2>
-    </div>
-    <table class="tabla-comp">
-      <thead><tr><th>Reformador</th><th>Año</th><th>Aportes principales</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Solón</strong></td><td>594 a.C.</td><td>Arconte con poder constituyente; primera constitución democrática de la Historia Universal; isonomía (igualdad ante la ley)</td></tr>
-        <tr><td><strong>Clístenes</strong></td><td>561–527 a.C.</td><td>Dividió la población en 10 tribus (50 ciudadanos c/u = 500 en la Asamblea); todos con iguales derechos; considerado padre de la democracia</td></tr>
-        <tr><td><strong>Pericles</strong></td><td>461–429 a.C.</td><td>Profundizó las reformas; compensación económica a los cargos públicos; permitió participación de ciudadanos pobres en el gobierno</td></tr>
-      </tbody>
-    </table>
-    <div class="concepto-clave">
-      <div class="etiqueta">Organismos de la democracia ateniense</div>
-      <strong>Eclesía</strong>: asamblea del pueblo donde todos los ciudadanos participaban.<br>
-      <strong>Estrategas</strong>: dirigen el ejército, fijan impuestos de guerra y representan a Atenas.<br>
-      <strong>Arcontes</strong>: a cargo de asuntos administrativos y religiosos.
-    </div>
-    <div class="quiz-section" data-correcta="1">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿A quién se considera padre de la democracia por sus reformas en Atenas?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">Solón</button>
-        <button class="quiz-btn" data-idx="1">Clístenes</button>
-        <button class="quiz-btn" data-idx="2">Pericles</button>
-        <button class="quiz-btn" data-idx="3">Licurgo</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD II · Paleolítico</div>
+  <div class="card-body">
+    <h2>El Paleolítico</h2>
+    <div class="tag">4.000.000 – 10.000 a.C.</div>
+<p><b>Paleolítico</b> = «piedra antigua o tallada». Es el período más largo de la prehistoria.</p>
+<h3>Características</h3>
+<ul>
+  <li>Cazadores y recolectores, <b>nómadas</b> y depredadores.</li>
+  <li>Se organizaban en <b>bandas y clanes</b>.</li>
+  <li>Dominaron el <b>fuego</b> → exploración de nuevos hábitats.</li>
+  <li>Vivían en cuevas o chozas; dejaron pinturas rupestres (Altamira, Lascaux).</li>
+</ul>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuál es la característica principal del modo de vida en el Paleolítico?</div>
+  <button class="quiz-btn" data-idx="0">Agricultura y vida sedentaria en aldeas</button>
+<button class="quiz-btn" data-idx="1">Caza y recolección, vida nómada en bandas y clanes</button>
+<button class="quiz-btn" data-idx="2">Comercio y metalurgia</button>
+<button class="quiz-btn" data-idx="3">Uso del bronce y construcción de ciudades</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 7 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">7</span>
-      <h2>Sofistas y Filósofos: Sócrates, Platón, Aristóteles</h2>
-    </div>
-    <table class="tabla-comp">
-      <thead><tr><th></th><th>Sofistas</th><th>Sócrates</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Conocimiento</strong></td><td>De lo relativo (fenomenismo)</td><td>De lo universal (por definición)</td></tr>
-        <tr><td><strong>Método</strong></td><td>Monólogo y retórica (persuasión)</td><td>Diálogo (busca la verdad con otro)</td></tr>
-        <tr><td><strong>Ética</strong></td><td>Relativismo: los valores son opiniones</td><td>Valores objetivos y universales</td></tr>
-        <tr><td><strong>Derecho</strong></td><td>Convencionalismo: la ley solo vale por acuerdo</td><td>Hay un Derecho justo superior a las leyes</td></tr>
-      </tbody>
-    </table>
-    <p>Los principales sofistas fueron <strong>Protágoras</strong> ("el hombre es la medida de todas las cosas") y <strong>Gorgias</strong>. Su objetivo era capacitar a los jóvenes para la vida política mediante la oratoria y la erística.</p>
-    <div class="quiz-section" data-correcta="0">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Cuál es la postura de los Sofistas respecto a las leyes?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">Las leyes no tienen más fundamento que el acuerdo entre los ciudadanos (convencionalismo jurídico)</button>
-        <button class="quiz-btn" data-idx="1">Las leyes emanan de un Derecho natural objetivo y universal</button>
-        <button class="quiz-btn" data-idx="2">Las leyes deben ser dictadas solo por los filósofos</button>
-        <button class="quiz-btn" data-idx="3">Las leyes son expresión de la voluntad divina</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD II · Neolítico y Revolución Agrícola</div>
+  <div class="card-body">
+    <h2>Neolítico y Revolución Agrícola</h2>
+    <div class="tag">10.000 – 6.000 a.C.</div>
+<p>Se inicia con la aparición de la <b>agricultura</b>: la primera gran revolución de la humanidad.</p>
+<h3>Consecuencias de la Agricultura</h3>
+<ul>
+  <li><b>Sedentarización:</b> se abandona el clan nómada, se forman aldeas permanentes.</li>
+  <li><b>Aumento de población:</b> menor mortalidad, mejor alimentación, división del trabajo.</li>
+  <li><b>Nuevos oficios artesanales:</b> alfarería, textilería, herramientas (azadas, hoces, molinos, cerámica).</li>
+  <li><b>Estratificación social:</b> jerarquías para dirigir, repartir agua y resolver conflictos.</li>
+  <li><b>Domesticación</b> de plantas y animales.</li>
+</ul>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Por qué se llama 'revolución' a la aparición de la agricultura en el Neolítico?</div>
+  <button class="quiz-btn" data-idx="0">Porque provocó guerras entre tribus</button>
+<button class="quiz-btn" data-idx="1">Porque transformó radicalmente la economía y la organización humana</button>
+<button class="quiz-btn" data-idx="2">Porque inventó la escritura</button>
+<button class="quiz-btn" data-idx="3">Porque creó los primeros imperios</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- ══ UNIDAD V ══ -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla" style="background:#145230;">U5</span>
-      <h2>Unidad V — Roma: Instituciones Políticas, Sociales y Jurídicas</h2>
-    </div>
-    <div class="concepto-clave">
-      <div class="etiqueta">Temas de esta unidad</div>
-      La fundación de Roma, la sociedad romana (patricios/plebeyos/esclavos), las instituciones de la <strong>Monarquía</strong>, la <strong>República</strong> y el <strong>Imperio</strong>. La <strong>Ley de las XII Tablas</strong>, las fuentes del Derecho romano, las luchas de clase y las codificaciones (Justiniano). La caída del Imperio Romano de Occidente.
-    </div>
-    <ul>
-      <li><strong>Roma fundada</strong>: 21 de abril de 753 a.C. (tradición de Rómulo y Remo).</li>
-      <li><strong>Patricios</strong>: aristocracia, descendientes de los "padres fundadores". <strong>Plebeyos</strong>: personas libres sin derechos políticos. <strong>Esclavos</strong>: sin derechos.</li>
-      <li><strong>Períodos</strong>: Monarquía (753–509 a.C.) → República (509–27 a.C.) → Imperio (27 a.C.–476 d.C.).</li>
-    </ul>
+<div class="cartilla">
+  <div class="card-header">UNIDAD II · Jerarquización y Nacimiento de Instituciones</div>
+  <div class="card-body">
+    <h2>Jerarquización social y primeras instituciones</h2>
+    <p>El aumento de habitantes y la vida fija en aldeas obligó a las comunidades a dotarse de una <b>organización social compleja</b>.</p>
+<h3>La sociedad se jerarquizó para:</h3>
+<ul>
+  <li>Dirigir y realizar obras colectivas y rituales.</li>
+  <li>Repartir el agua entre agricultores.</li>
+  <li>Resolver desacuerdos y crear reglas mínimas de convivencia.</li>
+</ul>
+<h3>Primeras instituciones que nacieron</h3>
+<div class="destacado">
+  🏠 <b>La Familia</b> · ⚖️ <b>La Justicia</b> (venganza de sangre) · 🏛️ <b>Organización Política</b>
+</div>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuál fue la primera forma de justicia que surgió en las aldeas neolíticas?</div>
+  <button class="quiz-btn" data-idx="0">El tribunal de magistrados</button>
+<button class="quiz-btn" data-idx="1">La venganza de sangre</button>
+<button class="quiz-btn" data-idx="2">El código escrito</button>
+<button class="quiz-btn" data-idx="3">El juicio ante el rey</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 8 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">8</span>
-      <h2>La Monarquía romana e instituciones políticas</h2>
-    </div>
-    <p>En la <strong>Monarquía</strong> romana existían tres instituciones políticas fundamentales:</p>
-    <table class="tabla-comp">
-      <thead><tr><th>Institución</th><th>Función</th></tr></thead>
-      <tbody>
-        <tr><td><strong>El Rey</strong></td><td>Elegido por la Asamblea, cargo vitalicio. A su muerte el poder volvía al Estado</td></tr>
-        <tr><td><strong>El Senado</strong></td><td>Integrado por jefes de familias patricias; función esencialmente consultiva (asesoraba al rey)</td></tr>
-        <tr><td><strong>La Asamblea (Comicios por Curias)</strong></td><td>Solo ciudadanos; funciones legislativas, judiciales y elección de reyes</td></tr>
-      </tbody>
-    </table>
-    <div class="concepto-clave">
-      <div class="etiqueta">Mos maiorum</div>
-      El Derecho en la época de la Monarquía era no escrito, consuetudinario, regido por el <strong>mos maiorum</strong> (costumbre de los antepasados), con fuerte influencia religiosa. El <em>paterfamilias</em> era jefe absoluto y sacerdote de la familia.
-    </div>
-    <div class="quiz-section" data-correcta="2">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Qué era el "mos maiorum" en el Derecho romano?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">El código penal de la República</button>
-        <button class="quiz-btn" data-idx="1">La constitución escrita de Roma</button>
-        <button class="quiz-btn" data-idx="2">La costumbre de los antepasados que regía el Derecho no escrito</button>
-        <button class="quiz-btn" data-idx="3">El edicto del Senado romano</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD II · Edad de los Metales e Historia</div>
+  <div class="card-body">
+    <h2>Edad de los Metales e Historia</h2>
+    <h3>Edad de los Metales</h3>
+<p>La metalurgia comenzó con el <b>cobre</b> (~3.500 a.C.). Los metales se dominaron en orden:</p>
+<div class="destacado">🔶 Cobre → 🥉 Bronce → ⚙️ Hierro</div>
+<h3>La Historia</h3>
+<p class="cita">"La Historia comprende un registro e interpretación de las realizaciones y frustraciones, luchas y triunfos del hombre." (Edward Mc Nall Burns)</p>
+<p class="cita">"El principio es la parte más principal de cualquier cosa… Solo conociendo la historia se puede conocer el Derecho." (Gayo)</p>
+<p>Cecilio Báez también destacó la importancia del análisis histórico para quien estudia las ciencias jurídicas.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué afirmó Gayo sobre la relación entre historia y derecho?</div>
+  <button class="quiz-btn" data-idx="0">El Derecho moderno no necesita conocer el pasado</button>
+<button class="quiz-btn" data-idx="1">Solo conociendo la historia se puede conocer el Derecho</button>
+<button class="quiz-btn" data-idx="2">La historia solo importa a los filósofos</button>
+<button class="quiz-btn" data-idx="3">El Derecho es completamente independiente de la historia</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 9 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">9</span>
-      <h2>La República romana y la Ley de las XII Tablas</h2>
-    </div>
-    <p>La <strong>República</strong> (509–27 a.C.) reemplazó la monarquía. El Senado y las magistraturas (cónsul, censor, pretor, ediles, cuestores) dividieron el poder.</p>
-    <p>La lucha entre patricios y plebeyos durante ~400 años llevó a conquistar <strong>4 igualdades</strong>:</p>
-    <ul>
-      <li><strong>Civil</strong>: igualdad ante la ley — obtenida con la <strong>Ley de las XII Tablas</strong>.</li>
-      <li><strong>Social</strong>: matrimonio entre patricios y plebeyos.</li>
-      <li><strong>Política</strong>: acceso de plebeyos a todos los cargos públicos.</li>
-      <li><strong>Religiosa</strong>: libertad de culto.</li>
-    </ul>
-    <div class="concepto-clave">
-      <div class="etiqueta">Ley de las XII Tablas (451-450 a.C.)</div>
-      Primera ley <strong>escrita</strong> romana. Sus tablas abarcaban: procedimiento judicial (I-II), deudores insolventes (III), patria potestad (IV), tutela y curatela (V), propiedad (VI), servidumbres (VII), Derecho penal (VIII), Derecho público (IX), Derecho sagrado (X), complementos (XI-XII).
-    </div>
-    <div class="quiz-section" data-correcta="0">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Qué logro representó la Ley de las XII Tablas para los plebeyos?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">La igualdad civil y social ante la ley</button>
-        <button class="quiz-btn" data-idx="1">El acceso al Senado</button>
-        <button class="quiz-btn" data-idx="2">La abolición de la esclavitud</button>
-        <button class="quiz-btn" data-idx="3">La igualdad religiosa</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla portada">
+  <div class="card-body">
+    <h2>UNIDAD III</h2>
+    <div class="subtitulo">Las Primeras Civilizaciones</div>
   </div>
+</div>
 
-  <!-- 10 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">10</span>
-      <h2>Fuentes del Derecho romano: República e Imperio</h2>
-    </div>
-    <p>Las <strong>fuentes del Derecho en la República</strong> eran: la ley, los plebiscitos, los senadoconsultos, el edicto de los magistrados y la jurisprudencia.</p>
-    <p>En el <strong>Imperio</strong>, la fuente principal pasó a ser las <em>constituciones imperiales</em> (leges). El <strong>Edicto Perpetuo de Adriano</strong>, ordenado por el jurista <strong>Salvio Juliano</strong>, codificó el derecho pretoriano (<em>ius honorarium</em>), convirtiéndose en ley definitiva.</p>
-    <div class="concepto-clave">
-      <div class="etiqueta">Codificaciones romanas</div>
-      <ul>
-        <li><strong>Código Gregoriano</strong>: constituciones desde Adriano hasta Diocleciano.</li>
-        <li><strong>Código Hermogeniano</strong>: complementaba el anterior (época de Diocleciano).</li>
-        <li><strong>Código Teodosiano (438 d.C.)</strong>: recopilación de constituciones imperiales.</li>
-        <li><strong>Justiniano (529–533 d.C.)</strong>: codificación definitiva del Derecho romano en el Imperio de Oriente.</li>
-      </ul>
-    </div>
-    <div class="quiz-section" data-correcta="3">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Quién realizó la codificación definitiva del Derecho romano entre 529 y 533 d.C.?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">Constantino</button>
-        <button class="quiz-btn" data-idx="1">Adriano</button>
-        <button class="quiz-btn" data-idx="2">Teodosio</button>
-        <button class="quiz-btn" data-idx="3">Justiniano</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD III · India</div>
+  <div class="card-body">
+    <h2>India: Mohenjo-Daro, Hinduismo y Castas</h2>
+    <h3>Ciudades del Valle del Indo</h3>
+<p><b>Mohenjo-Daro y Harappa</b> (2.500–1.500 a.C., actual Pakistán): ciudades amuralladas con calles en ángulo recto, casas de dos pisos con cañerías, comercio activo y sistemas de escritura.</p>
+<h3>Hinduismo</h3>
+<p>Religión politeísta que cree en la <b>reencarnación del alma</b> hasta alcanzar el <b>Nirvana</b>. La purificación del cuerpo en el río Ganges equivale a la purificación del espíritu.</p>
+<h3>Las Castas</h3>
+<p>La clase social se adquiere con el <b>nacimiento</b>: sistema sólido, rígido, inmóvil, inmutable, permanente y hereditario.</p>
+<table>
+<tr><th>Casta</th><th>Rol</th></tr>
+<tr><td>Brahmanes</td><td>Sacerdotes</td></tr>
+<tr><td>Chatrias</td><td>Guerreros / nobles</td></tr>
+<tr><td>Vaisias</td><td>Comerciantes</td></tr>
+<tr><td>Sudras</td><td>Sirvientes / campesinos</td></tr>
+<tr><td>Parias</td><td>Intocables (fuera del sistema)</td></tr>
+</table>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cómo se adquiere la casta en la sociedad india?</div>
+  <button class="quiz-btn" data-idx="0">Por mérito y esfuerzo personal</button>
+<button class="quiz-btn" data-idx="1">Con el nacimiento, de forma hereditaria e inmutable</button>
+<button class="quiz-btn" data-idx="2">Por decisión del sacerdote</button>
+<button class="quiz-btn" data-idx="3">Por riqueza acumulada durante la vida</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- 11 -->
-  <div class="cartilla">
-    <div class="cartilla-header">
-      <span class="num-cartilla">11</span>
-      <h2>El Imperio romano: gobierno, reformas y caída</h2>
-    </div>
-    <p>El <strong>Imperio</strong> (27 a.C.–476 d.C.) fue el período de mayor extensión de Roma. El Emperador concentraba el poder; el Senado y los magistrados administraban las provincias senatoriales y la justicia.</p>
-    <table class="tabla-comp">
-      <thead><tr><th>Emperadores clave</th><th>Reforma o hecho</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Diocleciano</strong></td><td>Dividió el Imperio en Oriente y Occidente (Tetrarquía); saneó la economía y reforzó fronteras</td></tr>
-        <tr><td><strong>Constantino</strong></td><td>Edicto de Milán (313 d.C.): libertad de culto para los cristianos; trasladó la capital a Constantinopla</td></tr>
-        <tr><td><strong>Teodosio</strong></td><td>División definitiva en 395 d.C. entre sus hijos Honorio (Occidente) y Arcadio (Oriente)</td></tr>
-      </tbody>
-    </table>
-    <div class="concepto-clave">
-      <div class="etiqueta">Caída del Imperio Romano de Occidente — 476 d.C.</div>
-      Odoacro, rey de los hérulos, saqueó Roma en 476 d.C. poniendo fin al Imperio de Occidente.<br><br>
-      <strong>Legado político romano</strong>: carácter legislativo del Senado · división administrativa en provincias y municipios · ciudadanía universal · sistema legal y principios jurídicos (primacía de la ley) · derecho de apelación.
-    </div>
-    <div class="quiz-section" data-correcta="1">
-      <div class="quiz-titulo">Comprobá tu comprensión</div>
-      <div class="quiz-pregunta">¿Qué estableció el Edicto de Milán de Constantino (313 d.C.)?</div>
-      <div class="quiz-opciones">
-        <button class="quiz-btn" data-idx="0">La división del Imperio en Oriente y Occidente</button>
-        <button class="quiz-btn" data-idx="1">La libertad de culto para los cristianos</button>
-        <button class="quiz-btn" data-idx="2">La codificación definitiva del Derecho romano</button>
-        <button class="quiz-btn" data-idx="3">La abolición de la esclavitud en Roma</button>
-      </div>
-      <div class="quiz-feedback"></div>
-      <button class="quiz-btn-reset">Reintentar</button>
-    </div>
+<div class="cartilla">
+  <div class="card-header">UNIDAD III · Código de Manú</div>
+  <div class="card-body">
+    <h2>Código de Manú</h2>
+    <p>Colección de preceptos <b>religiosos, morales, sociales y jurídicos</b> que regulaban el gobierno, la justicia, el ejército, la agricultura, el comercio y la condición de la mujer.</p>
+<p>Consagró la separación de castas dándole carácter de <b>inconmovible permanencia</b>. El Brahmanismo afirmó que cada casta provenía de una parte del cuerpo de Brahma.</p>
+<h3>Derecho Penal</h3>
+<ul>
+  <li>Penas muy severas para castas inferiores: aplastamiento por elefante, mutilación, marca con hierro incandescente.</li>
+  <li>El <b>Brahmán</b> no recibía castigo corporal, solo podía ser desterrado.</li>
+</ul>
+<h3>Derecho Civil — Levirato</h3>
+<p>Si el hombre era incapaz de tener hijos, podía autorizar a su mujer a engendrar con un pariente cercano (solo un hijo). En caso de muerte del marido, el hermano podía tomar a la viuda como esposa.</p>
+<p><b>Acto de inmolación Sati:</b> la viuda se inmolaba en la pira funeraria del esposo.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué distinguía el castigo del Brahmán respecto a las otras castas en el Código de Manú?</div>
+  <button class="quiz-btn" data-idx="0">Recibía la pena de muerte siempre</button>
+<button class="quiz-btn" data-idx="1">No recibía castigo corporal, solo podía ser desterrado</button>
+<button class="quiz-btn" data-idx="2">Era castigado igual que todos</button>
+<button class="quiz-btn" data-idx="3">Pagaba una multa económica como única pena</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
   </div>
+</div>
 
-  <!-- NAV -->
+<div class="cartilla">
+  <div class="card-header">UNIDAD III · Egipto</div>
+  <div class="card-body">
+    <h2>Egipto: Faraón, Sociedad y Cultura</h2>
+    <p>Egipto está rodeado de desierto; solo las orillas del <b>río Nilo</b> presentaban tierras fértiles, base de toda su civilización.</p>
+<h3>Gobierno Teocrático</h3>
+<p>La totalidad del poder político estaba concentrada en el <b>Faraón</b>, considerado figura divina → gobierno <b>teocrático</b>.</p>
+<h3>Sociedad Egipcia (pirámidal)</h3>
+<ol>
+  <li>Familia Real y Nobleza</li>
+  <li>Funcionarios de confianza del Faraón y profesionales</li>
+  <li>Artesanos, comerciantes y campesinos</li>
+  <li>Esclavos</li>
+</ol>
+<h3>Cultura y Ciencia</h3>
+<ul>
+  <li><b>Momificación:</b> creían en la vida después de la muerte; el destino eterno se decidía ante Osiris.</li>
+  <li>Desarrollaron conocimiento de anatomía, farmoquímica (aceites y esencias) para preservar cuerpos.</li>
+  <li><b>Jeroglíficos:</b> escritura que describe vida cotidiana, creencias y hechos históricos.</li>
+  <li>Grandes templos: Luxor, Karnak.</li>
+</ul>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Por qué se denomina 'teocrático' al gobierno del Antiguo Egipto?</div>
+  <button class="quiz-btn" data-idx="0">Porque lo dirigían varios sacerdotes en asamblea</button>
+<button class="quiz-btn" data-idx="1">Porque el Faraón era considerado una figura divina y concentraba todo el poder</button>
+<button class="quiz-btn" data-idx="2">Porque las leyes venían directamente de los dioses escritas</button>
+<button class="quiz-btn" data-idx="3">Porque el ejército era controlado por los templos</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD III · Mesopotamia — Sumerios</div>
+  <div class="card-body">
+    <h2>Mesopotamia: Sumerios y Escritura Cuneiforme</h2>
+    <p><b>Mesopotamia</b> = «tierra entre ríos» (Tigris y Éufrates) → actual Irak. Junto con Egipto, parte de la <b>Media Luna Fértil</b>.</p>
+<h3>Los Sumerios (4.000 a.C.)</h3>
+<p>Establecieron las bases de la civilización mesopotámica. Se organizaron en <b>ciudades-Estado teocráticas</b> donde el rey era simultáneamente supremo gobernante y sacerdote.</p>
+<p>Primeras ciudades-Estado: <b>Ur, Uruk, Lagash y Eridu</b>.</p>
+<h3>El Zigurat</h3>
+<p>El templo no era solo centro religioso: era la sede del <b>gobierno</b> y el principal centro económico controlado por el rey.</p>
+<h3>Escritura Cuneiforme</h3>
+<p>Creada en Sumeria (~3.500 a.C.) en tablillas de arcilla húmeda con un tallo vegetal biselado en forma de cuña (<i>cuneus</i>). Sirvió para llevar contabilidad en templos, escribir leyes, textos literarios y religiosos.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Con qué propósito surgió originalmente la escritura cuneiforme?</div>
+  <button class="quiz-btn" data-idx="0">Para escribir textos religiosos y poemas épicos</button>
+<button class="quiz-btn" data-idx="1">Para llevar la contabilidad en los templos (cosechas, impuestos)</button>
+<button class="quiz-btn" data-idx="2">Para comunicarse entre ciudades-Estado enemigas</button>
+<button class="quiz-btn" data-idx="3">Para registrar victorias militares del rey</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD III · Hammurabi y Babilonia</div>
+  <div class="card-body">
+    <h2>Babilonia y el Código de Hammurabi</h2>
+    <p>Hacia <b>1750 a.C.</b>, Hammurabi dominó toda la Mesopotamia inferior, con capital en <b>Babilonia</b>. Creó el primer código escrito de leyes (~1760 a.C.).</p>
+<h3>Áreas del Código</h3>
+<ul>
+  <li><b>Derecho Civil:</b> familia.</li>
+  <li><b>Derecho de Propiedad:</b> catastro.</li>
+  <li><b>Derecho Privado:</b> compraventa, préstamos, depósito, prenda.</li>
+  <li><b>Derecho Penal:</b> muy riguroso. Ley del Talión + Ordalias.</li>
+</ul>
+<div class="destacado">⚖️ <b>Ley del Talión:</b> "Ojo por ojo, diente por diente" — pena igual a la ofensa entre iguales. Si la contraparte era de categoría inferior: compensación en dinero.</div>
+<p>Se castigaban con muerte: adulterio, incesto, falso testimonio, sacrilegio, hurto. La mujer tenía derecho a la herencia del marido (mitad de bienes adquiridos).</p>
+<p>Mérito histórico: entregó al <b>Estado</b> la responsabilidad del cumplimiento de la ley, suprimiendo la venganza privada.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuál fue el principal mérito histórico del Código de Hammurabi?</div>
+  <button class="quiz-btn" data-idx="0">Abolir la pena de muerte</button>
+<button class="quiz-btn" data-idx="1">Entregar al Estado la responsabilidad de hacer cumplir la ley, suprimiendo la venganza privada</button>
+<button class="quiz-btn" data-idx="2">Igualar los derechos de todas las clases sociales</button>
+<button class="quiz-btn" data-idx="3">Crear el primer sistema democrático</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD III · Hebreos — Biblia y Torá</div>
+  <div class="card-body">
+    <h2>Civilización Hebrea: Biblia y Torá</h2>
+    <p>El territorio hebreo es la antigua <b>Canaán</b> (Palestina), en el litoral oriental del Mar Mediterráneo, entre el río Jordán y el Mar Muerto.</p>
+<h3>Fuentes del Derecho Hebreo</h3>
+<p>La fuente principal es la <b>Biblia</b> (Antiguo Testamento), dividida en: <b>Ley (Torá) · Profetas (Neviim) · Hagiógrafos (Ketuvim)</b>.</p>
+<h3>La Torá — 5 libros del Pentateuco</h3>
+<table>
+<tr><th>Libro</th><th>Contenido</th></tr>
+<tr><td>Génesis</td><td>Creación del mundo</td></tr>
+<tr><td>Éxodo</td><td>Salida de Egipto</td></tr>
+<tr><td>Levítico</td><td>Culto en el tabernáculo</td></tr>
+<tr><td>Números</td><td>40 años en el desierto</td></tr>
+<tr><td>Deuteronomio</td><td>Mayor cantidad de leyes (Toráh)</td></tr>
+</table>
+    
+<div class="quiz-section" data-correcta="2">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿En cuántos libros se divide la Torá (Pentateuco)?</div>
+  <button class="quiz-btn" data-idx="0">Tres</button>
+<button class="quiz-btn" data-idx="1">Diez</button>
+<button class="quiz-btn" data-idx="2">Cinco</button>
+<button class="quiz-btn" data-idx="3">Siete</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD III · Derecho Hebreo</div>
+  <div class="card-body">
+    <h2>Derecho Hebreo: Tratados y Derecho Civil</h2>
+    <h3>Tratados de la Torá</h3>
+<ul>
+  <li><b>El Decálogo:</b> 10 leyes escritas por Dios (derecho positivo y natural).</li>
+  <li><b>Código de la Alianza:</b> Derecho penal y civil.</li>
+  <li><b>Decálogo Ritual:</b> normas para sociedad sedentaria.</li>
+  <li><b>Código Deuteronomio:</b> derecho penal, familiar y social.</li>
+  <li><b>Código de Sanidad:</b> leyes morales y rituales.</li>
+</ul>
+<h3>Derecho Civil Hebreo</h3>
+<ul>
+  <li>Familia <b>patriarcal</b>, matrimonio monogámico.</li>
+  <li>El padre podía vender a su hijo a otro hebreo.</li>
+  <li><b>Levirato:</b> si muere el marido, el hermano puede tomar a la viuda como esposa.</li>
+  <li>El <b>primogénito</b> recibía doble herencia.</li>
+</ul>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué establece el Levirato en el Derecho Hebreo?</div>
+  <button class="quiz-btn" data-idx="0">El primogénito recibe doble herencia</button>
+<button class="quiz-btn" data-idx="1">El hermano del marido fallecido puede tomar a la viuda como esposa</button>
+<button class="quiz-btn" data-idx="2">El padre tiene potestad absoluta sobre sus hijos</button>
+<button class="quiz-btn" data-idx="3">El matrimonio hebreo era poligámico</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla portada">
+  <div class="card-body">
+    <h2>UNIDAD IV</h2>
+    <div class="subtitulo">Grecia: Democracia, Filosofía e Instituciones</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD IV · Grecia — Introducción y Geografía</div>
+  <div class="card-body">
+    <h2>Grecia: Geografía e Ideales Políticos</h2>
+    <div class="cita">"La mayor parte de los ideales políticos modernos — la justicia, la libertad, el régimen constitucional y el respeto al Derecho — comenzaron con la reflexión de los pensadores griegos." (Sabine)</div>
+<h3>Geografía</h3>
+<p>La Antigua Grecia (Hélade) se extendió por tres espacios: la <b>Península de los Balcanes</b>, las islas del Mar Jónico y Egeo, y las costas occidentales de <b>Asia Menor</b> (actual Turquía).</p>
+<h3>Las dos grandes Polis</h3>
+<table>
+<tr><th>Atenas</th><th>Esparta</th></tr>
+<tr><td>Fundada por los Jonios</td><td>Fundada por los Dorios</td></tr>
+<tr><td>Península del Ática</td><td>Sur del Peloponeso</td></tr>
+<tr><td>Democrática, filosófica, individualista, artística</td><td>Militar, guerrera, disciplinada, patriótica</td></tr>
+</table>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué distinguía principalmente a Atenas de Esparta?</div>
+  <button class="quiz-btn" data-idx="0">Atenas era militar y Esparta democrática</button>
+<button class="quiz-btn" data-idx="1">Atenas era democrática y filosófica; Esparta era militar y guerrera</button>
+<button class="quiz-btn" data-idx="2">Ambas eran democráticas pero con distintas constituciones</button>
+<button class="quiz-btn" data-idx="3">Atenas usaba castas; Esparta era igualitaria</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD IV · Esparta</div>
+  <div class="card-body">
+    <h2>Esparta: Licurgo, Educación y Constitución</h2>
+    <h3>Licurgo y la Constitución de Esparta</h3>
+<p>En el siglo VIII a.C., el legislador <b>Licurgo</b> realizó la reforma política y social de Esparta, estableciendo su constitución, llamada <b>Retar (ley)</b>.</p>
+<h3>Sociedad y Gobierno</h3>
+<p>Sistema oligárquico-militar. Los ciudadanos plenos (<i>espartiatas</i>) eran guerreros de élite. Los <i>hilotas</i> (esclavos del Estado) trabajaban la tierra.</p>
+<h3>Educación Espartana (Agogé)</h3>
+<ul>
+  <li>Al nacer, los bebés eran examinados: si tenían defecto físico, eran arrojados desde un monte.</li>
+  <li>A los <b>7 años</b>, los niños eran apartados de sus hogares para recibir educación militar.</li>
+</ul>
+<h3>Las Guerras Médicas</h3>
+<p>Defensa de los griegos contra los persas (rey Darío y su hijo Jerjes). Batallas memorables: <b>Maratón, Termópilas, Salamina y Platea</b>. En Termópilas, 300 espartanos murieron conteniendo al ejército persa.</p>
+    
+<div class="quiz-section" data-correcta="2">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cómo se llamó la constitución que estableció Licurgo en Esparta?</div>
+  <button class="quiz-btn" data-idx="0">La Isonomía</button>
+<button class="quiz-btn" data-idx="1">La Éclesía</button>
+<button class="quiz-btn" data-idx="2">La Retar</button>
+<button class="quiz-btn" data-idx="3">La Acropolis</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD IV · Olimpiadas</div>
+  <div class="card-body">
+    <h2>Las Primeras Olimpiadas</h2>
+    <div class="destacado">🏟️ Año 776 a.C. — Primeros Juegos Olímpicos: el «año 0» del calendario griego.</div>
+<p>Los juegos olímpicos se celebraban en <b>Olimpia</b> cada cuatro años en honor a Zeus. Eran un evento panhelénico: todos los griegos, incluso en guerra, hacían una tregua sagrada para participar.</p>
+<p>Las competencias incluían atletismo, lucha, lanzamiento de disco y jabalina, carreras de carros y pentatlon. Los vencedores recibían una corona de olivo y gloria eterna.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿En qué año se celebraron los primeros Juegos Olímpicos?</div>
+  <button class="quiz-btn" data-idx="0">509 a.C.</button>
+<button class="quiz-btn" data-idx="1">776 a.C.</button>
+<button class="quiz-btn" data-idx="2">594 a.C.</button>
+<button class="quiz-btn" data-idx="3">753 a.C.</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD IV · Evolución Política de Atenas</div>
+  <div class="card-body">
+    <h2>Evolución Política de Atenas</h2>
+    <p>Atenas pasó por cuatro etapas políticas principales:</p>
+<ol>
+  <li><b>Monarquía:</b> gobernada por un rey.</li>
+  <li><b>Gobierno de los Eupátridas (nobles):</b> los Arcontes administraban, la religión, el ejército y la justicia.</li>
+  <li><b>Aristocracia:</b> gobierno de los mejores / nobles. El pueblo (demos) comenzó a reclamar derechos.</li>
+  <li><b>Democracia:</b> Clístenes realizó reformas que dieron origen al gobierno del pueblo.</li>
+</ol>
+<div class="destacado">Demo = pueblo · Kratos = gobierno → <b>Democracia</b> = Gobierno del pueblo</div>
+<h3>Dracón (621 a.C.)</h3>
+<p>Primer legislador que codificó las leyes de Atenas por escrito, aunque eran extremadamente severas ("draconiana").</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuáles son las 4 etapas de la evolución política de Atenas en orden?</div>
+  <button class="quiz-btn" data-idx="0">Democracia, aristocracia, monarquía, tiranía</button>
+<button class="quiz-btn" data-idx="1">Monarquía, gobierno de nobles, aristocracia, democracia</button>
+<button class="quiz-btn" data-idx="2">República, monarquía, tiranía, democracia</button>
+<button class="quiz-btn" data-idx="3">Teocracia, oligarquía, aristocracia, democracia</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD IV · Solón y Clístenes</div>
+  <div class="card-body">
+    <h2>Solón, Clístenes y la Democracia Ateniense</h2>
+    <h3>Solón (594 a.C.)</h3>
+<p>Nombrado arconte con poder para establecer una nueva constitución. Introdujo la <b>isonomía</b> (igualdad por la ley y ante la ley) → considerado <b>Padre de la Democracia</b>.</p>
+<h3>Clístenes (561–527 a.C.)</h3>
+<p>Aristócrata que llegó al gobierno de Atenas a fines del siglo VI a.C. Sus reformas consolidaron la democracia:</p>
+<ul>
+  <li>Dividió la población en <b>10 tribus</b> de 50 ciudadanos c/u (500 en total en la Asamblea).</li>
+  <li>Todos con <b>iguales derechos</b> para participar en el gobierno.</li>
+  <li>Cada tribu elegía un <b>Estratega</b> (ejército, flota, impuestos) y un <b>Arconte</b> (administración y religión).</li>
+</ul>
+<h3>Pericles (461–429 a.C.)</h3>
+<p>Profundizó las reformas: decidió que todos los cargos públicos recibieran <b>compensación económica</b>, permitiendo así la participación de los ciudadanos más pobres. La asamblea del pueblo se llamaba <b>Eclesía</b>; el lugar de reunión era el <b>Ágora</b>.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué innovación introdujo Clístenes para ampliar la participación política?</div>
+  <button class="quiz-btn" data-idx="0">Pagó a los ciudadanos por ocupar cargos</button>
+<button class="quiz-btn" data-idx="1">Dividió la población en 10 tribus de 50 ciudadanos c/u con iguales derechos</button>
+<button class="quiz-btn" data-idx="2">Eliminó a los nobles del gobierno</button>
+<button class="quiz-btn" data-idx="3">Creó el tribunal del pueblo</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD IV · Sofistas y Sócrates</div>
+  <div class="card-body">
+    <h2>Sofistas vs. Sócrates</h2>
+    <table>
+<tr><th></th><th>Sofistas</th><th>Sócrates</th></tr>
+<tr><td><b>Conocimiento</b></td><td>Relativo ("el hombre es la medida de todas las cosas")</td><td>Universal (a través de la definición)</td></tr>
+<tr><td><b>Método</b></td><td>Monólogo y retórica (persuadir emociones)</td><td>Diálogo (buscar la verdad con la razón)</td></tr>
+<tr><td><b>Objetivo</b></td><td>Capacitar para la vida política (oratoria y erística)</td><td>Conocer la virtud universal del alma</td></tr>
+<tr><td><b>Ética</b></td><td>Relativismo: los valores son solo opiniones</td><td>Existe una moral universal</td></tr>
+</table>
+<h3>Representantes Sofistas</h3>
+<p>Protágoras (481–411 a.C.) · Gorgias (483–375 a.C.) · Pródico de Ceos</p>
+<h3>Platón y Aristóteles</h3>
+<p><b>Platón</b> (discípulo de Sócrates): teoría de las ideas, la República ideal. <b>Aristóteles</b> (discípulo de Platón): política, lógica, ética — "el hombre es un animal político".</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuál era el objetivo principal de la educación sofística?</div>
+  <button class="quiz-btn" data-idx="0">Enseñar la virtud universal y la ética</button>
+<button class="quiz-btn" data-idx="1">Capacitar a los jóvenes para la participación política mediante oratoria y erística</button>
+<button class="quiz-btn" data-idx="2">Transmitir el conocimiento de la naturaleza</button>
+<button class="quiz-btn" data-idx="3">Formar filósofos que gobernaran la polis</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla portada">
+  <div class="card-body">
+    <h2>UNIDAD V</h2>
+    <div class="subtitulo">Roma: Monarquía, República e Imperio</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · Fundación de Roma</div>
+  <div class="card-body">
+    <h2>Fundación de Roma y Sociedad</h2>
+    <div class="destacado">🏛️ Roma se fundó el <b>21 de abril del año 753 a.C.</b> — fundadores míticos: Rómulo y Remo.</div>
+<p><b>Roma Quadrata</b>: conjunto de pueblos latinos, etruscos y sabinos que vivían a orillas del río Tíber.</p>
+<h3>Sociedad Romana</h3>
+<table>
+<tr><th>Grupo</th><th>Características</th></tr>
+<tr><td><b>Patricios</b></td><td>Aristocracia, descendientes de los "padres fundadores". Cargos políticos, militares y religiosos. Terratenientes. Agrupados en "gens".</td></tr>
+<tr><td><b>Plebeyos</b></td><td>Personas libres, no ciudadanos. Excluidos de la vida política y religiosa. Campesinos, comerciantes y artesanos. Pagaban impuestos.</td></tr>
+<tr><td><b>Esclavos</b></td><td>Sin ningún derecho. Propiedad de sus amos.</td></tr>
+</table>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué caracterizaba a los Patricios en la sociedad romana?</div>
+  <button class="quiz-btn" data-idx="0">Eran personas libres que pagaban impuestos sin derechos políticos</button>
+<button class="quiz-btn" data-idx="1">Eran la aristocracia descendiente de los padres fundadores con plenos derechos</button>
+<button class="quiz-btn" data-idx="2">Eran esclavos liberados con derechos limitados</button>
+<button class="quiz-btn" data-idx="3">Eran comerciantes extranjeros con privilegios especiales</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · Monarquía Romana</div>
+  <div class="card-body">
+    <h2>La Monarquía Romana (753–509 a.C.)</h2>
+    <h3>Instituciones Políticas de la Monarquía</h3>
+<ul>
+  <li><b>El Rey:</b> elegido por la Asamblea, duraba en su cargo de por vida. A su muerte el poder volvía al Estado; el Senado designaba un rey interino.</li>
+  <li><b>El Senado:</b> integrado por los jefes de familias patricias. Funciones consultivas: asesoraba al rey.</li>
+  <li><b>La Asamblea (Comicios por Curias):</b> solo ciudadanos. Funciones legislativas (votar leyes, declarar la guerra), judiciales y electorales.</li>
+</ul>
+<h3>Mos Maiorum</h3>
+<p>Hasta la Ley de las XII Tablas, el derecho romano era <b>no escrito y consuetudinario</b>, regido por el <i>mos maiorum</i> (costumbre de los antepasados) con fuerte peso de la religión.</p>
+<p>El <b>paterfamilias</b> era el jefe absoluto de la familia y su sacerdote. El <b>rex</b>, jefe absoluto de la ciudad, era el sumo sacerdote del Estado.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué era el 'mos maiorum' en el derecho romano temprano?</div>
+  <button class="quiz-btn" data-idx="0">El primer código escrito de Roma</button>
+<button class="quiz-btn" data-idx="1">La costumbre de los antepasados que regía el derecho no escrito</button>
+<button class="quiz-btn" data-idx="2">La constitución del rey Servio Tulio</button>
+<button class="quiz-btn" data-idx="3">El conjunto de leyes aprobadas por el Senado</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · Reformas de Servio Tulio</div>
+  <div class="card-body">
+    <h2>Reformas de Servio Tulio</h2>
+    <h3>El Muro Serviano</h3>
+<p>Durante el reinado de <b>Servio Tulio</b> se construyó la muralla de la ciudad: 11 km de longitud, 3,6 m de ancho, protegiendo 427 hectáreas.</p>
+<h3>Primera Constitución Política de Roma</h3>
+<p>Servio Tulio introdujo un nuevo modelo de organización con dos objetivos:</p>
+<ul>
+  <li>Facilitar el pago de <b>impuestos</b>.</li>
+  <li>Mejorar el <b>reclutamiento del ejército</b>.</li>
+</ul>
+<p>Organizó la ciudad en <b>4 barrios</b> e implantó un censo basado en la <b>riqueza</b> (no solo en el nacimiento). Dividió la población en <b>5 clases</b> organizadas en <b>centurias</b> (compañías de 100 hombres), hasta un total de <b>193 centurias</b>.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuál fue el criterio innovador del censo de Servio Tulio?</div>
+  <button class="quiz-btn" data-idx="0">Se basaba únicamente en el nacimiento y el linaje</button>
+<button class="quiz-btn" data-idx="1">Se basaba en la riqueza, no solo en el nacimiento</button>
+<button class="quiz-btn" data-idx="2">Se basaba en el mérito militar</button>
+<button class="quiz-btn" data-idx="3">Se basaba en la religión y el sacerdocio</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · La República y Magistraturas</div>
+  <div class="card-body">
+    <h2>La República Romana (509–27 a.C.)</h2>
+    <p>La República comenzó en <b>509 a.C.</b> con la expulsión del último rey etrusco.</p>
+<h3>Principales Magistraturas (Cursus Honorum)</h3>
+<table>
+<tr><th>Magistratura</th><th>Función</th></tr>
+<tr><td><b>Cónsul</b></td><td>2 cónsules anuales; máxima autoridad civil y militar</td></tr>
+<tr><td><b>Pretor</b></td><td>Administración de justicia</td></tr>
+<tr><td><b>Censor</b></td><td>Censo de ciudadanos y control de la moral pública</td></tr>
+<tr><td><b>Edil</b></td><td>Obras públicas, mercados, juegos</td></tr>
+<tr><td><b>Cuestor</b></td><td>Administración financiera del Estado</td></tr>
+</table>
+<p>El <b>Cursus Honorum</b> era la carrera política; los magistrados iban ascendiendo de cargo en cargo, todos electivos y anuales.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué era el 'Cursus Honorum' en Roma?</div>
+  <button class="quiz-btn" data-idx="0">El código de leyes de la República</button>
+<button class="quiz-btn" data-idx="1">La carrera política por la que un ciudadano ascendía de cargo en cargo</button>
+<button class="quiz-btn" data-idx="2">El nombre del ejército romano</button>
+<button class="quiz-btn" data-idx="3">El manual de ética para senadores</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · XII Tablas y Lucha de Clases</div>
+  <div class="card-body">
+    <h2>Ley de las XII Tablas y las 4 Igualdades</h2>
+    <h3>La Lucha de Clases</h3>
+<p>Durante ~400 años los plebeyos, perjudicados por guerras de conquista que los obligaban a abandonar sus tierras, lucharon por conquistar igualdad. Su gran logro fue la <b>Ley de las XII Tablas (451–450 a.C.)</b>: primera ley escrita de Roma.</p>
+<h3>Las 4 Igualdades conquistadas</h3>
+<ul>
+  <li><b>Civil:</b> equivalencia entre patricios y plebeyos ante la ley (XII Tablas).</li>
+  <li><b>Social:</b> matrimonio entre patricios y plebeyos.</li>
+  <li><b>Política:</b> acceso de plebeyos a todos los cargos públicos (consulado, Senado).</li>
+  <li><b>Religiosa:</b> libertad de culto.</li>
+</ul>
+<h3>Contenido de las XII Tablas</h3>
+<p>Tablas I–II: procedimiento judicial · III: deudores · IV: patria potestad · V: tutela · VI: propiedad · VII: servidumbres · VIII: penal · IX: derecho público · X: sagrado · XI–XII: complementos.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué igualdad conquistaron los plebeyos con la Ley de las XII Tablas?</div>
+  <button class="quiz-btn" data-idx="0">Igualdad política (acceso a cargos)</button>
+<button class="quiz-btn" data-idx="1">Igualdad civil y social (ante la ley y el matrimonio mixto)</button>
+<button class="quiz-btn" data-idx="2">Igualdad religiosa (libertad de culto)</button>
+<button class="quiz-btn" data-idx="3">Igualdad económica (reparto de tierras)</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · Fuentes del Derecho en la República</div>
+  <div class="card-body">
+    <h2>Fuentes del Derecho en la República</h2>
+    <p>En la República, el Derecho romano tenía múltiples fuentes:</p>
+<ul>
+  <li><b>Ley:</b> aprobada por los Comicios.</li>
+  <li><b>Plebiscitos:</b> decisiones de la Asamblea plebeya.</li>
+  <li><b>Senadoconsultos:</b> decisiones del Senado.</li>
+  <li><b>Edicto de los Magistrados:</b> normas publicadas por pretores al inicio de su cargo.</li>
+  <li><b>Jurisprudencia:</b> opiniones de los juristas (ius respondendi).</li>
+</ul>
+<div class="destacado">El <b>Ius Honorarium</b> (derecho pretoriano) fue el conjunto de normas creadas por el pretor para corroborar, suplir o corregir el derecho civil existente.</div>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué era el Ius Honorarium o derecho pretoriano?</div>
+  <button class="quiz-btn" data-idx="0">El conjunto de leyes aprobadas por el Senado</button>
+<button class="quiz-btn" data-idx="1">El derecho creado por el pretor para corroborar, suplir o corregir el derecho civil</button>
+<button class="quiz-btn" data-idx="2">Las constituciones imperiales del emperador</button>
+<button class="quiz-btn" data-idx="3">Los plebiscitos votados por la Asamblea plebeya</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · El Imperio Romano</div>
+  <div class="card-body">
+    <h2>El Imperio Romano (27 a.C.–476 d.C.)</h2>
+    <h3>Organización del Imperio</h3>
+<p>El <b>Emperador</b> nombraba al Consejo del Príncipe y a miembros del orden senatorial y ecuestre, que tenían a su cargo las provincias imperiales, el ejército y la policía.</p>
+<p>Los Magistrados, elegidos por el Senado, controlaban las provincias senatoriales, las finanzas y la justicia en Roma.</p>
+<h3>Fuentes del Derecho en el Imperio</h3>
+<ul>
+  <li>Imperio Republicano: jurisprudencia (ius respondendi), Edicto Perpetuo, senadoconsultos, constituciones imperiales.</li>
+  <li>Imperio Absoluto: las <b>leges o constituciones de los emperadores</b> se convirtieron en la única fuente.</li>
+</ul>
+<h3>El Edicto Perpetuo de Adriano</h3>
+<p>Adriano ordenó al jurista <b>Salvio Juliano</b> reunir en un solo cuerpo las reglas publicadas cada año por el pretor urbano → codificación del derecho pretoriano → promulgado como <b>ley definitiva</b> (sin más modificaciones).</p>
+    
+<div class="quiz-section" data-correcta="3">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Quién codificó el Edicto Perpetuo por orden del Emperador Adriano?</div>
+  <button class="quiz-btn" data-idx="0">Cayo</button>
+<button class="quiz-btn" data-idx="1">Ulpiano</button>
+<button class="quiz-btn" data-idx="2">Justiniano</button>
+<button class="quiz-btn" data-idx="3">Salvio Juliano</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · Crisis del s. III, Diocleciano y Constantino</div>
+  <div class="card-body">
+    <h2>Crisis del s. III · Diocleciano · Constantino</h2>
+    <h3>Crisis del Siglo III</h3>
+<p>Revueltas sociales y militares, anarquía y sucesión de emperadores incapaces. Ataques de los pueblos germanos.</p>
+<h3>Diocleciano (s. IV)</h3>
+<p>Saneó la economía y reforzó las fronteras. Dividió el Imperio en dos sectores: Oriente y Occidente → <b>Tetrarquía</b>: cada sector gobernado por un <b>Augusto</b> con un vice-emperador llamado <b>César</b>.</p>
+<h3>Constantino</h3>
+<ul>
+  <li><b>Edicto de Milán (313 d.C.):</b> declaró la libertad de culto para los cristianos.</li>
+  <li>Trasladó la capital a <b>Constantinopla</b> (actual Estambul) para cohesión interna.</li>
+</ul>
+<h3>Teodosio (395 d.C.)</h3>
+<p>Dividió definitivamente el Imperio entre sus hijos Honorio (Occidente) y Arcadio (Oriente).</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Qué estableció el Edicto de Milán de Constantino en el año 313 d.C.?</div>
+  <button class="quiz-btn" data-idx="0">La división del Imperio en Oriente y Occidente</button>
+<button class="quiz-btn" data-idx="1">La libertad de culto para los cristianos</button>
+<button class="quiz-btn" data-idx="2">La codificación definitiva del derecho romano</button>
+<button class="quiz-btn" data-idx="3">El traslado de la capital a Roma</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · Codificaciones y Ley de Citas</div>
+  <div class="card-body">
+    <h2>Codificaciones: Gregoriano, Hermogeniano, Teodosiano y Ley de Citas</h2>
+    <p>Ante la enorme cantidad de leyes romanas, desde el siglo II comenzó la codificación:</p>
+<table>
+<tr><th>Código</th><th>Período</th><th>Contenido</th></tr>
+<tr><td><b>Gregoriano</b></td><td>196–303 d.C.</td><td>Constituciones desde Adriano hasta Diocleciano</td></tr>
+<tr><td><b>Hermogeniano</b></td><td>291–324 d.C.</td><td>Completaba el Gregoriano con constituciones de Diocleciano</td></tr>
+<tr><td><b>Teodosiano</b></td><td>438 d.C.</td><td>Recopilación de constituciones imperiales</td></tr>
+</table>
+<div class="destacado">La <b>Ley de Citas</b>: estableció qué juristas podían ser citados como autoridad en los juicios (Papiniano, Paulo, Ulpiano, Modestino, Gayo).</div>
+<p>La codificación definitiva fue obra del Emperador <b>Justiniano</b> (529–533 d.C.) desde el Imperio de Oriente → <i>Corpus Iuris Civilis</i>.</p>
+    
+<div class="quiz-section" data-correcta="1">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿Cuál fue la codificación definitiva del derecho romano y quién la realizó?</div>
+  <button class="quiz-btn" data-idx="0">El Código Teodosiano, por el Senado romano</button>
+<button class="quiz-btn" data-idx="1">El Corpus Iuris Civilis, por el Emperador Justiniano (529–533 d.C.)</button>
+<button class="quiz-btn" data-idx="2">El Código Gregoriano, por el jurista Salvio Juliano</button>
+<button class="quiz-btn" data-idx="3">La Ley de Citas, por el Emperador Diocleciano</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
+
+<div class="cartilla">
+  <div class="card-header">UNIDAD V · Caída del Imperio y Legado</div>
+  <div class="card-body">
+    <h2>Caída del Imperio y Legado Romano</h2>
+    <div class="destacado">⚔️ <b>476 d.C.</b> — Odoacro, rey de los hérulos, saqueó Roma → caída del Imperio Romano de Occidente.</div>
+<p>Previamente, Atila, rey de los hunos, había devastado grandes partes del Imperio.</p>
+<h3>Legado Político de Roma</h3>
+<ul>
+  <li>Carácter legislativo del Senado.</li>
+  <li>División administrativa: Provincias y Municipios.</li>
+  <li>Importancia de los centros urbanos.</li>
+  <li>Ciudadanía universal.</li>
+  <li>Burocracia para administrar el Estado.</li>
+  <li>El sistema legal, principios jurídicos (primacía de la ley) y derecho de apelación.</li>
+</ul>
+    
+<div class="quiz-section" data-correcta="2">
+  <div class="quiz-label">🔎 Pregunta rápida</div>
+  <div class="quiz-pregunta">¿En qué año y quién produjo la caída del Imperio Romano de Occidente?</div>
+  <button class="quiz-btn" data-idx="0">395 d.C., cuando Teodosio dividió el Imperio</button>
+<button class="quiz-btn" data-idx="1">313 d.C., con el Edicto de Milán de Constantino</button>
+<button class="quiz-btn" data-idx="2">476 d.C., cuando Odoacro (rey de los hérulos) saqueó Roma</button>
+<button class="quiz-btn" data-idx="3">529 d.C., con la codificación de Justiniano</button>
+
+  <div class="quiz-feedback"></div>
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+</div>
+  </div>
+</div>
   <div class="nav-buttons">
     <button class="btn-nav" id="btnAnterior" onclick="cambiar(-1)">← Anterior</button>
     <button class="btn-nav" id="btnIndice" onclick="abrirIndice()">☰ Índice</button>
@@ -767,7 +1113,6 @@
   </div>
 </div><!-- fin #vistaCartillas -->
 
-<!-- ÍNDICE LATERAL -->
 <div class="indice-overlay" id="indiceOverlay" onclick="cerrarIndice()"></div>
 <div class="indice-panel" id="indicePanel">
   <div class="indice-titulo">
@@ -778,7 +1123,6 @@
 </div>
 <button class="menu-toggle" onclick="abrirIndice()" title="Ver índice">☰</button>
 
-<!-- ════ VISTA EXAMEN ════ -->
 <div id="vistaExamen" class="vista">
   <div id="examenConfig" class="examen-config">
     <h3>🧠 Modo Examen</h3>
@@ -815,39 +1159,57 @@
 </div>
 
 <script>
-// ─── BANCO DE PREGUNTAS ────────────────────────────────────────────────────────
+
 const BANCO = [
-  // UNIDAD I
-  { u:"U1", titulo:"Sociedad y Estado", pregunta:"¿Cuál es la definición de Nación según Martyniuk?", opciones:["Una organización jurídica con territorio y poder","Conjunto de individuos vinculados por historia, idioma, costumbres y conciencia nacional","Un gobierno democrático con constitución escrita","Una agrupación de familias con el mismo idioma"], correcta:1, explicacion:"La Nación es el conjunto de individuos con caracteres comunes (idioma, religión, costumbres) vinculados por un pasado histórico y aspiraciones comunes (conciencia nacional)." },
-  { u:"U1", titulo:"Elementos del Estado", pregunta:"¿Qué expresa la SOBERANÍA dentro del elemento 'Poder' del Estado?", opciones:["La capacidad del Estado de declarar guerras","La supremacía máxima del poder, tanto interno como externo","El control exclusivo del ejército nacional","El derecho de voto de los ciudadanos"], correcta:1, explicacion:"La soberanía es una cualidad del Poder del Estado: expresa la idea de un poder supremo, máximo y superior, tanto en el ámbito interno como externo." },
-  { u:"U1", titulo:"Instituciones", pregunta:"¿Qué caracteriza a las instituciones sociales?", opciones:["Son asociaciones voluntarias sin normas fijas","Son organizaciones donde cada miembro cumple un rol, regidas por normas de la costumbre","Son organismos exclusivamente estatales","Son grupos de personas sin jerarquía ni organización"], correcta:1, explicacion:"Las instituciones son asociaciones con roles diferenciados, sistematizadas en una estructura formal, regidas por normas derivadas de la costumbre." },
-  // UNIDAD II
-  { u:"U2", titulo:"Prehistoria", pregunta:"¿Cuál es el período que abarca la Prehistoria?", opciones:["Desde la agricultura hasta la escritura","Desde la aparición del hombre (~2.500.000 a.C.) hasta la invención de la escritura (~3500 a.C.)","Desde el Paleolítico hasta el Imperio Romano","Desde la Edad de Bronce hasta la Edad de Hierro"], correcta:1, explicacion:"La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3500 a.C.)." },
-  { u:"U2", titulo:"Neolítico", pregunta:"¿Cuál es la principal característica del Paleolítico?", opciones:["Agricultura y sedentarización","Caza y recolección, nomadismo, dominio del fuego","Uso de metales y ciudades amuralladas","Invención de la escritura cuneiforme"], correcta:1, explicacion:"El Paleolítico (piedra tallada) se caracterizó por la vida de cazadores-recolectores nómadas, organización en bandas y clanes, y el dominio del fuego." },
-  { u:"U2", titulo:"Instituciones primitivas", pregunta:"¿Cuáles fueron las primeras instituciones que nacieron en el Neolítico?", opciones:["El parlamento, los tribunales y la policía","La familia, la organización política y la justicia (venganza de sangre)","Los gremios, los bancos y el Estado moderno","La iglesia, la monarquía y el ejército permanente"], correcta:1, explicacion:"Con la vida sedentaria en aldeas nacieron las primeras instituciones: la familia, la organización política para dirigir la comunidad y la justicia (inicialmente la venganza de sangre)." },
-  { u:"U2", titulo:"Historia", pregunta:"¿Qué dice Gayo sobre la importancia de la Historia para el Derecho?", opciones:["El Derecho es independiente de la historia","Solo conociendo la historia se puede conocer el Derecho","La historia solo importa para los filósofos","El Derecho moderno no necesita conocer el pasado"], correcta:1, explicacion:'Gayo afirmó: "el principio es la parte más principal de cualquier cosa. Solo conociendo la historia se puede conocer el Derecho."' },
-  // UNIDAD III
-  { u:"U3", titulo:"Mesopotamia", pregunta:"¿Qué significa 'Mesopotamia' y dónde está ubicada?", opciones:["'Tierra fértil', en la costa del Mediterráneo","'Tierra entre ríos' (Tigris y Éufrates), actual Irak","'Ciudad amurallada', en el actual Irán","'Río sagrado', en el actual Egipto"], correcta:1, explicacion:"Mesopotamia significa 'tierra entre ríos', se ubica entre los ríos Tigris y Éufrates en lo que hoy es Irak. Fue cuna de las primeras ciudades-Estado." },
-  { u:"U3", titulo:"Código de Hammurabi", pregunta:"¿En qué se basa la Ley del Talión del Código de Hammurabi?", opciones:["En la compensación económica sin importar la clase social","Pena igual a la ofensa entre personas de igual posición social; compensación en dinero para categoría inferior","En la muerte como única pena para todos los delitos","En el perdón obligatorio al primer delito"], correcta:1, explicacion:'La Ley del Talión: "ojo por ojo, diente por diente" aplicaba pena igual a la ofensa entre personas de igual posición social. Si la contraparte era de categoría inferior, se pagaba compensación en dinero.' },
-  { u:"U3", titulo:"Código de Manú", pregunta:"¿Cuál era la característica más notable del Derecho Penal del Código de Manú?", opciones:["Era muy indulgente con todas las castas","Eran penas muy severas, especialmente para castas inferiores; el Brahmán solo podía ser desterrado","Solo aplicaba penas económicas","Otorgaba el mismo trato a todas las castas"], correcta:1, explicacion:"El Derecho Penal del Código de Manú era muy riguroso: penas de muerte (aplastamiento, mutilación, marcas) para castas inferiores. El Brahmán (sacerdote) no recibía castigo corporal, solo destierro." },
-  { u:"U3", titulo:"Derecho Hebreo", pregunta:"¿Cuáles son los cinco libros que componen la Torá (Pentateuco)?", opciones:["Salmos, Proverbios, Job, Eclesiastés, Cantares","Génesis, Éxodo, Levítico, Números, Deuteronomio","Mateo, Marcos, Lucas, Juan, Hechos","Isaías, Jeremías, Ezequiel, Daniel, Oseas"], correcta:1, explicacion:"La Torá o Pentateuco comprende cinco libros: Génesis, Éxodo, Levítico, Números y Deuteronomio. Son la fuente principal del Derecho hebreo." },
-  // UNIDAD IV
-  { u:"U4", titulo:"Grecia - Polis", pregunta:"¿Cuáles eran las principales características que diferenciaban Atenas de Esparta?", opciones:["Atenas era militar y espartana; Esparta era democrática y filosófica","Atenas era democrática, filosófica e individualista; Esparta era militar, guerrera y patriótica","Atenas tenía castas; Esparta era igualitaria","Ambas eran iguales en su organización política"], correcta:1, explicacion:"Atenas (jonios): democrática, filosófica, individualista, artística. Esparta (dorios): militar, guerrera, disciplinada, patriótica." },
-  { u:"U4", titulo:"Democracia ateniense", pregunta:"¿Qué innovación política introdujo Clístenes en Atenas?", opciones:["Creó el cargo de Estratega militar","Dividió la población en 10 tribus de 50 ciudadanos c/u, con iguales derechos en la Asamblea","Estableció la primera constitución democrática y la isonomía","Compensó económicamente a los cargos públicos"], correcta:1, explicacion:"Clístenes dividió a la población en 10 tribus con 50 ciudadanos c/u (500 en total en la Asamblea), todos con iguales derechos para participar en el gobierno." },
-  { u:"U4", titulo:"Sofistas", pregunta:"¿Qué enseñaban los Sofistas a los jóvenes atenienses?", opciones:["La virtud y la ética universal","Oratoria y erística (arte de la argumentación) para participar en la vida política","La filosofía natural y la cosmología","Las matemáticas y la geometría"], correcta:1, explicacion:"Los Sofistas capacitaban a los jóvenes para la participación en la vida política mediante la oratoria y la erística (arte de la argumentación)." },
-  // UNIDAD V
-  { u:"U5", titulo:"Roma - Sociedad", pregunta:"¿Cuáles eran los tres grupos sociales en la Roma antigua?", opciones:["Ciudadanos, extranjeros y libertos","Patricios, plebeyos y esclavos","Sacerdotes, guerreros y comerciantes","Cónsules, senadores y magistrados"], correcta:1, explicacion:"La sociedad romana se dividía en: Patricios (aristocracia con derechos plenos), Plebeyos (personas libres sin derechos políticos) y Esclavos (sin ningún derecho)." },
-  { u:"U5", titulo:"República romana", pregunta:"¿Cuáles son las 4 igualdades que conquistaron los plebeyos durante la República?", opciones:["Económica, cultural, religiosa y militar","Civil, social, política y religiosa","Jurídica, electoral, fiscal y territorial","Laboral, familiar, penal y administrativa"], correcta:1, explicacion:"Los plebeyos conquistaron en ~400 años: igualdad civil (ante la ley), social (matrimonio mixto), política (acceso a cargos) y religiosa (libertad de culto)." },
-  { u:"U5", titulo:"XII Tablas", pregunta:"¿Cuándo y por qué se creó la Ley de las XII Tablas?", opciones:["En 509 a.C. para reemplazar la monarquía","En 451-450 a.C. para dar igualdad civil y social a los plebeyos ante la ley","En 27 a.C. para instaurar el Imperio","En 313 d.C. para otorgar libertad religiosa"], correcta:1, explicacion:"La Ley de las XII Tablas (451-450 a.C.) fue la primera ley escrita romana, conquistada por los plebeyos para obtener igualdad civil y social frente a los patricios." },
-  { u:"U5", titulo:"Fuentes del Derecho romano", pregunta:"¿Qué fue el Edicto Perpetuo de Adriano?", opciones:["Un código penal del Imperio","La codificación del derecho pretoriano (ius honorarium) ordenada por Adriano y redactada por Salvio Juliano","La primera constitución escrita de Roma","El conjunto de constituciones imperiales del siglo IV"], correcta:1, explicacion:"El Edicto Perpetuo de Adriano codificó el ius honorarium (derecho pretoriano). Adriano encargó al jurista Salvio Juliano reunir en un solo cuerpo las reglas del pretor urbano, convirtiéndolo en ley definitiva." },
-  { u:"U5", titulo:"Caída de Roma", pregunta:"¿En qué año cayó el Imperio Romano de Occidente y quién lo produjo?", opciones:["395 d.C., con la división del Imperio por Teodosio","476 d.C., cuando Odoacro (rey de los hérulos) saqueó Roma","313 d.C., con el Edicto de Milán de Constantino","529 d.C., con la codificación de Justiniano"], correcta:1, explicacion:"El Imperio Romano de Occidente cayó en el año 476 d.C. cuando Odoacro, rey de los hérulos, saqueó Roma." },
+  // U1
+  {u:"U1",titulo:"Sociedad",pregunta:"¿Qué es la Sociedad según Macionis y Plummer?",opciones:["Una organización estatal con leyes escritas","Conjunto de personas que interactúa en un espacio determinado compartiendo una misma cultura","Un grupo familiar con idioma común","Una institución jurídica con normas formales"],correcta:1,explicacion:"La Sociedad es el conjunto de personas que interactúa en un espacio determinado y comparte una misma cultura, relacionándose según reglas jurídicas y costumbres."},
+  {u:"U1",titulo:"Estructura Social",pregunta:"¿Qué es la Estructura Social?",opciones:["El gobierno de un país","Conjunto de formas en que grupos e individuos se organizan y relacionan dentro de una sociedad","Las normas escritas de una constitución","La jerarquía religiosa de una civilización"],correcta:1,explicacion:"La estructura social es la constelación especial de grupos (castas, estamentos, clases) y sus relaciones dentro de una sociedad."},
+  {u:"U1",titulo:"Instituciones",pregunta:"¿Cuál es la característica clave de las instituciones sociales?",opciones:["Son organismos exclusivamente estatales","Cada miembro cumple un rol y se rigen por normas de la costumbre en una estructura formal","Son grupos informales sin organización","Solo existen en sociedades con escritura"],correcta:1,explicacion:"Las instituciones son relaciones sistematizadas en una estructura formal donde cada miembro cumple un rol y rigen normas consuetudinarias."},
+  {u:"U1",titulo:"Cultura",pregunta:"¿Qué incluye el concepto de Cultura?",opciones:["Solo las artes y la arquitectura","Bienes materiales y espirituales de un grupo transmitidos generacionalmente: lengua, costumbres, valores, herramientas","Solo las normas jurídicas escritas","El territorio y la población de un Estado"],correcta:1,explicacion:"La cultura incluye lengua, costumbres, tradiciones, hábitos, valores, herramientas y conocimiento transmitidos de generación en generación."},
+  {u:"U1",titulo:"Nación",pregunta:"¿Qué define a la Nación según Martyniuk?",opciones:["Un Estado con constitución escrita","Conjunto de individuos vinculados por caracteres comunes (idioma, religión, costumbres) y conciencia nacional","Una organización militar con territorio propio","Un grupo étnico sin gobierno propio"],correcta:1,explicacion:"La Nación es el conjunto de individuos con caracteres comunes vinculados por un pasado histórico y aspiraciones comunes que forman la conciencia nacional (Martyniuk, 2003)."},
+  {u:"U1",titulo:"Estado",pregunta:"¿Cuáles son los 3 elementos del Estado?",opciones:["Gobierno, leyes y ciudadanos","Territorio, población y poder (soberanía)","Nación, idioma y cultura","Constitución, ejército y justicia"],correcta:1,explicacion:"Los tres elementos del Estado son Territorio (espacio geográfico), Población (habitantes) y Poder con soberanía interna y externa."},
+  {u:"U1",titulo:"Soberanía",pregunta:"¿Qué expresa la Soberanía dentro del elemento 'Poder' del Estado?",opciones:["La capacidad de declarar guerras","Un poder supremo y máximo, tanto interno como externo","El control exclusivo del ejército","El derecho de voto de los ciudadanos"],correcta:1,explicacion:"La soberanía es una cualidad del Poder del Estado: expresa la idea de un poder supremo y máximo, superior en el ámbito interno y externo."},
+  // U2
+  {u:"U2",titulo:"Prehistoria",pregunta:"¿Qué período abarca la Prehistoria?",opciones:["Desde la agricultura hasta la escritura","Desde la aparición del hombre (~2.500.000 a.C.) hasta la invención de la escritura (~3.500 a.C.)","Desde el Paleolítico hasta el Imperio Romano","Desde la Edad de Bronce hasta la Edad de Hierro"],correcta:1,explicacion:"La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3.500 a.C.) en Sumeria."},
+  {u:"U2",titulo:"Paleolítico",pregunta:"¿Cuál es la característica principal del Paleolítico?",opciones:["Agricultura y sedentarización","Caza y recolección, nomadismo, organización en bandas y dominio del fuego","Uso de metales y ciudades amuralladas","Invención de la escritura cuneiforme"],correcta:1,explicacion:"El Paleolítico se caracterizó por la vida nómada de cazadores-recolectores organizados en bandas y clanes, con dominio del fuego."},
+  {u:"U2",titulo:"Revolución Agrícola",pregunta:"¿Por qué se llama 'revolución' a la aparición de la agricultura?",opciones:["Causó guerras entre tribus","Transformó radicalmente la economía: de cazador-recolector a productor sedentario","Inventó la escritura","Creó los primeros imperios"],correcta:1,explicacion:"Fue revolucionaria porque cambió completamente la economía humana: del nomadismo cazador al sedentarismo productor, generando estratificación social y crecimiento demográfico."},
+  {u:"U2",titulo:"Instituciones primitivas",pregunta:"¿Cuáles fueron las primeras instituciones que surgieron en el Neolítico?",opciones:["El parlamento, los tribunales y la policía","La familia, la organización política y la justicia (venganza de sangre)","Los gremios, los bancos y el Estado moderno","La iglesia, la monarquía y el ejército permanente"],correcta:1,explicacion:"Con la vida sedentaria en aldeas nacieron las primeras instituciones: la familia, la organización política y la justicia (venganza de sangre)."},
+  {u:"U2",titulo:"Historia y Derecho",pregunta:"¿Qué afirmó Gayo sobre historia y Derecho?",opciones:["El Derecho es independiente de la historia","Solo conociendo la historia se puede conocer el Derecho","La historia solo importa a los filósofos","El Derecho moderno no necesita el pasado"],correcta:1,explicacion:'Gayo afirmó que "el principio es la parte más principal de cualquier cosa" y que solo conociendo la historia se puede conocer el Derecho.'},
+  // U3
+  {u:"U3",titulo:"Castas India",pregunta:"¿Cómo se adquiere la casta en la sociedad india?",opciones:["Por mérito personal","Con el nacimiento, de forma hereditaria e inmutable","Por decisión del sacerdote","Por riqueza acumulada"],correcta:1,explicacion:"El sistema de castas es hereditario: la casta se determina al nacer y no puede cambiarse durante la vida."},
+  {u:"U3",titulo:"Código de Manú",pregunta:"¿Qué tipo de colección es el Código de Manú?",opciones:["Solo un código penal","Colección de preceptos religiosos, morales, sociales y jurídicos que regula toda la vida social","Un tratado filosófico sin valor jurídico","Un registro histórico de guerras"],correcta:1,explicacion:"El Código de Manú es una colección de preceptos religiosos, morales, sociales y jurídicos que regula el gobierno, la justicia, el ejército, el comercio y la familia."},
+  {u:"U3",titulo:"Penas Código Manú",pregunta:"¿Qué pena recibía el Brahmán en el Código de Manú?",opciones:["La pena de muerte siempre","No recibía castigo corporal, solo podía ser desterrado","Era castigado igual que todos","Solo pagaba una multa económica"],correcta:1,explicacion:"El Brahmán (sacerdote, casta más alta) estaba exento de castigos corporales; la única pena que podía recibir era el destierro."},
+  {u:"U3",titulo:"Egipto",pregunta:"¿Por qué se denomina 'teocrático' al gobierno del Antiguo Egipto?",opciones:["Porque lo dirigían varios sacerdotes","Porque el Faraón era considerado figura divina y concentraba todo el poder","Porque las leyes venían escritas de los dioses","Porque el ejército controlaba los templos"],correcta:1,explicacion:"El gobierno egipcio era teocrático porque el Faraón era visto como un dios viviente que concentraba todo el poder político y religioso."},
+  {u:"U3",titulo:"Sumerios",pregunta:"¿Cuáles fueron las primeras ciudades-Estado de Sumeria?",opciones:["Babilonia, Nínive, Asiria y Persia","Ur, Uruk, Lagash y Eridu","Menfis, Tebas, Alejandría y Luxor","Mohenjo-Daro, Harappa, Delhi y Bombay"],correcta:1,explicacion:"Las primeras ciudades-Estado de Sumeria (hacia el IV milenio a.C.) fueron Ur, Uruk, Lagash y Eridu."},
+  {u:"U3",titulo:"Escritura Cuneiforme",pregunta:"¿Con qué propósito surgió la escritura cuneiforme?",opciones:["Para escribir textos religiosos y épicos","Para llevar la contabilidad en los templos (cosechas, impuestos)","Para comunicarse entre ciudades enemigas","Para registrar victorias militares"],correcta:1,explicacion:"La escritura cuneiforme surgió como herramienta contable en los templos mesopotámicos (~3.500 a.C.) y luego se extendió a leyes y literatura."},
+  {u:"U3",titulo:"Hammurabi",pregunta:"¿Cuál fue el principal mérito del Código de Hammurabi?",opciones:["Abolir la pena de muerte","Entregar al Estado la responsabilidad de cumplir la ley, suprimiendo la venganza privada","Igualar los derechos de todas las clases","Crear el primer sistema democrático"],correcta:1,explicacion:"El Código de Hammurabi transfirió la justicia del ámbito privado al Estado, que pasó a ser el garante del cumplimiento de las leyes."},
+  {u:"U3",titulo:"Ley del Talión",pregunta:"¿Qué establece la Ley del Talión del Código de Hammurabi?",opciones:["Perdón obligatorio al primer delito","Pena igual a la ofensa entre iguales; compensación en dinero si la contraparte es de categoría inferior","Pena de muerte para todos los delitos","Solo penas económicas sin castigo corporal"],correcta:1,explicacion:'La Ley del Talión ("ojo por ojo") aplicaba pena igual a la ofensa entre personas de igual posición. Si la víctima era de categoría inferior, se pagaba compensación en dinero.'},
+  {u:"U3",titulo:"Torá Hebrea",pregunta:"¿En cuántos libros se divide la Torá (Pentateuco)?",opciones:["Tres","Diez","Cinco","Siete"],correcta:2,explicacion:"La Torá o Pentateuco comprende 5 libros: Génesis, Éxodo, Levítico, Números y Deuteronomio."},
+  {u:"U3",titulo:"Levirato",pregunta:"¿Qué establece el Levirato en el Derecho Hebreo?",opciones:["El primogénito recibe doble herencia","El hermano del marido fallecido puede tomar a la viuda como esposa","El padre tiene potestad absoluta sobre sus hijos","El matrimonio hebreo era poligámico"],correcta:1,explicacion:"El Levirato establece que al fallecer el esposo, su hermano puede tomar a la viuda como esposa para garantizar la continuidad del linaje familiar."},
+  // U4
+  {u:"U4",titulo:"Atenas vs. Esparta",pregunta:"¿Qué distinguía principalmente a Atenas de Esparta?",opciones:["Atenas era militar y Esparta democrática","Atenas era democrática y filosófica; Esparta era militar y guerrera","Ambas eran igualmente democráticas","Atenas tenía castas; Esparta era igualitaria"],correcta:1,explicacion:"Atenas (jonios): democrática, filosófica, individualista, artística. Esparta (dorios): militar, guerrera, disciplinada, patriótica."},
+  {u:"U4",titulo:"Licurgo",pregunta:"¿Cómo se llamó la constitución que estableció Licurgo en Esparta?",opciones:["La Isonomía","La Eclesía","La Retar","La Acropolis"],correcta:2,explicacion:"Licurgo estableció la constitución de Esparta en el siglo VIII a.C., cuya obra recibió el nombre de Retar (ley)."},
+  {u:"U4",titulo:"Olimpiadas",pregunta:"¿En qué año se celebraron los primeros Juegos Olímpicos?",opciones:["509 a.C.","776 a.C.","594 a.C.","753 a.C."],correcta:1,explicacion:"Los primeros Juegos Olímpicos se celebraron en el año 776 a.C. en Olimpia, en honor a Zeus, considerado el 'año 0' del calendario griego."},
+  {u:"U4",titulo:"Clístenes",pregunta:"¿Qué innovación política introdujo Clístenes en Atenas?",opciones:["Pagó a los ciudadanos por ocupar cargos","Dividió la población en 10 tribus de 50 ciudadanos c/u con iguales derechos en la Asamblea","Eliminó a los nobles del gobierno","Creó el tribunal popular"],correcta:1,explicacion:"Clístenes dividió a los ciudadanos en 10 tribus (500 en total en la Asamblea), todos con iguales derechos, rompiendo el poder de los clanes nobles."},
+  {u:"U4",titulo:"Pericles",pregunta:"¿Cuál fue la principal innovación de Pericles para la democracia?",opciones:["Creó la constitución escrita","Decidió que todos los cargos públicos recibieran compensación económica, permitiendo participar a los pobres","Amplió el territorio de Atenas","Fundó la Liga del Peloponeso"],correcta:1,explicacion:"Pericles estableció que todos los cargos públicos recibieran un sueldo, lo que permitió que ciudadanos sin recursos pudieran participar en el gobierno."},
+  {u:"U4",titulo:"Sofistas",pregunta:"¿Cuál era el objetivo principal de la educación sofística?",opciones:["Enseñar la virtud universal","Capacitar a jóvenes para la participación política mediante oratoria y erística","Transmitir el conocimiento de la naturaleza","Formar filósofos gobernantes"],correcta:1,explicacion:"Los Sofistas capacitaban a los jóvenes para la vida política mediante la oratoria y la erística (arte de la argumentación)."},
+  // U5
+  {u:"U5",titulo:"Sociedad romana",pregunta:"¿Cuáles eran los tres grupos sociales de la Roma antigua?",opciones:["Ciudadanos, extranjeros y libertos","Patricios, plebeyos y esclavos","Sacerdotes, guerreros y comerciantes","Cónsules, senadores y magistrados"],correcta:1,explicacion:"La sociedad romana se dividía en Patricios (aristocracia con plenos derechos), Plebeyos (libres sin derechos políticos) y Esclavos (sin ningún derecho)."},
+  {u:"U5",titulo:"Mos Maiorum",pregunta:"¿Qué era el 'mos maiorum' en el derecho romano temprano?",opciones:["El primer código escrito de Roma","La costumbre de los antepasados que regía el derecho no escrito","La constitución del rey Servio Tulio","El conjunto de leyes del Senado"],correcta:1,explicacion:"El mos maiorum (costumbre de los antepasados) fue el derecho consuetudinario no escrito que rigió Roma antes de las XII Tablas."},
+  {u:"U5",titulo:"Servio Tulio",pregunta:"¿Cuál fue el criterio innovador del censo de Servio Tulio?",opciones:["Se basaba en el nacimiento y el linaje","Se basaba en la riqueza, no solo en el nacimiento","Se basaba en el mérito militar","Se basaba en la religión"],correcta:1,explicacion:"Servio Tulio innovó al introducir un censo basado en la riqueza, organizando la población en 5 clases y 193 centurias."},
+  {u:"U5",titulo:"XII Tablas",pregunta:"¿Cuándo se creó la Ley de las XII Tablas y qué igualdades otorgó?",opciones:["509 a.C., igualdad política","451–450 a.C., igualdad civil y social","27 a.C., igualdad religiosa","476 d.C., igualdad económica"],correcta:1,explicacion:"Las XII Tablas (451–450 a.C.) otorgaron a los plebeyos la igualdad civil (ante la ley) y social (matrimonio mixto con patricios)."},
+  {u:"U5",titulo:"Cursus Honorum",pregunta:"¿Qué era el Cursus Honorum en Roma?",opciones:["El código de leyes de la República","La carrera política por la que un ciudadano ascendía de cargo en cargo","El nombre del ejército romano","El manual de ética para senadores"],correcta:1,explicacion:"El Cursus Honorum era la carrera política romana: una secuencia de magistraturas (cuestor, edil, pretor, cónsul) que un ciudadano debía recorrer."},
+  {u:"U5",titulo:"Ius Honorarium",pregunta:"¿Qué era el Ius Honorarium o derecho pretoriano?",opciones:["Las leyes del Senado","El derecho creado por el pretor para corroborar, suplir o corregir el derecho civil","Las constituciones del emperador","Los plebiscitos de la Asamblea"],correcta:1,explicacion:"El Ius Honorarium era el conjunto de normas que el pretor publicaba en su edicto para complementar y corregir el derecho civil existente."},
+  {u:"U5",titulo:"Edicto Perpetuo",pregunta:"¿Quién codificó el Edicto Perpetuo por orden del Emperador Adriano?",opciones:["Cayo","Ulpiano","Justiniano","Salvio Juliano"],correcta:3,explicacion:"El Emperador Adriano encargó al jurista Salvio Juliano reunir y sistematizar el Edicto Perpetuo, convirtiéndolo en ley definitiva."},
+  {u:"U5",titulo:"Diocleciano y Constantino",pregunta:"¿Qué estableció el Edicto de Milán de Constantino (313 d.C.)?",opciones:["La división del Imperio","La libertad de culto para los cristianos","La codificación del derecho romano","El traslado de la capital a Roma"],correcta:1,explicacion:"El Edicto de Milán (313 d.C.) declaró la libertad de culto para los cristianos, poniendo fin a su persecución."},
+  {u:"U5",titulo:"Códigos",pregunta:"¿Cuál fue la codificación definitiva del derecho romano?",opciones:["El Código Teodosiano","El Corpus Iuris Civilis de Justiniano (529–533 d.C.)","El Código Gregoriano","La Ley de Citas de Diocleciano"],correcta:1,explicacion:"La codificación definitiva fue el Corpus Iuris Civilis, ordenado por el Emperador Justiniano del Imperio Romano de Oriente entre el 529 y 533 d.C."},
+  {u:"U5",titulo:"Caída de Roma",pregunta:"¿En qué año y quién produjo la caída del Imperio Romano de Occidente?",opciones:["395 d.C., Teodosio dividió el Imperio","313 d.C., Edicto de Milán de Constantino","476 d.C., Odoacro (rey de los hérulos) saqueó Roma","529 d.C., codificación de Justiniano"],correcta:2,explicacion:"El Imperio Romano de Occidente cayó en el año 476 d.C., cuando Odoacro, rey de los hérulos, saqueó Roma y depuso al último emperador."},
 ];
 
-// ─── ESTADO ──────────────────────────────────────────────────────────────────
 const cards = document.querySelectorAll('.cartilla');
 let cur = 0;
 
-// ─── QUIZ por cartilla ────────────────────────────────────────────────────────
+// Quiz por cartilla
 document.querySelectorAll('.quiz-section').forEach(sec => {
   const correcta = parseInt(sec.dataset.correcta);
   const btns     = sec.querySelectorAll('.quiz-btn');
@@ -878,7 +1240,6 @@ document.querySelectorAll('.quiz-section').forEach(sec => {
   });
 });
 
-// ─── RENDER cartillas ────────────────────────────────────────────────────────
 function render() {
   cards.forEach((c, i) => {
     c.classList.toggle('activa', i === cur);
@@ -888,20 +1249,20 @@ function render() {
   const pct = Math.round((cur + 1) / cards.length * 100);
   document.getElementById('pBar').style.width = pct + '%';
   document.getElementById('pText').textContent = (cur + 1) + ' / ' + cards.length;
-  // sync índice
   document.querySelectorAll('.indice-item').forEach((it, i) => {
     it.classList.toggle('activo', i === cur);
   });
 }
+
 function cambiar(d) { cur = Math.max(0, Math.min(cards.length-1, cur+d)); render(); window.scrollTo(0,0); }
 render();
 
-// ─── ÍNDICE ───────────────────────────────────────────────────────────────────
+// Índice
 const indiceContenido = document.getElementById('indiceContenido');
 cards.forEach(function(c, i) {
   const h2 = c.querySelector('h2');
   const titulo = h2 ? h2.textContent : '';
-  const esPortada = /^Unidad\s+/i.test(titulo);
+  const esPortada = /^UNIDAD /i.test(titulo) || c.classList.contains('portada');
   const btn = document.createElement('button');
   btn.className = 'indice-item' + (esPortada ? ' indice-portada' : '');
   btn.innerHTML = '<span class="indice-num">' + (i+1) + '.</span>' + titulo;
@@ -912,7 +1273,7 @@ cards.forEach(function(c, i) {
 function abrirIndice()  { document.getElementById('indicePanel').classList.add('abierto'); document.getElementById('indiceOverlay').classList.add('visible'); }
 function cerrarIndice() { document.getElementById('indicePanel').classList.remove('abierto'); document.getElementById('indiceOverlay').classList.remove('visible'); }
 
-// ─── MODO ─────────────────────────────────────────────────────────────────────
+// Tabs
 document.querySelectorAll('.modo-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.modo-btn').forEach(b => b.classList.remove('activo'));
@@ -922,9 +1283,10 @@ document.querySelectorAll('.modo-btn').forEach(btn => {
   });
 });
 
-// ─── MODO EXAMEN ──────────────────────────────────────────────────────────────
+// Modo examen
 let exPreguntas = [], exIdx = 0, exCorrectas = 0, exIncorrectas = 0, exHistorial = [];
 let exTotal = 10;
+
 document.querySelectorAll('.btn-num').forEach(b => {
   b.addEventListener('click', function() {
     document.querySelectorAll('.btn-num').forEach(x => x.classList.remove('sel'));
@@ -932,7 +1294,9 @@ document.querySelectorAll('.btn-num').forEach(b => {
     exTotal = parseInt(this.dataset.n);
   });
 });
+
 function mezclar(arr) { for (let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+
 function iniciarExamen() {
   const mezclado = mezclar([...BANCO]);
   exPreguntas = mezclado.slice(0, Math.min(exTotal, BANCO.length));
@@ -942,6 +1306,7 @@ function iniciarExamen() {
   document.getElementById('examenActivo').classList.add('visible');
   mostrarPregunta();
 }
+
 function mostrarPregunta() {
   const p = exPreguntas[exIdx];
   document.getElementById('exContador').textContent = 'Pregunta ' + (exIdx+1) + ' / ' + exPreguntas.length;
@@ -968,11 +1333,13 @@ function mostrarPregunta() {
     opcDiv.appendChild(b);
   });
 }
+
 function siguientePregunta() {
   exIdx++;
   if (exIdx >= exPreguntas.length) { mostrarResultado(); return; }
   mostrarPregunta();
 }
+
 function mostrarResultado() {
   document.getElementById('examenActivo').classList.remove('visible');
   const res = document.getElementById('examenResultado');
@@ -990,6 +1357,7 @@ function mostrarResultado() {
     det.appendChild(d);
   });
 }
+
 function reiniciarExamen() {
   document.getElementById('examenResultado').classList.remove('visible');
   document.getElementById('examenActivo').classList.remove('visible');
