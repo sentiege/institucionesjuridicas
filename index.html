@@ -139,6 +139,7 @@
   <div class="modo-tabs">
     <button class="modo-btn activo" data-vista="vistaCartillas">📚 Cartillas</button>
     <button class="modo-btn" data-vista="vistaExamen">🧠 Examen</button>
+    <button class="modo-btn" data-vista="vistaProfAda">📝 Prof. Ada</button>
   </div>
 </div>
 
@@ -1158,6 +1159,21 @@
   </div>
 </div>
 
+<div id="vistaProfAda" class="vista">
+  <div style="max-width:700px;margin:0 auto;padding:1rem">
+    <h2 style="color:var(--verde1);text-align:center;margin-bottom:1rem">📝 Cuestionario – Prof. Ada</h2>
+    <p style="text-align:center;color:var(--gris2);font-size:.88rem;margin-bottom:1.5rem">
+      Historia de las Instituciones Jurídicas · Seleccioná la respuesta correcta
+    </p>
+    <div id="ada-quiz-container"></div>
+    <div id="ada-resultado" style="display:none;background:#fff;border-radius:14px;padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(27,110,61,.1);margin-top:1rem">
+      <div id="ada-score-num" style="font-size:3rem;font-weight:900;color:var(--verde1)"></div>
+      <div style="font-size:1.1rem;color:var(--gris2);margin-bottom:1rem">respuestas correctas</div>
+      <button onclick="reiniciarAdaQuiz()" style="background:var(--verde1);color:#fff;border:none;padding:.7rem 2rem;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:700">🔄 Reiniciar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 
 const BANCO = [
@@ -1363,6 +1379,101 @@ function reiniciarExamen() {
   document.getElementById('examenActivo').classList.remove('visible');
   document.getElementById('examenConfig').style.display='block';
 }
+
+// ── Prof. Ada Quiz ──────────────────────────────────────────
+const ADA_PREGUNTAS = [
+  { p:"Código más antiguo de Babilonia:", ops:["Código de Hamurabi","Código de Manu"], c:0 },
+  { p:"Gobernante supremo egipcio:", ops:["El Rey","El Faraón"], c:1 },
+  { p:"Civilización de los Juegos Olímpicos:", ops:["Civilización de Grecia","Civilización Romana"], c:0 },
+  { p:"Sociedad organizada con soberanía:", ops:["Estado","Nación"], c:0 },
+  { p:"Código severo de leyes en India:", ops:["Código de Manu","Código Hamurabi"], c:0 },
+  { p:"Rey que mandó compilar el Código de Hammurabi:", ops:["El Rey Hammurabi","El Rey Tutankamon"], c:0 },
+  { p:"Sistema social hereditario en India:", ops:["Casta","Patricios y Plebeyos"], c:0 },
+  { p:"Conjunto de personas que interactúan organizadas con cultura común:", ops:["Sociedad","Dinámica cultural"], c:0 },
+  { p:"Fiesta deportiva griega:", ops:["Los Juegos Olímpicos","Los Juegos del Circo Romano"], c:0 },
+  { p:"Primer grupo social formado por hombre y mujer:", ops:["La familia","El Clan"], c:0 },
+  { p:"¿Cómo se denomina el estudio del pasado desde la aparición de la escritura?", ops:["La Historia","La Civilización"], c:0 },
+  { p:"Periodo de la revolución agrícola:", ops:["Paleolítico","Neolítico"], c:1 },
+  { p:"Códigos de compilación romana:", ops:["Código Gregoriano, Hermogeniano y Teodosiano","Edicto Salvio Juliano"], c:0 },
+  { p:"Clase privilegiada romana:", ops:["Los Patricios","Los Plebeyos"], c:0 },
+  { p:"Características del hombre del Paleolítico:", ops:["Eran nómadas, recolectores y cazadores","Eran sedentarios y agricultores"], c:0 },
+  { p:"Reforma de Diocleciano:", ops:["División del Imperio","Tetrarquía","La respuesta a y b son correctas"], c:2 },
+  { p:"Divinidad con control total en Roma:", ops:["El Senado","Los Magistrados","El Emperador"], c:2 },
+  { p:"Primera institución que perdura hasta hoy:", ops:["La familia","El Clan"], c:0 },
+  { p:"Ciudadanos amantes de la democracia y la filosofía:", ops:["Ateniense","Espartano"], c:0 },
+  { p:"El hombre por naturaleza es un ser:", ops:["Altruistas y cooperadores","Social y político"], c:1 },
+  { p:"Clase social sin privilegios en Roma:", ops:["Patricios","Plebeyos"], c:1 },
+  { p:"Primera ley escrita de Roma:", ops:["Edicto Salvio Juliano","La Ley de las XII Tablas"], c:1 },
+  { p:"Intelectuales engañosos:", ops:["Los Sofistas","Los Artistas"], c:0 },
+  { p:"Padre de la democracia ateniense:", ops:["Dracón","Clístenes"], c:1 },
+  { p:"Primer registro histórico:", ops:["La escritura cuneiforme","La escritura jeroglífica"], c:0 },
+  { p:"Primeras pinturas en cuevas:", ops:["Pintura Rupestre","Manifestación Cultural"], c:0 },
+  { p:"Grupo con idioma, religión y pasado histórico común:", ops:["Estado","Nación"], c:1 },
+  { p:"Primera escritura de Mesopotamia:", ops:["Escritura cuneiforme","Alfabeto Grecolatino"], c:0 },
+  { p:"Sistema social religioso de la India:", ops:["Las Castas","Patricios y Plebeyos"], c:0 },
+  { p:"Conjunto de bienes materiales y espirituales transmitidos de generación en generación:", ops:["Cultura","Civilización"], c:0 },
+  { p:"Institución política romana consejera:", ops:["Emperador","Senado"], c:1 },
+  { p:"Periodo político con cónsules:", ops:["Monarquía","República","Imperio"], c:1 },
+  { p:"Primer código mesopotámico:", ops:["Código de Hamurabi","Código de Manu"], c:0 },
+  { p:"Código penal indio antiguo:", ops:["Código de Manu","Código Hamurabi"], c:0 },
+  { p:"Comunidad con pasado histórico común:", ops:["Estado","Nación"], c:1 },
+  { p:"Origen de Roma:", ops:["De la leyenda de Rómulo y Remo","De la unión de latinos y sabinas","En el 753 a.C.","Todas las respuestas son correctas"], c:3 },
+  { p:"Periodo 509–27 a.C.:", ops:["Monarquía","República","Imperio"], c:1 },
+  { p:"Periodo 753–509 a.C.:", ops:["Monarquía","República","Imperio"], c:0 },
+  { p:"Periodo donde surge la revolución agrícola:", ops:["Paleolítico","Neolítico"], c:1 },
+  { p:"Gobernante supremo de Egipto:", ops:["Rey","Faraón"], c:1 },
+];
+
+let adaScore = 0;
+let adaRespondidas = 0;
+
+function renderAdaQuiz() {
+  adaScore = 0; adaRespondidas = 0;
+  const cont = document.getElementById('ada-quiz-container');
+  document.getElementById('ada-resultado').style.display = 'none';
+  cont.innerHTML = ADA_PREGUNTAS.map((q, i) => `
+    <div class="card" id="ada-q-${i}" style="margin-bottom:.8rem;padding:1rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--verde2);margin-bottom:.3rem">Pregunta ${i+1}</div>
+      <div style="font-size:.92rem;font-weight:700;margin-bottom:.7rem;line-height:1.5">${q.p}</div>
+      ${q.ops.map((op, j) => `
+        <button class="quiz-btn" onclick="responderAda(${i},${j})" id="ada-btn-${i}-${j}">${op}</button>
+      `).join('')}
+      <div class="quiz-feedback" id="ada-fb-${i}"></div>
+    </div>
+  `).join('');
+}
+
+function responderAda(qi, oi) {
+  const q = ADA_PREGUNTAS[qi];
+  const fb = document.getElementById(`ada-fb-${qi}`);
+  q.ops.forEach((_, j) => {
+    const btn = document.getElementById(`ada-btn-${qi}-${j}`);
+    btn.disabled = true;
+    if (j === q.c) btn.classList.add('correcto');
+  });
+  const elegido = document.getElementById(`ada-btn-${qi}-${oi}`);
+  if (oi === q.c) {
+    fb.textContent = '✅ ¡Correcto!';
+    fb.style.color = '#155724';
+    adaScore++;
+  } else {
+    elegido.classList.add('incorrecto');
+    fb.textContent = `❌ Incorrecto. Correcta: "${q.ops[q.c]}"`;
+    fb.style.color = '#721c24';
+  }
+  adaRespondidas++;
+  if (adaRespondidas === ADA_PREGUNTAS.length) {
+    document.getElementById('ada-score-num').textContent = `${adaScore} / ${ADA_PREGUNTAS.length}`;
+    document.getElementById('ada-resultado').style.display = 'block';
+    document.getElementById('ada-resultado').scrollIntoView({behavior:'smooth'});
+  }
+}
+
+function reiniciarAdaQuiz() { renderAdaQuiz(); }
+
+document.addEventListener('DOMContentLoaded', renderAdaQuiz);
+// ── Fin Prof. Ada Quiz ───────────────────────────────────────
+
 </script>
 </body>
 </html>
