@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Historia de las Instituciones – Unidades VI a X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    header {
+      background: #111827;
+      color: #f9fafb;
+      padding: 1rem 1.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+    header p {
+      margin: .25rem 0 0;
+      font-size: .9rem;
+      color: #d1d5db;
+    }
+    main {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1rem;
+      padding-bottom: 3rem;
+    }
+    .unit-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+    .unit-btn {
+      border-radius: .375rem;
+      padding: .4rem .8rem;
+      border: 1px solid #9ca3af;
+      background: #e5e7eb;
+      font-size: .85rem;
+      cursor: pointer;
+    }
+    .unit-btn.active {
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
+    }
+    .unit { display: none; }
+    .unit.active { display: block; }
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 0;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: .25rem;
+    }
+    h3 {
+      font-size: 1rem;
+      margin-top: 1.2rem;
+      margin-bottom: .25rem;
+      color: #111827;
+    }
+    p {
+      font-size: .9rem;
+      line-height: 1.55;
+      margin: .15rem 0 .4rem;
+    }
+    ul {
+      font-size: .9rem;
+      padding-left: 1.1rem;
+      margin-top: 0;
+    }
+    li { margin-bottom: .15rem; }
+
+    .block {
+      background: #ffffff;
+      border-radius: .5rem;
+      padding: .9rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,.06);
+      border: 1px solid #e5e7eb;
+    }
+    .block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .5rem;
+    }
+    .badge {
+      font-size: .7rem;
+      padding: .1rem .45rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+      white-space: nowrap;
+    }
+    .qa-title {
+      font-size: .9rem;
+      margin-top: .5rem;
+      font-weight: 600;
+    }
+    .question-block {
+      border-radius: .4rem;
+      border: 1px solid #e5e7eb;
+      padding: .6rem .7rem;
+      margin-top: .45rem;
+      background: #f9fafb;
+    }
+    .question-block p {
+      margin: 0 0 .25rem;
+    }
+    .options {
+      margin-top: .15rem;
+    }
+    .options label {
+      display: block;
+      font-size: .85rem;
+      margin-bottom: .05rem;
+      cursor: pointer;
+    }
+    .btn-small {
+      margin-top: .25rem;
+      padding: .2rem .55rem;
+      font-size: .78rem;
+      border-radius: .35rem;
+      border: 1px solid #9ca3af;
+      background: #e5e7eb;
+      cursor: pointer;
+    }
+    .feedback {
+      margin-top: .25rem;
+      font-size: .8rem;
+      font-weight: 600;
+    }
+    .correct { color: #15803d; }
+    .incorrect { color: #b91c1c; }
+
+    .open-answer {
+      display: none;
+      font-size: .85rem;
+      margin-top: .25rem;
+      color: #374151;
+    }
+
+    @media (max-width: 700px) {
+      .block-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Historia de las Instituciones Jurídicas – Unidades VI a X</h1>
+  <p>Modo estudio + preguntas de práctica (segundo parcial – UNA)</p>
+</header>
+
+<main>
+  <div class="unit-tabs">
+    <button class="unit-btn active" data-target="u6">Unidad VI – Edad Media</button>
+    <button class="unit-btn" data-target="u7">Unidad VII – Sacro Imperio y Estados nacionales</button>
+    <button class="unit-btn" data-target="u8">Unidad VIII – Modernidad</button>
+    <button class="unit-btn" data-target="u9">Unidad IX – Edad Contemporánea</button>
+    <button class="unit-btn" data-target="u10">Unidad X – Siglo XX y Organismos</button>
+  </div>
+
+  <!-- UNIDAD VI -->
+  <section id="u6" class="unit active">
+    <h2>Unidad VI – Historia de las Instituciones en la Edad Media</h2>
+
+    <!-- Cristianismo -->
+    <div class="block">
+      <div class="block-header">
+        <h3>1. Cristianismo, San Agustín, Santo Tomás y Derecho Canónico</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El cristianismo nace en Palestina, territorio habitado por los judíos que esperaban la llegada de un Mesías. Jesús de Nazaret predica el Reino de Dios y es ejecutado hacia el año 30 d.C.; sus discípulos sostienen que ha resucitado, lo que se convierte en el núcleo de la fe cristiana.</p>
+      <p>La doctrina cristiana afirma la existencia de un solo Dios, la divinidad de Cristo, la inmortalidad del alma y la salvación. El mandamiento central es el amor al prójimo: no solo se debe perdonar al enemigo, sino también querer su bien. El cristianismo introduce una moral interior que exige pureza de pensamientos y deseos.</p>
+      <p>El Derecho Canónico es el conjunto de normas jurídicas que rigen la organización y la vida interna de la Iglesia Católica. Con el tiempo, su autoridad moral y la eficacia de sus tribunales hacen que influya fuertemente en la vida civil y que desplace parcialmente al derecho romano y al primitivo derecho germano en la Europa medieval.</p>
+      <p>San Agustín formula en <em>La Ciudad de Dios</em> una filosofía de la historia. Define la república como “congregación de hombres unidos por la comunión de los objetos que aman” y distingue entre la ciudad de Dios y la ciudad terrenal: la primera es la comunidad de los que aman a Dios, la segunda es la sociedad política donde conviven justos y pecadores.</p>
+      <p>Santo Tomás de Aquino, máximo representante de la escolástica, sostiene un realismo moderado: los universales existen en las cosas y en la mente. Distingue la ley eterna (razón divina), la ley natural (participación racional en la ley eterna), la ley humana (concreción positiva) y la ley divina revelada. En política, reconoce el valor del Estado, pero justifica racionalmente la subordinación del poder temporal a la Iglesia.</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="b">
+        <p>1. ¿Qué es el Derecho Canónico?</p>
+        <div class="options">
+          <label><input type="radio" name="u6c1" value="a"> a) El conjunto de leyes civiles del Imperio Romano</label>
+          <label><input type="radio" name="u6c1" value="b"> b) El conjunto de normas jurídicas de la Iglesia Católica</label>
+          <label><input type="radio" name="u6c1" value="c"> c) El derecho de los pueblos germanos</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question-block">
+        <p><strong>2. Explica brevemente la diferencia entre ciudad de Dios y ciudad terrenal en San Agustín.</strong></p>
+        <button class="btn-small" onclick="toggleOpenAnswer(this)">Mostrar respuesta</button>
+        <div class="open-answer">
+          La ciudad de Dios es la comunidad de quienes aman a Dios sobre todas las cosas y buscan el fin sobrenatural; la ciudad terrenal es la sociedad política, donde conviven justos y pecadores, ordenada a bienes temporales. No se identifica sin más con la Iglesia visible ni con un Estado concreto.
+        </div>
+      </div>
+    </div>
+
+    <!-- Germanos -->
+    <div class="block">
+      <div class="block-header">
+        <h3>2. Disolución de Occidente y pueblos germanos</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>En 476 d.C. cae el Imperio Romano de Occidente, cuando el jefe germano Odoacro depone a Rómulo Augústulo. Diversos pueblos germanos ocupan los territorios imperiales y forman reinos independientes: visigodos en Hispania, ostrogodos en Italia, francos en la Galia, burgundios y otros.</p>
+      <p>La sociedad germánica se organiza alrededor de la familia, con un padre que ejerce poder casi absoluto sobre esposa e hijos. Las familias de una misma estirpe forman la tribu. En cada tribu hay nobles y jefes, hombres libres y siervos, además de esclavos.</p>
+      <p>El derecho germano es fundamentalmente consuetudinario. La tierra pertenece a la familia en forma colectiva, bajo autoridad del padre, que no puede venderla ni enajenarla. El hijo mayor es heredero forzoso y, en su defecto, los demás varones o el pariente masculino más próximo, con exclusión de las mujeres.</p>
+      <p>La desaparición del poder romano y la inseguridad general provocan la ruralización de Occidente: el comercio declina, la población abandona las ciudades y se refugia en grandes dominios agrarios, la cultura escrita se reduce a clérigos y monjes.</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="c">
+        <p>1. ¿Qué caracteriza al derecho germano primitivo?</p>
+        <div class="options">
+          <label><input type="radio" name="u6g1" value="a"> a) Elaborados códigos escritos</label>
+          <label><input type="radio" name="u6g1" value="b"> b) Exclusivo uso del latín</label>
+          <label><input type="radio" name="u6g1" value="c"> c) Predominio de costumbres orales y propiedad colectiva de la tierra</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Bizancio -->
+    <div class="block">
+      <div class="block-header">
+        <h3>3. Civilización Bizantina y Justiniano</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El Imperio Romano de Oriente se transforma en Imperio Bizantino y sobrevive casi mil años a la caída de Occidente. Su capital, Constantinopla, está estratégicamente situada entre Europa y Asia, fuertemente amurallada y llena de palacios, iglesias y edificios públicos.</p>
+      <p>El poder imperial es absoluto: el emperador concentra los poderes civil, militar, administrativo, financiero, legislativo y judicial. El sistema se describe como monarquía teocrática, porque el emperador gobierna como representante de Dios en la Tierra y controla la Iglesia ortodoxa, nombrando patriarcas y obispos.</p>
+      <p>Justiniano I (527–565) lleva al Imperio a su máximo esplendor. Reconquista parte de Italia, el norte de África y la península ibérica. Su principal legado jurídico es el <em>Corpus Iuris Civilis</em>, compuesto por el Código (constituciones imperiales), el Digesto (fragmentos de juristas), las Instituciones (manual para estudiantes) y las Novelas (leyes posteriores).</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="b">
+        <p>1. ¿Cómo se denomina la gran recopilación de derecho romano ordenada por Justiniano?</p>
+        <div class="options">
+          <label><input type="radio" name="u6b1" value="a"> a) Código Teodosiano</label>
+          <label><input type="radio" name="u6b1" value="b"> b) Corpus Iuris Civilis</label>
+          <label><input type="radio" name="u6b1" value="c"> c) Ley de las XII Tablas</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Islam -->
+    <div class="block">
+      <div class="block-header">
+        <h3>4. Civilización Islámica</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Mahoma, tras una vida de meditación, afirma haber recibido la revelación del arcángel Gabriel. Predica la fe en un único Dios, Alá, y la sumisión a su voluntad: eso es el Islam. La Hégira, su huida de La Meca a Medina en 622, marca el inicio del calendario islámico.</p>
+      <p>Los pilares religiosos incluyen la creencia en un solo Dios, la oración cinco veces al día mirando a La Meca, el ayuno de Ramadán, la limosna y la peregrinación a La Meca al menos una vez en la vida. El libro sagrado es el Corán.</p>
+      <p>Políticamente, el Islam se organiza en califatos: monarquías absolutas dominadas por califas (sucesores del profeta), que concentran el poder religioso, civil y militar. El derecho musulmán tiene base religiosa y regula culto, contratos, sucesiones, familia y relaciones entre súbdito y soberano.</p>
+      <p>Socialmente, la sociedad se estructura en familias con fuerte autoridad del padre. Se limita la poligamia a cuatro esposas legítimas; la mujer debe cubrirse en público, pero puede heredar hasta la mitad de los bienes del marido. El Califato de Córdoba fue un foco de esplendor cultural en Occidente.</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="a">
+        <p>1. ¿Qué hecho marca el inicio de la era islámica?</p>
+        <div class="options">
+          <label><input type="radio" name="u6i1" value="a"> a) La Hégira de Mahoma</label>
+          <label><input type="radio" name="u6i1" value="b"> b) La proclamación del Califato de Córdoba</label>
+          <label><input type="radio" name="u6i1" value="c"> c) La conquista de Jerusalén por Saladino</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Feudalismo y Cruzadas -->
+    <div class="block">
+      <div class="block-header">
+        <h3>5. Imperio Carolingio, feudalismo y Cruzadas</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Carlomagno es coronado emperador en el año 800 por el papa León III, refundando el Imperio de Occidente. Su imperio se organiza mediante condes y <em>missi dominici</em> que representan y controlan al poder central. Tras su muerte, el Tratado de Verdún (843) divide el territorio entre sus nietos, origen de Francia, Alemania e Italia.</p>
+      <p>El feudalismo surge como respuesta a la inseguridad: el rey cede tierras (feudos) a señores, que mantienen caballeros armados a cambio de lealtad y servicio militar. La relación se formaliza en el contrato feudal, con fe (juramento), homenaje e investidura. La sociedad se estructura en rey, señores, caballeros y siervos de la gleba.</p>
+      <p>Las Cruzadas (1095–1270), expediciones militares convocadas por los papas, pretendían recuperar Tierra Santa y canalizar la violencia feudal. Tuvieron consecuencias importantes: reactivación del comercio entre Oriente y Occidente, fortalecimiento de las ciudades italianas, debilitamiento de la nobleza feudal y aumento del poder real.</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="c">
+        <p>1. ¿Cuál fue una consecuencia importante de las Cruzadas?</p>
+        <div class="options">
+          <label><input type="radio" name="u6f1" value="a"> a) La desaparición inmediata del feudalismo</label>
+          <label><input type="radio" name="u6f1" value="b"> b) El aislamiento comercial de Europa</label>
+          <label><input type="radio" name="u6f1" value="c"> c) La reactivación del comercio y el fortalecimiento de las monarquías</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Universidades -->
+    <div class="block">
+      <div class="block-header">
+        <h3>6. Universidades, glosadores y posglosadores</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Las universidades medievales se organizan espontáneamente como corporaciones de maestros y estudiantes, con aprobación papal. Exigen como base el estudio del trivium (gramática, retórica, lógica) y del quadrivium (aritmética, geometría, música, astronomía).</p>
+      <p>La Universidad de París se especializa en teología y es considerada el “concilio permanente de Galia”. La Universidad de Bolonia se convierte en el gran centro del estudio del derecho romano y canónico; allí surge la escuela de los glosadores.</p>
+      <p>Los glosadores, encabezados por Irnerio, estudian los textos de Justiniano (Código, Digesto, Instituciones, Novelas) y los anotan con glosas marginales e interlineales. Los posglosadores, como Cino de Pistoya y Bartolo de Saxoferrato, comentan esos textos, integrando el derecho romano con el canónico y los derechos locales.</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="b">
+        <p>1. ¿En qué universidad se desarrolla principalmente la escuela de los glosadores?</p>
+        <div class="options">
+          <label><input type="radio" name="u6u1" value="a"> a) París</label>
+          <label><input type="radio" name="u6u1" value="b"> b) Bolonia</label>
+          <label><input type="radio" name="u6u1" value="c"> c) Salamanca</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIDAD VII -->
+  <section id="u7" class="unit">
+    <h2>Unidad VII – Sacro Imperio, Estados Nacionales y Universidades</h2>
+
+    <!-- Sacro Imperio -->
+    <div class="block">
+      <div class="block-header">
+        <h3>1. Sacro Imperio Romano Germánico y Querella de las Investiduras</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El Sacro Imperio Romano Germánico se consolida con la coronación de Otón I en 962, retomando la idea de un imperio cristiano universal en Europa bajo hegemonía alemana. El emperador pretende ser defensor de la Iglesia y del orden político cristiano.</p>
+      <p>La Querella de las Investiduras (siglos XI–XII) enfrenta al papa Gregorio VII y al emperador Enrique IV por el derecho a nombrar obispos y abades. Se discute si la autoridad última en la Iglesia recae en el papa o si el emperador puede investir a los obispos con anillo y báculo.</p>
+      <p>El conflicto incluye excomuniones y el célebre episodio de Canosa (1077), donde Enrique IV hace penitencia ante el papa. Se resuelve en el Concordato de Worms (1122), que establece una separación de esferas: la Iglesia otorga la investidura espiritual, mientras el emperador conserva ciertos derechos en la investidura temporal.</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="b">
+        <p>1. ¿Qué estaba en juego en la Querella de las Investiduras?</p>
+        <div class="options">
+          <label><input type="radio" name="u7s1" value="a"> a) La elección del papa por votación popular</label>
+          <label><input type="radio" name="u7s1" value="b"> b) El derecho a nombrar obispos y abades</label>
+          <label><input type="radio" name="u7s1" value="c"> c) La división territorial de Alemania</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Inglaterra -->
+    <div class="block">
+      <div class="block-header">
+        <h3>2.a Inglaterra: Carta Magna, Estatuto de Oxford y Common Law</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>En 1215, los barones ingleses obligan al rey Juan “Sin Tierra” a firmar la Carta Magna. Este documento limita el poder real: prohíbe imponer nuevos impuestos sin consentimiento del reino y reconoce garantías procesales para los hombres libres, antecedente del Habeas Corpus.</p>
+      <p>El Estatuto de Oxford (1258) refuerza el control sobre el rey mediante un consejo de barones que debe ser consultado en las decisiones importantes. Paralelamente, el Common Law se desarrolla como derecho consuetudinario construido por las decisiones de los tribunales reales, basado en el precedente judicial.</p>
+
+      <div class="qa-title">Preguntas</div>
+
+      <div class="question-block" data-correct="c">
+        <p>1. ¿Cuál de estas características corresponde al Common Law?</p>
+        <div class="options">
+          <label><input type="radio" name="u7i1" value="a"> a) Es un código único redactado por el rey</label>
+          <label><input type="radio" name="u7i1" value="b"> b) Se basa exclusivamente en el derecho romano</label>
+          <label><input type="radio" name="u7i1" value="c"> c) Se forma a partir de las decisiones de los tribunales y los precedentes</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- España -->
+    <div class="block">
+      <div class="block-header">
+        <h3>2.b España: Código de las Siete Partidas</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El Código de las Siete Partidas, elaborado bajo Alfonso X “el Sabio”, es una gran recopilación jurídica en lengua castellana que integra derecho romano, derecho canónico y costumbres del reino. Se organiza en siete Partidas que tratan sobre fuentes del derecho, derecho público, proceso, familia, sucesiones, contratos y derecho penal.</p>
+      <p>Su importancia radica en que sirve de base al derecho castellano tardomedieval y, posteriormente, influye en el derecho de los territorios americanos coloniales, incluida gran parte de América Latina.</p>
+
+      <div class="qa-title">Pregunta</div>
+
+      <div class="question-block" data-correct="b">
+        <p>1. ¿Qué caracteriza al Código de las Siete Partidas?</p>
+        <div class="options">
+          <label><input type="radio" name="u7e1" value="a"> a) Es un código exclusivo de derecho canónico en latín</label>
+          <label><input type="radio" name="u7e1" value="b"> b) Es una recopilación en castellano que integra derecho romano, canónico y costumbres</label>
+          <label><input type="radio" name="u7e1" value="c"> c) Es solo un código penal medieval</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Francia -->
+    <div class="block">
+      <div class="block-header">
+        <h3>2.c Francia: Estados Generales</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Los Estados Generales son una asamblea de representación estamental en la Francia de la monarquía absoluta. Integran al clero (Primer Estado), la nobleza (Segundo Estado) y el Tercer Estado (pueblo llano). Son convocados por el rey, sobre todo para aprobar nuevos impuestos.</p>
+      <p>Aunque no llegan a convertirse en un parlamento permanente, constituyen un antecedente de la representación política y juegan un papel decisivo en 1789, al transformarse en Asamblea Nacional al inicio de la Revolución Francesa.</p>
+
+      <div class="qa-title">Pregunta</div>
+
+      <div class="question-block" data-correct="a">
+        <p>1. ¿Cuál es la función principal de los Estados Generales en el Antiguo Régimen francés?</p>
+        <div class="options">
+          <label><input type="radio" name="u7f1" value="a"> a) Asesorar al rey y aprobar impuestos representando a los tres estamentos</label>
+          <label><input type="radio" name="u7f1" value="b"> b) Elegir directamente al rey</label>
+          <label><input type="radio" name="u7f1" value="c"> c) Ejercer la justicia en última instancia</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Universidades (ya integradas en VI, aquí como refuerzo del programa) -->
+    <div class="block">
+      <div class="block-header">
+        <h3>3. Desarrollo intelectual: Universidades y derecho romano–canónico</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El renacimiento cultural de los siglos XII y XIII trae consigo el surgimiento de las universidades. Estas instituciones se especializan en distintas disciplinas: teología en París, derecho en Bolonia. Su autonomía y sus estatutos propios las convierten en corporaciones poderosas dentro de la cristiandad.</p>
+      <p>El estudio sistemático del derecho romano y canónico en las universidades alimenta la formación de una “ciencia jurídica” y la creación de un derecho común europeo que influye en las legislaciones y prácticas judiciales de muchos reinos.</p>
+    </div>
+  </section>
+
+  <!-- UNIDAD VIII -->
+  <section id="u8" class="unit">
+    <h2>Unidad VIII – La Modernidad: Instituciones Jurídicas y Políticas</h2>
+
+    <!-- Humanismo y Renacimiento -->
+    <div class="block">
+      <div class="block-header">
+        <h3>1. Humanismo y Renacimiento</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El Humanismo surge en Italia en los siglos XIV y XV como movimiento intelectual que coloca al ser humano en el centro de la reflexión, frente al teocentrismo medieval. Recupera los textos clásicos grecolatinos y exalta la dignidad y la libertad humanas.</p>
+      <p>El Renacimiento es la expresión cultural y artística de este Humanismo. Sus causas incluyen la caída de Constantinopla (1453) con la llegada de sabios griegos a Occidente, el desarrollo del comercio y de la burguesía, y la invención de la imprenta. Se caracteriza por el antropocentrismo, la confianza en la razón y el desarrollo de las artes y las ciencias.</p>
+
+      <div class="qa-title">Pregunta</div>
+      <div class="question-block" data-correct="c">
+        <p>1. ¿Qué rasgo es típico del Humanismo renacentista?</p>
+        <div class="options">
+          <label><input type="radio" name="u8h1" value="a"> a) Predominio absoluto de la teología escolástica</label>
+          <label><input type="radio" name="u8h1" value="b"> b) Rechazo completo de la cultura clásica</label>
+          <label><input type="radio" name="u8h1" value="c"> c) Revalorización del ser humano y de los textos clásicos</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Renacimiento en Italia, España, Inglaterra -->
+    <div class="block">
+      <div class="block-header">
+        <h3>2. Renacimiento en Italia, España e Inglaterra</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>En Italia, el Renacimiento florece en ciudades como Florencia, Roma y Venecia. Familias como los Médici impulsan el mecenazgo artístico. Figuras como Leonardo da Vinci, Miguel Ángel, Rafael y Maquiavelo marcan la cultura de la época.</p>
+      <p>En España, el Renacimiento se desarrolla en el siglo XVI, entrelazado con la monarquía de los Reyes Católicos y de Carlos I. Autores como Nebrija, fray Luis de León y Cervantes reflejan la nueva sensibilidad. En Inglaterra, el Renacimiento alcanza su apogeo en el reinado de Isabel I, con Shakespeare en literatura y Francis Bacon en filosofía y ciencia.</p>
+    </div>
+
+    <!-- Maquiavelo -->
+    <div class="block">
+      <div class="block-header">
+        <h3>3. Política y derecho según Maquiavelo</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Nicolás Maquiavelo (1469–1527), en su obra <em>El Príncipe</em>, inaugura una visión realista de la política. Sostiene que el gobernante debe preocuparse ante todo por la conservación del poder y la estabilidad del Estado, aunque para ello deba usar medios moralmente discutibles: el fin político puede justificar los medios.</p>
+      <p>Maquiavelo separa la política de la moral y la religión. Recomienda que el príncipe combine la fuerza del león con la astucia del zorro. Introduce el concepto moderno de “Estado” como entidad política autónoma, distinta de la persona del gobernante.</p>
+
+      <div class="qa-title">Pregunta</div>
+      <div class="question-block" data-correct="b">
+        <p>1. ¿Qué aporta Maquiavelo a la teoría política?</p>
+        <div class="options">
+          <label><input type="radio" name="u8m1" value="a"> a) La defensa del derecho divino de los reyes</label>
+          <label><input type="radio" name="u8m1" value="b"> b) Una visión realista que separa política y moral</label>
+          <label><input type="radio" name="u8m1" value="c"> c) La idea de contrato social</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Reforma y Contrarreforma -->
+    <div class="block">
+      <div class="block-header">
+        <h3>4. Reforma Protestante y Contrarreforma Católica</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>La Reforma Protestante se inicia en 1517 cuando Martín Lutero publica sus 95 tesis contra la venta de indulgencias. Sus principios son la justificación por la fe, la autoridad exclusiva de la Escritura y el sacerdocio universal de los creyentes. Otros reformadores como Calvino y Zwinglio impulsan nuevas iglesias en Europa.</p>
+      <p>La Contrarreforma Católica responde a través del Concilio de Trento (1545–1563), que reafirma los dogmas tradicionales, reforma la disciplina del clero, crea seminarios y refuerza la autoridad papal. La Compañía de Jesús se convierte en un instrumento clave de la renovación católica.</p>
+
+      <div class="qa-title">Pregunta</div>
+      <div class="question-block" data-correct="a">
+        <p>1. ¿Cuál fue un objetivo central del Concilio de Trento?</p>
+        <div class="options">
+          <label><input type="radio" name="u8r1" value="a"> a) Reformar la disciplina eclesiástica y reafirmar los dogmas católicos</label>
+          <label><input type="radio" name="u8r1" value="b"> b) Abolir el papado</label>
+          <label><input type="radio" name="u8r1" value="c"> c) Reconocer la supremacía de los príncipes sobre la Iglesia</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Absolutismo y Hobbes -->
+    <div class="block">
+      <div class="block-header">
+        <h3>5. Absolutismo e instituciones jurídicas. Hobbes</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El absolutismo es un sistema político en el que el monarca concentra todos los poderes del Estado sin controles efectivos. Se consolida entre los siglos XVII y XVIII, con ejemplos como Luis XIV en Francia (“El Estado soy yo”), los Austrias en España y los Estuardo en Inglaterra (aunque allí se verá limitado por las revoluciones).</p>
+      <p>Thomas Hobbes, en su obra <em>Leviatán</em> (1651), justifica teóricamente un poder soberano absoluto. Parte de un estado de naturaleza en el que la vida del hombre es “solitaria, pobre, desagradable, brutal y corta”. Para salir de ese estado de guerra de todos contra todos, los individuos pactan un contrato social por el cual transfieren su poder a un soberano que debe garantizar la paz.</p>
+
+      <div class="qa-title">Pregunta</div>
+      <div class="question-block" data-correct="b">
+        <p>1. Según Hobbes, ¿qué justifica el poder absoluto del soberano?</p>
+        <div class="options">
+          <label><input type="radio" name="u8h2" value="a"> a) La voluntad divina directa</label>
+          <label><input type="radio" name="u8h2" value="b"> b) El contrato social por el que los súbditos ceden su poder para escapar del estado de naturaleza</label>
+          <label><input type="radio" name="u8h2" value="c"> c) La herencia de la nobleza</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Ilustración y pensadores -->
+    <div class="block">
+      <div class="block-header">
+        <h3>6. Ilustración y teoría política de Locke, Montesquieu, Voltaire y Rousseau</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>La Ilustración es un movimiento intelectual del siglo XVIII que confía en la razón y en la ciencia como motores del progreso. Critica el absolutismo, la superstición y el fanatismo, y defiende las libertades individuales, la tolerancia y la igualdad jurídica.</p>
+      <p>John Locke sostiene que los hombres tienen derechos naturales inalienables (vida, libertad, propiedad) y que el gobierno surge de un contrato para protegerlos; si no lo hace, el pueblo tiene derecho a la revolución. Montesquieu propone la separación de poderes en legislativo, ejecutivo y judicial para evitar la tiranía.</p>
+      <p>Voltaire defiende la tolerancia religiosa, la libertad de expresión y la reforma de las instituciones, criticando el fanatismo y el despotismo. Rousseau, en <em>El Contrato Social</em>, sostiene que la soberanía reside en el pueblo y se expresa en la voluntad general, orientada al bien común.</p>
+
+      <div class="qa-title">Preguntas</div>
+      <div class="question-block" data-correct="a">
+        <p>1. ¿Qué propone Montesquieu para evitar la tiranía?</p>
+        <div class="options">
+          <label><input type="radio" name="u8i1" value="a"> a) La separación de poderes</label>
+          <label><input type="radio" name="u8i1" value="b"> b) El poder absoluto del rey</label>
+          <label><input type="radio" name="u8i1" value="c"> c) El dominio exclusivo del clero</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Enciclopedia y Kant -->
+    <div class="block">
+      <div class="block-header">
+        <h3>7. Enciclopedistas y Kant</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Los enciclopedistas, dirigidos por Diderot y D’Alembert, publican la <em>Enciclopedia</em>, que reúne el saber de la época desde una perspectiva crítica e ilustrada. Difunden ideas sobre libertad, igualdad, utilidad social del conocimiento y crítica del Antiguo Régimen.</p>
+      <p>Immanuel Kant define el derecho como el conjunto de condiciones bajo las cuales el arbitrio de cada uno puede coexistir con el de los demás según una ley universal de libertad. Distingue entre moral (interior, autónoma) y derecho (externo, coercible) y formula el imperativo categórico: actuar solo según máximas que puedan convertirse en ley universal.</p>
+
+      <div class="qa-title">Pregunta</div>
+      <div class="question-block">
+        <p><strong>1. ¿Cómo fundamenta Kant el Estado de Derecho?</strong></p>
+        <button class="btn-small" onclick="toggleOpenAnswer(this)">Mostrar respuesta</button>
+        <div class="open-answer">
+          Sostiene que el derecho debe garantizar una libertad externa compatible entre todos según leyes universales; el Estado de Derecho se basa en normas racionales y universales, no en la voluntad arbitraria del gobernante, y protege la libertad y la igualdad jurídica de todos los ciudadanos.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIDAD IX -->
+  <section id="u9" class="unit">
+    <h2>Unidad IX – Historia de las Instituciones en la Edad Contemporánea</h2>
+
+    <!-- Revolución Americana -->
+    <div class="block">
+      <div class="block-header">
+        <h3>1. Revolución Americana y Constitución de EE.UU.</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Las Trece Colonias británicas en América del Norte desarrollan una identidad propia y reclaman representación frente a los impuestos del parlamento inglés. El lema “no taxation without representation” sintetiza su protesta.</p>
+      <p>En 1776, el Congreso Continental aprueba la Declaración de Independencia, redactada principalmente por Thomas Jefferson, que afirma los derechos inalienables a la vida, la libertad y la búsqueda de la felicidad, y el derecho del pueblo a cambiar un gobierno tiránico.</p>
+      <p>La Constitución de 1787 crea el primer Estado moderno con una constitución escrita. Establece un sistema federal, la división de poderes (legislativo, ejecutivo y judicial) y un sistema presidencialista en el que el presidente es jefe de Estado y de Gobierno. La Carta de Derechos (Bill of Rights, 1791) garantiza libertades fundamentales.</p>
+
+      <div class="qa-title">Pregunta</div>
+      <div class="question-block" data-correct="b">
+        <p>1. ¿Qué caracteriza al sistema político establecido por la Constitución de EE.UU.?</p>
+        <div class="options">
+          <label><input type="radio" name="u9a1" value="a"> a) Monarquía absoluta</label>
+          <label><input type="radio" name="u9a1" value="b"> b) República federal presidencialista con separación de poderes</label>
+          <label><input type="radio" name="u9a1" value="c"> c) Teocracia con poder del clero</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Revolución Francesa -->
+    <div class="block">
+      <div class="block-header">
+        <h3>2. Revolución Francesa y Declaración de Derechos del Hombre</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>La Francia de finales del siglo XVIII sufre una crisis financiera, una sociedad desigual dividida en tres estamentos y un absolutismo monárquico. Las ideas ilustradas y el ejemplo de la Revolución Americana alimentan el descontento.</p>
+      <p>En 1789, la convocatoria de los Estados Generales se transforma en Asamblea Nacional. La toma de la Bastilla simboliza el inicio de la Revolución. La Declaración de los Derechos del Hombre y del Ciudadano proclama la libertad, la igualdad ante la ley, la soberanía nacional y los derechos a la propiedad, la seguridad y la resistencia a la opresión.</p>
+
+      <div class="qa-title">Pregunta</div>
+      <div class="question-block" data-correct="c">
+        <p>1. ¿Qué principio fundamental afirma la Declaración de los Derechos del Hombre y del Ciudadano?</p>
+        <div class="options">
+          <label><input type="radio" name="u9f1" value="a"> a) La supremacía del rey por derecho divino</label>
+          <label><input type="radio" name="u9f1" value="b"> b) La desigualdad natural entre los estamentos</label>
+          <label><input type="radio" name="u9f1" value="c"> c) La igualdad de todos los ciudadanos ante la ley y la soberanía de la nación</label>
+        </div>
+        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Napoleón -->
+    <div class="block">
+      <div class="block-header">
+        <h3>3. Napoleón y la codificación del derecho</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>Napoleón Bonaparte, tras la Revolución, se convierte en primer cónsul y luego emperador de los franceses. Su legado jurídico principal es el Código Civil de 1804, que recoge los principios de igualdad civil, libertad contractual, propiedad privada y laicidad del derecho.</p>
+      <p>El Código Civil y otros códigos napoleónicos (comercial, penal, de procedimientos) se difunden por Europa y América, influyendo en las codificaciones de numerosos países, incluidos los de América Latina.</p>
+    </div>
+
+    <!-- Congreso de Viena, nacionalismo, liberalismo -->
+    <div class="block">
+      <div class="block-header">
+        <h3>4. Congreso de Viena, nacionalismo y liberalismo</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El Congreso de Viena (1814–1815) reorganiza Europa tras la derrota de Napoleón, bajo los principios de legitimidad (restaurar las dinastías), equilibrio de poder y restauración del Antiguo Régimen. La Santa Alianza busca defender el orden monárquico y cristiano.</p>
+      <p>El siglo XIX ve el auge del liberalismo, que defiende las libertades individuales, la constitución escrita y la limitación del poder, y del nacionalismo, que reclama que cada nación tenga su propio Estado. Estos movimientos impulsan revoluciones y procesos de unificación como los de Italia y Alemania.</p>
+    </div>
+
+    <!-- Constitucionalismo, codificación, revolución industrial -->
+    <div class="block">
+      <div class="block-header">
+        <h3>5. Constitucionalismo, codificación y Revolución Industrial</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>El constitucionalismo es la doctrina que afirma que el poder del Estado debe estar limitado por una constitución escrita y por la separación de poderes. Las revoluciones del siglo XIX extienden constituciones en Europa y América Latina.</p>
+      <p>La codificación, inspirada en el modelo napoleónico, organiza el derecho en códigos sistemáticos (civil, penal, comercial), lo que da seguridad y claridad al orden jurídico. La Revolución Industrial transforma la economía y la sociedad: crea el proletariado urbano, plantea la “cuestión social” y conduce al nacimiento del derecho del trabajo y de movimientos obreros y socialistas.</p>
+    </div>
+  </section>
+
+  <!-- UNIDAD X -->
+  <section id="u10" class="unit">
+    <h2>Unidad X – Siglo XX, Organismos Internacionales y Derechos Humanos</h2>
+
+    <!-- Primera Guerra Mundial -->
+    <div class="block">
+      <div class="block-header">
+        <h3>1. Primera Guerra Mundial, 14 puntos de Wilson y Sociedad de Naciones</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>La Primera Guerra Mundial (1914–1918) tiene causas profundas: rivalidades imperialistas, nacionalismos, sistema de alianzas y carrera armamentista. El asesinato del archiduque Francisco Fernando en Sarajevo desencadena el conflicto entre las potencias europeas.</p>
+      <p>La guerra termina con la derrota de las Potencias Centrales. El Tratado de Versalles impone duras condiciones a Alemania: pérdidas territoriales, reparaciones económicas y aceptación de la culpabilidad. El presidente estadounidense Woodrow Wilson propone sus 14 puntos, que incluyen el principio de autodeterminación de los pueblos y la creación de la Sociedad de Naciones.</p>
+      <p>La Sociedad de Naciones, fundada en 1920, es el primer intento de organización internacional permanente para mantener la paz. Sin embargo, carece de medios coercitivos efectivos y no logra impedir el camino hacia la Segunda Guerra Mundial.</p>
+    </div>
+
+    <!-- Totalitarismos y Segunda Guerra -->
+    <div class="block">
+      <div class="block-header">
+        <h3>2. Totalitarismos y Segunda Guerra Mundial</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>En el período de entreguerras surgen regímenes totalitarios: el comunismo soviético, el fascismo italiano y el nazismo alemán. Se caracterizan por el partido único, el culto al líder, el control total de la sociedad y la represión de las libertades.</p>
+      <p>La Segunda Guerra Mundial (1939–1945) se inicia con la invasión alemana de Polonia. Alemania nazi, Italia fascista y Japón imperial se enfrentan a las potencias aliadas. El conflicto provoca destrucción masiva, genocidios como el Holocausto y la utilización de armas nucleares en Hiroshima y Nagasaki.</p>
+      <p>Al término de la guerra, se redefinen las fronteras y nace un nuevo orden internacional, con Estados Unidos y la Unión Soviética como superpotencias enfrentadas en la Guerra Fría.</p>
+    </div>
+
+    <!-- Guerra Fría, ONU -->
+    <div class="block">
+      <div class="block-header">
+        <h3>3. Guerra Fría, colapso soviético y ONU</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>La Guerra Fría es el enfrentamiento político e ideológico entre el bloque occidental capitalista, liderado por Estados Unidos, y el bloque oriental comunista, encabezado por la Unión Soviética. Se manifiesta en carreras armamentistas, conflictos indirectos y división del mundo en ámbitos de influencia.</p>
+      <p>Las reformas de Gorbachov (Perestroika y Glasnost) en los años 80 buscan modernizar la URSS, pero desencadenan procesos que culminan con la caída del Muro de Berlín (1989) y la disolución de la Unión Soviética (1991).</p>
+      <p>La Organización de las Naciones Unidas (ONU), fundada en 1945, tiene como fines mantener la paz y la seguridad internacionales, fomentar relaciones amistosas entre las naciones y promover el desarrollo y los derechos humanos. Sus principales órganos son la Asamblea General, el Consejo de Seguridad, la Secretaría General, el Consejo Económico y Social, el Consejo de Administración Fiduciaria y la Corte Internacional de Justicia.</p>
+    </div>
+
+    <!-- DDHH, Corte IDH, OEA, UE, Mercosur -->
+    <div class="block">
+      <div class="block-header">
+        <h3>4. Declaración Universal, Corte IDH, OEA, Unión Europea y Mercosur</h3>
+        <span class="badge">Estudio</span>
+      </div>
+      <p>La Declaración Universal de los Derechos Humanos es adoptada por la Asamblea General de la ONU en 1948. Proclama un catálogo de derechos civiles, políticos, económicos, sociales y culturales que corresponden a toda persona por el hecho de ser humana.</p>
+      <p>En el sistema interamericano, la Corte Interamericana de Derechos Humanos, con sede en San José de Costa Rica, es el órgano judicial encargado de juzgar violaciones a la Convención Americana de Derechos Humanos por parte de los Estados que han reconocido su competencia.</p>
+      <p>La Organización de Estados Americanos (OEA), fundada en 1948, busca fortalecer la paz y la seguridad en el continente, consolidar la democracia y promover el desarrollo. La Unión Europea surge de procesos de integración iniciados con la Comunidad Europea del Carbón y del Acero (1951) y el Tratado de Roma (1957), y se consolida con el Tratado de Maastricht (1992).</p>
+      <p>El Mercosur, creado por el Tratado de Asunción (1991) entre Argentina, Brasil, Paraguay y Uruguay, es un proceso de integración que apunta a la libre circulación de bienes, servicios y factores de producción, así como a la coordinación de políticas macroeconómicas. Tiene órganos como el Consejo del Mercado Común, el Grupo Mercado Común, la Comisión de Comercio, el Parlamento del Mercosur y el Tribunal Permanente de Revisión.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Tabs
+  const unitBtns = document.querySelectorAll('.unit-btn');
+  const units = document.querySelectorAll('.unit');
+
+  unitBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      unitBtns.forEach(b => b.classList.remove('active'));
+      units.forEach(u => u.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
+  // Multiple choice
+  function checkQuestion(button) {
+    const block = button.closest('.question-block');
+    const correct = block.dataset.correct;
+    const selected = block.querySelector('input[type="radio"]:checked');
+    const feedback = block.querySelector('.feedback');
+    if (!selected) {
+      feedback.textContent = 'Elegí una opción antes de corregir.';
+      feedback.className = 'feedback';
+      return;
+    }
+    if (selected.value === correct) {
+      feedback.textContent = 'Correcto ✔';
+      feedback.className = 'feedback correct';
+    } else {
+      feedback.textContent = 'Incorrecto ✘';
+      feedback.className = 'feedback incorrect';
+    }
+  }
+
+  // Open answers
+  function toggleOpenAnswer(button) {
+    const ans = button.nextElementSibling;
+    ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+  }
+
+  window.checkQuestion = checkQuestion;
+  window.toggleOpenAnswer = toggleOpenAnswer;
+</script>
+</body>
+</html>
