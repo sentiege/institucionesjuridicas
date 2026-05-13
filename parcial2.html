@@ -1,763 +1,1861 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Historia de las Instituciones – Unidades VI a X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historia de las Instituciones Jurídicas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      background: #f3f4f6;
-      color: #111827;
+    :root {
+      --ink: #1a1208;
+      --paper: #fdf8f0;
+      --parchment: #f5edd8;
+      --gold: #b8860b;
+      --gold-light: #d4a843;
+      --gold-muted: rgba(184,134,11,0.18);
+      --rust: #8b3a0f;
+      --rust-light: #c04a18;
+      --teal: #1a6b6b;
+      --shadow-warm: rgba(26,18,8,0.18);
+      --border-warm: rgba(184,134,11,0.35);
+      --serif: 'Source Serif 4', Georgia, serif;
+      --display: 'Playfair Display', Georgia, serif;
     }
-    header {
-      background: #111827;
-      color: #f9fafb;
-      padding: 1rem 1.5rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.4rem;
-    }
-    header p {
-      margin: .25rem 0 0;
-      font-size: .9rem;
-      color: #d1d5db;
-    }
-    main {
-      max-width: 1150px;
-      margin: 0 auto;
-      padding: 1rem;
-      padding-bottom: 3rem;
-    }
-    .unit-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      margin-bottom: 1rem;
-    }
-    .unit-btn {
-      border-radius: .375rem;
-      padding: .4rem .8rem;
-      border: 1px solid #9ca3af;
-      background: #e5e7eb;
-      font-size: .85rem;
-      cursor: pointer;
-    }
-    .unit-btn.active {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
-    }
-    .unit { display: none; }
-    .unit.active { display: block; }
-    h2 {
-      font-size: 1.2rem;
-      margin-top: 0;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: .25rem;
-    }
-    h3 {
-      font-size: 1rem;
-      margin-top: 1.2rem;
-      margin-bottom: .25rem;
-      color: #111827;
-    }
-    p {
-      font-size: .9rem;
-      line-height: 1.55;
-      margin: .15rem 0 .4rem;
-    }
-    ul {
-      font-size: .9rem;
-      padding-left: 1.1rem;
-      margin-top: 0;
-    }
-    li { margin-bottom: .15rem; }
 
-    .block {
-      background: #ffffff;
-      border-radius: .5rem;
-      padding: .9rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 1px 2px rgba(0,0,0,.06);
-      border: 1px solid #e5e7eb;
-    }
-    .block-header {
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--serif);
+      background: #2a1f0e;
+      background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(184,134,11,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(139,58,15,0.1) 0%, transparent 50%);
+      min-height: 100vh;
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: .5rem;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 16px 60px;
+      color: var(--ink);
     }
-    .badge {
-      font-size: .7rem;
-      padding: .1rem .45rem;
-      border-radius: 999px;
-      background: #e5e7eb;
-      color: #374151;
+
+    /* ====== HEADER ====== */
+    .app-header {
+      width: 100%;
+      max-width: 1080px;
+      text-align: center;
+      margin-bottom: 28px;
+      animation: fadeDown 0.6s ease-out;
+    }
+
+    .header-eyebrow {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .header-title {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--paper);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      margin-bottom: 6px;
+    }
+
+    .header-sub {
+      font-size: 0.88rem;
+      color: rgba(253,248,240,0.55);
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .header-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 14px 0;
+      color: var(--gold);
+      opacity: 0.7;
+      font-size: 0.85rem;
+    }
+    .header-ornament::before, .header-ornament::after {
+      content: '';
+      flex: 1 1 80px;
+      max-width: 120px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .header-ornament::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    /* ====== UNIT TABS ====== */
+    .unit-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 22px;
+      width: 100%;
+      max-width: 1080px;
+      animation: fadeUp 0.7s ease-out 0.1s both;
+    }
+
+    .unit-tab {
+      border: 1px solid rgba(184,134,11,0.4);
+      background: rgba(26,18,8,0.6);
+      color: rgba(253,248,240,0.65);
+      padding: 8px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .unit-tab:hover {
+      background: rgba(184,134,11,0.2);
+      color: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+
+    .unit-tab.active {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(184,134,11,0.4);
+    }
+
+    /* ====== SHELL ====== */
+    .app-shell {
+      width: 100%;
+      max-width: 1080px;
+      background: var(--paper);
+      border-radius: 4px;
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(184,134,11,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      overflow: hidden;
+      animation: fadeUp 0.5s ease-out 0.2s both;
+    }
+
+    /* top decorative band */
+    .shell-topband {
+      height: 5px;
+      background: linear-gradient(90deg, var(--rust), var(--gold), var(--rust-light), var(--gold-light), var(--rust));
+    }
+
+    /* ====== UNIT HEADER ====== */
+    .unit-header {
+      padding: 28px 36px 22px;
+      background: var(--parchment);
+      border-bottom: 1px solid var(--border-warm);
+      position: relative;
+      overflow: hidden;
+    }
+    .unit-header::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 180px; height: 100%;
+      background: radial-gradient(ellipse at right, rgba(184,134,11,0.08), transparent 70%);
+    }
+    .unit-header-epoch {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .unit-header-title {
+      font-family: var(--display);
+      font-size: clamp(1.2rem, 3vw, 1.9rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .unit-header-desc {
+      font-size: 0.88rem;
+      color: #5a4a30;
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* ====== MODE TABS ====== */
+    .mode-bar {
+      display: flex;
+      gap: 0;
+      background: var(--parchment);
+      border-bottom: 1px solid var(--border-warm);
+    }
+    .mode-btn {
+      flex: 1;
+      padding: 13px 10px;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      color: #7a6040;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .mode-btn:hover {
+      background: rgba(184,134,11,0.08);
+      color: var(--gold);
+    }
+    .mode-btn.active {
+      border-bottom-color: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+      background: rgba(184,134,11,0.06);
+    }
+    .mode-btn .btn-icon { font-size: 1rem; }
+
+    /* ====== CONTENT PANEL ====== */
+    .content-panel {
+      padding: 32px 36px 40px;
+      min-height: 480px;
+      line-height: 1.8;
+      font-size: 0.95rem;
+      color: #2a1f0e;
+    }
+
+    /* ====== READING STYLES ====== */
+    .content-panel h2 {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--rust);
+      margin: 28px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(139,58,15,0.2);
+    }
+    .content-panel h2:first-child { margin-top: 0; }
+
+    .content-panel h3 {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin: 18px 0 7px;
+    }
+
+    .content-panel p {
+      margin: 8px 0;
+      color: #2a1f0e;
+    }
+
+    .content-panel ul {
+      margin: 8px 0 10px 1.5rem;
+    }
+    .content-panel li {
+      margin: 5px 0;
+      position: relative;
+    }
+    .content-panel li::marker {
+      color: var(--gold);
+    }
+
+    .highlight {
+      color: var(--rust);
+      font-weight: 600;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .divider {
+      margin: 22px 0;
+      border: none;
+      border-top: 1px dashed rgba(184,134,11,0.3);
+    }
+
+    /* ====== SUMMARY STYLES ====== */
+    .summary-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .summary-card {
+      background: var(--parchment);
+      border: 1px solid var(--border-warm);
+      border-left: 4px solid var(--gold);
+      border-radius: 3px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+    .summary-card strong {
+      color: var(--rust);
+    }
+
+    /* ====== QUIZ STYLES ====== */
+    .quiz-intro {
+      background: var(--parchment);
+      border: 1px solid var(--border-warm);
+      border-radius: 3px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+      color: #5a4a30;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .quiz-intro-icon { font-size: 1.4rem; }
+
+    .quiz-score-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .score-pill {
+      background: var(--ink);
+      color: var(--gold-light);
+      padding: 6px 16px;
+      border-radius: 2px;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(184,134,11,0.2);
+      border-radius: 3px;
+      min-width: 100px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    .question-block {
+      margin-bottom: 26px;
+      border: 1px solid var(--border-warm);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .question-header {
+      background: var(--parchment);
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border-bottom: 1px solid var(--border-warm);
+      display: flex;
+      gap: 10px;
+    }
+    .q-number {
+      background: var(--gold);
+      color: var(--ink);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .options-list {
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .option-btn {
+      text-align: left;
+      padding: 10px 14px;
+      border: 1px solid rgba(184,134,11,0.3);
+      border-radius: 3px;
+      background: #fff;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.88rem;
+      color: var(--ink);
+      transition: all 0.18s;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .option-btn:hover:not(:disabled) {
+      background: rgba(184,134,11,0.08);
+      border-color: var(--gold);
+    }
+    .option-letter {
+      width: 22px;
+      height: 22px;
+      border: 1px solid rgba(184,134,11,0.5);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--gold);
+    }
+    .option-btn.correct {
+      background: rgba(26,107,107,0.1);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .option-btn.correct .option-letter {
+      background: var(--teal);
+      color: #fff;
+      border-color: var(--teal);
+    }
+    .option-btn.wrong {
+      background: rgba(139,58,15,0.1);
+      border-color: var(--rust);
+      color: var(--rust);
+    }
+    .option-btn.wrong .option-letter {
+      background: var(--rust);
+      color: #fff;
+      border-color: var(--rust);
+    }
+    .option-btn:disabled { cursor: default; }
+
+    .feedback-box {
+      margin: 0 18px 14px;
+      padding: 10px 14px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      display: none;
+    }
+    .feedback-box.correct {
+      background: rgba(26,107,107,0.1);
+      border: 1px solid rgba(26,107,107,0.35);
+      color: var(--teal);
+    }
+    .feedback-box.wrong {
+      background: rgba(139,58,15,0.08);
+      border: 1px solid rgba(139,58,15,0.3);
+      color: var(--rust);
+    }
+    .feedback-box.show { display: block; }
+
+    .quiz-result-panel {
+      margin-top: 28px;
+      padding: 24px 28px;
+      background: var(--parchment);
+      border: 1px solid var(--border-warm);
+      border-radius: 4px;
+      text-align: center;
+    }
+    .result-score {
+      font-family: var(--display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .result-label {
+      font-size: 0.9rem;
+      color: #5a4a30;
+      margin-bottom: 18px;
+    }
+    .result-message {
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .retry-btn {
+      background: var(--ink);
+      color: var(--gold-light);
+      border: none;
+      padding: 11px 28px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      transition: background 0.2s;
+    }
+    .retry-btn:hover { background: #2e2212; }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 640px) {
+      .content-panel { padding: 22px 20px 30px; }
+      .unit-header { padding: 20px 20px 16px; }
+    }
+
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeUp 0.35s ease-out both;
+    }
+
+    /* ====== FOOTER EXAM BUTTON ====== */
+    .app-footer {
+      width: 100%;
+      max-width: 1080px;
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+    }
+    .exam-mode-btn {
+      background: linear-gradient(135deg, #1a0a00, #2e1505);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 16px 44px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,168,67,0.2);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .exam-mode-btn:hover {
+      background: linear-gradient(135deg, #2e1505, #4a1f00);
+      box-shadow: 0 12px 40px rgba(184,134,11,0.3), inset 0 1px 0 rgba(212,168,67,0.3);
+      transform: translateY(-2px);
+      color: var(--gold);
+    }
+    .exam-mode-btn .exam-icon { font-size: 1.3rem; }
+
+    /* ====== EXAM OVERLAY ====== */
+    .exam-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,6,2,0.96);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      padding: 0 16px 60px;
+    }
+    .exam-overlay.hidden { display: none; }
+
+    /* Exam header */
+    .exam-topbar {
+      width: 100%;
+      max-width: 860px;
+      padding: 22px 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(184,134,11,0.25);
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .exam-topbar-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .exam-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .exam-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      color: var(--paper);
+    }
+    .exam-close-btn {
+      background: rgba(253,248,240,0.06);
+      border: 1px solid rgba(184,134,11,0.4);
+      color: rgba(253,248,240,0.7);
+      padding: 8px 18px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.82rem;
+      transition: all 0.2s;
+    }
+    .exam-close-btn:hover {
+      background: rgba(184,134,11,0.15);
+      color: var(--gold-light);
+    }
+
+    /* Challenge picker */
+    .challenge-picker {
+      width: 100%;
+      max-width: 860px;
+      animation: fadeUp 0.4s ease-out both;
+    }
+    .picker-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(212,168,67,0.7);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .challenge-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .challenge-card {
+      background: linear-gradient(135deg, rgba(30,15,5,0.9), rgba(20,10,3,0.95));
+      border: 1px solid rgba(184,134,11,0.35);
+      border-radius: 4px;
+      padding: 28px 24px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .challenge-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .challenge-card:hover::before { opacity: 1; }
+    .challenge-card:hover {
+      border-color: var(--gold-light);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(184,134,11,0.2);
+    }
+    .challenge-card.featured {
+      border-color: rgba(184,134,11,0.6);
+      background: linear-gradient(135deg, rgba(50,25,5,0.95), rgba(30,12,3,0.98));
+    }
+    .card-num {
+      font-family: var(--display);
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+      text-shadow: 0 4px 20px rgba(184,134,11,0.4);
+    }
+    .card-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(212,168,67,0.65);
+      margin-bottom: 12px;
+    }
+    .card-name {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      color: var(--paper);
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 0.8rem;
+      color: rgba(253,248,240,0.45);
+      line-height: 1.5;
+    }
+    .card-badge {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 4px 12px;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      background: rgba(184,134,11,0.15);
+      color: var(--gold-light);
+      border: 1px solid rgba(184,134,11,0.3);
+    }
+
+    /* Exam in progress */
+    .exam-arena {
+      width: 100%;
+      max-width: 860px;
+      display: none;
+    }
+    .exam-arena.active { display: block; }
+
+    .exam-progress-header {
+      background: rgba(20,10,3,0.8);
+      border: 1px solid rgba(184,134,11,0.3);
+      border-radius: 4px;
+      padding: 16px 22px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .exam-progress-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 100px;
+    }
+    .exam-q-counter {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      color: var(--gold-light);
+    }
+    .exam-unit-badge {
+      font-size: 0.72rem;
+      color: rgba(212,168,67,0.6);
+      letter-spacing: 0.1em;
+    }
+    .exam-prog-track {
+      flex: 1;
+      height: 5px;
+      background: rgba(184,134,11,0.15);
+      border-radius: 3px;
+      min-width: 80px;
+      overflow: hidden;
+    }
+    .exam-prog-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rust), var(--gold));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    .exam-live-score {
+      font-size: 0.82rem;
+      color: rgba(253,248,240,0.5);
       white-space: nowrap;
     }
-    .qa-title {
-      font-size: .9rem;
-      margin-top: .5rem;
-      font-weight: 600;
-    }
-    .question-block {
-      border-radius: .4rem;
-      border: 1px solid #e5e7eb;
-      padding: .6rem .7rem;
-      margin-top: .45rem;
-      background: #f9fafb;
-    }
-    .question-block p {
-      margin: 0 0 .25rem;
-    }
-    .options {
-      margin-top: .15rem;
-    }
-    .options label {
-      display: block;
-      font-size: .85rem;
-      margin-bottom: .05rem;
-      cursor: pointer;
-    }
-    .btn-small {
-      margin-top: .25rem;
-      padding: .2rem .55rem;
-      font-size: .78rem;
-      border-radius: .35rem;
-      border: 1px solid #9ca3af;
-      background: #e5e7eb;
-      cursor: pointer;
-    }
-    .feedback {
-      margin-top: .25rem;
-      font-size: .8rem;
-      font-weight: 600;
-    }
-    .correct { color: #15803d; }
-    .incorrect { color: #b91c1c; }
 
-    .open-answer {
+    /* Single exam question card */
+    .exam-question-card {
+      background: linear-gradient(135deg, rgba(25,12,4,0.95), rgba(15,7,2,0.98));
+      border: 1px solid rgba(184,134,11,0.3);
+      border-radius: 4px;
+      overflow: hidden;
+      animation: fadeUp 0.3s ease-out both;
+    }
+    .exam-q-header {
+      background: rgba(184,134,11,0.08);
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(184,134,11,0.2);
+      font-size: 1rem;
+      color: var(--paper);
+      line-height: 1.55;
+      display: flex;
+      gap: 14px;
+    }
+    .exam-q-num {
+      background: var(--gold);
+      color: var(--ink);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .exam-options {
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .exam-opt-btn {
+      text-align: left;
+      padding: 12px 16px;
+      border: 1px solid rgba(184,134,11,0.25);
+      border-radius: 3px;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      color: rgba(253,248,240,0.85);
+      transition: all 0.18s;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .exam-opt-btn:hover:not(:disabled) {
+      background: rgba(184,134,11,0.12);
+      border-color: var(--gold);
+      color: var(--paper);
+    }
+    .exam-opt-letter {
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(184,134,11,0.45);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.74rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--gold-light);
+    }
+    .exam-opt-btn.correct {
+      background: rgba(26,107,107,0.15);
+      border-color: var(--teal);
+      color: #7ecfcf;
+    }
+    .exam-opt-btn.correct .exam-opt-letter {
+      background: var(--teal); color: #fff; border-color: var(--teal);
+    }
+    .exam-opt-btn.wrong {
+      background: rgba(139,58,15,0.15);
+      border-color: var(--rust);
+      color: #d4846a;
+    }
+    .exam-opt-btn.wrong .exam-opt-letter {
+      background: var(--rust); color: #fff; border-color: var(--rust);
+    }
+    .exam-opt-btn:disabled { cursor: default; }
+
+    .exam-feedback {
+      margin: 0 24px 18px;
+      padding: 12px 16px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      line-height: 1.6;
       display: none;
-      font-size: .85rem;
-      margin-top: .25rem;
-      color: #374151;
+    }
+    .exam-feedback.correct {
+      background: rgba(26,107,107,0.12);
+      border: 1px solid rgba(26,107,107,0.4);
+      color: #7ecfcf;
+    }
+    .exam-feedback.wrong {
+      background: rgba(139,58,15,0.12);
+      border: 1px solid rgba(139,58,15,0.35);
+      color: #d4846a;
+    }
+    .exam-feedback.show { display: block; }
+
+    .exam-next-btn {
+      display: block;
+      width: calc(100% - 48px);
+      margin: 0 24px 24px;
+      padding: 13px;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: 0.92rem;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      transition: background 0.2s;
+      display: none;
+    }
+    .exam-next-btn:hover { background: var(--gold-light); }
+    .exam-next-btn.show { display: block; }
+
+    /* Exam results */
+    .exam-results {
+      width: 100%;
+      max-width: 860px;
+      display: none;
+      animation: fadeUp 0.5s ease-out both;
+    }
+    .exam-results.active { display: block; }
+    .results-shell {
+      background: linear-gradient(135deg, rgba(30,15,5,0.96), rgba(15,7,2,0.98));
+      border: 1px solid rgba(184,134,11,0.45);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .results-topband {
+      height: 4px;
+      background: linear-gradient(90deg, var(--rust), var(--gold), var(--rust-light));
+    }
+    .results-body {
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .results-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(212,168,67,0.6);
+      margin-bottom: 14px;
+    }
+    .results-big-score {
+      font-family: var(--display);
+      font-size: clamp(4rem, 12vw, 7rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      text-shadow: 0 8px 40px rgba(184,134,11,0.5);
+      margin-bottom: 6px;
+    }
+    .results-fraction {
+      font-size: 1rem;
+      color: rgba(212,168,67,0.65);
+      margin-bottom: 18px;
+    }
+    .results-message {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      color: var(--paper);
+      margin-bottom: 8px;
+    }
+    .results-sub {
+      font-size: 0.88rem;
+      color: rgba(253,248,240,0.45);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+    .results-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .breakdown-cell {
+      background: rgba(184,134,11,0.07);
+      border: 1px solid rgba(184,134,11,0.2);
+      border-radius: 3px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+    .bc-val {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      color: var(--gold-light);
+      margin-bottom: 3px;
+    }
+    .bc-label {
+      font-size: 0.72rem;
+      color: rgba(253,248,240,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .results-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .res-btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .res-btn-primary:hover { background: var(--gold-light); }
+    .res-btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(184,134,11,0.45);
+      color: rgba(212,168,67,0.8);
+      padding: 12px 30px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+    .res-btn-secondary:hover {
+      background: rgba(184,134,11,0.12);
+      color: var(--gold-light);
     }
 
-    @media (max-width: 700px) {
-      .block-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    /* Review list */
+    .results-review {
+      margin-top: 28px;
+      text-align: left;
     }
+    .review-title {
+      font-family: var(--display);
+      color: var(--gold-light);
+      font-size: 1rem;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(184,134,11,0.2);
+    }
+    .review-item {
+      margin-bottom: 14px;
+      padding: 12px 16px;
+      border-radius: 3px;
+      border-left: 3px solid;
+      background: rgba(255,255,255,0.02);
+    }
+    .review-item.ok { border-left-color: var(--teal); }
+    .review-item.fail { border-left-color: var(--rust); }
+    .review-q {
+      font-size: 0.85rem;
+      color: rgba(253,248,240,0.8);
+      margin-bottom: 5px;
+    }
+    .review-ans {
+      font-size: 0.8rem;
+      color: rgba(253,248,240,0.45);
+    }
+    .review-ans span.correct-ans { color: #7ecfcf; font-weight: 600; }
+    .review-ans span.wrong-ans { color: #d4846a; text-decoration: line-through; }
   </style>
 </head>
 <body>
-<header>
-  <h1>Historia de las Instituciones Jurídicas – Unidades VI a X</h1>
-  <p>Modo estudio + preguntas de práctica (segundo parcial – UNA)</p>
-</header>
 
-<main>
-  <div class="unit-tabs">
-    <button class="unit-btn active" data-target="u6">Unidad VI – Edad Media</button>
-    <button class="unit-btn" data-target="u7">Unidad VII – Sacro Imperio y Estados nacionales</button>
-    <button class="unit-btn" data-target="u8">Unidad VIII – Modernidad</button>
-    <button class="unit-btn" data-target="u9">Unidad IX – Edad Contemporánea</button>
-    <button class="unit-btn" data-target="u10">Unidad X – Siglo XX y Organismos</button>
+  <div class="app-header">
+    <div class="header-eyebrow">Facultad de Derecho y Ciencias Sociales · UNA</div>
+    <h1 class="header-title">Historia de las Instituciones Jurídicas</h1>
+    <div class="header-ornament">✦</div>
+    <p class="header-sub">Unidades VI – X · Cartillas de estudio interactivas · Prof. cátedra</p>
   </div>
 
-  <!-- UNIDAD VI -->
-  <section id="u6" class="unit active">
-    <h2>Unidad VI – Historia de las Instituciones en la Edad Media</h2>
+  <nav class="unit-nav" id="unitNav">
+    <button class="unit-tab active" data-unit="vi">VI · Edad Media</button>
+    <button class="unit-tab" data-unit="vii">VII · Baja Edad Media</button>
+    <button class="unit-tab" data-unit="viii">VIII · Modernidad</button>
+    <button class="unit-tab" data-unit="ix">IX · Contemporánea</button>
+    <button class="unit-tab" data-unit="x">X · Siglo XX</button>
+  </nav>
 
-    <!-- Cristianismo -->
-    <div class="block">
-      <div class="block-header">
-        <h3>1. Cristianismo, San Agustín, Santo Tomás y Derecho Canónico</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El cristianismo nace en Palestina, territorio habitado por los judíos que esperaban la llegada de un Mesías. Jesús de Nazaret predica el Reino de Dios y es ejecutado hacia el año 30 d.C.; sus discípulos sostienen que ha resucitado, lo que se convierte en el núcleo de la fe cristiana.</p>
-      <p>La doctrina cristiana afirma la existencia de un solo Dios, la divinidad de Cristo, la inmortalidad del alma y la salvación. El mandamiento central es el amor al prójimo: no solo se debe perdonar al enemigo, sino también querer su bien. El cristianismo introduce una moral interior que exige pureza de pensamientos y deseos.</p>
-      <p>El Derecho Canónico es el conjunto de normas jurídicas que rigen la organización y la vida interna de la Iglesia Católica. Con el tiempo, su autoridad moral y la eficacia de sus tribunales hacen que influya fuertemente en la vida civil y que desplace parcialmente al derecho romano y al primitivo derecho germano en la Europa medieval.</p>
-      <p>San Agustín formula en <em>La Ciudad de Dios</em> una filosofía de la historia. Define la república como “congregación de hombres unidos por la comunión de los objetos que aman” y distingue entre la ciudad de Dios y la ciudad terrenal: la primera es la comunidad de los que aman a Dios, la segunda es la sociedad política donde conviven justos y pecadores.</p>
-      <p>Santo Tomás de Aquino, máximo representante de la escolástica, sostiene un realismo moderado: los universales existen en las cosas y en la mente. Distingue la ley eterna (razón divina), la ley natural (participación racional en la ley eterna), la ley humana (concreción positiva) y la ley divina revelada. En política, reconoce el valor del Estado, pero justifica racionalmente la subordinación del poder temporal a la Iglesia.</p>
+  <div class="app-shell">
+    <div class="shell-topband"></div>
 
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="b">
-        <p>1. ¿Qué es el Derecho Canónico?</p>
-        <div class="options">
-          <label><input type="radio" name="u6c1" value="a"> a) El conjunto de leyes civiles del Imperio Romano</label>
-          <label><input type="radio" name="u6c1" value="b"> b) El conjunto de normas jurídicas de la Iglesia Católica</label>
-          <label><input type="radio" name="u6c1" value="c"> c) El derecho de los pueblos germanos</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question-block">
-        <p><strong>2. Explica brevemente la diferencia entre ciudad de Dios y ciudad terrenal en San Agustín.</strong></p>
-        <button class="btn-small" onclick="toggleOpenAnswer(this)">Mostrar respuesta</button>
-        <div class="open-answer">
-          La ciudad de Dios es la comunidad de quienes aman a Dios sobre todas las cosas y buscan el fin sobrenatural; la ciudad terrenal es la sociedad política, donde conviven justos y pecadores, ordenada a bienes temporales. No se identifica sin más con la Iglesia visible ni con un Estado concreto.
-        </div>
-      </div>
+    <div class="unit-header" id="unitHeader">
+      <div class="unit-header-epoch" id="headerEpoch"></div>
+      <div class="unit-header-title" id="headerTitle"></div>
+      <div class="unit-header-desc" id="headerDesc"></div>
     </div>
 
-    <!-- Germanos -->
-    <div class="block">
-      <div class="block-header">
-        <h3>2. Disolución de Occidente y pueblos germanos</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>En 476 d.C. cae el Imperio Romano de Occidente, cuando el jefe germano Odoacro depone a Rómulo Augústulo. Diversos pueblos germanos ocupan los territorios imperiales y forman reinos independientes: visigodos en Hispania, ostrogodos en Italia, francos en la Galia, burgundios y otros.</p>
-      <p>La sociedad germánica se organiza alrededor de la familia, con un padre que ejerce poder casi absoluto sobre esposa e hijos. Las familias de una misma estirpe forman la tribu. En cada tribu hay nobles y jefes, hombres libres y siervos, además de esclavos.</p>
-      <p>El derecho germano es fundamentalmente consuetudinario. La tierra pertenece a la familia en forma colectiva, bajo autoridad del padre, que no puede venderla ni enajenarla. El hijo mayor es heredero forzoso y, en su defecto, los demás varones o el pariente masculino más próximo, con exclusión de las mujeres.</p>
-      <p>La desaparición del poder romano y la inseguridad general provocan la ruralización de Occidente: el comercio declina, la población abandona las ciudades y se refugia en grandes dominios agrarios, la cultura escrita se reduce a clérigos y monjes.</p>
-
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="c">
-        <p>1. ¿Qué caracteriza al derecho germano primitivo?</p>
-        <div class="options">
-          <label><input type="radio" name="u6g1" value="a"> a) Elaborados códigos escritos</label>
-          <label><input type="radio" name="u6g1" value="b"> b) Exclusivo uso del latín</label>
-          <label><input type="radio" name="u6g1" value="c"> c) Predominio de costumbres orales y propiedad colectiva de la tierra</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
+    <div class="mode-bar">
+      <button class="mode-btn active" data-mode="lectura" id="btnLectura">
+        <span class="btn-icon">📜</span> Lectura
+      </button>
+      <button class="mode-btn" data-mode="resumen" id="btnResumen">
+        <span class="btn-icon">🗂</span> Resumen
+      </button>
+      <button class="mode-btn" data-mode="quiz" id="btnQuiz">
+        <span class="btn-icon">⚖️</span> Ejercicios interactivos
+      </button>
     </div>
 
-    <!-- Bizancio -->
-    <div class="block">
-      <div class="block-header">
-        <h3>3. Civilización Bizantina y Justiniano</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El Imperio Romano de Oriente se transforma en Imperio Bizantino y sobrevive casi mil años a la caída de Occidente. Su capital, Constantinopla, está estratégicamente situada entre Europa y Asia, fuertemente amurallada y llena de palacios, iglesias y edificios públicos.</p>
-      <p>El poder imperial es absoluto: el emperador concentra los poderes civil, militar, administrativo, financiero, legislativo y judicial. El sistema se describe como monarquía teocrática, porque el emperador gobierna como representante de Dios en la Tierra y controla la Iglesia ortodoxa, nombrando patriarcas y obispos.</p>
-      <p>Justiniano I (527–565) lleva al Imperio a su máximo esplendor. Reconquista parte de Italia, el norte de África y la península ibérica. Su principal legado jurídico es el <em>Corpus Iuris Civilis</em>, compuesto por el Código (constituciones imperiales), el Digesto (fragmentos de juristas), las Instituciones (manual para estudiantes) y las Novelas (leyes posteriores).</p>
-
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="b">
-        <p>1. ¿Cómo se denomina la gran recopilación de derecho romano ordenada por Justiniano?</p>
-        <div class="options">
-          <label><input type="radio" name="u6b1" value="a"> a) Código Teodosiano</label>
-          <label><input type="radio" name="u6b1" value="b"> b) Corpus Iuris Civilis</label>
-          <label><input type="radio" name="u6b1" value="c"> c) Ley de las XII Tablas</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
+    <div class="content-panel" id="contentPanel">
+      <!-- renderizado dinámico -->
     </div>
-
-    <!-- Islam -->
-    <div class="block">
-      <div class="block-header">
-        <h3>4. Civilización Islámica</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Mahoma, tras una vida de meditación, afirma haber recibido la revelación del arcángel Gabriel. Predica la fe en un único Dios, Alá, y la sumisión a su voluntad: eso es el Islam. La Hégira, su huida de La Meca a Medina en 622, marca el inicio del calendario islámico.</p>
-      <p>Los pilares religiosos incluyen la creencia en un solo Dios, la oración cinco veces al día mirando a La Meca, el ayuno de Ramadán, la limosna y la peregrinación a La Meca al menos una vez en la vida. El libro sagrado es el Corán.</p>
-      <p>Políticamente, el Islam se organiza en califatos: monarquías absolutas dominadas por califas (sucesores del profeta), que concentran el poder religioso, civil y militar. El derecho musulmán tiene base religiosa y regula culto, contratos, sucesiones, familia y relaciones entre súbdito y soberano.</p>
-      <p>Socialmente, la sociedad se estructura en familias con fuerte autoridad del padre. Se limita la poligamia a cuatro esposas legítimas; la mujer debe cubrirse en público, pero puede heredar hasta la mitad de los bienes del marido. El Califato de Córdoba fue un foco de esplendor cultural en Occidente.</p>
-
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="a">
-        <p>1. ¿Qué hecho marca el inicio de la era islámica?</p>
-        <div class="options">
-          <label><input type="radio" name="u6i1" value="a"> a) La Hégira de Mahoma</label>
-          <label><input type="radio" name="u6i1" value="b"> b) La proclamación del Califato de Córdoba</label>
-          <label><input type="radio" name="u6i1" value="c"> c) La conquista de Jerusalén por Saladino</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Feudalismo y Cruzadas -->
-    <div class="block">
-      <div class="block-header">
-        <h3>5. Imperio Carolingio, feudalismo y Cruzadas</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Carlomagno es coronado emperador en el año 800 por el papa León III, refundando el Imperio de Occidente. Su imperio se organiza mediante condes y <em>missi dominici</em> que representan y controlan al poder central. Tras su muerte, el Tratado de Verdún (843) divide el territorio entre sus nietos, origen de Francia, Alemania e Italia.</p>
-      <p>El feudalismo surge como respuesta a la inseguridad: el rey cede tierras (feudos) a señores, que mantienen caballeros armados a cambio de lealtad y servicio militar. La relación se formaliza en el contrato feudal, con fe (juramento), homenaje e investidura. La sociedad se estructura en rey, señores, caballeros y siervos de la gleba.</p>
-      <p>Las Cruzadas (1095–1270), expediciones militares convocadas por los papas, pretendían recuperar Tierra Santa y canalizar la violencia feudal. Tuvieron consecuencias importantes: reactivación del comercio entre Oriente y Occidente, fortalecimiento de las ciudades italianas, debilitamiento de la nobleza feudal y aumento del poder real.</p>
-
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="c">
-        <p>1. ¿Cuál fue una consecuencia importante de las Cruzadas?</p>
-        <div class="options">
-          <label><input type="radio" name="u6f1" value="a"> a) La desaparición inmediata del feudalismo</label>
-          <label><input type="radio" name="u6f1" value="b"> b) El aislamiento comercial de Europa</label>
-          <label><input type="radio" name="u6f1" value="c"> c) La reactivación del comercio y el fortalecimiento de las monarquías</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Universidades -->
-    <div class="block">
-      <div class="block-header">
-        <h3>6. Universidades, glosadores y posglosadores</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Las universidades medievales se organizan espontáneamente como corporaciones de maestros y estudiantes, con aprobación papal. Exigen como base el estudio del trivium (gramática, retórica, lógica) y del quadrivium (aritmética, geometría, música, astronomía).</p>
-      <p>La Universidad de París se especializa en teología y es considerada el “concilio permanente de Galia”. La Universidad de Bolonia se convierte en el gran centro del estudio del derecho romano y canónico; allí surge la escuela de los glosadores.</p>
-      <p>Los glosadores, encabezados por Irnerio, estudian los textos de Justiniano (Código, Digesto, Instituciones, Novelas) y los anotan con glosas marginales e interlineales. Los posglosadores, como Cino de Pistoya y Bartolo de Saxoferrato, comentan esos textos, integrando el derecho romano con el canónico y los derechos locales.</p>
-
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="b">
-        <p>1. ¿En qué universidad se desarrolla principalmente la escuela de los glosadores?</p>
-        <div class="options">
-          <label><input type="radio" name="u6u1" value="a"> a) París</label>
-          <label><input type="radio" name="u6u1" value="b"> b) Bolonia</label>
-          <label><input type="radio" name="u6u1" value="c"> c) Salamanca</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- UNIDAD VII -->
-  <section id="u7" class="unit">
-    <h2>Unidad VII – Sacro Imperio, Estados Nacionales y Universidades</h2>
-
-    <!-- Sacro Imperio -->
-    <div class="block">
-      <div class="block-header">
-        <h3>1. Sacro Imperio Romano Germánico y Querella de las Investiduras</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El Sacro Imperio Romano Germánico se consolida con la coronación de Otón I en 962, retomando la idea de un imperio cristiano universal en Europa bajo hegemonía alemana. El emperador pretende ser defensor de la Iglesia y del orden político cristiano.</p>
-      <p>La Querella de las Investiduras (siglos XI–XII) enfrenta al papa Gregorio VII y al emperador Enrique IV por el derecho a nombrar obispos y abades. Se discute si la autoridad última en la Iglesia recae en el papa o si el emperador puede investir a los obispos con anillo y báculo.</p>
-      <p>El conflicto incluye excomuniones y el célebre episodio de Canosa (1077), donde Enrique IV hace penitencia ante el papa. Se resuelve en el Concordato de Worms (1122), que establece una separación de esferas: la Iglesia otorga la investidura espiritual, mientras el emperador conserva ciertos derechos en la investidura temporal.</p>
-
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="b">
-        <p>1. ¿Qué estaba en juego en la Querella de las Investiduras?</p>
-        <div class="options">
-          <label><input type="radio" name="u7s1" value="a"> a) La elección del papa por votación popular</label>
-          <label><input type="radio" name="u7s1" value="b"> b) El derecho a nombrar obispos y abades</label>
-          <label><input type="radio" name="u7s1" value="c"> c) La división territorial de Alemania</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Inglaterra -->
-    <div class="block">
-      <div class="block-header">
-        <h3>2.a Inglaterra: Carta Magna, Estatuto de Oxford y Common Law</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>En 1215, los barones ingleses obligan al rey Juan “Sin Tierra” a firmar la Carta Magna. Este documento limita el poder real: prohíbe imponer nuevos impuestos sin consentimiento del reino y reconoce garantías procesales para los hombres libres, antecedente del Habeas Corpus.</p>
-      <p>El Estatuto de Oxford (1258) refuerza el control sobre el rey mediante un consejo de barones que debe ser consultado en las decisiones importantes. Paralelamente, el Common Law se desarrolla como derecho consuetudinario construido por las decisiones de los tribunales reales, basado en el precedente judicial.</p>
-
-      <div class="qa-title">Preguntas</div>
-
-      <div class="question-block" data-correct="c">
-        <p>1. ¿Cuál de estas características corresponde al Common Law?</p>
-        <div class="options">
-          <label><input type="radio" name="u7i1" value="a"> a) Es un código único redactado por el rey</label>
-          <label><input type="radio" name="u7i1" value="b"> b) Se basa exclusivamente en el derecho romano</label>
-          <label><input type="radio" name="u7i1" value="c"> c) Se forma a partir de las decisiones de los tribunales y los precedentes</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- España -->
-    <div class="block">
-      <div class="block-header">
-        <h3>2.b España: Código de las Siete Partidas</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El Código de las Siete Partidas, elaborado bajo Alfonso X “el Sabio”, es una gran recopilación jurídica en lengua castellana que integra derecho romano, derecho canónico y costumbres del reino. Se organiza en siete Partidas que tratan sobre fuentes del derecho, derecho público, proceso, familia, sucesiones, contratos y derecho penal.</p>
-      <p>Su importancia radica en que sirve de base al derecho castellano tardomedieval y, posteriormente, influye en el derecho de los territorios americanos coloniales, incluida gran parte de América Latina.</p>
-
-      <div class="qa-title">Pregunta</div>
-
-      <div class="question-block" data-correct="b">
-        <p>1. ¿Qué caracteriza al Código de las Siete Partidas?</p>
-        <div class="options">
-          <label><input type="radio" name="u7e1" value="a"> a) Es un código exclusivo de derecho canónico en latín</label>
-          <label><input type="radio" name="u7e1" value="b"> b) Es una recopilación en castellano que integra derecho romano, canónico y costumbres</label>
-          <label><input type="radio" name="u7e1" value="c"> c) Es solo un código penal medieval</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Francia -->
-    <div class="block">
-      <div class="block-header">
-        <h3>2.c Francia: Estados Generales</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Los Estados Generales son una asamblea de representación estamental en la Francia de la monarquía absoluta. Integran al clero (Primer Estado), la nobleza (Segundo Estado) y el Tercer Estado (pueblo llano). Son convocados por el rey, sobre todo para aprobar nuevos impuestos.</p>
-      <p>Aunque no llegan a convertirse en un parlamento permanente, constituyen un antecedente de la representación política y juegan un papel decisivo en 1789, al transformarse en Asamblea Nacional al inicio de la Revolución Francesa.</p>
-
-      <div class="qa-title">Pregunta</div>
-
-      <div class="question-block" data-correct="a">
-        <p>1. ¿Cuál es la función principal de los Estados Generales en el Antiguo Régimen francés?</p>
-        <div class="options">
-          <label><input type="radio" name="u7f1" value="a"> a) Asesorar al rey y aprobar impuestos representando a los tres estamentos</label>
-          <label><input type="radio" name="u7f1" value="b"> b) Elegir directamente al rey</label>
-          <label><input type="radio" name="u7f1" value="c"> c) Ejercer la justicia en última instancia</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Universidades (ya integradas en VI, aquí como refuerzo del programa) -->
-    <div class="block">
-      <div class="block-header">
-        <h3>3. Desarrollo intelectual: Universidades y derecho romano–canónico</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El renacimiento cultural de los siglos XII y XIII trae consigo el surgimiento de las universidades. Estas instituciones se especializan en distintas disciplinas: teología en París, derecho en Bolonia. Su autonomía y sus estatutos propios las convierten en corporaciones poderosas dentro de la cristiandad.</p>
-      <p>El estudio sistemático del derecho romano y canónico en las universidades alimenta la formación de una “ciencia jurídica” y la creación de un derecho común europeo que influye en las legislaciones y prácticas judiciales de muchos reinos.</p>
-    </div>
-  </section>
-
-  <!-- UNIDAD VIII -->
-  <section id="u8" class="unit">
-    <h2>Unidad VIII – La Modernidad: Instituciones Jurídicas y Políticas</h2>
-
-    <!-- Humanismo y Renacimiento -->
-    <div class="block">
-      <div class="block-header">
-        <h3>1. Humanismo y Renacimiento</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El Humanismo surge en Italia en los siglos XIV y XV como movimiento intelectual que coloca al ser humano en el centro de la reflexión, frente al teocentrismo medieval. Recupera los textos clásicos grecolatinos y exalta la dignidad y la libertad humanas.</p>
-      <p>El Renacimiento es la expresión cultural y artística de este Humanismo. Sus causas incluyen la caída de Constantinopla (1453) con la llegada de sabios griegos a Occidente, el desarrollo del comercio y de la burguesía, y la invención de la imprenta. Se caracteriza por el antropocentrismo, la confianza en la razón y el desarrollo de las artes y las ciencias.</p>
-
-      <div class="qa-title">Pregunta</div>
-      <div class="question-block" data-correct="c">
-        <p>1. ¿Qué rasgo es típico del Humanismo renacentista?</p>
-        <div class="options">
-          <label><input type="radio" name="u8h1" value="a"> a) Predominio absoluto de la teología escolástica</label>
-          <label><input type="radio" name="u8h1" value="b"> b) Rechazo completo de la cultura clásica</label>
-          <label><input type="radio" name="u8h1" value="c"> c) Revalorización del ser humano y de los textos clásicos</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Renacimiento en Italia, España, Inglaterra -->
-    <div class="block">
-      <div class="block-header">
-        <h3>2. Renacimiento en Italia, España e Inglaterra</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>En Italia, el Renacimiento florece en ciudades como Florencia, Roma y Venecia. Familias como los Médici impulsan el mecenazgo artístico. Figuras como Leonardo da Vinci, Miguel Ángel, Rafael y Maquiavelo marcan la cultura de la época.</p>
-      <p>En España, el Renacimiento se desarrolla en el siglo XVI, entrelazado con la monarquía de los Reyes Católicos y de Carlos I. Autores como Nebrija, fray Luis de León y Cervantes reflejan la nueva sensibilidad. En Inglaterra, el Renacimiento alcanza su apogeo en el reinado de Isabel I, con Shakespeare en literatura y Francis Bacon en filosofía y ciencia.</p>
-    </div>
-
-    <!-- Maquiavelo -->
-    <div class="block">
-      <div class="block-header">
-        <h3>3. Política y derecho según Maquiavelo</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Nicolás Maquiavelo (1469–1527), en su obra <em>El Príncipe</em>, inaugura una visión realista de la política. Sostiene que el gobernante debe preocuparse ante todo por la conservación del poder y la estabilidad del Estado, aunque para ello deba usar medios moralmente discutibles: el fin político puede justificar los medios.</p>
-      <p>Maquiavelo separa la política de la moral y la religión. Recomienda que el príncipe combine la fuerza del león con la astucia del zorro. Introduce el concepto moderno de “Estado” como entidad política autónoma, distinta de la persona del gobernante.</p>
-
-      <div class="qa-title">Pregunta</div>
-      <div class="question-block" data-correct="b">
-        <p>1. ¿Qué aporta Maquiavelo a la teoría política?</p>
-        <div class="options">
-          <label><input type="radio" name="u8m1" value="a"> a) La defensa del derecho divino de los reyes</label>
-          <label><input type="radio" name="u8m1" value="b"> b) Una visión realista que separa política y moral</label>
-          <label><input type="radio" name="u8m1" value="c"> c) La idea de contrato social</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Reforma y Contrarreforma -->
-    <div class="block">
-      <div class="block-header">
-        <h3>4. Reforma Protestante y Contrarreforma Católica</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>La Reforma Protestante se inicia en 1517 cuando Martín Lutero publica sus 95 tesis contra la venta de indulgencias. Sus principios son la justificación por la fe, la autoridad exclusiva de la Escritura y el sacerdocio universal de los creyentes. Otros reformadores como Calvino y Zwinglio impulsan nuevas iglesias en Europa.</p>
-      <p>La Contrarreforma Católica responde a través del Concilio de Trento (1545–1563), que reafirma los dogmas tradicionales, reforma la disciplina del clero, crea seminarios y refuerza la autoridad papal. La Compañía de Jesús se convierte en un instrumento clave de la renovación católica.</p>
-
-      <div class="qa-title">Pregunta</div>
-      <div class="question-block" data-correct="a">
-        <p>1. ¿Cuál fue un objetivo central del Concilio de Trento?</p>
-        <div class="options">
-          <label><input type="radio" name="u8r1" value="a"> a) Reformar la disciplina eclesiástica y reafirmar los dogmas católicos</label>
-          <label><input type="radio" name="u8r1" value="b"> b) Abolir el papado</label>
-          <label><input type="radio" name="u8r1" value="c"> c) Reconocer la supremacía de los príncipes sobre la Iglesia</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Absolutismo y Hobbes -->
-    <div class="block">
-      <div class="block-header">
-        <h3>5. Absolutismo e instituciones jurídicas. Hobbes</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El absolutismo es un sistema político en el que el monarca concentra todos los poderes del Estado sin controles efectivos. Se consolida entre los siglos XVII y XVIII, con ejemplos como Luis XIV en Francia (“El Estado soy yo”), los Austrias en España y los Estuardo en Inglaterra (aunque allí se verá limitado por las revoluciones).</p>
-      <p>Thomas Hobbes, en su obra <em>Leviatán</em> (1651), justifica teóricamente un poder soberano absoluto. Parte de un estado de naturaleza en el que la vida del hombre es “solitaria, pobre, desagradable, brutal y corta”. Para salir de ese estado de guerra de todos contra todos, los individuos pactan un contrato social por el cual transfieren su poder a un soberano que debe garantizar la paz.</p>
-
-      <div class="qa-title">Pregunta</div>
-      <div class="question-block" data-correct="b">
-        <p>1. Según Hobbes, ¿qué justifica el poder absoluto del soberano?</p>
-        <div class="options">
-          <label><input type="radio" name="u8h2" value="a"> a) La voluntad divina directa</label>
-          <label><input type="radio" name="u8h2" value="b"> b) El contrato social por el que los súbditos ceden su poder para escapar del estado de naturaleza</label>
-          <label><input type="radio" name="u8h2" value="c"> c) La herencia de la nobleza</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Ilustración y pensadores -->
-    <div class="block">
-      <div class="block-header">
-        <h3>6. Ilustración y teoría política de Locke, Montesquieu, Voltaire y Rousseau</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>La Ilustración es un movimiento intelectual del siglo XVIII que confía en la razón y en la ciencia como motores del progreso. Critica el absolutismo, la superstición y el fanatismo, y defiende las libertades individuales, la tolerancia y la igualdad jurídica.</p>
-      <p>John Locke sostiene que los hombres tienen derechos naturales inalienables (vida, libertad, propiedad) y que el gobierno surge de un contrato para protegerlos; si no lo hace, el pueblo tiene derecho a la revolución. Montesquieu propone la separación de poderes en legislativo, ejecutivo y judicial para evitar la tiranía.</p>
-      <p>Voltaire defiende la tolerancia religiosa, la libertad de expresión y la reforma de las instituciones, criticando el fanatismo y el despotismo. Rousseau, en <em>El Contrato Social</em>, sostiene que la soberanía reside en el pueblo y se expresa en la voluntad general, orientada al bien común.</p>
-
-      <div class="qa-title">Preguntas</div>
-      <div class="question-block" data-correct="a">
-        <p>1. ¿Qué propone Montesquieu para evitar la tiranía?</p>
-        <div class="options">
-          <label><input type="radio" name="u8i1" value="a"> a) La separación de poderes</label>
-          <label><input type="radio" name="u8i1" value="b"> b) El poder absoluto del rey</label>
-          <label><input type="radio" name="u8i1" value="c"> c) El dominio exclusivo del clero</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Enciclopedia y Kant -->
-    <div class="block">
-      <div class="block-header">
-        <h3>7. Enciclopedistas y Kant</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Los enciclopedistas, dirigidos por Diderot y D’Alembert, publican la <em>Enciclopedia</em>, que reúne el saber de la época desde una perspectiva crítica e ilustrada. Difunden ideas sobre libertad, igualdad, utilidad social del conocimiento y crítica del Antiguo Régimen.</p>
-      <p>Immanuel Kant define el derecho como el conjunto de condiciones bajo las cuales el arbitrio de cada uno puede coexistir con el de los demás según una ley universal de libertad. Distingue entre moral (interior, autónoma) y derecho (externo, coercible) y formula el imperativo categórico: actuar solo según máximas que puedan convertirse en ley universal.</p>
-
-      <div class="qa-title">Pregunta</div>
-      <div class="question-block">
-        <p><strong>1. ¿Cómo fundamenta Kant el Estado de Derecho?</strong></p>
-        <button class="btn-small" onclick="toggleOpenAnswer(this)">Mostrar respuesta</button>
-        <div class="open-answer">
-          Sostiene que el derecho debe garantizar una libertad externa compatible entre todos según leyes universales; el Estado de Derecho se basa en normas racionales y universales, no en la voluntad arbitraria del gobernante, y protege la libertad y la igualdad jurídica de todos los ciudadanos.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- UNIDAD IX -->
-  <section id="u9" class="unit">
-    <h2>Unidad IX – Historia de las Instituciones en la Edad Contemporánea</h2>
-
-    <!-- Revolución Americana -->
-    <div class="block">
-      <div class="block-header">
-        <h3>1. Revolución Americana y Constitución de EE.UU.</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Las Trece Colonias británicas en América del Norte desarrollan una identidad propia y reclaman representación frente a los impuestos del parlamento inglés. El lema “no taxation without representation” sintetiza su protesta.</p>
-      <p>En 1776, el Congreso Continental aprueba la Declaración de Independencia, redactada principalmente por Thomas Jefferson, que afirma los derechos inalienables a la vida, la libertad y la búsqueda de la felicidad, y el derecho del pueblo a cambiar un gobierno tiránico.</p>
-      <p>La Constitución de 1787 crea el primer Estado moderno con una constitución escrita. Establece un sistema federal, la división de poderes (legislativo, ejecutivo y judicial) y un sistema presidencialista en el que el presidente es jefe de Estado y de Gobierno. La Carta de Derechos (Bill of Rights, 1791) garantiza libertades fundamentales.</p>
-
-      <div class="qa-title">Pregunta</div>
-      <div class="question-block" data-correct="b">
-        <p>1. ¿Qué caracteriza al sistema político establecido por la Constitución de EE.UU.?</p>
-        <div class="options">
-          <label><input type="radio" name="u9a1" value="a"> a) Monarquía absoluta</label>
-          <label><input type="radio" name="u9a1" value="b"> b) República federal presidencialista con separación de poderes</label>
-          <label><input type="radio" name="u9a1" value="c"> c) Teocracia con poder del clero</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Revolución Francesa -->
-    <div class="block">
-      <div class="block-header">
-        <h3>2. Revolución Francesa y Declaración de Derechos del Hombre</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>La Francia de finales del siglo XVIII sufre una crisis financiera, una sociedad desigual dividida en tres estamentos y un absolutismo monárquico. Las ideas ilustradas y el ejemplo de la Revolución Americana alimentan el descontento.</p>
-      <p>En 1789, la convocatoria de los Estados Generales se transforma en Asamblea Nacional. La toma de la Bastilla simboliza el inicio de la Revolución. La Declaración de los Derechos del Hombre y del Ciudadano proclama la libertad, la igualdad ante la ley, la soberanía nacional y los derechos a la propiedad, la seguridad y la resistencia a la opresión.</p>
-
-      <div class="qa-title">Pregunta</div>
-      <div class="question-block" data-correct="c">
-        <p>1. ¿Qué principio fundamental afirma la Declaración de los Derechos del Hombre y del Ciudadano?</p>
-        <div class="options">
-          <label><input type="radio" name="u9f1" value="a"> a) La supremacía del rey por derecho divino</label>
-          <label><input type="radio" name="u9f1" value="b"> b) La desigualdad natural entre los estamentos</label>
-          <label><input type="radio" name="u9f1" value="c"> c) La igualdad de todos los ciudadanos ante la ley y la soberanía de la nación</label>
-        </div>
-        <button class="btn-small" onclick="checkQuestion(this)">Corregir</button>
-        <div class="feedback"></div>
-      </div>
-    </div>
-
-    <!-- Napoleón -->
-    <div class="block">
-      <div class="block-header">
-        <h3>3. Napoleón y la codificación del derecho</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>Napoleón Bonaparte, tras la Revolución, se convierte en primer cónsul y luego emperador de los franceses. Su legado jurídico principal es el Código Civil de 1804, que recoge los principios de igualdad civil, libertad contractual, propiedad privada y laicidad del derecho.</p>
-      <p>El Código Civil y otros códigos napoleónicos (comercial, penal, de procedimientos) se difunden por Europa y América, influyendo en las codificaciones de numerosos países, incluidos los de América Latina.</p>
-    </div>
-
-    <!-- Congreso de Viena, nacionalismo, liberalismo -->
-    <div class="block">
-      <div class="block-header">
-        <h3>4. Congreso de Viena, nacionalismo y liberalismo</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El Congreso de Viena (1814–1815) reorganiza Europa tras la derrota de Napoleón, bajo los principios de legitimidad (restaurar las dinastías), equilibrio de poder y restauración del Antiguo Régimen. La Santa Alianza busca defender el orden monárquico y cristiano.</p>
-      <p>El siglo XIX ve el auge del liberalismo, que defiende las libertades individuales, la constitución escrita y la limitación del poder, y del nacionalismo, que reclama que cada nación tenga su propio Estado. Estos movimientos impulsan revoluciones y procesos de unificación como los de Italia y Alemania.</p>
-    </div>
-
-    <!-- Constitucionalismo, codificación, revolución industrial -->
-    <div class="block">
-      <div class="block-header">
-        <h3>5. Constitucionalismo, codificación y Revolución Industrial</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>El constitucionalismo es la doctrina que afirma que el poder del Estado debe estar limitado por una constitución escrita y por la separación de poderes. Las revoluciones del siglo XIX extienden constituciones en Europa y América Latina.</p>
-      <p>La codificación, inspirada en el modelo napoleónico, organiza el derecho en códigos sistemáticos (civil, penal, comercial), lo que da seguridad y claridad al orden jurídico. La Revolución Industrial transforma la economía y la sociedad: crea el proletariado urbano, plantea la “cuestión social” y conduce al nacimiento del derecho del trabajo y de movimientos obreros y socialistas.</p>
-    </div>
-  </section>
-
-  <!-- UNIDAD X -->
-  <section id="u10" class="unit">
-    <h2>Unidad X – Siglo XX, Organismos Internacionales y Derechos Humanos</h2>
-
-    <!-- Primera Guerra Mundial -->
-    <div class="block">
-      <div class="block-header">
-        <h3>1. Primera Guerra Mundial, 14 puntos de Wilson y Sociedad de Naciones</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>La Primera Guerra Mundial (1914–1918) tiene causas profundas: rivalidades imperialistas, nacionalismos, sistema de alianzas y carrera armamentista. El asesinato del archiduque Francisco Fernando en Sarajevo desencadena el conflicto entre las potencias europeas.</p>
-      <p>La guerra termina con la derrota de las Potencias Centrales. El Tratado de Versalles impone duras condiciones a Alemania: pérdidas territoriales, reparaciones económicas y aceptación de la culpabilidad. El presidente estadounidense Woodrow Wilson propone sus 14 puntos, que incluyen el principio de autodeterminación de los pueblos y la creación de la Sociedad de Naciones.</p>
-      <p>La Sociedad de Naciones, fundada en 1920, es el primer intento de organización internacional permanente para mantener la paz. Sin embargo, carece de medios coercitivos efectivos y no logra impedir el camino hacia la Segunda Guerra Mundial.</p>
-    </div>
-
-    <!-- Totalitarismos y Segunda Guerra -->
-    <div class="block">
-      <div class="block-header">
-        <h3>2. Totalitarismos y Segunda Guerra Mundial</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>En el período de entreguerras surgen regímenes totalitarios: el comunismo soviético, el fascismo italiano y el nazismo alemán. Se caracterizan por el partido único, el culto al líder, el control total de la sociedad y la represión de las libertades.</p>
-      <p>La Segunda Guerra Mundial (1939–1945) se inicia con la invasión alemana de Polonia. Alemania nazi, Italia fascista y Japón imperial se enfrentan a las potencias aliadas. El conflicto provoca destrucción masiva, genocidios como el Holocausto y la utilización de armas nucleares en Hiroshima y Nagasaki.</p>
-      <p>Al término de la guerra, se redefinen las fronteras y nace un nuevo orden internacional, con Estados Unidos y la Unión Soviética como superpotencias enfrentadas en la Guerra Fría.</p>
-    </div>
-
-    <!-- Guerra Fría, ONU -->
-    <div class="block">
-      <div class="block-header">
-        <h3>3. Guerra Fría, colapso soviético y ONU</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>La Guerra Fría es el enfrentamiento político e ideológico entre el bloque occidental capitalista, liderado por Estados Unidos, y el bloque oriental comunista, encabezado por la Unión Soviética. Se manifiesta en carreras armamentistas, conflictos indirectos y división del mundo en ámbitos de influencia.</p>
-      <p>Las reformas de Gorbachov (Perestroika y Glasnost) en los años 80 buscan modernizar la URSS, pero desencadenan procesos que culminan con la caída del Muro de Berlín (1989) y la disolución de la Unión Soviética (1991).</p>
-      <p>La Organización de las Naciones Unidas (ONU), fundada en 1945, tiene como fines mantener la paz y la seguridad internacionales, fomentar relaciones amistosas entre las naciones y promover el desarrollo y los derechos humanos. Sus principales órganos son la Asamblea General, el Consejo de Seguridad, la Secretaría General, el Consejo Económico y Social, el Consejo de Administración Fiduciaria y la Corte Internacional de Justicia.</p>
-    </div>
-
-    <!-- DDHH, Corte IDH, OEA, UE, Mercosur -->
-    <div class="block">
-      <div class="block-header">
-        <h3>4. Declaración Universal, Corte IDH, OEA, Unión Europea y Mercosur</h3>
-        <span class="badge">Estudio</span>
-      </div>
-      <p>La Declaración Universal de los Derechos Humanos es adoptada por la Asamblea General de la ONU en 1948. Proclama un catálogo de derechos civiles, políticos, económicos, sociales y culturales que corresponden a toda persona por el hecho de ser humana.</p>
-      <p>En el sistema interamericano, la Corte Interamericana de Derechos Humanos, con sede en San José de Costa Rica, es el órgano judicial encargado de juzgar violaciones a la Convención Americana de Derechos Humanos por parte de los Estados que han reconocido su competencia.</p>
-      <p>La Organización de Estados Americanos (OEA), fundada en 1948, busca fortalecer la paz y la seguridad en el continente, consolidar la democracia y promover el desarrollo. La Unión Europea surge de procesos de integración iniciados con la Comunidad Europea del Carbón y del Acero (1951) y el Tratado de Roma (1957), y se consolida con el Tratado de Maastricht (1992).</p>
-      <p>El Mercosur, creado por el Tratado de Asunción (1991) entre Argentina, Brasil, Paraguay y Uruguay, es un proceso de integración que apunta a la libre circulación de bienes, servicios y factores de producción, así como a la coordinación de políticas macroeconómicas. Tiene órganos como el Consejo del Mercado Común, el Grupo Mercado Común, la Comisión de Comercio, el Parlamento del Mercosur y el Tribunal Permanente de Revisión.</p>
-    </div>
-  </section>
-</main>
+  </div>
 
 <script>
-  // Tabs
-  const unitBtns = document.querySelectorAll('.unit-btn');
-  const units = document.querySelectorAll('.unit');
+// ============================================================
+//  DATA
+// ============================================================
+const units = {
+  vi: {
+    epoch: "Alta Edad Media · ss. I – XIV",
+    title: "Unidad VI — Historia de las instituciones en la Edad Media",
+    desc: "Cristianismo, reinos germanos, Bizancio, Islam, Sacro Imperio, feudalismo y cruzadas.",
+    lectura: `
+<span class="section-tag">1. Cristianismo, doctrina y derecho</span>
+<h2>1.1. Origen del cristianismo</h2>
+<p>El cristianismo nace en Palestina, provincia del Imperio Romano habitada por el pueblo judío, que practicaba el judaísmo y esperaba la llegada de un Mesías salvador.</p>
+<p>Jesús de Nazaret comienza a predicar hacia los 30 años, proponiendo un nuevo mensaje religioso; es crucificado alrededor de los 33 años, y tras su muerte sus discípulos difunden la nueva fe por todo el Imperio.</p>
 
-  unitBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.target;
-      unitBtns.forEach(b => b.classList.remove('active'));
-      units.forEach(u => u.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(target).classList.add('active');
+<h2>1.2. Doctrina básica</h2>
+<ul>
+  <li>Religión monoteísta: reconoce a un solo Dios y a Jesús como Hijo de Dios.</li>
+  <li>Promete la salvación eterna a quien ame a Dios y al prójimo, perdone las ofensas y viva humildemente.</li>
+  <li>Proclama la igualdad fundamental de todas las personas, lo que atrae a sectores humildes y genera recelo en las élites romanas.</li>
+</ul>
+
+<h2>1.3. Reconocimiento en el Imperio</h2>
+<ul>
+  <li><span class="highlight">Edicto de Milán (313)</span>: Constantino concede libertad de culto a los cristianos.</li>
+  <li><span class="highlight">Concilio de Nicea (325)</span>: formula el Credo y afirma la doble naturaleza de Cristo.</li>
+  <li><span class="highlight">Concilio de Tesalónica (380)</span>: Teodosio declara al cristianismo religión oficial del Imperio.</li>
+</ul>
+
+<h2>1.4. Derecho canónico</h2>
+<p>El derecho canónico es el conjunto de normas de la Iglesia que regula su organización, los sacramentos y la disciplina del clero. Se forma a partir de concilios, decretales papales y compilaciones medievales como el <em>Decretum Gratiani</em> y las Decretales de Gregorio IX.</p>
+
+<h2>1.5. San Agustín y el derecho</h2>
+<p>San Agustín (354–430), en <em>La ciudad de Dios</em>, distingue entre la <span class="highlight">Civitas Dei</span> (ciudad de Dios) y la <span class="highlight">Civitas Terrena</span>. Concibe la justicia como "dar a cada uno lo suyo"; sin justicia, el Estado se asemeja a una banda de ladrones.</p>
+
+<h2>1.6. Santo Tomás de Aquino y el derecho</h2>
+<p>Santo Tomás (1224–1274) define la ley como una <span class="highlight">ordenación de la razón dirigida al bien común</span>. Prefiere la monarquía cuando busca el bien común; condena la tiranía y admite el tiranicidio en casos extremos. Integra fe y razón a través de la filosofía aristotélica.</p>
+
+<hr class="divider">
+<span class="section-tag">2. Pueblos germanos y disolución de Occidente</span>
+<h2>2.1. Caída del Imperio de Occidente (476)</h2>
+<p>En 476 cae el último emperador romano de Occidente. El territorio se fragmenta y desaparece la unidad política romana en la parte occidental, mientras el Imperio Bizantino se mantiene en Oriente.</p>
+
+<h2>2.2. Reinos germánicos</h2>
+<ul>
+  <li><strong>Visigodos</strong>: se instalan en Hispania; elaboran el <em>Liber Iudiciorum</em>.</li>
+  <li><strong>Burgundios</strong>: combinan derecho romano y costumbres germánicas en la Galia oriental.</li>
+  <li><strong>Ostrogodos</strong>: se establecen en Italia, manteniendo parte de la administración romana.</li>
+  <li><strong>Francos</strong>: bajo Clodoveo se convierten al catolicismo; su derecho se plasma en la <em>Ley Sálica</em>.</li>
+</ul>
+
+<hr class="divider">
+<span class="section-tag">3. Bizancio e Islam</span>
+<h2>3.1. El Corpus Iuris Civilis de Justiniano</h2>
+<p>Justiniano I ordena compilar el derecho romano en el <span class="highlight">Corpus Iuris Civilis</span>, formado por: el <strong>Código</strong> (constituciones imperiales), el <strong>Digesto</strong> (opiniones de juristas clásicos), las <strong>Institutas</strong> (manual para estudiantes) y las <strong>Novelas</strong> (leyes nuevas). Esta obra es esencial para la tradición del derecho civil europeo.</p>
+
+<h2>3.2. Civilización islámica</h2>
+<p>El Islam surge en el siglo VII con Mahoma (570–632). La <span class="highlight">Sharía</span> es la ley islámica, basada en Corán, Sunna, consenso y analogía. El califa ejerce poder religioso y político, asistido por visires, emires y cadíes (jueces).</p>
+
+<hr class="divider">
+<span class="section-tag">4. Carlomagno y el feudalismo</span>
+<h2>4.1. Sacro Imperio Romano Franco</h2>
+<p>Carlomagno crea un vasto imperio en Europa occidental, coronado por el Papa en el año 800. Tras su muerte, el Tratado de Verdún (843) divide el imperio, origen de Francia, Alemania e Italia.</p>
+
+<h2>4.2. Régimen feudal</h2>
+<p>Entre los siglos IX y XIII se consolida el <span class="highlight">feudalismo</span>: sociedad estamental (nobleza, clero, campesinos); relación señor–vasallo con homenaje e investidura; economía rural basada en el feudo; debilitamiento de la autoridad real.</p>
+
+<h2>4.3. Cruzadas (1095–1270)</h2>
+<p>Expediciones militares hacia Tierra Santa con motivaciones religiosas, políticas y económicas. Consecuencias: reactivación del comercio, surgimiento de la burguesía urbana y antesala del nacimiento de los Estados modernos.</p>
+    `,
+    resumen: [
+      { key: "Cristianismo y derecho", val: "Nace en Palestina, se convierte en religión oficial con Teodosio (380). Genera el <strong>derecho canónico</strong>. San Agustín distingue Ciudad de Dios y Ciudad Terrena; Santo Tomás define la ley como ordenación de la razón al bien común." },
+      { key: "Pueblos germanos", val: "Tras la caída de Roma (476), visigodos, burgundios, ostrogodos y francos crean reinos que combinan costumbre germánica y derecho romano. Documentos clave: <strong>Liber Iudiciorum</strong> y <strong>Ley Sálica</strong>." },
+      { key: "Bizancio e Islam", val: "Justiniano codifica el derecho romano en el <strong>Corpus Iuris Civilis</strong> (Código, Digesto, Institutas, Novelas). El Islam crea la <strong>Sharía</strong> como sistema jurídico-religioso basado en el Corán y la Sunna." },
+      { key: "Feudalismo y Cruzadas", val: "Carlomagno restaura el Imperio occidental; su desintegración consolida el feudalismo (señor–vasallo, feudo, sociedad estamental). Las Cruzadas (1095–1270) reactivan el comercio y fomentan la burguesía." }
+    ],
+    quiz: [
+      {
+        q: "¿Qué decreto del año 380 convirtió al cristianismo en la religión oficial del Imperio Romano?",
+        opts: ["Edicto de Milán", "Concilio de Nicea", "Concilio de Tesalónica", "Decretum Gratiani"],
+        ans: 2,
+        fb: "Correcto. El Concilio de Tesalónica (380) bajo el emperador Teodosio declaró el cristianismo como religión oficial. El Edicto de Milán (313) solo concedía libertad de culto."
+      },
+      {
+        q: "Para Santo Tomás de Aquino, ¿qué es la ley?",
+        opts: [
+          "La voluntad arbitraria del soberano",
+          "Una ordenación de la razón dirigida al bien común",
+          "El conjunto de normas del derecho canónico",
+          "La revelación divina expresada en la Biblia"
+        ],
+        ans: 1,
+        fb: "Exacto. Santo Tomás define la ley como 'ordenación de la razón dirigida al bien común'. Esta definición integra filosofía aristotélica y teología cristiana."
+      },
+      {
+        q: "¿Cuáles son los cuatro textos que componen el Corpus Iuris Civilis de Justiniano?",
+        opts: [
+          "Ley Sálica, Liber Iudiciorum, Decretales y Novelas",
+          "Código, Digesto, Institutas y Novelas",
+          "Código, Sharía, Credo y Concordato",
+          "Constitutas, Pandectas, Decretos y Novelas"
+        ],
+        ans: 1,
+        fb: "Correcto: Código (constituciones imperiales), Digesto (jurisprudencia clásica), Institutas (manual estudiantil) y Novelas (nuevas leyes). Esta compilación es la base del derecho civil europeo."
+      },
+      {
+        q: "¿Qué caracterizó principalmente al sistema feudal medieval?",
+        opts: [
+          "Un poder central fuerte del rey sobre todos los territorios",
+          "La igualdad jurídica entre todos los habitantes del feudo",
+          "La relación señor–vasallo con intercambio de protección y servicio militar",
+          "La ausencia de jerarquía social y propiedad privada"
+        ],
+        ans: 2,
+        fb: "Correcto. El feudalismo se basa en el vínculo señor–vasallo: el vasallo presta homenaje y servicio militar; el señor otorga protección y un feudo. Esto implica fragmentación del poder y sociedad estamental."
+      },
+      {
+        q: "Según San Agustín, ¿qué ocurre con un Estado que carece de justicia?",
+        opts: [
+          "Se convierte en una teocracia legítima",
+          "Se asemeja a una banda de ladrones",
+          "Puede seguir gobernando con apoyo de la Iglesia",
+          "Pierde solo la legitimidad económica"
+        ],
+        ans: 1,
+        fb: "Así lo afirma Agustín en La Ciudad de Dios: sin justicia —que es 'dar a cada uno lo suyo'— el Estado no se diferencia de una banda de ladrones. La justicia es conditio sine qua non del poder legítimo."
+      },
+      {
+        q: "¿Qué consecuencia histórica tuvieron principalmente las Cruzadas (1095–1270)?",
+        opts: [
+          "La consolidación definitiva del feudalismo",
+          "La decadencia del comercio mediterráneo",
+          "El debilitamiento del papado como institución",
+          "La reactivación del comercio y el surgimiento de la burguesía urbana"
+        ],
+        ans: 3,
+        fb: "Las Cruzadas abrieron rutas comerciales con Oriente, revitalizaron ciudades, impulsaron a la burguesía mercantil y prepararon el terreno para los Estados modernos. No consolidan sino que erosionan el feudalismo."
+      }
+    ]
+  },
+
+  vii: {
+    epoch: "Baja Edad Media · ss. XI – XV",
+    title: "Unidad VII — Sacro Imperio, Estados nacionales y Universidades",
+    desc: "SIRG, Carta Magna, Common Law, Siete Partidas, Estados Generales y universidades medievales.",
+    lectura: `
+<h2>1. Sacro Imperio Romano Germano y conflicto Iglesia–Imperio</h2>
+<p>El Sacro Imperio Romano Germano surge tras la división carolingia por el Tratado de Verdún (843). Otón I es coronado emperador por el Papa en 962, intentando restaurar el Imperio occidental.</p>
+<ul>
+  <li>Monarquía electiva: los príncipes alemanes eligen al rey/emperador.</li>
+  <li>Fuerte fragmentación feudal que debilita el poder imperial.</li>
+  <li>Los obispos son a la vez señores feudales, con poder espiritual y temporal.</li>
+</ul>
+
+<h2>1.1. Querella de las Investiduras</h2>
+<p>El conflicto entre Enrique IV y Gregorio VII enfrenta al poder imperial con el papal por el derecho a nombrar obispos.</p>
+<ul>
+  <li>Gregorio VII afirma que solo el Papa puede deponer obispos e incluso emperadores.</li>
+  <li>Enrique IV insiste en investir obispos; es excomulgado.</li>
+  <li><span class="highlight">Concordato de Worms (1122)</span>: distingue investidura espiritual (Papa) y temporal (Emperador).</li>
+</ul>
+
+<hr class="divider">
+<h2>2. Formación de Estados nacionales</h2>
+<h3>2.1. Inglaterra: Carta Magna y Common Law</h3>
+<p>En 1215, el rey Juan Sin Tierra firma la <span class="highlight">Carta Magna</span>, que limita el poder real y consagra garantías:</p>
+<ul>
+  <li>Protección de la libertad personal frente a detenciones arbitrarias.</li>
+  <li>Principio de legalidad: nadie puede ser castigado sin juicio conforme a la ley.</li>
+  <li>Necesidad de consentimiento del Gran Consejo para nuevos impuestos.</li>
+</ul>
+<p>Las <strong>Provisiones de Oxford (1258)</strong> refuerzan el control del Parlamento bicameral (Lores y Comunes). El <span class="highlight">Common Law</span> es un sistema basado en precedentes judiciales y costumbres, sin código escrito; los jueces viajan y crean jurisprudencia uniforme.</p>
+
+<h3>2.2. España: Las Siete Partidas</h3>
+<p>Alfonso X el Sabio promulga las <span class="highlight">Siete Partidas</span> (s. XIII) para unificar el derecho castellano. Abarcan fe y derecho eclesiástico, funciones de reyes y señores, proceso, familia, contratos, sucesiones y delitos. Influyen decisivamente en el derecho hispanoamericano.</p>
+
+<h3>2.3. Francia: Estados Generales</h3>
+<p>Los <span class="highlight">Estados Generales</span> reúnen a nobleza, clero y tercer estado (burguesía) con función consultiva, principalmente fiscal. Votan por estamento, no por cabeza; dos votos de privilegiados frente a uno del tercer estado.</p>
+
+<hr class="divider">
+<h2>3. Universidades medievales</h2>
+<p>Nacen como corporaciones de maestros y estudiantes, con aprobación papal y amplia autonomía interna.</p>
+<h3>Universidad de París</h3>
+<ul>
+  <li>Especializada en Teología; centro de la escolástica.</li>
+  <li>La escolástica usa el método lógico-deductivo influido por Aristóteles.</li>
+</ul>
+<h3>Universidad de Bolonia</h3>
+<ul>
+  <li>Centro principal de derecho romano y canónico.</li>
+  <li><strong>Glosadores</strong> (Irnerio y discípulos): añaden glosas explicativas a los textos de Justiniano.</li>
+  <li><strong>Posglosadores o comentaristas</strong>: adaptan el derecho romano a necesidades prácticas medievales.</li>
+</ul>
+    `,
+    resumen: [
+      { key: "Sacro Imperio y Querella", val: "El SIRG intenta restaurar el imperio carolingio; enfrenta la <strong>Querella de las Investiduras</strong> entre Enrique IV y Gregorio VII. El <strong>Concordato de Worms (1122)</strong> separa investidura espiritual y temporal." },
+      { key: "Carta Magna y Common Law", val: "Juan Sin Tierra firma la <strong>Carta Magna (1215)</strong>: limita al rey, garantiza libertad personal y legalidad. El <strong>Common Law</strong> es un sistema basado en precedentes, sin código escrito." },
+      { key: "Siete Partidas y Estados Generales", val: "Alfonso X unifica el derecho castellano con las <strong>Siete Partidas</strong> (s. XIII), con enorme influencia en América. Francia crea los <strong>Estados Generales</strong> con función consultiva y voto por estamento." },
+      { key: "Universidades", val: "París (Teología, escolástica) y Bolonia (Derecho) son los grandes centros. Los <strong>glosadores</strong> comentan a Justiniano; los <strong>posglosadores</strong> adaptan el derecho romano a la práctica medieval." }
+    ],
+    quiz: [
+      {
+        q: "¿Qué resolvió el Concordato de Worms (1122) respecto al conflicto entre el Papa y el Emperador?",
+        opts: [
+          "El Papa obtuvo plena potestad sobre el nombramiento de obispos",
+          "El Emperador mantuvo el control total de la Iglesia alemana",
+          "Separó la investidura espiritual (Papa) de la temporal (Emperador)",
+          "Otorgó al Emperador el derecho de excomulgar al clero"
+        ],
+        ans: 2,
+        fb: "Correcto. El Concordato de Worms distingue entre la investidura espiritual (símbolos religiosos, competencia del Papa) y la investidura temporal (bienes y territorios, competencia del Emperador). Fue el primer gran acuerdo entre ambos poderes."
+      },
+      {
+        q: "¿Cuál de estos principios NO está consagrado en la Carta Magna de 1215?",
+        opts: [
+          "Prohibición de detenciones arbitrarias",
+          "Consentimiento del Gran Consejo para nuevos impuestos",
+          "Elección popular del rey de Inglaterra",
+          "Principio de legalidad en las penas"
+        ],
+        ans: 2,
+        fb: "La Carta Magna no establece elección popular del rey. Sí consagra libertad personal, legalidad (nadie puede ser penado sin juicio) y control parlamentario de impuestos. La monarquía inglesa seguía siendo hereditaria."
+      },
+      {
+        q: "¿En qué se diferencia principalmente el Common Law del sistema romanista continental?",
+        opts: [
+          "El Common Law se basa en precedentes judiciales y costumbre, no en códigos escritos",
+          "El Common Law es un código escrito elaborado por el Parlamento",
+          "El Common Law prohíbe la jurisprudencia como fuente de derecho",
+          "El Common Law fue creado por Alfonso X el Sabio"
+        ],
+        ans: 0,
+        fb: "El Common Law es un sistema de fuente jurisprudencial y consuetudinaria: los jueces crean derecho a través de sus sentencias (precedentes). El sistema romanista continental, en cambio, privilegia los códigos escritos y sistemáticos."
+      },
+      {
+        q: "¿Cuál era la principal diferencia en el sistema de votación de los Estados Generales franceses?",
+        opts: [
+          "Se votaba por cabeza, con un voto igual para cada ciudadano",
+          "Solo votaban nobleza y clero, excluyendo al tercer estado",
+          "Se votaba por estamento: dos votos de privilegiados frente a uno del tercer estado",
+          "El rey tenía voto de calidad para resolver empates"
+        ],
+        ans: 2,
+        fb: "Los Estados Generales votaban por orden o estamento: nobleza y clero tenían un voto cada uno (dos en total), el tercer estado solo uno. Esto garantizaba que los privilegiados siempre podían bloquear las propuestas del pueblo, lo que fue fuente de conflicto hasta la Revolución de 1789."
+      },
+      {
+        q: "¿Cuál fue el aporte principal de los glosadores de la Universidad de Bolonia?",
+        opts: [
+          "Redactaron las Siete Partidas de Alfonso X",
+          "Crearon el Common Law inglés",
+          "Añadieron glosas explicativas a los textos del Corpus Iuris Civilis de Justiniano",
+          "Fundaron la Universidad de París y desarrollaron la escolástica"
+        ],
+        ans: 2,
+        fb: "Los glosadores (iniciados por Irnerio, s. XII) estudiaron y comentaron los textos de Justiniano, añadiendo glosas o notas marginales para aclarar el sentido. Los posglosadores fueron un paso más allá y adaptaron ese derecho a las necesidades prácticas medievales."
+      }
+    ]
+  },
+
+  viii: {
+    epoch: "Edad Moderna · ss. XV – XVIII",
+    title: "Unidad VIII — La Modernidad: Humanismo, Absolutismo e Ilustración",
+    desc: "Humanismo y Renacimiento, absolutismo, Hobbes, Ilustración, Locke, Montesquieu, Rousseau y Kant.",
+    lectura: `
+<h2>1. Humanismo y Renacimiento</h2>
+<p>Entre los siglos XV y XVIII se produce el paso de una visión teocéntrica (Dios en el centro) a otra <span class="highlight">antropocéntrica</span>, donde se revaloriza al ser humano.</p>
+<ul>
+  <li>El Humanismo recupera las fuentes clásicas y pone énfasis en la dignidad y capacidad racional del hombre.</li>
+  <li>El Renacimiento implica un "renacer" artístico, científico y cultural, preparando el terreno para la ciencia moderna y el capitalismo.</li>
+</ul>
+
+<hr class="divider">
+<h2>2. Absolutismo y Hobbes</h2>
+<p>El absolutismo es un sistema político en el que el poder del monarca es soberano, ilimitado y no sujeto a control externo.</p>
+<p>Thomas Hobbes (<em>Leviatán</em>, 1651) fundamenta el absolutismo desde el iusnaturalismo: en el <span class="highlight">estado de naturaleza</span> la vida es "solitaria, pobre, desagradable, brutal y corta" (<em>bellum omnium contra omnes</em>). Para escapar de esa guerra perpetua, los hombres ceden todos sus derechos a un soberano absoluto mediante el <span class="highlight">contrato social</span>. El soberano no puede ser depuesto.</p>
+
+<hr class="divider">
+<h2>3. La Ilustración y sus teóricos</h2>
+<p>La Ilustración (s. XVIII) propugna el uso de la razón como instrumento principal del progreso humano. Critica la tradición, la superstición y el poder arbitrario.</p>
+
+<h3>John Locke</h3>
+<p>Locke distingue entre <span class="highlight">estado de naturaleza</span> (paz, con derechos naturales: vida, libertad y propiedad) y sociedad política. El pacto social es para <em>proteger</em> esos derechos previos. Si el gobierno los viola, el pueblo tiene derecho a la <span class="highlight">resistencia</span>. Propone separación entre poder legislativo y ejecutivo.</p>
+
+<h3>Montesquieu</h3>
+<p>En <em>El espíritu de las leyes</em>, desarrolla la <span class="highlight">teoría de la separación de poderes</span>: legislativo, ejecutivo y judicial deben estar en manos distintas para que ninguno abuse del poder. Esta idea es fundacional del constitucionalismo moderno.</p>
+
+<h3>Rousseau</h3>
+<p>Rousseau postula que el ser humano es <span class="highlight">bueno por naturaleza</span>, pero la sociedad lo corrompe. El contrato social crea una <span class="highlight">voluntad general</span> que expresa el interés común y no puede enajenarse. La soberanía reside en el pueblo y es inalienable e indivisible.</p>
+
+<h3>Los enciclopedistas</h3>
+<p>Diderot y D'Alembert dirigen la <em>Encyclopédie</em> (1751–1772), obra colectiva que sistematiza el conocimiento humano desde una perspectiva racional y crítica, difundiendo las ideas ilustradas.</p>
+
+<h3>Immanuel Kant</h3>
+<p>Kant consolida la Ilustración con su <span class="highlight">imperativo categórico</span>: actúa solo según la máxima que puedas querer que sea ley universal. Defiende la autonomía moral del individuo; el ser humano es fin en sí mismo, nunca mero medio. Define la Ilustración como la salida del ser humano de su minoría de edad.</p>
+
+<hr class="divider">
+<h2>4. Reforma protestante y sus efectos jurídicos</h2>
+<p>Martín Lutero (1517) cuestiona la autoridad papal y propone que la fe y la Biblia son la única fuente de salvación. Esto fractura la unidad religiosa europea y refuerza los Estados nacionales, ya que los príncipes asumen el control de la Iglesia en sus territorios (<em>cuius regio, eius religio</em>).</p>
+    `,
+    resumen: [
+      { key: "Humanismo y Renacimiento", val: "Giro del <strong>teocentrismo</strong> al <strong>antropocentrismo</strong>: recuperación de fuentes clásicas, valorización de la razón y dignidad humana. Prepara el terreno para la ciencia moderna y el capitalismo." },
+      { key: "Absolutismo / Hobbes", val: "Hobbes (<em>Leviatán</em>) justifica el poder absoluto: en el estado de naturaleza hay guerra de todos contra todos; el contrato social cede todos los derechos a un soberano irrevocable para garantizar la paz." },
+      { key: "Locke y Montesquieu", val: "Locke: el pacto social protege derechos naturales previos (vida, libertad, propiedad); el pueblo puede resistir si son violados. Montesquieu: separación de poderes (legislativo / ejecutivo / judicial) para evitar el abuso." },
+      { key: "Rousseau y Kant", val: "Rousseau: soberanía popular y <strong>voluntad general</strong> inalienable. Kant: imperativo categórico, autonomía moral, el ser humano como fin en sí mismo. La Ilustración = salida de la minoría de edad por la razón." }
+    ],
+    quiz: [
+      {
+        q: "¿Cómo describe Hobbes la vida en el estado de naturaleza?",
+        opts: [
+          "Pacífica, con derechos naturales de vida y libertad",
+          "Solitaria, pobre, desagradable, brutal y corta (guerra de todos contra todos)",
+          "Buena por naturaleza, corrompida solo por la sociedad",
+          "Organizada en torno a la propiedad privada y el comercio"
+        ],
+        ans: 1,
+        fb: "Correcto. Hobbes describe el estado de naturaleza como 'bellum omnium contra omnes': una guerra perpetua de todos contra todos que hace la vida miserable. Por eso los hombres necesitan ceder sus derechos a un soberano absoluto."
+      },
+      {
+        q: "¿En qué se diferencia la posición de Locke de la de Hobbes respecto al contrato social?",
+        opts: [
+          "Locke considera que el estado de naturaleza ya es un estado de guerra",
+          "Locke cree que el pacto social protege derechos previos y el pueblo puede resistir si son violados",
+          "Locke coincide con Hobbes en que el soberano no puede ser depuesto",
+          "Locke defiende la monarquía absoluta como mejor forma de gobierno"
+        ],
+        ans: 1,
+        fb: "La diferencia clave es que Locke parte de un estado de naturaleza pacífico con derechos previos (vida, libertad, propiedad). El contrato social es para protegerlos, no para cederlos. Si el gobierno los viola, el pueblo tiene derecho de resistencia, algo que Hobbes niega."
+      },
+      {
+        q: "¿Cuál es la contribución central de Montesquieu al constitucionalismo moderno?",
+        opts: [
+          "La teoría de la voluntad general como fuente de soberanía",
+          "El imperativo categórico como fundamento de la moral política",
+          "La teoría de la separación de los tres poderes del Estado",
+          "La idea de que el hombre es bueno por naturaleza"
+        ],
+        ans: 2,
+        fb: "Montesquieu, en El espíritu de las leyes, propone que el poder legislativo, ejecutivo y judicial deben estar en manos distintas para que se controlen mutuamente. Esta es la base del constitucionalismo moderno y de casi todas las constituciones actuales."
+      },
+      {
+        q: "¿Qué entiende Rousseau por 'voluntad general'?",
+        opts: [
+          "La suma de todas las voluntades individuales de los ciudadanos",
+          "La voluntad del rey como representante del pueblo",
+          "El interés común del pueblo, inalienable e indivisible, que no puede delegarse",
+          "El consenso de los Estados Generales en materia fiscal"
+        ],
+        ans: 2,
+        fb: "Para Rousseau, la voluntad general no es la suma de voluntades individuales (voluntad de todos), sino el interés colectivo auténtico. Es inalienable (no puede cederse a un representante) e indivisible. La soberanía reside en el pueblo de manera permanente."
+      },
+      {
+        q: "¿Qué consecuencia jurídico-política tuvo principalmente la Reforma protestante?",
+        opts: [
+          "Unificó la autoridad religiosa bajo un papa protestante",
+          "Reforzó el poder del Sacro Imperio Romano Germano",
+          "Fortaleció a los Estados nacionales, que asumieron el control de la Iglesia en sus territorios",
+          "Llevó a la codificación del derecho canónico protestante"
+        ],
+        ans: 2,
+        fb: "El principio 'cuius regio, eius religio' (quien manda el territorio, determina la religión) concentró el poder eclesiástico en manos de los príncipes y reyes. Esto fortaleció los Estados nacionales frente al papado y fue un paso clave en la secularización del poder político."
+      }
+    ]
+  },
+
+  ix: {
+    epoch: "Edad Contemporánea · ss. XVIII – XIX",
+    title: "Unidad IX — Revoluciones, Napoleón y constitucionalismo",
+    desc: "Revolución Americana y Francesa, Napoleón, Congreso de Viena, constitucionalismo, codificación e industrialización.",
+    lectura: `
+<h2>1. Revolución Americana (1776)</h2>
+<p>Las trece colonias inglesas en América del Norte se rebelan contra Gran Bretaña por impuestos sin representación. En 1776 proclaman la <span class="highlight">Declaración de Independencia</span> (redactada principalmente por Jefferson), basada en ideas ilustradas: igualdad, derechos naturales y soberanía popular.</p>
+<p>La <span class="highlight">Constitución de 1787</span> crea la primera república federal moderna con constitución escrita, separación de poderes y Bill of Rights. Es un modelo para el constitucionalismo global.</p>
+
+<hr class="divider">
+<h2>2. Revolución Francesa (1789–1799)</h2>
+<h3>Causas</h3>
+<ul>
+  <li>Crisis fiscal del Estado borbónico.</li>
+  <li>Desigualdad social del Antiguo Régimen (tres estados sin igualdad de voto).</li>
+  <li>Influencia de las ideas ilustradas (Locke, Montesquieu, Rousseau).</li>
+</ul>
+
+<h3>Etapas</h3>
+<ul>
+  <li><strong>Asamblea Nacional (1789)</strong>: aprueba la Declaración de los Derechos del Hombre y del Ciudadano; abolición del feudalismo.</li>
+  <li><strong>Monarquía constitucional (1791)</strong>: primera constitución escrita francesa.</li>
+  <li><strong>Primera República y el Terror (1792–1794)</strong>: radicalización con el Comité de Salud Pública; miles de ejecuciones.</li>
+  <li><strong>Directorio (1795–1799)</strong>: gobierno moderado que concluye con el golpe de Brumario de Napoleón.</li>
+</ul>
+
+<h3>Declaración de los Derechos del Hombre y del Ciudadano (1789)</h3>
+<p>Proclama la libertad, igualdad, soberanía nacional, legalidad y derecho de propiedad. Es un hito del constitucionalismo moderno.</p>
+
+<hr class="divider">
+<h2>3. Napoleón y el Código Civil</h2>
+<p>Napoleón Bonaparte (1769–1821) asciende como militar y luego como Primer Cónsul (1799) y Emperador (1804). Sus guerras expansivas difunden los principios revolucionarios por Europa.</p>
+<p>Su legado jurídico principal es el <span class="highlight">Código Napoleónico (1804)</span>:</p>
+<ul>
+  <li>Sistematiza el derecho civil en un código claro, laico y accesible.</li>
+  <li>Consolida la igualdad ante la ley, la libertad contractual y la propiedad privada.</li>
+  <li>Influye en los códigos civiles de América Latina, Europa continental, Québec y Luisiana.</li>
+</ul>
+
+<hr class="divider">
+<h2>4. Congreso de Viena (1814–1815) y Santa Alianza</h2>
+<p>Tras la derrota de Napoleón, el Congreso de Viena reorganiza Europa restaurando monarquías y el principio de <span class="highlight">legitimidad dinástica</span>. La Santa Alianza y la Cuádruple Alianza buscan intervenir contra movimientos liberales y nacionalistas. Sin embargo, el liberalismo y el nacionalismo siguen avanzando durante todo el s. XIX.</p>
+
+<hr class="divider">
+<h2>5. Constitucionalismo, codificación y Revolución Industrial</h2>
+<ul>
+  <li><strong>Constitucionalismo</strong>: difusión de constituciones escritas que limitan el poder y garantizan derechos.</li>
+  <li><strong>Codificación</strong>: creación de códigos (civil, penal, comercial) que sistematizan el derecho y refuerzan la igualdad formal.</li>
+  <li><strong>Revolución Industrial</strong>: transformación económica iniciada en Gran Bretaña; surgen burguesía industrial y proletariado urbano; nacen los movimientos obreros y las doctrinas socialistas.</li>
+</ul>
+    `,
+    resumen: [
+      { key: "Revolución Americana (1776)", val: "Independencia de las 13 colonias basada en ideas ilustradas. La <strong>Constitución de 1787</strong> crea la primera república federal moderna con separación de poderes y Bill of Rights." },
+      { key: "Revolución Francesa (1789)", val: "Derrumba el Antiguo Régimen; proclama la <strong>Declaración de los DDHH</strong> (1789). Pasa por monarquía constitucional, República y el Terror, hasta el golpe de Napoleón en 1799." },
+      { key: "Napoleón y el Código Civil", val: "<strong>Código Napoleónico (1804)</strong>: sistematiza el derecho civil, consagra igualdad ante la ley, libertad contractual y propiedad. Influye en toda América Latina y Europa continental." },
+      { key: "Congreso de Viena y legados", val: "El Congreso de Viena (1815) restaura el absolutismo, pero el <strong>liberalismo y el nacionalismo</strong> avanzan. El constitucionalismo, la codificación y la Revolución Industrial transforman el derecho y la sociedad del s. XIX." }
+    ],
+    quiz: [
+      {
+        q: "¿Cuál fue el principal aporte jurídico-institucional de la Revolución Americana de 1776?",
+        opts: [
+          "La primera declaración de derechos del hombre y el ciudadano",
+          "La creación de la primera república federal moderna con constitución escrita y separación de poderes",
+          "La abolición del feudalismo y de los estamentos sociales",
+          "La redacción del Código Napoleónico de derecho civil"
+        ],
+        ans: 1,
+        fb: "La Constitución de 1787 es el primer documento constitucional que crea una república federal, con separación efectiva de los tres poderes y garantías individuales (Bill of Rights, 1791). Fue modelo para el constitucionalismo global posterior."
+      },
+      {
+        q: "¿En qué etapa de la Revolución Francesa se produce el período conocido como el 'Terror'?",
+        opts: [
+          "Asamblea Nacional (1789)",
+          "Monarquía constitucional (1791)",
+          "Primera República con el Comité de Salud Pública (1792–1794)",
+          "Directorio (1795–1799)"
+        ],
+        ans: 2,
+        fb: "El Terror se produce durante la Primera República (1792–1794), cuando el Comité de Salud Pública liderado por Robespierre ejecutó a miles de personas acusadas de contrarrevolucionarias. Culmina con la caída del propio Robespierre (Termidor, 1794)."
+      },
+      {
+        q: "¿Cuál es la principal característica del Código Napoleónico de 1804?",
+        opts: [
+          "Es un código penal que establece sanciones para delitos políticos",
+          "Sistematiza el derecho civil consagrando igualdad ante la ley, libertad contractual y propiedad privada",
+          "Es una constitución que limita el poder del Emperador",
+          "Regula exclusivamente el derecho comercial y mercantil"
+        ],
+        ans: 1,
+        fb: "El Código Napoleónico (Code Civil) de 1804 es un código de derecho privado que codifica de forma clara, laica y sistemática las relaciones entre particulares. Sus pilares son: igualdad ante la ley, libertad de contrato y propiedad privada inviolable. Su influencia llega hasta hoy en América Latina y Europa continental."
+      },
+      {
+        q: "¿Qué principio buscó restablecer el Congreso de Viena (1814-1815) tras la derrota de Napoleón?",
+        opts: [
+          "La soberanía popular y el sufragio universal",
+          "El federalismo y las constituciones escritas",
+          "La legitimidad dinástica y la restauración de las monarquías absolutas",
+          "La libertad de comercio y la supresión de los aranceles"
+        ],
+        ans: 2,
+        fb: "El Congreso de Viena, liderado por Metternich, buscó restaurar el orden anterior a la Revolución Francesa basándose en el principio de 'legitimidad': el derecho de las dinastías históricas a gobernar. La Santa Alianza reforzó este conservadurismo frente al liberalismo."
+      },
+      {
+        q: "¿Cuál fue la principal consecuencia social de la Revolución Industrial en términos jurídicos?",
+        opts: [
+          "La consolidación del feudalismo y el trabajo servil",
+          "El surgimiento del proletariado urbano y los movimientos obreros que dieron origen al derecho laboral",
+          "La eliminación de la propiedad privada y la socialización de los medios de producción",
+          "La codificación del derecho penal para castigar delitos empresariales"
+        ],
+        ans: 1,
+        fb: "La Revolución Industrial creó el proletariado urbano sometido a condiciones laborales abusivas (jornadas largas, trabajo infantil, bajos salarios). La respuesta fue el movimiento obrero y el socialismo, que eventualmente dieron origen al derecho laboral y los derechos sociales del s. XX."
+      }
+    ]
+  },
+
+  x: {
+    epoch: "Siglo XX y Contemporaneidad",
+    title: "Unidad X — Guerras mundiales, ONU, Derechos Humanos e integración",
+    desc: "Primera y Segunda Guerra Mundial, Guerra Fría, ONU, DUDH, Corte IDH, OEA, globalización, UE y Mercosur.",
+    lectura: `
+<h2>1. Primera Guerra Mundial (1914–1918)</h2>
+<h3>Causas</h3>
+<ul>
+  <li>Rivalidades nacionalistas y coloniales entre potencias europeas.</li>
+  <li>Sistema de alianzas rígidas (Triple Entente vs. Triple Alianza).</li>
+  <li>Asesinato del archiduque Francisco Fernando en Sarajevo (1914).</li>
+</ul>
+<h3>Consecuencias</h3>
+<ul>
+  <li><span class="highlight">Tratado de Versalles (1919)</span>: impone duras reparaciones a Alemania y redibuja el mapa europeo.</li>
+  <li>Los 14 Puntos de Wilson proponen una paz justa e impulsan la <span class="highlight">Sociedad de Naciones</span>, antecesora de la ONU.</li>
+</ul>
+
+<hr class="divider">
+<h2>2. Segunda Guerra Mundial (1939–1945) y Guerra Fría</h2>
+<h3>Causas</h3>
+<ul>
+  <li>Ascenso de regímenes totalitarios (nazismo, fascismo, militarismo japonés).</li>
+  <li>Revisión agresiva del orden de Versalles.</li>
+</ul>
+<h3>Consecuencias</h3>
+<ul>
+  <li>Ascenso de EE.UU. y la URSS como superpotencias; inicio de la <span class="highlight">Guerra Fría</span>.</li>
+  <li>Reformas de Gorbachov (Glasnost y Perestroika), caída del Muro de Berlín (1989) y disolución de la URSS (1991).</li>
+</ul>
+
+<hr class="divider">
+<h2>3. ONU y Declaración Universal de los Derechos Humanos</h2>
+<p>La <span class="highlight">ONU</span> se crea en 1945 con la Carta de San Francisco. Objetivos: mantener la paz, fomentar la cooperación y promover los derechos humanos. Órganos principales: Asamblea General, Consejo de Seguridad, ECOSOC, CIJ y Secretaría.</p>
+<p>La <span class="highlight">Declaración Universal de los Derechos Humanos (1948)</span> proclama un catálogo de derechos civiles, políticos, económicos, sociales y culturales. Ha inspirado constituciones nacionales y tratados internacionales en todo el mundo.</p>
+
+<hr class="divider">
+<h2>4. Sistema interamericano: OEA y Corte IDH</h2>
+<ul>
+  <li>La <span class="highlight">OEA (1948)</span>: foro político regional que promueve la democracia, la paz y los derechos humanos en América.</li>
+  <li>La <span class="highlight">Corte Interamericana de Derechos Humanos</span>: aplica la Convención Americana y juzga violaciones de derechos humanos cometidas por los Estados que han reconocido su competencia.</li>
+</ul>
+
+<hr class="divider">
+<h2>5. Globalización, Unión Europea y Mercosur</h2>
+<h3>Unión Europea</h3>
+<p>Surge de comunidades europeas de posguerra y se consolida con el <span class="highlight">Tratado de Maastricht (1993)</span>. Mercado único con libre circulación de bienes, servicios, personas y capitales; adopción del euro; Carta de Derechos Fundamentales. Instituciones: Parlamento Europeo, Consejo Europeo, Comisión Europea, Tribunal de Justicia, BCE.</p>
+
+<h3>Mercosur</h3>
+<p>Creado en 1991 por el <span class="highlight">Tratado de Asunción</span>; miembros fundadores: Argentina, Brasil, Paraguay y Uruguay. Objetivos: libre circulación de bienes, arancel externo común y coordinación macroeconómica. Órganos: Consejo del Mercado Común, Grupo Mercado Común y Comisión de Comercio.</p>
+    `,
+    resumen: [
+      { key: "Guerras mundiales", val: "1ª GM (1914–18): Versalles + Sociedad de Naciones. 2ª GM (1939–45): nazismo, derrota del Eje; surgen EE.UU. y URSS como superpotencias y comienza la <strong>Guerra Fría</strong>, que concluye con la caída de la URSS en 1991." },
+      { key: "ONU y DUDH", val: "La <strong>ONU</strong> (1945) busca mantener la paz y la cooperación internacional. La <strong>DUDH (1948)</strong> proclama un catálogo universal de derechos civiles, políticos, económicos, sociales y culturales." },
+      { key: "Sistema interamericano", val: "La <strong>OEA (1948)</strong> promueve democracia y derechos humanos en América. La <strong>Corte IDH</strong> aplica la Convención Americana y juzga violaciones de Estados parte." },
+      { key: "UE y Mercosur", val: "<strong>UE</strong> (Maastricht, 1993): mercado único, euro y libre circulación. <strong>Mercosur</strong> (Tratado de Asunción, 1991): libre comercio e integración económica entre Argentina, Brasil, Paraguay y Uruguay." }
+    ],
+    quiz: [
+      {
+        q: "¿Cuál fue la principal consecuencia jurídico-institucional de la Primera Guerra Mundial?",
+        opts: [
+          "La creación de la ONU con la Carta de San Francisco",
+          "La promulgación de la Declaración Universal de los Derechos Humanos",
+          "La firma del Tratado de Versalles y la creación de la Sociedad de Naciones",
+          "El establecimiento del Tribunal Penal Internacional"
+        ],
+        ans: 2,
+        fb: "El Tratado de Versalles (1919) redibujó el mapa europeo e impuso graves sanciones a Alemania. Los 14 Puntos de Wilson impulsaron la Sociedad de Naciones, el primer organismo multilateral para la paz colectiva, antecesora directa de la ONU."
+      },
+      {
+        q: "¿En qué año fue creada la ONU y qué instrumento jurídico le dio origen?",
+        opts: [
+          "1919, mediante el Tratado de Versalles",
+          "1945, mediante la Carta de San Francisco",
+          "1948, mediante la Declaración Universal de Derechos Humanos",
+          "1991, mediante el Tratado de Maastricht"
+        ],
+        ans: 1,
+        fb: "La ONU fue fundada en 1945, al término de la Segunda Guerra Mundial, mediante la Carta de San Francisco. Sus propósitos son mantener la paz y seguridad internacional, fomentar la cooperación y promover los derechos humanos."
+      },
+      {
+        q: "¿Qué categorías de derechos reconoce la Declaración Universal de Derechos Humanos de 1948?",
+        opts: [
+          "Solo derechos civiles y políticos",
+          "Solo derechos económicos, sociales y culturales",
+          "Derechos civiles, políticos, económicos, sociales y culturales",
+          "Solo derechos de los Estados y no de los individuos"
+        ],
+        ans: 2,
+        fb: "La DUDH es integral: incluye derechos civiles y políticos (libertad, prohibición de tortura, debido proceso) y también derechos económicos, sociales y culturales (trabajo, educación, salud). Esta universalidad e integralidad la convirtió en fuente de inspiración para constituciones y tratados posteriores."
+      },
+      {
+        q: "¿Cuál es la diferencia entre la OEA y la Corte Interamericana de Derechos Humanos?",
+        opts: [
+          "La OEA es un tribunal y la Corte IDH es un foro político regional",
+          "La OEA es un foro político regional, mientras que la Corte IDH es un tribunal que juzga violaciones de derechos humanos",
+          "Ambas son tribunales con las mismas funciones pero distintos países miembros",
+          "La OEA tiene más poder coercitivo que la Corte IDH"
+        ],
+        ans: 1,
+        fb: "La OEA (1948) es un organismo político intergubernamental que promueve la democracia y los derechos humanos. La Corte IDH es un tribunal internacional que aplica la Convención Americana y puede declarar responsable internacionalmente a un Estado por violaciones de derechos humanos."
+      },
+      {
+        q: "¿Cuáles fueron los países fundadores del Mercosur mediante el Tratado de Asunción (1991)?",
+        opts: [
+          "Argentina, Bolivia, Chile y Paraguay",
+          "Brasil, Venezuela, Uruguay y Colombia",
+          "Argentina, Brasil, Paraguay y Uruguay",
+          "Paraguay, Bolivia, Brasil y Perú"
+        ],
+        ans: 2,
+        fb: "El Mercosur fue creado el 26 de marzo de 1991 por Argentina, Brasil, Paraguay y Uruguay mediante el Tratado de Asunción. Venezuela fue admitida posteriormente (2012) y suspendida en 2017. Bolivia está en proceso de adhesión."
+      }
+    ]
+  }
+};
+
+// ============================================================
+//  STATE
+// ============================================================
+let currentUnit = 'vi';
+let currentMode = 'lectura';
+let quizState = {};
+
+function initQuizState(unitKey) {
+  const q = units[unitKey].quiz;
+  quizState[unitKey] = {
+    answered: new Array(q.length).fill(null), // null | 'correct' | 'wrong'
+    done: false
+  };
+}
+
+// ============================================================
+//  RENDER
+// ============================================================
+function renderUnit(unitKey, mode) {
+  const u = units[unitKey];
+  document.getElementById('headerEpoch').textContent = u.epoch;
+  document.getElementById('headerTitle').textContent = u.title;
+  document.getElementById('headerDesc').textContent = u.desc;
+
+  document.querySelectorAll('.unit-tab').forEach(t => t.classList.toggle('active', t.dataset.unit === unitKey));
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+
+  const panel = document.getElementById('contentPanel');
+  panel.className = 'content-panel fade-in';
+  // force reflow for animation
+  void panel.offsetWidth;
+
+  if (mode === 'lectura') {
+    panel.innerHTML = u.lectura;
+  } else if (mode === 'resumen') {
+    renderResumen(panel, u);
+  } else {
+    renderQuiz(panel, unitKey);
+  }
+}
+
+function renderResumen(panel, u) {
+  let html = `<div class="summary-grid">`;
+  u.resumen.forEach(item => {
+    html += `<div class="summary-card"><strong>${item.key}</strong><br>${item.val}</div>`;
+  });
+  html += `</div>`;
+  panel.innerHTML = html;
+}
+
+function renderQuiz(panel, unitKey) {
+  if (!quizState[unitKey]) initQuizState(unitKey);
+  const state = quizState[unitKey];
+  const qs = units[unitKey].quiz;
+
+  const answered = state.answered.filter(a => a !== null).length;
+  const correct  = state.answered.filter(a => a === 'correct').length;
+  const pct = qs.length > 0 ? Math.round((answered / qs.length) * 100) : 0;
+
+  let html = `
+    <div class="quiz-intro">
+      <span class="quiz-intro-icon">⚖️</span>
+      <span>Seleccioná la opción correcta. Cada pregunta muestra retroalimentación inmediata.</span>
+    </div>
+    <div class="quiz-score-bar">
+      <div class="score-pill">✔ ${correct} / ${qs.length}</div>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <span style="font-size:0.8rem;color:#7a6040">${answered} respondidas</span>
+    </div>
+  `;
+
+  qs.forEach((q, qi) => {
+    const ans = state.answered[qi]; // null | 'correct' | 'wrong'
+    html += `<div class="question-block" id="qblock-${qi}">
+      <div class="question-header">
+        <span class="q-number">${qi + 1}</span>
+        <span>${q.q}</span>
+      </div>
+      <div class="options-list">`;
+
+    const letters = ['A', 'B', 'C', 'D'];
+    q.opts.forEach((opt, oi) => {
+      let cls = '';
+      if (ans !== null) {
+        if (oi === q.ans) cls = 'correct';
+        else if (state.answered[qi] === 'wrong' && oi === state.selected[qi]) cls = 'wrong';
+      }
+      html += `<button class="option-btn ${cls}" ${ans !== null ? 'disabled' : ''}
+        onclick="selectAnswer(${qi}, ${oi}, '${unitKey}')">
+        <span class="option-letter">${letters[oi]}</span>
+        <span>${opt}</span>
+      </button>`;
     });
+
+    html += `</div>`;
+    if (ans !== null) {
+      html += `<div class="feedback-box ${ans} show">
+        ${ans === 'correct' ? '✔ ' : '✘ '} ${q.fb}
+      </div>`;
+    }
+    html += `</div>`;
   });
 
-  // Multiple choice
-  function checkQuestion(button) {
-    const block = button.closest('.question-block');
-    const correct = block.dataset.correct;
-    const selected = block.querySelector('input[type="radio"]:checked');
-    const feedback = block.querySelector('.feedback');
-    if (!selected) {
-      feedback.textContent = 'Elegí una opción antes de corregir.';
-      feedback.className = 'feedback';
-      return;
-    }
-    if (selected.value === correct) {
-      feedback.textContent = 'Correcto ✔';
-      feedback.className = 'feedback correct';
-    } else {
-      feedback.textContent = 'Incorrecto ✘';
-      feedback.className = 'feedback incorrect';
-    }
+  if (state.done) {
+    const pctScore = Math.round((correct / qs.length) * 100);
+    let msg = pctScore >= 90 ? "¡Excelente dominio de la unidad!" :
+              pctScore >= 70 ? "Buen trabajo. Repasá los puntos que fallaste." :
+              "Revisá la lectura antes de volver a intentar.";
+    html += `<div class="quiz-result-panel">
+      <div class="result-score">${pctScore}%</div>
+      <div class="result-label">${correct} correctas de ${qs.length}</div>
+      <div class="result-message">${msg}</div>
+      <button class="retry-btn" onclick="retryQuiz('${unitKey}')">↺ Reintentar</button>
+    </div>`;
   }
 
-  // Open answers
-  function toggleOpenAnswer(button) {
-    const ans = button.nextElementSibling;
-    ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-  }
+  panel.innerHTML = html;
+}
 
-  window.checkQuestion = checkQuestion;
-  window.toggleOpenAnswer = toggleOpenAnswer;
+// ============================================================
+//  INTERACTIONS
+// ============================================================
+function selectAnswer(qi, selectedOpt, unitKey) {
+  if (!quizState[unitKey]) initQuizState(unitKey);
+  const state = quizState[unitKey];
+  if (state.answered[qi] !== null) return;
+
+  const q = units[unitKey].quiz[qi];
+  const isCorrect = selectedOpt === q.ans;
+  state.answered[qi] = isCorrect ? 'correct' : 'wrong';
+  if (!state.selected) state.selected = [];
+  state.selected[qi] = selectedOpt;
+
+  const allAnswered = state.answered.every(a => a !== null);
+  if (allAnswered) state.done = true;
+
+  // Re-render quiz preserving scroll
+  const panel = document.getElementById('contentPanel');
+  const scrollY = panel.scrollTop;
+  renderQuiz(panel, unitKey);
+  panel.scrollTop = scrollY;
+}
+
+function retryQuiz(unitKey) {
+  initQuizState(unitKey);
+  renderQuiz(document.getElementById('contentPanel'), unitKey);
+}
+
+// Event listeners
+document.querySelectorAll('.unit-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    currentUnit = tab.dataset.unit;
+    currentMode = 'lectura';
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === 'lectura'));
+    renderUnit(currentUnit, currentMode);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentMode = btn.dataset.mode;
+    renderUnit(currentUnit, currentMode);
+  });
+});
+
+// Initial render
+renderUnit(currentUnit, currentMode);
 </script>
 </body>
 </html>
