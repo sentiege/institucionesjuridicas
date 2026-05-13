@@ -2092,12 +2092,12 @@ renderUnit(currentUnit, currentMode);
 
     currentExam.forEach(function(q, idx) {
       html += '<div class="ep-q" data-idx="'+idx+'" style="margin-bottom:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(212,168,67,0.12);border-radius:10px;padding:16px;">';
-      html += '<p style="font-weight:600;margin-bottom:10px;line-height:1.5;font-size:0.9rem;"><span style="color:var(--gold-light,#e8c87a);font-weight:700;">'+(idx+1)+'.</span> '+q.q+'</p>';
+      html += '<p style="font-weight:600;margin-bottom:10px;line-height:1.5;font-size:0.9rem;"><span style="color:#ffffff;font-weight:700;">'+(idx+1)+'.</span> '+q.q+'</p>';
       html += '<div style="display:flex;flex-direction:column;gap:6px;">';
       q.o.forEach(function(opt, i) {
         html += '<label class="ep-opt" data-oi="'+i+'" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:background 0.15s;">'
           + '<input type="radio" name="eq'+idx+'" data-qi="'+idx+'" data-oi="'+i+'" style="accent-color:var(--gold,#d4a843);cursor:pointer;"/>'
-          + '<span style="font-size:0.85rem;"><strong style="color:var(--gold-light,#e8c87a);">'+LETTERS[i]+'.</strong> '+opt+'</span>'
+          + '<span style="font-size:0.85rem;"><strong style="color:#ffffff;font-weight:700;">'+LETTERS[i]+'.</strong> '+opt+'</span>'
           + '</label>';
       });
       html += '</div></div>';
