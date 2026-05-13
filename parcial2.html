@@ -1858,276 +1858,322 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
 renderUnit(currentUnit, currentMode);
 </script>
 
-  <!-- ===== FOOTER: BOTÓN MODO EXAMEN ===== -->
-  <footer style="
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding: 12px 24px;
-    background: rgba(10,8,6,0.97);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-  ">
-    <span style="font-size:0.78rem;color:#9ca3af;font-family:'Source Serif 4',serif;">
-      ¿Listo para ponerte a prueba?
-    </span>
-    <button id="exam-mode-btn" style="
-      border: none; outline: none;
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-size: 0.82rem;
-      cursor: pointer;
-      background: linear-gradient(135deg,#f97316,#ea580c);
-      color: #fff;
-      font-weight: 700;
-      box-shadow: 0 6px 20px rgba(249,115,22,0.45);
-      display: flex; align-items: center; gap: 6px;
-      font-family: 'Source Serif 4', serif;
-      letter-spacing: 0.02em;
-    ">
-      🎯 Modo examen
+  
+  <!-- ===== FOOTER MODO EXAMEN ===== -->
+  <div class="exam-footer-bar">
+    <span class="exam-footer-tagline">¿Preparado para el parcial?</span>
+    <button class="exam-mode-btn" id="exam-mode-btn">
+      <span class="exam-icon">🎯</span>
+      <span>Modo Examen</span>
     </button>
-  </footer>
+  </div>
 
+  <!-- ===== MODAL SELECTOR DE DESAFÍO ===== -->
+  <div id="exam-overlay" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+    <div id="exam-modal" style="
+      background: linear-gradient(160deg,#1a0e02,#0f0700);
+      border: 1px solid rgba(212,168,67,0.35);
+      border-radius: 12px;
+      padding: 36px 32px;
+      max-width: 440px;
+      width: 90%;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(212,168,67,0.15);
+      text-align: center;
+      position: relative;
+    ">
+      <button id="exam-modal-close" style="position:absolute;top:14px;right:16px;background:none;border:none;color:#9ca3af;font-size:1.4rem;cursor:pointer;line-height:1;">&times;</button>
+      <div style="font-size:2.4rem;margin-bottom:10px;">⚖️</div>
+      <h2 style="font-family:var(--display);color:var(--gold-light);font-size:1.35rem;margin-bottom:6px;letter-spacing:0.04em;">Modo Examen</h2>
+      <p style="color:#9ca3af;font-size:0.83rem;margin-bottom:28px;line-height:1.55;">Elegí la cantidad de preguntas.<br>Se mezclan aleatoriamente de las unidades VI a X.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+
+        <button class="challenge-btn" data-n="10" style="
+          background: linear-gradient(135deg,#1a0e02,#2e1a04);
+          border: 1px solid rgba(212,168,67,0.3);
+          border-radius: 10px; padding: 16px 20px; cursor: pointer;
+          color: #f5e6c8; font-family: var(--display);
+          display: flex; align-items: center; justify-content: space-between;
+          transition: all 0.2s;
+        ">
+          <div style="text-align:left;">
+            <div style="font-size:1rem;font-weight:700;color:var(--gold-light);">Desafío 1 — 10 preguntas</div>
+            <div style="font-size:0.78rem;color:#9ca3af;margin-top:2px;">Calentamiento · ~10 min</div>
+          </div>
+          <span style="font-size:1.5rem;">🔥</span>
+        </button>
+
+        <button class="challenge-btn" data-n="25" style="
+          background: linear-gradient(135deg,#1a0e02,#2e1a04);
+          border: 1px solid rgba(212,168,67,0.3);
+          border-radius: 10px; padding: 16px 20px; cursor: pointer;
+          color: #f5e6c8; font-family: var(--display);
+          display: flex; align-items: center; justify-content: space-between;
+          transition: all 0.2s;
+        ">
+          <div style="text-align:left;">
+            <div style="font-size:1rem;font-weight:700;color:var(--gold-light);">Desafío 2 — 25 preguntas</div>
+            <div style="font-size:0.78rem;color:#9ca3af;margin-top:2px;">Intermedio · ~25 min</div>
+          </div>
+          <span style="font-size:1.5rem;">⚡</span>
+        </button>
+
+        <button class="challenge-btn" data-n="50" style="
+          background: linear-gradient(135deg,#1a0e02,#2e1a04);
+          border: 1px solid rgba(212,168,67,0.3);
+          border-radius: 10px; padding: 16px 20px; cursor: pointer;
+          color: #f5e6c8; font-family: var(--display);
+          display: flex; align-items: center; justify-content: space-between;
+          transition: all 0.2s;
+        ">
+          <div style="text-align:left;">
+            <div style="font-size:1rem;font-weight:700;color:var(--gold-light);">Desafío 3 — 50 preguntas</div>
+            <div style="font-size:0.78rem;color:#9ca3af;margin-top:2px;">Completo · ~50 min</div>
+          </div>
+          <span style="font-size:1.5rem;">🏆</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PANEL EXAMEN (se inyecta sobre el contenido) ===== -->
+  <div id="exam-panel" style="display:none;position:fixed;inset:0;z-index:999;overflow-y:auto;background:var(--bg, #100c04);padding:24px 16px 80px;">
+    <div style="max-width:720px;margin:0 auto;" id="exam-panel-inner"></div>
+  </div>
 
 <script>
-// =====================================================
-// MODO EXAMEN — Banco de 100 preguntas (20 por unidad)
-// =====================================================
-const questionBank = [
-  // ── UNIDAD VI ──
-  {unit:'vi', q:'¿En qué región del Imperio Romano surgió el cristianismo?', options:['Galia','Palestina','Britania','Germania'], answer:1},
-  {unit:'vi', q:'¿Qué emperador promulgó el Edicto de Milán (313 d.C.)?', options:['Teodosio','Nerón','Constantino','Diocleciano'], answer:2},
-  {unit:'vi', q:'¿Qué concilio declaró al cristianismo religión oficial del Imperio?', options:['Nicea','Calcedonia','Tesalónica','Trento'], answer:2},
-  {unit:'vi', q:'Según San Agustín, ¿qué vuelve injusto a un Estado?', options:['La pobreza','La falta de ejército','La ausencia de justicia','La herejía'], answer:2},
-  {unit:'vi', q:'Para Santo Tomás, la ley es una ordenación de la razón dirigida al…', options:['bien común','poder real','beneficio del clero','comercio'], answer:0},
-  {unit:'vi', q:'¿Qué parte del Corpus Iuris Civilis compila constituciones imperiales?', options:['Digesto','Institutas','Novelas','Código'], answer:3},
-  {unit:'vi', q:'¿Cómo se llama la ley islámica?', options:['Halajá','Sharía','Canon','Lex'], answer:1},
-  {unit:'vi', q:'¿Qué relación básica define el feudalismo?', options:['Señor–esclavo','Rey–ciudadano','Señor–vasallo','Papa–emperador'], answer:2},
-  {unit:'vi', q:'¿Qué institución guerrera-religiosa enfrentó a cristianos y turcos en Tierra Santa?', options:['Cruzadas','Reconquista','Guerras púnicas','Guerras médicas'], answer:0},
-  {unit:'vi', q:'¿Qué pueblo fundó el Imperio Carolingio?', options:['Visigodos','Francos','Lombardos','Sajones'], answer:1},
-  {unit:'vi', q:'¿Qué rey fue coronado emperador en el año 800?', options:['Carlos Martel','Pipino el Breve','Carlomagno','Luis el Piadoso'], answer:2},
-  {unit:'vi', q:'¿Qué elemento NO caracteriza al feudo medieval?', options:['Reserva señorial','Mansos campesinos','Tierras comunales','Senado urbano'], answer:3},
-  {unit:'vi', q:'¿Qué compendio canónico de Graciano antecede a las Decretales?', options:['Decretum Gratiani','Siete Partidas','Ley Sálica','Corpus Iuris'], answer:0},
-  {unit:'vi', q:'¿Qué ciudad fue capital del Imperio Bizantino?', options:['Roma','Aquisgrán','Constantinopla','Antioquía'], answer:2},
-  {unit:'vi', q:'¿Qué pueblo germano se estableció en Hispania?', options:['Francos','Visigodos','Anglos','Sajones'], answer:1},
-  {unit:'vi', q:'¿Cuál era el libro sagrado del Islam?', options:['Torá','Biblia','Corán','Vedas'], answer:2},
-  {unit:'vi', q:'¿Cómo se denomina al juez en el mundo islámico clásico?', options:['Cadí','Cónsul','Pretor','Notario'], answer:0},
-  {unit:'vi', q:'¿Qué relación expresaba el homenaje feudal?', options:['Obediencia al papa','Fidelidad del vasallo al señor','Sometimiento al emperador','Ciudadanía romana'], answer:1},
-  {unit:'vi', q:'¿Qué grupo social "rezaba" según la división tripartita medieval?', options:['Campesinos','Nobleza','Clero','Burguesía'], answer:2},
-  {unit:'vi', q:'¿Qué institución fue clave para la conservación de la cultura escrita en la Alta Edad Media?', options:['Corte real','Monasterios','Gremios','Ayuntamientos'], answer:1},
+(function() {
+  // ── BANCO DE 100 PREGUNTAS ──────────────────────────────────
+  var Q = [
+    // UNIDAD VI (20)
+    {u:'vi',q:'¿En qué región del Imperio Romano surgió el cristianismo?',o:['Galia','Palestina','Britania','Germania'],a:1},
+    {u:'vi',q:'¿Qué emperador promulgó el Edicto de Milán (313 d.C.)?',o:['Teodosio','Nerón','Constantino','Diocleciano'],a:2},
+    {u:'vi',q:'¿Qué concilio declaró al cristianismo religión oficial del Imperio?',o:['Nicea','Calcedonia','Tesalónica','Trento'],a:2},
+    {u:'vi',q:'Según San Agustín, ¿qué vuelve injusto a un Estado?',o:['La pobreza','La falta de ejército','La ausencia de justicia','La herejía'],a:2},
+    {u:'vi',q:'Para Santo Tomás, la ley es una ordenación de la razón dirigida al…',o:['bien común','poder real','beneficio del clero','comercio'],a:0},
+    {u:'vi',q:'¿Qué parte del Corpus Iuris Civilis compila constituciones imperiales?',o:['Digesto','Institutas','Novelas','Código'],a:3},
+    {u:'vi',q:'¿Cómo se llama la ley islámica?',o:['Halajá','Sharía','Canon','Lex'],a:1},
+    {u:'vi',q:'¿Qué relación básica define el feudalismo?',o:['Señor–esclavo','Rey–ciudadano','Señor–vasallo','Papa–emperador'],a:2},
+    {u:'vi',q:'¿Qué institución guerrera-religiosa enfrentó a cristianos y turcos?',o:['Cruzadas','Reconquista','Guerras púnicas','Guerras médicas'],a:0},
+    {u:'vi',q:'¿Qué pueblo fundó el Imperio Carolingio?',o:['Visigodos','Francos','Lombardos','Sajones'],a:1},
+    {u:'vi',q:'¿Qué rey fue coronado emperador en el año 800?',o:['Carlos Martel','Pipino el Breve','Carlomagno','Luis el Piadoso'],a:2},
+    {u:'vi',q:'¿Qué elemento NO caracteriza al feudo medieval?',o:['Reserva señorial','Mansos campesinos','Tierras comunales','Senado urbano'],a:3},
+    {u:'vi',q:'¿Qué compendio canónico de Graciano antecede a las Decretales?',o:['Decretum Gratiani','Siete Partidas','Ley Sálica','Corpus Iuris'],a:0},
+    {u:'vi',q:'¿Qué ciudad fue capital del Imperio Bizantino?',o:['Roma','Aquisgrán','Constantinopla','Antioquía'],a:2},
+    {u:'vi',q:'¿Qué pueblo germano se estableció en Hispania?',o:['Francos','Visigodos','Anglos','Sajones'],a:1},
+    {u:'vi',q:'¿Cuál era el libro sagrado del Islam?',o:['Torá','Biblia','Corán','Vedas'],a:2},
+    {u:'vi',q:'¿Cómo se denomina al juez en el mundo islámico clásico?',o:['Cadí','Cónsul','Pretor','Notario'],a:0},
+    {u:'vi',q:'¿Qué relación expresaba el homenaje feudal?',o:['Obediencia al papa','Fidelidad del vasallo al señor','Sometimiento al emperador','Ciudadanía romana'],a:1},
+    {u:'vi',q:'¿Qué grupo social "rezaba" según la división tripartita medieval?',o:['Campesinos','Nobleza','Clero','Burguesía'],a:2},
+    {u:'vi',q:'¿Qué institución fue clave para conservar la cultura escrita en la Alta Edad Media?',o:['Corte real','Monasterios','Gremios','Ayuntamientos'],a:1},
+    // UNIDAD VII (20)
+    {u:'vii',q:'¿En qué año fue coronado Otón I como emperador del Sacro Imperio?',o:['800','962','1215','1492'],a:1},
+    {u:'vii',q:'La Querella de las Investiduras enfrentó principalmente a…',o:['Rey y nobles','Papa y emperador','Rey y burguesía','Papa y obispos'],a:1},
+    {u:'vii',q:'¿Qué acuerdo puso fin a la Querella de las Investiduras?',o:['Edicto de Nantes','Concordato de Worms','Paz de Augsburgo','Tratado de Verdún'],a:1},
+    {u:'vii',q:'La Carta Magna fue impuesta al rey…',o:['Ricardo I','Juan Sin Tierra','Enrique VIII','Guillermo el Conquistador'],a:1},
+    {u:'vii',q:'¿Qué tipo de derecho es el Common Law inglés?',o:['Codificado','Consuetudinario','Canónico','Mercantil'],a:1},
+    {u:'vii',q:'¿Quién promulgó el Código de las Siete Partidas?',o:['Alfonso X','Carlos V','Isabel I','Felipe II'],a:0},
+    {u:'vii',q:'Los Estados Generales franceses reunían a…',o:['Solo nobleza','Solo clero','Tres órdenes','Solo burguesía'],a:2},
+    {u:'vii',q:'¿Qué universidad medieval se especializó en teología?',o:['Bolonia','París','Salamanca','Oxford'],a:1},
+    {u:'vii',q:'¿Qué universidad medieval se destacó en estudios jurídicos?',o:['París','Bolonia','Cambridge','Nápoles'],a:1},
+    {u:'vii',q:'Los glosadores comentaban principalmente…',o:['El Corpus Iuris Civilis','El Código Napoleónico','El derecho inglés','Las Siete Partidas'],a:0},
+    {u:'vii',q:'¿Qué obra canónica compiló Graciano?',o:['Decretales','Decretum Gratiani','Institutas','Digesto'],a:1},
+    {u:'vii',q:'¿Qué forma de representación surge en Inglaterra con Simón de Montfort?',o:['Senado','Cámara de los Comunes','Consejo Imperial','Tribunal Constitucional'],a:1},
+    {u:'vii',q:'La monarquía inglesa se vuelve claramente parlamentaria tras…',o:['La Carta Magna','Las Provisiones de Oxford','El Bill of Rights','El Acta de Unión'],a:2},
+    {u:'vii',q:'¿Qué estamento integraba el "tercer estado" en Francia?',o:['Nobleza','Clero','Burguesía y pueblo llano','Solo campesinado'],a:2},
+    {u:'vii',q:'La función principal de los Estados Generales era…',o:['Legislar con autonomía','Elegir rey','Asesorar y aprobar impuestos','Dictar sentencias'],a:2},
+    {u:'vii',q:'Los posglosadores se caracterizaron por…',o:['Rechazar el derecho romano','Aplicar el derecho romano a casos prácticos','Estudiar solo derecho canónico','Fundar universidades'],a:1},
+    {u:'vii',q:'¿Qué rey francés convocó los Estados Generales en 1302?',o:['Luis IX','Felipe el Hermoso','Francisco I','Luis XIV'],a:1},
+    {u:'vii',q:'El parlamento bicameral inglés se compone de…',o:['Lores y Comunes','Senado y Cámara baja','Clero y pueblo','Rey y Consejo'],a:0},
+    {u:'vii',q:'¿Qué rasgo define a las comunas urbanas medievales?',o:['Dependencia total del señor feudal','Autonomía municipal','Carácter rural','Solo poder religioso'],a:1},
+    {u:'vii',q:'El movimiento comunal contribuyó al surgimiento de…',o:['Imperios universales','Estados nacionales modernos','Ciudades-Estado griegas','Tribus germánicas'],a:1},
+    // UNIDAD VIII (20)
+    {u:'viii',q:'El Humanismo renacentista pone en el centro a…',o:['Dios','La Iglesia','El ser humano','El Estado'],a:2},
+    {u:'viii',q:'La frase "El Estado soy yo" se atribuye a…',o:['Luis XIII','Luis XIV','Richelieu','Hobbes'],a:1},
+    {u:'viii',q:'¿Qué documento inglés de 1679 protege contra detenciones arbitrarias?',o:['Petición de Derechos','Carta Magna','Habeas Corpus Act','Bill of Rights'],a:2},
+    {u:'viii',q:'El Bill of Rights de 1689 consolidó en Inglaterra…',o:['La monarquía absoluta','La monarquía parlamentaria','La república','El imperio'],a:1},
+    {u:'viii',q:'Para Hobbes, la vida en estado de naturaleza es…',o:['Ordenada y pacífica','Una sociedad justa','Guerra de todos contra todos','Un paraíso de libertad'],a:2},
+    {u:'viii',q:'Según Hobbes, el soberano del Leviatán debe ser…',o:['Limitado por la ley','Absoluto e indivisible','Elegido anualmente','Colegial'],a:1},
+    {u:'viii',q:'Locke es considerado padre del…',o:['Absolutismo','Liberalismo político','Socialismo','Anarquismo'],a:1},
+    {u:'viii',q:'Montesquieu propuso la separación de poderes en…',o:['Legislativo y ejecutivo','Legislativo, ejecutivo y judicial','Judicial y militar','Civil y eclesiástico'],a:1},
+    {u:'viii',q:'Para Rousseau, la soberanía reside en…',o:['El rey','El parlamento','El pueblo (voluntad general)','La nobleza'],a:2},
+    {u:'viii',q:'La Enciclopedia fue dirigida principalmente por…',o:['Locke y Hume','Diderot y D\'Alembert','Rousseau y Voltaire','Kant y Hegel'],a:1},
+    {u:'viii',q:'La Ilustración se caracteriza fundamentalmente por la confianza en…',o:['La tradición','La fe revelada','La razón humana','La fuerza militar'],a:2},
+    {u:'viii',q:'Kant concibe el derecho como condiciones para la…',o:['Obediencia al soberano','Igualdad material','Coexistencia de libertades','Riqueza pública'],a:2},
+    {u:'viii',q:'El absolutismo monárquico se legitima teóricamente por…',o:['La soberanía popular','El derecho divino de los reyes','El contrato social','La separación de poderes'],a:1},
+    {u:'viii',q:'¿Cuál de estos NO es un filósofo ilustrado francés?',o:['Montesquieu','Voltaire','Rousseau','Calvino'],a:3},
+    {u:'viii',q:'La Petición de Derechos (1628) se firma bajo el rey…',o:['Carlos I','Carlos II','Enrique VIII','Juan Sin Tierra'],a:0},
+    {u:'viii',q:'El Leviatán de Hobbes fue publicado en…',o:['1551','1651','1751','1851'],a:1},
+    {u:'viii',q:'El despotismo ilustrado se resume en la frase…',o:['"El pueblo manda"','"Todo para el pueblo pero sin el pueblo"','"La ley es la voluntad general"','"El Estado soy yo"'],a:1},
+    {u:'viii',q:'La Enciclopedia francesa buscaba principalmente…',o:['Apoyar al absolutismo','Difundir el saber y criticar fanatismos','Defender la Inquisición','Conservar privilegios feudales'],a:1},
+    {u:'viii',q:'Para Kant, gobernantes y gobernados deben estar sometidos a…',o:['La costumbre','La ley universal','La Iglesia','La voluntad del monarca'],a:1},
+    {u:'viii',q:'¿Qué movimiento cultural se denomina "Siglo de las Luces"?',o:['Renacimiento','Ilustración','Barroco','Romanticismo'],a:1},
+    // UNIDAD IX (20)
+    {u:'ix',q:'¿En qué año se proclamó la Declaración de Independencia de EE. UU.?',o:['1776','1789','1810','1848'],a:0},
+    {u:'ix',q:'La Constitución estadounidense de 1787 establece un sistema…',o:['Unitario y parlamentario','Federal y presidencialista','Monárquico constitucional','Teocrático'],a:1},
+    {u:'ix',q:'"No taxation without representation" fue consigna de…',o:['La Revolución Francesa','La Revolución Americana','La Revolución Industrial','La Reforma protestante'],a:1},
+    {u:'ix',q:'La toma de la Bastilla ocurrió en…',o:['1763','1776','1789','1799'],a:2},
+    {u:'ix',q:'La Declaración de los Derechos del Hombre afirma que la soberanía reside en…',o:['El monarca','La nobleza','La nación','El ejército'],a:2},
+    {u:'ix',q:'¿Qué código civil napoleónico se promulgó en 1804?',o:['Código Justinianeo','Código Civil francés','Siete Partidas','Common Law'],a:1},
+    {u:'ix',q:'El Congreso de Viena (1814–1815) buscó principalmente…',o:['Extender los principios revolucionarios','Restaurar el Antiguo Régimen','Implantar repúblicas liberales','Abolir todas las monarquías'],a:1},
+    {u:'ix',q:'La Santa Alianza (1815) fue impulsada por el zar…',o:['Nicolás II','Pedro el Grande','Alejandro I','Iván IV'],a:2},
+    {u:'ix',q:'El liberalismo político defiende…',o:['El absolutismo monárquico','La economía planificada','Las constituciones y derechos individuales','La supremacía feudal'],a:2},
+    {u:'ix',q:'El nacionalismo sostiene el derecho de…',o:['Cada dinastía a conservar su trono','Cada nación a tener su propio Estado','Cada rey a nombrar obispos','Cada iglesia a gobernar un territorio'],a:1},
+    {u:'ix',q:'La Revolución Industrial se inició en…',o:['Francia','Estados Unidos','Alemania','Gran Bretaña'],a:3},
+    {u:'ix',q:'La clase obrera industrial recibe el nombre de…',o:['Burguesía','Proletariado','Aristocracia','Clero'],a:1},
+    {u:'ix',q:'¿Qué documento establece la primera constitución escrita de Francia?',o:['El Código Civil','La Constitución de 1791','El Acta de Unión','La Paz de París'],a:1},
+    {u:'ix',q:'¿Cuál fue una consecuencia directa de la Revolución Industrial?',o:['Refuerzo de la servidumbre feudal','Aparición del movimiento obrero organizado','Disolución de los Estados-nación','Fin del capitalismo'],a:1},
+    {u:'ix',q:'¿Qué independencia influyó ideológicamente en la Revolución Francesa?',o:['La de México','La de EE. UU.','La de Brasil','La de Haití'],a:1},
+    {u:'ix',q:'El Código Napoleónico se inspira principalmente en…',o:['El derecho germánico','El derecho canónico','El derecho romano y costumbres francesas','El Common Law inglés'],a:2},
+    {u:'ix',q:'Los movimientos de 1820, 1830 y 1848 buscaban…',o:['Más absolutismo monárquico','Teocracia','Reformas liberales y autonomía nacional','Vuelta al feudalismo'],a:2},
+    {u:'ix',q:'El constitucionalismo moderno implica…',o:['Gobiernos sin limitaciones legales','Constituciones escritas que limitan el poder del Estado','Solo la costumbre como fuente del derecho','Supremacía del poder militar'],a:1},
+    {u:'ix',q:'La codificación del derecho favorece…',o:['La inseguridad jurídica','La igualdad formal ante la ley','Los privilegios estamentales','La fragmentación normativa'],a:1},
+    {u:'ix',q:'¿Cuál de estos es un principio del Código Napoleónico?',o:['Desigualdad ante la ley','Privilegio de la nobleza','Igualdad civil y laicidad','Supremacía de la Iglesia'],a:2},
+    // UNIDAD X (20)
+    {u:'x',q:'¿En qué año comenzó la Primera Guerra Mundial?',o:['1912','1914','1918','1920'],a:1},
+    {u:'x',q:'El Tratado de Versalles se firmó al concluir…',o:['La Revolución Francesa','La Primera Guerra Mundial','La Segunda Guerra Mundial','La Guerra Fría'],a:1},
+    {u:'x',q:'¿Quién propuso los Catorce Puntos como base para la paz en 1918?',o:['Lloyd George','Clemenceau','Woodrow Wilson','Churchill'],a:2},
+    {u:'x',q:'La Segunda Guerra Mundial se inició con la invasión alemana de…',o:['Francia','Polonia','Rusia','Italia'],a:1},
+    {u:'x',q:'La Guerra Fría enfrentó los bloques liderados por…',o:['EE. UU. y Japón','URSS y China','EE. UU. y URSS','Francia y Alemania'],a:2},
+    {u:'x',q:'Glasnost (política de Gorbachov) significa…',o:['Apertura / transparencia','Reforma económica','Guerra total','Neutralidad'],a:0},
+    {u:'x',q:'Perestroika (política de Gorbachov) significa…',o:['Rearme militar','Reestructuración','Represión política','Revolución'],a:1},
+    {u:'x',q:'La ONU fue creada en…',o:['1919','1939','1945','1955'],a:2},
+    {u:'x',q:'La Declaración Universal de los Derechos Humanos fue aprobada en…',o:['1918','1945','1948','1966'],a:2},
+    {u:'x',q:'La OEA es una organización de ámbito…',o:['Africano','Asiático','Europeo','Americano'],a:3},
+    {u:'x',q:'La Corte Interamericana de Derechos Humanos aplica principalmente…',o:['La Convención Americana sobre DDHH','La Carta de la ONU','El Tratado de Versalles','El Código Civil'],a:0},
+    {u:'x',q:'La globalización se asocia sobre todo a…',o:['Aislamiento nacional','Interdependencia económica mundial','Fin del comercio internacional','Autarquía estatal'],a:1},
+    {u:'x',q:'¿Qué tratado consolidó la Unión Europea?',o:['Liga de Naciones','Tratado de Maastricht','Tratado OTAN','Tratado de Lisboa'],a:1},
+    {u:'x',q:'¿En qué año se creó el Mercosur?',o:['1981','1991','2001','2011'],a:1},
+    {u:'x',q:'Los miembros fundadores del Mercosur fueron…',o:['Argentina, Brasil, Paraguay y Uruguay','España y Portugal','EE. UU. y Canadá','Chile y Perú'],a:0},
+    {u:'x',q:'La UE garantiza la libre circulación de…',o:['Solo mercancías','Solo capitales','Bienes, servicios, personas y capitales','Solo personas'],a:2},
+    {u:'x',q:'El principal objetivo de la ONU es…',o:['Expandir imperios','Mantener la paz y la seguridad internacionales','Organizar mercados globales','Dirigir iglesias nacionales'],a:1},
+    {u:'x',q:'La DUDH proclama que los derechos humanos son…',o:['Universales e inalienables','Solo para ciudadanos','Solo derechos políticos','Exclusivos de países ricos'],a:0},
+    {u:'x',q:'La Guerra Fría concluyó con la disolución de la URSS en…',o:['1981','1991','2001','2011'],a:1},
+    {u:'x',q:'La integración regional busca principalmente…',o:['Aumentar barreras aduaneras','Eliminar trabas y coordinar políticas comunes','Suprimir la soberanía estatal','Crear conflictos bélicos'],a:1},
+  ];
 
-  // ── UNIDAD VII ──
-  {unit:'vii', q:'¿En qué año fue coronado Otón I como emperador del Sacro Imperio?', options:['800','962','1215','1492'], answer:1},
-  {unit:'vii', q:'La Querella de las Investiduras enfrentó principalmente a…', options:['Rey y nobles','Papa y emperador','Rey y burguesía','Papa y obispos'], answer:1},
-  {unit:'vii', q:'¿Qué acuerdo puso fin a la Querella de las Investiduras?', options:['Edicto de Nantes','Concordato de Worms','Paz de Augsburgo','Tratado de Verdún'], answer:1},
-  {unit:'vii', q:'La Carta Magna fue impuesta al rey…', options:['Ricardo I','Juan Sin Tierra','Enrique VIII','Guillermo el Conquistador'], answer:1},
-  {unit:'vii', q:'¿Qué tipo de derecho es el Common Law inglés?', options:['Codificado','Consuetudinario','Canónico','Mercantil'], answer:1},
-  {unit:'vii', q:'¿Quién promulgó el Código de las Siete Partidas?', options:['Alfonso X','Carlos V','Isabel I','Felipe II'], answer:0},
-  {unit:'vii', q:'Los Estados Generales franceses reunían a…', options:['Solo nobleza','Solo clero','Tres órdenes (clero, nobleza y tercer estado)','Solo burguesía'], answer:2},
-  {unit:'vii', q:'¿Qué universidad medieval se especializó en teología?', options:['Bolonia','París','Salamanca','Oxford'], answer:1},
-  {unit:'vii', q:'¿Qué universidad medieval se destacó en estudios jurídicos?', options:['París','Bolonia','Cambridge','Nápoles'], answer:1},
-  {unit:'vii', q:'Los glosadores comentaban principalmente…', options:['El Corpus Iuris Civilis','El Código Napoleónico','El derecho inglés','Las Siete Partidas'], answer:0},
-  {unit:'vii', q:'¿Qué obra canónica compiló Graciano?', options:['Decretales','Decretum Gratiani','Institutas','Digesto'], answer:1},
-  {unit:'vii', q:'¿Qué forma de representación surge en Inglaterra con Simón de Montfort?', options:['Senado','Cámara de los Comunes','Consejo Imperial','Tribunal Constitucional'], answer:1},
-  {unit:'vii', q:'La monarquía inglesa se vuelve claramente parlamentaria tras…', options:['La Carta Magna','Las Provisiones de Oxford','El Bill of Rights','El Acta de Unión'], answer:2},
-  {unit:'vii', q:'¿Qué estamento integraba el "tercer estado" en Francia?', options:['Nobleza','Clero','Burguesía y pueblo llano','Solo campesinado'], answer:2},
-  {unit:'vii', q:'La función principal de los Estados Generales era…', options:['Legislar con autonomía','Elegir rey','Asesorar y aprobar impuestos','Dictar sentencias'], answer:2},
-  {unit:'vii', q:'Los posglosadores se caracterizaron por…', options:['Rechazar el derecho romano','Aplicar el derecho romano a casos prácticos','Estudiar solo derecho canónico','Fundar universidades'], answer:1},
-  {unit:'vii', q:'¿Qué rey francés convocó los Estados Generales en 1302?', options:['Luis IX','Felipe el Hermoso','Francisco I','Luis XIV'], answer:1},
-  {unit:'vii', q:'El parlamento bicameral inglés se compone de…', options:['Lores y Comunes','Senado y Cámara baja','Clero y pueblo','Rey y Consejo'], answer:0},
-  {unit:'vii', q:'¿Qué rasgo define a las comunas urbanas medievales?', options:['Dependencia total del señor feudal','Autonomía municipal','Carácter rural','Solo poder religioso'], answer:1},
-  {unit:'vii', q:'El movimiento comunal contribuyó al surgimiento de…', options:['Imperios universales','Estados nacionales modernos','Ciudades-Estado griegas','Tribus germánicas'], answer:1},
+  var currentExam = null;
+  var LETTERS = ['A','B','C','D'];
 
-  // ── UNIDAD VIII ──
-  {unit:'viii', q:'El Humanismo renacentista pone en el centro de su reflexión a…', options:['Dios','La Iglesia','El ser humano','El Estado'], answer:2},
-  {unit:'viii', q:'La frase "El Estado soy yo" se atribuye a…', options:['Luis XIII','Luis XIV','Richelieu','Hobbes'], answer:1},
-  {unit:'viii', q:'¿Qué documento inglés de 1679 protege contra detenciones arbitrarias?', options:['Petición de Derechos','Carta Magna','Habeas Corpus Act','Bill of Rights'], answer:2},
-  {unit:'viii', q:'El Bill of Rights de 1689 consolidó en Inglaterra…', options:['La monarquía absoluta','La monarquía parlamentaria','La república','El imperio'], answer:1},
-  {unit:'viii', q:'Para Hobbes, la vida en estado de naturaleza es…', options:['Ordenada y pacífica','Una sociedad justa','Guerra de todos contra todos','Un paraíso de libertad'], answer:2},
-  {unit:'viii', q:'Según Hobbes, el soberano del Leviatán debe ser…', options:['Limitado por la ley','Absoluto e indivisible','Elegido anualmente','Colegial'], answer:1},
-  {unit:'viii', q:'Locke es considerado padre del…', options:['Absolutismo','Liberalismo político','Socialismo','Anarquismo'], answer:1},
-  {unit:'viii', q:'Montesquieu propuso la separación de poderes en…', options:['Legislativo y ejecutivo','Legislativo, ejecutivo y judicial','Judicial y militar','Civil y eclesiástico'], answer:1},
-  {unit:'viii', q:'Para Rousseau, la soberanía reside en…', options:['El rey','El parlamento','El pueblo (voluntad general)','La nobleza'], answer:2},
-  {unit:'viii', q:'La Enciclopedia fue dirigida principalmente por…', options:['Locke y Hume','Diderot y D'Alembert','Rousseau y Voltaire','Kant y Hegel'], answer:1},
-  {unit:'viii', q:'La Ilustración se caracteriza fundamentalmente por la confianza en…', options:['La tradición','La fe revelada','La razón humana','La fuerza militar'], answer:2},
-  {unit:'viii', q:'Kant concibe el derecho como condiciones para la…', options:['Obediencia al soberano','Igualdad material','Coexistencia de libertades','Riqueza pública'], answer:2},
-  {unit:'viii', q:'El absolutismo monárquico se legitima teóricamente por…', options:['La soberanía popular','El derecho divino de los reyes','El contrato social','La separación de poderes'], answer:1},
-  {unit:'viii', q:'¿Cuál de estos NO es un filósofo ilustrado francés?', options:['Montesquieu','Voltaire','Rousseau','Calvino'], answer:3},
-  {unit:'viii', q:'La Petición de Derechos (Petition of Right) se firma bajo el rey…', options:['Carlos I','Carlos II','Enrique VIII','Juan Sin Tierra'], answer:0},
-  {unit:'viii', q:'El Leviatán de Hobbes fue publicado en…', options:['1551','1651','1751','1851'], answer:1},
-  {unit:'viii', q:'El despotismo ilustrado se resume en la frase…', options:['"El pueblo manda"','"Todo para el pueblo pero sin el pueblo"','"La ley es la voluntad general"','"El Estado soy yo"'], answer:1},
-  {unit:'viii', q:'La Enciclopedia francesa buscaba principalmente…', options:['Apoyar al absolutismo','Difundir el saber y criticar fanatismos','Defender la Inquisición','Conservar privilegios feudales'], answer:1},
-  {unit:'viii', q:'Para Kant, gobernantes y gobernados deben estar sometidos a…', options:['La costumbre','La ley universal','La Iglesia','La voluntad del monarca'], answer:1},
-  {unit:'viii', q:'¿Qué movimiento cultural se denomina "Siglo de las Luces"?', options:['Renacimiento','Ilustración','Barroco','Romanticismo'], answer:1},
+  function shuffle(arr) { return arr.slice().sort(function(){ return Math.random()-0.5; }); }
 
-  // ── UNIDAD IX ──
-  {unit:'ix', q:'¿En qué año se proclamó la Declaración de Independencia de EE. UU.?', options:['1776','1789','1810','1848'], answer:0},
-  {unit:'ix', q:'La Constitución estadounidense de 1787 establece un sistema…', options:['Unitario y parlamentario','Federal y presidencialista','Monárquico constitucional','Teocrático'], answer:1},
-  {unit:'ix', q:'"No taxation without representation" fue consigna de…', options:['La Revolución Francesa','La Revolución Americana','La Revolución Industrial','La Reforma protestante'], answer:1},
-  {unit:'ix', q:'La toma de la Bastilla ocurrió en…', options:['1763','1776','1789','1799'], answer:2},
-  {unit:'ix', q:'La Declaración de los Derechos del Hombre y el Ciudadano afirma que la soberanía reside en…', options:['El monarca','La nobleza','La nación','El ejército'], answer:2},
-  {unit:'ix', q:'¿Qué código civil napoleónico se promulgó en 1804?', options:['Código Justinianeo','Código Civil francés','Siete Partidas','Common Law'], answer:1},
-  {unit:'ix', q:'El Congreso de Viena (1814–1815) buscó principalmente…', options:['Extender los principios revolucionarios','Restaurar el Antiguo Régimen','Implantar repúblicas liberales','Abolir todas las monarquías'], answer:1},
-  {unit:'ix', q:'La Santa Alianza (1815) fue impulsada por el zar…', options:['Nicolás II','Pedro el Grande','Alejandro I','Iván IV'], answer:2},
-  {unit:'ix', q:'El liberalismo político defiende, entre otros principios…', options:['El absolutismo monárquico','La economía planificada','Las constituciones y los derechos individuales','La supremacía feudal'], answer:2},
-  {unit:'ix', q:'El nacionalismo sostiene el derecho de…', options:['Cada dinastía a conservar su trono','Cada nación a tener su propio Estado','Cada rey a nombrar obispos','Cada iglesia a gobernar un territorio'], answer:1},
-  {unit:'ix', q:'La Revolución Industrial se inició en…', options:['Francia','Estados Unidos','Alemania','Gran Bretaña'], answer:3},
-  {unit:'ix', q:'La clase obrera industrial recibe el nombre de…', options:['Burguesía','Proletariado','Aristocracia','Clero'], answer:1},
-  {unit:'ix', q:'¿Qué documento establece la primera constitución escrita de Francia en 1791?', options:['El Código Civil','La Constitución de 1791','El Acta de Unión','La Paz de París'], answer:1},
-  {unit:'ix', q:'¿Cuál fue una consecuencia política directa de la Revolución Industrial?', options:['Refuerzo de la servidumbre feudal','Aparición del movimiento obrero organizado','Disolución de los Estados-nación','Fin del capitalismo'], answer:1},
-  {unit:'ix', q:'¿Qué independencia influyó ideológicamente en la Revolución Francesa?', options:['La de México','La de EE. UU.','La de Brasil','La de Haití'], answer:1},
-  {unit:'ix', q:'El Código Napoleónico se inspira principalmente en…', options:['El derecho germánico','El derecho canónico','El derecho romano y las costumbres francesas','El Common Law inglés'], answer:2},
-  {unit:'ix', q:'Los movimientos liberales y nacionalistas de 1820, 1830 y 1848 buscaban…', options:['Más absolutismo monárquico','Teocracia','Reformas liberales y autonomía nacional','Vuelta al feudalismo'], answer:2},
-  {unit:'ix', q:'El constitucionalismo moderno implica…', options:['Gobiernos sin limitaciones legales','Constituciones escritas que limitan el poder del Estado','Solo la costumbre como fuente del derecho','Supremacía del poder militar'], answer:1},
-  {unit:'ix', q:'La codificación del derecho favorece…', options:['La inseguridad jurídica','La igualdad formal ante la ley','Los privilegios estamentales','La fragmentación normativa'], answer:1},
-  {unit:'ix', q:'¿Cuál de estos es un principio del Código Napoleónico?', options:['Desigualdad ante la ley','Privilegio de la nobleza','Igualdad civil y laicidad','Supremacía de la Iglesia'], answer:2},
+  function openModal() {
+    var ov = document.getElementById('exam-overlay');
+    ov.style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('exam-overlay').style.display = 'none';
+  }
+  function closeExamPanel() {
+    document.getElementById('exam-panel').style.display = 'none';
+    currentExam = null;
+  }
 
-  // ── UNIDAD X ──
-  {unit:'x', q:'¿En qué año comenzó la Primera Guerra Mundial?', options:['1912','1914','1918','1920'], answer:1},
-  {unit:'x', q:'El Tratado de Versalles se firmó al concluir…', options:['La Revolución Francesa','La Primera Guerra Mundial','La Segunda Guerra Mundial','La Guerra Fría'], answer:1},
-  {unit:'x', q:'¿Quién propuso los Catorce Puntos como base para la paz en 1918?', options:['Lloyd George','Clemenceau','Woodrow Wilson','Churchill'], answer:2},
-  {unit:'x', q:'La Segunda Guerra Mundial se inició con la invasión alemana de…', options:['Francia','Polonia','Rusia','Italia'], answer:1},
-  {unit:'x', q:'La Guerra Fría enfrentó los bloques liderados por…', options:['EE. UU. y Japón','URSS y China','EE. UU. y URSS','Francia y Alemania'], answer:2},
-  {unit:'x', q:'Glasnost (política de Gorbachov) significa…', options:['Apertura / transparencia','Reforma económica','Guerra total','Neutralidad'], answer:0},
-  {unit:'x', q:'Perestroika (política de Gorbachov) significa…', options:['Rearme militar','Reestructuración','Represión política','Revolución'], answer:1},
-  {unit:'x', q:'La ONU fue creada en…', options:['1919','1939','1945','1955'], answer:2},
-  {unit:'x', q:'La Declaración Universal de los Derechos Humanos fue aprobada en…', options:['1918','1945','1948','1966'], answer:2},
-  {unit:'x', q:'La OEA es una organización de ámbito…', options:['Africano','Asiático','Europeo','Americano'], answer:3},
-  {unit:'x', q:'La Corte Interamericana de Derechos Humanos aplica principalmente…', options:['La Convención Americana sobre DDHH','La Carta de la ONU','El Tratado de Versalles','El Código Civil'], answer:0},
-  {unit:'x', q:'La globalización se asocia sobre todo a…', options:['Aislamiento nacional','Interdependencia económica mundial','Fin del comercio internacional','Autarquía estatal'], answer:1},
-  {unit:'x', q:'¿Qué tratado consolidó la Unión Europea?', options:['Liga de Naciones','Tratado de Maastricht','Tratado OTAN','Mercosur'], answer:1},
-  {unit:'x', q:'¿En qué año se creó el Mercosur?', options:['1981','1991','2001','2011'], answer:1},
-  {unit:'x', q:'Los miembros fundadores del Mercosur fueron…', options:['Argentina, Brasil, Paraguay y Uruguay','España y Portugal','EE. UU. y Canadá','Chile y Perú'], answer:0},
-  {unit:'x', q:'La UE garantiza la libre circulación de…', options:['Solo mercancías','Solo capitales','Bienes, servicios, personas y capitales','Solo personas'], answer:2},
-  {unit:'x', q:'El principal objetivo de la ONU es…', options:['Expandir imperios','Mantener la paz y la seguridad internacionales','Organizar mercados globales','Dirigir iglesias nacionales'], answer:1},
-  {unit:'x', q:'La DUDH proclama que los derechos humanos son…', options:['Universales e inalienables','Solo para ciudadanos','Solo derechos políticos','Exclusivos de países ricos'], answer:0},
-  {unit:'x', q:'La Guerra Fría concluyó con la disolución de la URSS en…', options:['1981','1991','2001','2011'], answer:1},
-  {unit:'x', q:'La integración regional busca principalmente…', options:['Aumentar barreras aduaneras','Eliminar trabas y coordinar políticas comunes','Suprimir la soberanía estatal','Crear conflictos bélicos'], answer:1},
-];
+  function startExam(n) {
+    closeModal();
+    currentExam = shuffle(Q).slice(0, n);
+    var inner = document.getElementById('exam-panel-inner');
+    var tiempos = {10:'~10 min', 25:'~25 min', 50:'~50 min'};
+    var icons = {10:'🔥', 25:'⚡', 50:'🏆'};
 
-let currentExam = null;
+    var html = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px;">'
+      + '<div>'
+      + '<h2 style="font-family:var(--display);color:var(--gold-light,#e8c87a);font-size:1.4rem;margin-bottom:4px;">'
+      + icons[n]+' Desafío '+({10:1,25:2,50:3}[n])+' — '+n+' preguntas</h2>'
+      + '<p style="color:#9ca3af;font-size:0.8rem;">Unidades VI–X · '+tiempos[n]+'</p>'
+      + '</div>'
+      + '<button id="ep-close" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#9ca3af;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:0.8rem;">✕ Cerrar</button>'
+      + '</div>'
+      + '<div id="ep-result" style="display:none;margin-bottom:20px;padding:14px 18px;border-radius:10px;font-size:0.9rem;font-weight:600;border:1px solid;"></div>'
+      + '<div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;">'
+      + '<button id="ep-grade" style="background:linear-gradient(135deg,#16a34a,#15803d);border:none;border-radius:999px;padding:9px 20px;color:#fff;cursor:pointer;font-weight:700;font-size:0.83rem;box-shadow:0 4px 14px rgba(22,163,74,0.4);">✅ Corregir examen</button>'
+      + '<button id="ep-retry" style="background:linear-gradient(135deg,#b45309,#92400e);border:none;border-radius:999px;padding:9px 20px;color:#fff;cursor:pointer;font-weight:700;font-size:0.83rem;box-shadow:0 4px 14px rgba(180,83,9,0.4);">🔄 Nuevo examen</button>'
+      + '</div>';
 
-function getRandomQuestions(total) {
-  return questionBank.slice().sort(() => Math.random() - 0.5).slice(0, total);
-}
-
-function renderExam(total) {
-  currentExam = getRandomQuestions(total);
-  const panel = document.getElementById('contentPanel');
-  if (!panel) return;
-
-  const letters = ['A','B','C','D'];
-  const tiempos = {10:'10–15 min', 25:'25–35 min', 50:'45–60 min'};
-
-  let html = `
-    <div style="margin-bottom:20px;">
-      <h2 style="font-size:1.4rem;margin-bottom:4px;">🎯 Modo Examen — ${total} preguntas</h2>
-      <p style="color:#9ca3af;font-size:0.82rem;margin-bottom:12px;">
-        Preguntas aleatorias de las unidades VI a X · Tiempo recomendado: ${tiempos[total]}
-      </p>
-      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-        <button id="grade-exam-btn" style="
-          border:none;border-radius:999px;padding:8px 18px;font-size:0.82rem;cursor:pointer;
-          background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-weight:700;
-          box-shadow:0 6px 20px rgba(34,197,94,0.4);
-        ">✅ Corregir examen</button>
-        <button id="retry-exam-btn" style="
-          border:none;border-radius:999px;padding:8px 18px;font-size:0.82rem;cursor:pointer;
-          background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;font-weight:700;
-          box-shadow:0 6px 20px rgba(249,115,22,0.4);
-        ">🔄 Nuevo examen</button>
-      </div>
-      <div id="exam-result" style="
-        margin-top:12px;padding:12px 16px;border-radius:10px;
-        background:rgba(255,255,255,0.05);display:none;
-        font-size:0.9rem;font-weight:600;color:#f8fafc;
-        border:1px solid rgba(255,255,255,0.12);
-      "></div>
-    </div>
-    <div id="exam-questions">
-  `;
-
-  currentExam.forEach((q, idx) => {
-    html += `<div class="qa-block" data-qindex="${idx}" style="margin-bottom:18px;padding:14px 16px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">`;
-    html += `<p style="margin-bottom:8px;font-weight:600;line-height:1.45;"><span style="color:#f97316;">${idx+1}.</span> ${q.q}</p>`;
-    html += `<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;">`;
-    q.options.forEach((opt, i) => {
-      html += `
-        <li data-optindex="${i}" style="border-radius:7px;overflow:hidden;">
-          <label style="display:flex;align-items:center;gap:8px;padding:7px 10px;cursor:pointer;border-radius:7px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);transition:background 0.15s;">
-            <input type="radio" name="q${idx}" data-qindex="${idx}" data-optindex="${i}" style="accent-color:#f97316;cursor:pointer;"/>
-            <span style="font-size:0.85rem;"><strong style="color:#f97316;">${letters[i]}.</strong> ${opt}</span>
-          </label>
-        </li>`;
+    currentExam.forEach(function(q, idx) {
+      html += '<div class="ep-q" data-idx="'+idx+'" style="margin-bottom:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(212,168,67,0.12);border-radius:10px;padding:16px;">';
+      html += '<p style="font-weight:600;margin-bottom:10px;line-height:1.5;font-size:0.9rem;"><span style="color:var(--gold-light,#e8c87a);font-weight:700;">'+(idx+1)+'.</span> '+q.q+'</p>';
+      html += '<div style="display:flex;flex-direction:column;gap:6px;">';
+      q.o.forEach(function(opt, i) {
+        html += '<label class="ep-opt" data-oi="'+i+'" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:background 0.15s;">'
+          + '<input type="radio" name="eq'+idx+'" data-qi="'+idx+'" data-oi="'+i+'" style="accent-color:var(--gold,#d4a843);cursor:pointer;"/>'
+          + '<span style="font-size:0.85rem;"><strong style="color:var(--gold-light,#e8c87a);">'+LETTERS[i]+'.</strong> '+opt+'</span>'
+          + '</label>';
+      });
+      html += '</div></div>';
     });
-    html += `</ul></div>`;
-  });
 
-  html += `</div>`;
-  panel.innerHTML = html;
+    inner.innerHTML = html;
+    var panel = document.getElementById('exam-panel');
+    panel.style.display = 'block';
+    panel.scrollTop = 0;
 
-  document.getElementById('grade-exam-btn').addEventListener('click', gradeExam);
-  document.getElementById('retry-exam-btn').addEventListener('click', () => {
-    const choice = prompt('Nuevo examen. Escribí 10, 25 o 50:');
-    const n = parseInt(choice, 10);
-    if (![10,25,50].includes(n)) { alert('Valor no válido. Elegí 10, 25 o 50.'); return; }
-    renderExam(n);
-  });
-}
+    document.getElementById('ep-close').addEventListener('click', closeExamPanel);
+    document.getElementById('ep-grade').addEventListener('click', gradeExam);
+    document.getElementById('ep-retry').addEventListener('click', function() {
+      closeExamPanel();
+      openModal();
+    });
+  }
 
-function gradeExam() {
-  if (!currentExam) return;
-  let correct = 0, answered = 0;
-  const letters = ['A','B','C','D'];
-
-  currentExam.forEach((q, idx) => {
-    const selected = document.querySelector(`input[name="q${idx}"]:checked`);
-    const lis = document.querySelectorAll(`.qa-block[data-qindex="${idx}"] li`);
-
-    // marcar correcta en verde siempre
-    lis[q.answer].style.background = 'rgba(34,197,94,0.18)';
-    lis[q.answer].style.border = '1px solid rgba(34,197,94,0.5)';
-    lis[q.answer].querySelector('label').style.background = 'transparent';
-    lis[q.answer].querySelector('strong').style.color = '#4ade80';
-
-    if (selected) {
-      answered++;
-      const selIdx = parseInt(selected.dataset.optindex, 10);
-      if (selIdx === q.answer) {
-        correct++;
-      } else {
-        lis[selIdx].style.background = 'rgba(239,68,68,0.18)';
-        lis[selIdx].style.border = '1px solid rgba(239,68,68,0.5)';
-        lis[selIdx].querySelector('strong').style.color = '#f87171';
+  function gradeExam() {
+    if (!currentExam) return;
+    var correct = 0, answered = 0;
+    currentExam.forEach(function(q, idx) {
+      var sel = document.querySelector('input[name="eq'+idx+'"]:checked');
+      var opts = document.querySelectorAll('.ep-q[data-idx="'+idx+'"] .ep-opt');
+      // marcar correcta verde
+      opts[q.a].style.background = 'rgba(34,197,94,0.18)';
+      opts[q.a].style.borderColor = 'rgba(34,197,94,0.5)';
+      opts[q.a].querySelector('strong').style.color = '#4ade80';
+      if (sel) {
+        answered++;
+        var oi = parseInt(sel.dataset.oi, 10);
+        if (oi === q.a) { correct++; }
+        else {
+          opts[oi].style.background = 'rgba(239,68,68,0.18)';
+          opts[oi].style.borderColor = 'rgba(239,68,68,0.5)';
+          opts[oi].querySelector('strong').style.color = '#f87171';
+        }
       }
-    }
-    // bloquear inputs
-    document.querySelectorAll(`input[name="q${idx}"]`).forEach(inp => inp.disabled = true);
+      document.querySelectorAll('input[name="eq'+idx+'"]').forEach(function(inp){ inp.disabled=true; });
+    });
+    var pct = Math.round(correct/currentExam.length*100);
+    var nota = pct>=90?'🏆 ¡Excelente!':pct>=70?'👍 Muy bien':pct>=50?'📚 Regular':'❌ A repasar';
+    var res = document.getElementById('ep-result');
+    res.style.display = 'block';
+    res.innerHTML = nota+' &nbsp;·&nbsp; Correctas: <strong>'+correct+'/'+currentExam.length+'</strong> &nbsp;·&nbsp; Porcentaje: <strong>'+pct+'%</strong> &nbsp;·&nbsp; Respondidas: '+answered+'/'+currentExam.length;
+    res.style.background = pct>=70?'rgba(34,197,94,0.1)':'rgba(239,68,68,0.1)';
+    res.style.borderColor = pct>=70?'rgba(34,197,94,0.4)':'rgba(239,68,68,0.4)';
+    res.style.color = '#f8fafc';
+    document.getElementById('ep-grade').disabled = true;
+    document.getElementById('ep-grade').style.opacity = '0.45';
+    res.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // ── LISTENERS ──────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('exam-mode-btn').addEventListener('click', openModal);
+    document.getElementById('exam-modal-close').addEventListener('click', closeModal);
+    document.getElementById('exam-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    document.querySelectorAll('.challenge-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        startExam(parseInt(this.dataset.n, 10));
+      });
+      btn.addEventListener('mouseenter', function() {
+        this.style.background = 'linear-gradient(135deg,#2e1a04,#4a2808)';
+        this.style.borderColor = 'rgba(212,168,67,0.6)';
+      });
+      btn.addEventListener('mouseleave', function() {
+        this.style.background = 'linear-gradient(135deg,#1a0e02,#2e1a04)';
+        this.style.borderColor = 'rgba(212,168,67,0.3)';
+      });
+    });
   });
 
-  const pct = Math.round((correct / currentExam.length) * 100);
-  const nota = pct >= 90 ? '🏆 ¡Excelente!' : pct >= 70 ? '👍 Muy bien' : pct >= 50 ? '📚 Regular' : '❌ A repasar';
-  const result = document.getElementById('exam-result');
-  result.style.display = 'block';
-  result.innerHTML = `${nota} &nbsp;|&nbsp; Correctas: <strong>${correct}/${currentExam.length}</strong> &nbsp;|&nbsp; Porcentaje: <strong>${pct}%</strong> &nbsp;|&nbsp; Respondidas: ${answered}/${currentExam.length}`;
-  result.style.background = pct >= 70 ? 'rgba(34,197,94,0.12)' : 'rgba(239,68,68,0.12)';
-  result.style.borderColor = pct >= 70 ? 'rgba(34,197,94,0.35)' : 'rgba(239,68,68,0.35)';
-  document.getElementById('grade-exam-btn').disabled = true;
-  document.getElementById('grade-exam-btn').style.opacity = '0.5';
-  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-document.getElementById('exam-mode-btn').addEventListener('click', () => {
-  const choice = prompt('Modo examen\n\n● Desafío 1 → escribí 10\n● Desafío 2 → escribí 25\n● Desafío 3 → escribí 50');
-  const n = parseInt(choice, 10);
-  if (![10,25,50].includes(n)) { alert('Valor no válido. Elegí 10, 25 o 50.'); return; }
-  renderExam(n);
-  // scroll al panel
-  const panel = document.getElementById('contentPanel');
-  if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+})();
 </script>
-
 </body>
 </html>
