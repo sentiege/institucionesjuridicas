@@ -1047,6 +1047,32 @@
     .review-ans span.correct-ans { color: #7ecfcf; font-weight: 600; }
     .review-ans span.wrong-ans { color: #d4846a; text-decoration: line-through; }
   </style>
+
+<style>
+
+.hl-apply-btn {
+  background: linear-gradient(135deg,#1e3a5f,#2563eb);
+  border: none;
+  color: #fff;
+}
+.hl-apply-btn:hover {
+  background: rgba(212,168,67,0.32);
+  border-color: rgba(212,168,67,0.8);
+}
+.hl-apply-btn:active { transform: scale(0.95); }
+.hl-apply-btn.flash {
+  background: rgba(212,168,67,0.55) !important;
+  border-color: #e8c87a !important;
+}
+.hl-btn-row {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+</style>
 </head>
 <body>
 
@@ -2447,11 +2473,97 @@ renderUnit(currentUnit, currentMode);
     }, 50);
 
     toolbar.appendChild(panel);
-    toolbar.appendChild(btn);
+    // Botón "Resaltar" — aplica el color activo a la selección actual
+    var applyBtn = document.createElement('button');
+    applyBtn.className = 'hl-apply-btn';
+    applyBtn.id = 'hl-apply-btn';
+    applyBtn.setAttribute('aria-label', 'Resaltar selección');
+    applyBtn.innerHTML = '\u2726 Resaltar';
+    applyBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      forceHighlight();
+    });
+    var btnRow = document.createElement('div');
+    btnRow.className = 'hl-btn-row';
+    btnRow.appendChild(applyBtn);
+    btnRow.appendChild(btn);
+    toolbar.appendChild(btnRow);
     document.body.appendChild(toolbar);
   }
 
-  // ── INIT ─────────────────────────────────────────────────────────────────────
+
+  // Fuerza el resaltado de lo que esté seleccionado en ese momento
+  function forceHighlight() {
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount) {
+      // Parpadeo visual para indicar que no hay selección
+      var ab = document.getElementById('hl-apply-btn');
+      if (ab) {
+        ab.style.borderColor = '#f87171';
+        ab.style.color = '#f87171';
+        ab.innerHTML = '\u26A0 Seleccioná texto';
+        setTimeout(function() {
+          ab.style.borderColor = '';
+          ab.style.color = '';
+          ab.innerHTML = '\u2726 Resaltar';
+        }, 1500);
+      }
+      return;
+    }
+    var range = sel.getRangeAt(0);
+    // Soportar selecciones que cruzan nodos
+    if (range.startContainer === range.endContainer && range.startContainer.nodeType === 3) {
+      // Mismo nodo de texto — ruta simple
+      var textNode = range.startContainer;
+      var start = range.startOffset;
+      var end   = range.endOffset;
+      if (start === end) return;
+      var xpath = getXPath(textNode);
+      var text  = textNode.textContent.slice(start, end);
+      var hlId  = 'hl_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+      applyHighlight(textNode, start, end, activeColor, hlId);
+      sel.removeAllRanges();
+      var stored = loadHL();
+      stored.push({id: hlId, xpath: xpath, start: start, end: end, text: text, color: activeColor});
+      saveHL(stored);
+      updateCount();
+    } else {
+      // Selección multi-nodo: recorremos los nodos de texto en el rango
+      var treeWalker = document.createTreeWalker(
+        range.commonAncestorContainer.nodeType === 3
+          ? range.commonAncestorContainer.parentNode
+          : range.commonAncestorContainer,
+        NodeFilter.SHOW_TEXT, null, false
+      );
+      var nodes = [];
+      var node;
+      while ((node = treeWalker.nextNode())) {
+        if (range.intersectsNode(node)) nodes.push(node);
+      }
+      sel.removeAllRanges();
+      var stored = loadHL();
+      nodes.forEach(function(tn) {
+        var s = (tn === range.startContainer) ? range.startOffset : 0;
+        var e2 = (tn === range.endContainer)  ? range.endOffset   : tn.textContent.length;
+        if (s >= e2) return;
+        var xp = getXPath(tn);
+        var tx = tn.textContent.slice(s, e2);
+        var id = 'hl_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+        applyHighlight(tn, s, e2, activeColor, id);
+        stored.push({id: id, xpath: xp, start: s, end: e2, text: tx, color: activeColor});
+      });
+      saveHL(stored);
+      updateCount();
+    }
+    // Flash visual del botón
+    var ab = document.getElementById('hl-apply-btn');
+    if (ab) {
+      ab.classList.add('flash');
+      setTimeout(function(){ ab.classList.remove('flash'); }, 300);
+    }
+  }
+
+    // ── INIT ─────────────────────────────────────────────────────────────────────
   function init() {
     buildToolbar();
     // Inyectar CSS
