@@ -2963,81 +2963,122 @@ renderUnit(currentUnit, currentMode);
 (function() {
   var STORAGE_KEY = 'parcial2_highlights_v1';
   var COLORS = {
-    yellow:'rgba(255,230,0,0.45)',
-    green:'rgba(60,220,100,0.40)',
-    cyan:'rgba(0,210,220,0.38)',
-    orange:'rgba(255,140,0,0.42)',
-    pink:'rgba(255,80,180,0.38)'
+    yellow:'rgba(255,220,0,0.55)',
+    green:'rgba(60,200,100,0.50)',
+    cyan:'rgba(0,200,220,0.48)',
+    orange:'rgba(255,140,0,0.52)',
+    pink:'rgba(255,80,180,0.48)'
   };
   var currentColor = 'yellow';
+  var savedRange = null;
   var highlights = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
-  function getXPath(node) {
-    if (node.nodeType !== Node.TEXT_NODE) return null;
-    var parent = node.parentNode, parts = [];
-    while (parent && parent !== document.body) {
-      var tag = parent.tagName.toLowerCase();
-      var sibs = Array.from(parent.parentNode ? parent.parentNode.children : []).filter(function(c){ return c.tagName === parent.tagName; });
-      var idx = sibs.indexOf(parent) + 1;
-      parts.unshift(tag + (sibs.length > 1 ? '[' + idx + ']' : ''));
-      parent = parent.parentNode;
+  // Always save selection on mouseup (text selection ends)
+  document.addEventListener('mouseup', function(e) {
+    if (toolbar && toolbar.contains(e.target)) return;
+    var sel = window.getSelection();
+    if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+      savedRange = sel.getRangeAt(0).cloneRange();
+      if (panel && panel.style.display !== 'none') {
+        setTimeout(doHighlight, 30);
+      }
     }
-    return parts.join('/');
+  });
+
+  // Prevent toolbar clicks from stealing focus / clearing selection
+  document.addEventListener('mousedown', function(e) {
+    if (toolbar && toolbar.contains(e.target)) {
+      e.preventDefault();
+    }
+  }, true);
+
+  function getTextNodesInRange(range) {
+    var nodes = [];
+    var walker = document.createTreeWalker(
+      range.commonAncestorContainer.nodeType === Node.TEXT_NODE
+        ? range.commonAncestorContainer.parentNode
+        : range.commonAncestorContainer,
+      NodeFilter.SHOW_TEXT,
+      null, false
+    );
+    var node;
+    while ((node = walker.nextNode())) {
+      if (range.intersectsNode(node)) nodes.push(node);
+    }
+    return nodes;
   }
 
-  function resolveXPath(xp) {
-    try { return document.evaluate('//' + xp, document.body, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; }
-    catch(e) { return null; }
-  }
-
-  function applyHighlight(textNode, start, end, colorId, hlId) {
+  function highlightTextNode(textNode, start, end, colorId, hlId) {
     var text = textNode.nodeValue;
-    if (!text || start >= text.length || end > text.length) return;
-    var before = document.createTextNode(text.slice(0, start));
+    var before = text.slice(0, start);
+    var middle = text.slice(start, end);
+    var after = text.slice(end);
+
     var mark = document.createElement('mark');
-    mark.className = 'hl-mark'; mark.dataset.hlId = hlId;
-    mark.style.background = COLORS[colorId] || COLORS.yellow;
-    mark.style.borderRadius = '2px'; mark.style.cursor = 'pointer';
+    mark.className = 'hl-mark';
+    mark.dataset.hlId = hlId;
+    mark.style.cssText = 'background:' + (COLORS[colorId]||COLORS.yellow) + ';border-radius:2px;cursor:pointer;color:inherit;padding:0 1px;';
     mark.title = 'Click para quitar resaltado';
-    mark.textContent = text.slice(start, end);
-    mark.addEventListener('click', function(e) { e.stopPropagation(); removeHighlight(hlId); });
-    var after = document.createTextNode(text.slice(end));
-    var p = textNode.parentNode;
-    p.replaceChild(after, textNode); p.insertBefore(mark, after); p.insertBefore(before, mark);
+    mark.textContent = middle;
+    mark.addEventListener('click', function(e){ e.stopPropagation(); removeHighlight(hlId); });
+
+    var parent = textNode.parentNode;
+    if (after) parent.insertBefore(document.createTextNode(after), textNode.nextSibling);
+    parent.insertBefore(mark, textNode.nextSibling ? textNode.nextSibling.previousSibling : null);
+    // simpler: replace textNode with before + mark + after
+    var frag = document.createDocumentFragment();
+    if (before) frag.appendChild(document.createTextNode(before));
+    frag.appendChild(mark);
+    if (after) frag.appendChild(document.createTextNode(after));
+    parent.replaceChild(frag, textNode);
+  }
+
+  function doHighlight() {
+    var range = savedRange;
+    if (!range || range.collapsed) {
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) { showWarn(); return; }
+      range = sel.getRangeAt(0).cloneRange();
+    }
+    var selectedText = range.toString().trim();
+    if (!selectedText) { showWarn(); return; }
+
+    var hlId = 'hl_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+    var textNodes = getTextNodesInRange(range);
+
+    textNodes.forEach(function(node) {
+      var nodeText = node.nodeValue;
+      var start = 0, end = nodeText.length;
+      if (node === range.startContainer) start = range.startOffset;
+      if (node === range.endContainer) end = range.endOffset;
+      if (start < end && end <= nodeText.length) {
+        highlightTextNode(node, start, end, currentColor, hlId);
+      }
+    });
+
+    highlights.push({id: hlId, text: selectedText, color: currentColor});
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(highlights));
+    updateCount();
+    savedRange = null;
+    try { window.getSelection().removeAllRanges(); } catch(e){}
   }
 
   function removeHighlight(hlId) {
-    var mark = document.querySelector('[data-hl-id="' + hlId + '"]');
-    if (mark) { mark.parentNode.replaceChild(document.createTextNode(mark.textContent), mark); }
+    document.querySelectorAll('[data-hl-id="' + hlId + '"]').forEach(function(mark) {
+      var parent = mark.parentNode;
+      parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      parent.normalize();
+    });
     highlights = highlights.filter(function(h){ return h.id !== hlId; });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(highlights));
     updateCount();
   }
 
-  function saveAndApply(range, colorId) {
-    var textNode = range.startContainer;
-    if (textNode.nodeType !== Node.TEXT_NODE) return;
-    var xp = getXPath(textNode); if (!xp) return;
-    var hlId = 'hl_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
-    var hl = {id:hlId, xpath:xp, start:range.startOffset, end:range.endOffset, text:range.toString(), color:colorId};
-    highlights.push(hl);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(highlights));
-    applyHighlight(textNode, hl.start, hl.end, colorId, hlId);
-    updateCount();
-  }
-
-  function restoreHighlights() {
-    highlights.forEach(function(hl) {
-      var el = resolveXPath(hl.xpath); if (!el) return;
-      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-      var node;
-      while ((node = walker.nextNode())) {
-        if (node.nodeValue && node.nodeValue.includes(hl.text.slice(0,20))) {
-          var idx = node.nodeValue.indexOf(hl.text);
-          if (idx !== -1) { applyHighlight(node, idx, idx + hl.text.length, hl.color, hl.id); break; }
-        }
-      }
-    });
+  function showWarn() {
+    var w = document.getElementById('hl-warn');
+    if (!w) return;
+    w.style.opacity = '1';
+    setTimeout(function(){ w.style.opacity = '0'; }, 2000);
   }
 
   function updateCount() {
@@ -3045,51 +3086,37 @@ renderUnit(currentUnit, currentMode);
     if (el) el.textContent = highlights.length + ' resaltado' + (highlights.length !== 1 ? 's' : '') + ' guardado' + (highlights.length !== 1 ? 's' : '');
   }
 
-  function doHighlight() {
-    var sel = window.getSelection();
-    if (!sel || sel.isCollapsed || sel.rangeCount === 0) { showWarn(); return; }
-    var range = sel.getRangeAt(0);
-    if (range.startContainer === range.endContainer && range.startContainer.nodeType === Node.TEXT_NODE) {
-      saveAndApply(range, currentColor); sel.removeAllRanges();
-    }
-  }
-
-  function showWarn() {
-    var w = document.getElementById('hl-warn');
-    if (!w) return;
-    w.style.opacity = '1'; setTimeout(function(){ w.style.opacity = '0'; }, 1800);
-  }
-
   // Build toolbar
   var toolbar = document.createElement('div');
-  toolbar.style.cssText = 'position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px;';
+  toolbar.id = 'hl-toolbar';
+  toolbar.style.cssText = 'position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:Georgia,serif;';
 
   var panel = document.createElement('div');
   panel.id = 'hl-panel';
-  panel.style.cssText = 'display:none;background:rgba(20,10,3,.97);border:1px solid rgba(184,134,11,.5);border-radius:6px;padding:14px 16px;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.6);';
-  panel.innerHTML = '<div style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,168,67,.7);margin-bottom:10px;">Color de resaltado</div>'
+  panel.style.cssText = 'display:none;background:rgba(20,10,3,.97);border:1px solid rgba(184,134,11,.5);border-radius:6px;padding:14px 16px;min-width:210px;box-shadow:0 8px 32px rgba(0,0,0,.6);';
+  panel.innerHTML =
+    '<div style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,168,67,.7);margin-bottom:10px;">Color de resaltado</div>'
     + '<div style="display:flex;gap:7px;margin-bottom:12px;">'
     + Object.entries(COLORS).map(function(c){
-        return '<button data-color="'+c[0]+'" title="'+c[0]+'" style="width:22px;height:22px;border-radius:50%;background:'+c[1]+';border:2px solid transparent;cursor:pointer;"></button>';
+        return '<button data-color="'+c[0]+'" title="'+c[0]+'" style="width:24px;height:24px;border-radius:50%;background:'+c[1]+';border:2px solid transparent;cursor:pointer;"></button>';
       }).join('')
     + '</div>'
-    + '<button id="hl-clear" style="width:100%;padding:7px;background:rgba(139,58,15,.25);border:1px solid rgba(139,58,15,.4);color:#d4846a;border-radius:3px;cursor:pointer;font-size:.82rem;margin-bottom:8px;">🗑 Borrar todo</button>'
-    + '<div id="hl-count" style="font-size:.75rem;color:rgba(212,168,67,.55);text-align:center;margin-bottom:6px;">0 resaltados guardados</div>'
+    + '<button id="hl-do-btn" style="width:100%;padding:8px;background:rgba(184,134,11,.25);border:1px solid rgba(184,134,11,.5);color:#d4a843;border-radius:3px;cursor:pointer;font-size:.85rem;margin-bottom:8px;font-family:Georgia,serif;">✦ Resaltar selección</button>'
+    + '<button id="hl-clear" style="width:100%;padding:7px;background:rgba(139,58,15,.25);border:1px solid rgba(139,58,15,.4);color:#d4846a;border-radius:3px;cursor:pointer;font-size:.82rem;margin-bottom:8px;font-family:Georgia,serif;">🗑 Borrar todo</button>'
+    + '<div id="hl-count" style="font-size:.75rem;color:rgba(212,168,67,.55);text-align:center;margin-bottom:4px;">0 resaltados guardados</div>'
     + '<div id="hl-warn" style="font-size:.75rem;color:#d4846a;text-align:center;opacity:0;transition:opacity .3s;">⚠ Seleccioná texto primero</div>';
 
   var mainBtn = document.createElement('button');
   mainBtn.textContent = '📖 Resaltador';
-  mainBtn.style.cssText = 'padding:9px 16px;background:rgba(20,10,3,.95);border:1px solid rgba(184,134,11,.5);color:#d4a843;border-radius:4px;cursor:pointer;font-size:.82rem;letter-spacing:.04em;box-shadow:0 4px 16px rgba(0,0,0,.4);';
+  mainBtn.style.cssText = 'padding:9px 18px;background:rgba(20,10,3,.95);border:1px solid rgba(184,134,11,.5);color:#d4a843;border-radius:4px;cursor:pointer;font-size:.82rem;letter-spacing:.04em;box-shadow:0 4px 16px rgba(0,0,0,.4);font-family:Georgia,serif;';
 
-  var hlBtn = document.createElement('button');
-  hlBtn.textContent = '✦ Resaltar';
-  hlBtn.style.cssText = 'padding:7px 14px;background:rgba(184,134,11,.2);border:1px solid rgba(184,134,11,.4);color:#d4a843;border-radius:4px;cursor:pointer;font-size:.8rem;';
-
-  toolbar.appendChild(panel); toolbar.appendChild(hlBtn); toolbar.appendChild(mainBtn);
+  toolbar.appendChild(panel);
+  toolbar.appendChild(mainBtn);
   document.body.appendChild(toolbar);
 
-  mainBtn.addEventListener('click', function(){ panel.style.display = panel.style.display === 'none' ? 'block' : 'none'; });
-  hlBtn.addEventListener('click', function(){ doHighlight(); });
+  mainBtn.addEventListener('click', function(){
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  });
 
   panel.querySelectorAll('[data-color]').forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -3101,29 +3128,24 @@ renderUnit(currentUnit, currentMode);
   var firstBtn = panel.querySelector('[data-color="yellow"]');
   if (firstBtn) firstBtn.style.borderColor = '#d4a843';
 
-  document.getElementById('hl-clear').addEventListener('click', function(){
-    document.querySelectorAll('.hl-mark').forEach(function(m){ m.parentNode.replaceChild(document.createTextNode(m.textContent),m); });
-    highlights = []; localStorage.removeItem(STORAGE_KEY); updateCount();
+  panel.querySelector('#hl-do-btn').addEventListener('click', function(){ doHighlight(); });
+
+  panel.querySelector('#hl-clear').addEventListener('click', function(){
+    document.querySelectorAll('.hl-mark').forEach(function(m){
+      var p = m.parentNode;
+      p.replaceChild(document.createTextNode(m.textContent), m);
+      p.normalize();
+    });
+    highlights = [];
+    localStorage.removeItem(STORAGE_KEY);
+    updateCount();
   });
 
-  document.addEventListener('mouseup', function(e){
-    if (toolbar.contains(e.target)) return;
-    if (panel.style.display !== 'none') {
-      var sel = window.getSelection();
-      if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
-        var r = sel.getRangeAt(0);
-        if (r.startContainer === r.endContainer && r.startContainer.nodeType === Node.TEXT_NODE) {
-          setTimeout(function(){ doHighlight(); }, 10);
-        }
-      }
-    }
-  });
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function(){ restoreHighlights(); updateCount(); });
-  } else { restoreHighlights(); updateCount(); }
+  updateCount();
 })();
 </script>
+
+
 
 </body>
 </html>
