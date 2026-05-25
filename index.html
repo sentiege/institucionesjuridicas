@@ -3,1601 +3,1255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Historia de las Instituciones Jurídicas</title>
+<title>Introducción a las Ciencias Jurídicas — Lecciones 11 al 30</title>
 <style>
   :root {
-    --verde1: #1b6e3d;
-    --verde2: #2e8b57;
-    --verde3: #e8f5ee;
-    --verde4: #c8e6d4;
-    --verde5: #a8d5b8;
-    --verde6: #155d32;
-    --blanco: #ffffff;
-    --gris1: #f4f9f6;
-    --gris2: #5a7363;
-    --texto: #1a2e22;
+    --gold: #d4af37;
+    --gold2: #f0c040;
+    --dark: #1a1a2e;
+    --dark2: #16213e;
+    --dark3: #0f3460;
+    --text: #e8e0d0;
+    --card-bg: #1e2a45;
+    --accent: #c9a227;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gris1); color: var(--texto); min-height: 100vh; }
-
-  /* ── HEADER ── */
-  .app-header { background: linear-gradient(135deg, var(--verde1), var(--verde2)); color: #fff; padding: 1rem 1.5rem; display: flex; flex-direction: column; gap: .4rem; box-shadow: 0 2px 8px rgba(0,0,0,.25); align-items:center; text-align:center; }
-  .app-header h1 { font-size: 1.05rem; font-weight: 700; letter-spacing: .3px; }
-  .app-header p  { font-size: .78rem; opacity: .85; }
-  .modo-tabs { display: flex; gap: .5rem; margin-top: .4rem; }
-  .modo-btn { padding: .35rem .9rem; border: 2px solid rgba(255,255,255,.5); background: transparent; color: #fff; border-radius: 20px; font-size: .8rem; cursor: pointer; transition: all .2s; }
-  .modo-btn.activo { background: #fff; color: var(--verde1); font-weight: 700; border-color: #fff; }
-
-  /* ── VISTAS ── */
-  .vista { display: none; }
-  .vista.activa { display: block; }
-
-  /* ── CARTILLAS ── */
-  #vistaCartillas { padding: .8rem; max-width: 700px; margin: 0 auto; }
-  .prog-wrap { display: flex; align-items: center; gap: .6rem; margin-bottom: .7rem; }
-  .prog-bar-bg { flex: 1; height: 7px; background: var(--verde4); border-radius: 4px; overflow: hidden; }
-  .prog-bar { height: 100%; background: var(--verde2); border-radius: 4px; transition: width .3s; }
-  .prog-text { font-size: .78rem; color: var(--gris2); white-space: nowrap; }
-
-  .cartilla { display: none; background: #fff; border-radius: 14px; box-shadow: 0 2px 12px rgba(27,110,61,.1); overflow: hidden; }
-  .cartilla.activa { display: block; }
-
-  /* portada de unidad */
-  .cartilla.portada .card-body { background: linear-gradient(135deg, var(--verde1) 0%, var(--verde2) 100%); color: #fff; text-align: center; padding: 2.5rem 1.5rem; }
-  .cartilla.portada h2 { font-size: 1.6rem; margin-bottom: .5rem; }
-  .cartilla.portada .subtitulo { font-size: 1rem; opacity: .9; }
-
-  /* cartilla normal */
-  .card-header { background: linear-gradient(90deg, var(--verde1), var(--verde2)); color: #fff; padding: .6rem 1rem; font-size: .78rem; font-weight: 600; letter-spacing: .5px; }
-  .card-body { padding: 1.2rem 1.1rem; }
-  .card-body h2 { font-size: 1.15rem; color: var(--verde1); margin-bottom: .8rem; border-bottom: 2px solid var(--verde4); padding-bottom: .4rem; text-align:center; }
-  .card-body h3 { font-size: .95rem; color: var(--verde6); margin: .9rem 0 .4rem; }
-  .card-body p  { font-size: .88rem; line-height: 1.65; margin-bottom: .6rem; color: #2a3e30; }
-  .card-body ul, .card-body ol { padding-left: 1.3rem; margin-bottom: .6rem; }
-  .card-body li { font-size: .87rem; line-height: 1.6; margin-bottom: .2rem; }
-  .card-body .destacado { background: var(--verde3); border-left: 4px solid var(--verde2); padding: .6rem .9rem; border-radius: 0 8px 8px 0; margin: .7rem 0; font-size: .87rem; }
-  .card-body .cita { font-style: italic; color: var(--gris2); font-size: .85rem; border-left: 3px solid var(--verde5); padding-left: .8rem; margin: .6rem 0; }
-  .card-body table { width: 100%; border-collapse: collapse; font-size: .83rem; margin: .7rem 0; }
-  .card-body th { background: var(--verde2); color: #fff; padding: .4rem .6rem; text-align: left; }
-  .card-body td { padding: .35rem .6rem; border-bottom: 1px solid var(--verde4); }
-  .card-body tr:nth-child(even) td { background: var(--verde3); }
-  .tag { display: inline-block; background: var(--verde3); color: var(--verde1); padding: .2rem .6rem; border-radius: 12px; font-size: .73rem; font-weight: 700; margin-bottom: .5rem; }
-
-  /* quiz */
-  .quiz-section { margin-top: 1rem; border-top: 2px dashed var(--verde4); padding-top: .9rem; }
-  .quiz-label { font-size: .8rem; font-weight: 700; color: var(--verde1); margin-bottom: .5rem; }
-  .quiz-pregunta { font-size: .88rem; margin-bottom: .6rem; font-weight: 600; }
-  .quiz-btn { display: block; width: 100%; text-align: left; padding: .5rem .8rem; margin: .3rem 0; border: 1.5px solid var(--verde4); border-radius: 8px; background: #fff; cursor: pointer; font-size: .84rem; transition: all .15s; }
-  .quiz-btn:hover { border-color: var(--verde2); background: var(--verde3); }
-  .quiz-btn.correcto { background: #d4edda; border-color: #28a745; color: #155724; font-weight: 700; }
-  .quiz-btn.incorrecto { background: #f8d7da; border-color: #dc3545; color: #721c24; }
-  .quiz-feedback { font-size: .83rem; margin-top: .4rem; font-weight: 600; min-height: 1.2em; }
-  .quiz-btn-reset { margin-top: .5rem; padding: .3rem .7rem; background: var(--verde3); border: 1.5px solid var(--verde2); color: var(--verde1); border-radius: 8px; font-size: .78rem; cursor: pointer; display: none; }
-  .quiz-btn-reset.visible { display: inline-block; }
-
-  /* nav */
-  .nav-buttons { display: flex; gap: .5rem; justify-content: center; margin-top: 1rem; padding-bottom: 1.5rem; }
-  .btn-nav { padding: .5rem 1.2rem; background: var(--verde2); color: #fff; border: none; border-radius: 8px; font-size: .88rem; cursor: pointer; transition: background .2s; }
-  .btn-nav:hover { background: var(--verde1); }
-  .btn-nav:disabled { background: #ccc; cursor: default; }
-
-  /* índice */
-  .menu-toggle { position: fixed; bottom: 1.2rem; right: 1.2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--verde1); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,.3); z-index: 100; display: none; }
-  .indice-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 200; }
-  .indice-overlay.visible { display: block; }
-  .indice-panel { position: fixed; top: 0; left: -320px; width: 300px; height: 100vh; background: #fff; z-index: 300; overflow-y: auto; transition: left .3s; box-shadow: 3px 0 15px rgba(0,0,0,.2); }
-  .indice-panel.abierto { left: 0; }
-  .indice-titulo { background: var(--verde1); color: #fff; padding: 1rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; }
-  .btn-cerrar-indice { background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
-  .indice-item { display: block; width: 100%; text-align: left; padding: .55rem .8rem; border: none; background: none; cursor: pointer; font-size: .83rem; border-bottom: 1px solid var(--verde4); transition: background .15s; }
-  .indice-item:hover { background: var(--verde3); }
-  .indice-item.activo { background: var(--verde3); color: var(--verde1); font-weight: 700; }
-  .indice-item.indice-portada { background: var(--verde1); color: #fff; font-weight: 700; font-size: .85rem; }
-  .indice-item.indice-portada:hover { background: var(--verde6); }
-  .indice-num { color: var(--gris2); margin-right: .4rem; font-size: .75rem; }
-  .indice-item.indice-portada .indice-num { color: rgba(255,255,255,.7); }
-
-  /* ── MODO EXAMEN ── */
-  #vistaExamen { max-width: 680px; margin: 0 auto; padding: 1rem; }
-  .examen-config { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(27,110,61,.1); text-align: center; }
-  .examen-config h3 { color: var(--verde1); font-size: 1.2rem; margin-bottom: .4rem; }
-  .btn-num-wrap { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 1rem; }
-  .btn-num { padding: .4rem .9rem; border: 2px solid var(--verde4); background: #fff; border-radius: 20px; cursor: pointer; font-size: .88rem; transition: all .15s; }
-  .btn-num.sel, .btn-num:hover { background: var(--verde2); color: #fff; border-color: var(--verde2); }
-  .btn-iniciar { background: var(--verde1); color: #fff; border: none; padding: .7rem 2rem; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: 700; }
-  .examen-activo { display: none; background: #fff; border-radius: 14px; padding: 1.2rem; box-shadow: 0 2px 12px rgba(27,110,61,.1); }
-  .examen-activo.visible { display: block; }
-  .ex-header { display: flex; justify-content: space-between; margin-bottom: .5rem; font-size: .83rem; color: var(--gris2); font-weight: 600; }
-  .ex-progbar-wrap { height: 6px; background: var(--verde4); border-radius: 3px; margin-bottom: .8rem; }
-  .ex-progbar { height: 100%; background: var(--verde2); border-radius: 3px; transition: width .3s; }
-  .ex-tag { font-size: .75rem; font-weight: 700; color: var(--verde2); margin-bottom: .4rem; }
-  .ex-pregunta { font-size: .95rem; font-weight: 700; margin-bottom: .9rem; line-height: 1.5; }
-  .ex-btn { display: block; width: 100%; text-align: left; padding: .55rem .9rem; margin: .35rem 0; border: 1.5px solid var(--verde4); border-radius: 9px; background: #fff; cursor: pointer; font-size: .85rem; transition: all .15s; }
-  .ex-btn:hover:not(:disabled) { border-color: var(--verde2); background: var(--verde3); }
-  .ex-btn.ex-correcto { background: #d4edda; border-color: #28a745; color: #155724; font-weight: 700; }
-  .ex-btn.ex-incorrecto { background: #f8d7da; border-color: #dc3545; color: #721c24; }
-  .ex-explicacion { display: none; background: var(--verde3); border-left: 4px solid var(--verde2); padding: .6rem .9rem; border-radius: 0 8px 8px 0; font-size: .83rem; margin-top: .6rem; }
-  .ex-explicacion.visible { display: block; }
-  .ex-siguiente { display: none; margin-top: .8rem; padding: .5rem 1.4rem; background: var(--verde1); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: .9rem; font-weight: 700; }
-  .ex-siguiente.visible { display: inline-block; }
-  .ex-resultado { display: none; background: #fff; border-radius: 14px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(27,110,61,.1); }
-  .ex-resultado.visible { display: block; }
-  .ex-score-num { font-size: 3rem; font-weight: 900; color: var(--verde1); }
-  .ex-score-txt { font-size: 1.1rem; color: var(--gris2); margin-bottom: 1rem; }
-  .ex-detalle { text-align: left; max-height: 300px; overflow-y: auto; margin-bottom: 1rem; }
-  .ex-detalle-item { padding: .35rem .5rem; font-size: .82rem; border-bottom: 1px solid var(--verde4); }
-  .ex-detalle-item.ok  { color: #155724; }
-  .ex-detalle-item.mal { color: #721c24; }
-  .btn-reiniciar-ex { background: var(--verde1); color: #fff; border: none; padding: .6rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 700; }
-
-  .badge-ada {
-    display: inline-block;
-    background: #fff3cd;
-    color: #856404;
-    border: 1.5px solid #ffc107;
-    border-radius: 20px;
-    font-size: .7rem;
-    font-weight: 700;
-    padding: .18rem .65rem;
-    margin-left: .5rem;
-    vertical-align: middle;
-    letter-spacing: .01em;
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
   }
 
+  /* ========== HOME PAGE ========== */
+  #home-page { display: block; }
+  .home-hero {
+    background: linear-gradient(135deg, var(--dark2) 0%, var(--dark3) 100%);
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .home-hero .crest {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .home-hero h1 {
+    color: var(--gold2);
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+  }
+  .home-hero .universidad {
+    color: #a89060;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+  }
+  .home-hero .profesor {
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .home-hero .badge-row {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(212,175,55,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.8rem;
+    color: var(--gold2);
+  }
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+    padding: 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .lesson-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 12px;
+    padding: 1.4rem 1.2rem 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .lesson-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(212,175,55,0.2);
+    border-color: var(--gold);
+  }
+  .lesson-card:hover::before { transform: scaleX(1); }
+  .card-emoji { font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .card-number {
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .card-title {
+    color: var(--gold2);
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+  .card-sub {
+    color: #a89060;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+  }
+  .card-arrow {
+    color: var(--gold);
+    font-size: 1.1rem;
+    text-align: right;
+  }
+
+  /* ========== LESSON PAGE ========== */
+  .lesson-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .lesson-header {
+    background: linear-gradient(135deg, var(--dark2), var(--dark3));
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .back-btn {
+    background: rgba(212,175,55,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold2);
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: rgba(212,175,55,0.3); }
+  .lesson-badge {
+    background: rgba(212,175,55,0.2);
+    border: 1px solid var(--gold);
+    color: var(--gold2);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-left: auto;
+  }
+  .lesson-meta {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem;
+    background: linear-gradient(180deg, var(--dark2) 0%, var(--dark) 100%);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+  }
+  .lesson-main-title {
+    color: var(--gold2);
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    margin-bottom: 0.3rem;
+  }
+  .lesson-subtitle {
+    color: #a89060;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+  .slideshow-container {
+    flex: 1;
+    padding: 1.5rem;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .slide { display: none; animation: fadeIn 0.4s ease; }
+  .slide.active { display: block; }
+  @keyframes fadeIn { from {opacity:0; transform: translateY(10px)} to {opacity:1; transform: translateY(0)} }
+  .slide-number {
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .slide-title {
+    color: var(--gold2);
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    line-height: 1.3;
+  }
+  .slide-content {
+    color: var(--text);
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    line-height: 1.9;
+  }
+  .slide-content strong { color: var(--gold2); }
+  .slide-content em { color: #c8b06a; font-style: italic; }
+  .slide-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    border-top: 1px solid rgba(212,175,55,0.2);
+    background: var(--dark2);
+  }
+  .ctrl-btn {
+    background: rgba(212,175,55,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold2);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ctrl-btn:hover { background: rgba(212,175,55,0.35); }
+  .dots-container { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(212,175,55,0.3);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    padding: 0;
+  }
+  .dot.active { background: var(--gold2); transform: scale(1.3); }
+  .progress-bar-wrap {
+    width: 100%;
+    height: 4px;
+    background: rgba(212,175,55,0.1);
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    transition: width 0.4s ease;
+  }
+
+  /* Keyboard hint */
+  .key-hint {
+    text-align: center;
+    color: #5a4e35;
+    font-size: 0.72rem;
+    padding: 0.4rem;
+    background: var(--dark2);
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: #5a4e35;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(212,175,55,0.15);
+    background: var(--dark2);
+  }
 </style>
 </head>
 <body>
 
-<div class="app-header">
-  <h1>Historia de las Instituciones Jurídicas</h1>
-  <p>Fac. de Derecho y Ciencias Sociales · UNA · Prof. Dra. Ana de la Luz Cuellar</p>
-  <div class="modo-tabs">
-    <button class="modo-btn activo" data-vista="vistaCartillas">📚 Cartillas</button>
-    <button class="modo-btn" data-vista="vistaExamen">🧠 Examen</button>
-    <button class="modo-btn" data-vista="vistaProfAda">📝 Prof. Ada</button>
-  </div>
-</div>
-
-<div id="vistaCartillas" class="vista activa">
-  <div style="max-width:700px;margin:0 auto;padding:.8rem .8rem 0">
-    <div class="prog-wrap">
-      <div class="prog-bar-bg"><div class="prog-bar" id="pBar" style="width:2%"></div></div>
-      <span class="prog-text" id="pText">1 / 1</span>
+<!-- ===== HOME PAGE ===== -->
+<div id="home-page">
+  <div class="home-hero">
+    <div class="crest">⚖️</div>
+    <h1>Introducción a las Ciencias Jurídicas</h1>
+    <div class="universidad">Universidad Nacional de Asunción · Facultad de Derecho y Ciencias Políticas</div>
+    <div class="profesor">Abog. Raúl Florentín</div>
+    <div class="badge-row">
+      <span class="badge">📚 20 Lecciones</span>
+      <span class="badge">🎓 Lecciones 11 — 30</span>
+      <span class="badge">🇵🇾 Derecho Paraguayo</span>
     </div>
   </div>
-
-<div class="cartilla portada">
-  <div class="card-body">
-    <h2>UNIDAD I</h2>
-    <div class="subtitulo">Sociedad, Cultura, Nación y Estado</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD I · Sociedad y Grupos Sociales <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Sociedad y Grupos Sociales</h2>
-    <p><b>Sociedad</b> es el conjunto de personas que interactúa en un espacio determinado y comparte una misma cultura, relacionándose según reglas jurídicas y costumbres. <span style="font-size:.8rem;color:#5a7363">(Macionis & Plummer)</span></p>
-<h3>Grupos Sociales</h3>
-<p>Grupo de dos o más personas con identidad reconocida mutuamente y algún tipo de vínculo entre sí.</p>
-<div class="destacado">Ejemplos: la familia, el trabajo, la universidad, la iglesia.</div>
-<h3>Estructura Social</h3>
-<p>Conjunto de formas en que grupos e individuos se organizan y relacionan dentro de una sociedad. Incluye la "constelación especial" de castas, estamentos y clases.</p>
+  <div class="lessons-grid">
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué es un grupo social según Macionis y Plummer?</div>
-  <button class="quiz-btn" data-idx="0">Un conjunto de personas sin vínculos formales</button>
-<button class="quiz-btn" data-idx="1">Grupo de dos o más personas con identidad reconocida y vínculo entre sí</button>
-<button class="quiz-btn" data-idx="2">Una institución del Estado</button>
-<button class="quiz-btn" data-idx="3">Una organización exclusivamente laboral</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
+      <div class="lesson-card" onclick="showLesson(11)">
+        <div class="card-emoji">📜</div>
+        <div class="card-number">Lección 11</div>
+        <div class="card-title">Normas Jurídicas</div>
+        <div class="card-sub">Normas Religiosas, Morales, del Trato Social y Jurídicas</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(12)">
+        <div class="card-emoji">🏛️</div>
+        <div class="card-number">Lección 12</div>
+        <div class="card-title">Ordenamiento Jurídico</div>
+        <div class="card-sub">Juricidad, Antijuricidad y Pirámide de Kelsen</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(13)">
+        <div class="card-emoji">⚖️</div>
+        <div class="card-number">Lección 13</div>
+        <div class="card-title">El Derecho Positivo</div>
+        <div class="card-sub">Ramas, Estructura de la Constitución 1992</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(14)">
+        <div class="card-emoji">🌐</div>
+        <div class="card-number">Lección 14</div>
+        <div class="card-title">Derecho Internacional Público y Canónico</div>
+        <div class="card-sub">Ramas del Derecho Público Externo</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(15)">
+        <div class="card-emoji">📋</div>
+        <div class="card-number">Lección 15</div>
+        <div class="card-title">El Derecho Privado</div>
+        <div class="card-sub">Ramas del Derecho Privado Interno</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(16)">
+        <div class="card-emoji">👤</div>
+        <div class="card-number">Lección 16</div>
+        <div class="card-title">Derecho Subjetivo</div>
+        <div class="card-sub">Concepto, Fundamento y Derechos Fundamentales</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(17)">
+        <div class="card-emoji">🔏</div>
+        <div class="card-number">Lección 17</div>
+        <div class="card-title">Libertad Jurídica y Orden Público</div>
+        <div class="card-sub">Abuso del Derecho y Leyes de Orden Público</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(18)">
+        <div class="card-emoji">🔗</div>
+        <div class="card-number">Lección 18</div>
+        <div class="card-title">Relación Jurídica</div>
+        <div class="card-sub">Personas, Capacidad y Domicilio</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(19)">
+        <div class="card-emoji">📝</div>
+        <div class="card-number">Lección 19</div>
+        <div class="card-title">Hechos y Actos Jurídicos</div>
+        <div class="card-sub">Objeto de la Relación Jurídica y Negocio Jurídico</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(20)">
+        <div class="card-emoji">🗳️</div>
+        <div class="card-number">Lección 20</div>
+        <div class="card-title">Democracia Participativa</div>
+        <div class="card-sub">Referéndum, Iniciativa Popular y Estado Unitario</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(21)">
+        <div class="card-emoji">🏠</div>
+        <div class="card-number">Lección 21</div>
+        <div class="card-title">Derechos Reales</div>
+        <div class="card-sub">Dominio, Usufructo, Hipoteca y Servidumbre</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(22)">
+        <div class="card-emoji">💼</div>
+        <div class="card-number">Lección 22</div>
+        <div class="card-title">Derechos Obligacionales y Derecho Intelectual</div>
+        <div class="card-sub">Derechos de Crédito, Fuentes de Obligaciones y Derecho de Autor</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(23)">
+        <div class="card-emoji">™️</div>
+        <div class="card-number">Lección 23</div>
+        <div class="card-title">Derecho Marcario y Propiedad Intelectual</div>
+        <div class="card-sub">Marcas Comerciales, Propiedad Industrial y Derecho de Autor</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(24)">
+        <div class="card-emoji">🏺</div>
+        <div class="card-number">Lección 24</div>
+        <div class="card-title">Derecho Hereditario</div>
+        <div class="card-sub">Sucesión, Herederos Forzosos y Testamento</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(25)">
+        <div class="card-emoji">⚖️</div>
+        <div class="card-number">Lección 25</div>
+        <div class="card-title">Función Jurisdiccional</div>
+        <div class="card-sub">Derecho de Acción, Excepción y Poder Judicial</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(26)">
+        <div class="card-emoji">📚</div>
+        <div class="card-number">Lección 26</div>
+        <div class="card-title">Fuentes del Derecho</div>
+        <div class="card-sub">La Ley, Costumbre, Jurisprudencia, Doctrina y Codificación</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(27)">
+        <div class="card-emoji">🔍</div>
+        <div class="card-number">Lección 27</div>
+        <div class="card-title">Técnica Jurídica e Interpretación</div>
+        <div class="card-sub">Hermenéutica, Métodos de Interpretación y Derecho Paraguayo</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(28)">
+        <div class="card-emoji">🧩</div>
+        <div class="card-number">Lección 28</div>
+        <div class="card-title">Técnica Judicial e Integración</div>
+        <div class="card-sub">Silogismo Jurídico, Lagunas y Analogía</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(29)">
+        <div class="card-emoji">⏳</div>
+        <div class="card-number">Lección 29</div>
+        <div class="card-title">Aplicación de la Ley en el Tiempo</div>
+        <div class="card-sub">Irretroactividad, Derecho Intertemporal y Excepciones</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
+      <div class="lesson-card" onclick="showLesson(30)">
+        <div class="card-emoji">🗺️</div>
+        <div class="card-number">Lección 30</div>
+        <div class="card-title">Aplicación de la Ley en el Territorio</div>
+        <div class="card-sub">Territorialidad, Extraterritorialidad y Orden Público Internacional</div>
+        <div class="card-arrow">&#8594;</div>
+      </div>
   </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD I · Instituciones y Cultura <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Instituciones y Cultura</h2>
-    <h3>Instituciones</h3>
-<p>Son <b>"asociaciones"</b> que se forman a partir de su propia dinámica, donde cada miembro cumple un rol diferente y todos se rigen por normas derivadas de la costumbre y la naturaleza de las relaciones humanas.</p>
-<div class="destacado">Son relaciones entre personas sistematizadas en una estructura más o menos formal. Ej.: la familia.</div>
-<h3>Cultura</h3>
-<p>Conjunto de <b>bienes materiales y espirituales</b> de un grupo social, transmitidos de generación en generación para orientar prácticas individuales y colectivas. Incluye: lengua, costumbres, tradiciones, valores, herramientas y conocimiento.</p>
-<p class="cita">"La cultura se ha ido formando conforme el ser humano se ha desarrollado en un entorno específico."</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué caracteriza principalmente a las instituciones sociales?</div>
-  <button class="quiz-btn" data-idx="0">Son organismos exclusivamente estatales</button>
-<button class="quiz-btn" data-idx="1">Cada miembro cumple un rol y se rigen por normas de la costumbre</button>
-<button class="quiz-btn" data-idx="2">Son grupos informales sin estructura</button>
-<button class="quiz-btn" data-idx="3">Solo existen en sociedades modernas</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD I · Nación y Estado <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Nación y Estado</h2>
-    <h3>Nación</h3>
-<p class="cita">"Conjunto de individuos que habitan o no un mismo territorio, vinculados por caracteres comunes (raza, idioma, religión, costumbres) y por un pasado histórico y aspiraciones comunes — conciencia nacional." (Martyniuk, 2003)</p>
-<h3>Estado</h3>
-<p>El término <b>Estado</b> aparece en el Renacimiento con Maquiavelo (<i>El Príncipe</i>): «STATO» = organización política suprema. Antes se llamaba Polis (Grecia), Civitas/Imperio/República (Roma).</p>
-<p class="cita">"Sociedad humana fijada en un espacio geográfico, jurídicamente organizada mediante una autoridad que regula la convivencia social." (Martyniuk, 2003)</p>
-<h3>Elementos del Estado</h3>
-<ul>
-  <li><b>Territorio:</b> porción geográfica donde se asienta la población.</li>
-  <li><b>Población:</b> habitantes del país (nacionales y extranjeros).</li>
-  <li><b>Poder:</b> autoridad soberana que gobierna según el ordenamiento jurídico. La <b>soberanía</b> = poder supremo, máximo y superior, interno y externo.</li>
-</ul>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuáles son los 3 elementos del Estado?</div>
-  <button class="quiz-btn" data-idx="0">Gobierno, leyes y ciudadanos</button>
-<button class="quiz-btn" data-idx="1">Territorio, población y poder</button>
-<button class="quiz-btn" data-idx="2">Nación, idioma y cultura</button>
-<button class="quiz-btn" data-idx="3">Constitución, ejército y justicia</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD I · Gobierno</div>
-  <div class="card-body">
-    <h2>Gobierno</h2>
-    <p>El <b>gobierno</b> es el modo en que se expresa, concreta y organiza el Poder del Estado. No puede existir ni funcionar sin órganos.</p>
-<div class="destacado">Comprende tres poderes: <b>Ejecutivo · Legislativo · Judicial</b></div>
-<p>Desde el gobierno se ejerce el poder político sobre la sociedad, ejecutando las leyes, legislando y administrando justicia.</p>
-    
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuántos y cuáles son los poderes del gobierno?</div>
-  <button class="quiz-btn" data-idx="0">Dos: ejecutivo y legislativo</button>
-<button class="quiz-btn" data-idx="1">Cuatro: ejecutivo, legislativo, judicial y militar</button>
-<button class="quiz-btn" data-idx="2">Tres: ejecutivo, legislativo y judicial</button>
-<button class="quiz-btn" data-idx="3">Uno: el poder soberano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla portada">
-  <div class="card-body">
-    <h2>UNIDAD II</h2>
-    <div class="subtitulo">Prehistoria, Historia e Instituciones Primitivas</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD II · Línea del Tiempo</div>
-  <div class="card-body">
-    <h2>Línea del Tiempo General</h2>
-    <table>
-<tr><th>Período</th><th>Tiempo aprox.</th><th>Hito clave</th></tr>
-<tr><td>Paleolítico</td><td>4.000.000 – 10.000 a.C.</td><td>Dominio del fuego, cazadores nómadas</td></tr>
-<tr><td>Neolítico</td><td>10.000 – 6.000 a.C.</td><td>Agricultura, sedentarización</td></tr>
-<tr><td>Edad de los Metales</td><td>6.000 – 3.500 a.C.</td><td>Cobre → Bronce → Hierro</td></tr>
-<tr><td>Invención escritura</td><td>~3.500 a.C.</td><td>Inicio de la Historia</td></tr>
-<tr><td>Edad Antigua</td><td>3.500 a.C. – 476 d.C.</td><td>Civilizaciones, Grecia, Roma</td></tr>
-</table>
-<div class="destacado">La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3.500 a.C.).</div>
-    
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué marca el inicio de la Historia (fin de la Prehistoria)?</div>
-  <button class="quiz-btn" data-idx="0">La aparición del fuego</button>
-<button class="quiz-btn" data-idx="1">La invención de la agricultura</button>
-<button class="quiz-btn" data-idx="2">El descubrimiento de la escritura (~3.500 a.C.)</button>
-<button class="quiz-btn" data-idx="3">La fundación de Roma</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD II · Paleolítico <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>El Paleolítico</h2>
-    <div class="tag">4.000.000 – 10.000 a.C.</div>
-<p><b>Paleolítico</b> = «piedra antigua o tallada». Es el período más largo de la prehistoria.</p>
-<h3>Características</h3>
-<ul>
-  <li>Cazadores y recolectores, <b>nómadas</b> y depredadores.</li>
-  <li>Se organizaban en <b>bandas y clanes</b>.</li>
-  <li>Dominaron el <b>fuego</b> → exploración de nuevos hábitats.</li>
-  <li>Vivían en cuevas o chozas; dejaron pinturas rupestres (Altamira, Lascaux).</li>
-</ul>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál es la característica principal del modo de vida en el Paleolítico?</div>
-  <button class="quiz-btn" data-idx="0">Agricultura y vida sedentaria en aldeas</button>
-<button class="quiz-btn" data-idx="1">Caza y recolección, vida nómada en bandas y clanes</button>
-<button class="quiz-btn" data-idx="2">Comercio y metalurgia</button>
-<button class="quiz-btn" data-idx="3">Uso del bronce y construcción de ciudades</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD II · Neolítico y Revolución Agrícola <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Neolítico y Revolución Agrícola</h2>
-    <div class="tag">10.000 – 6.000 a.C.</div>
-<p>Se inicia con la aparición de la <b>agricultura</b>: la primera gran revolución de la humanidad.</p>
-<h3>Consecuencias de la Agricultura</h3>
-<ul>
-  <li><b>Sedentarización:</b> se abandona el clan nómada, se forman aldeas permanentes.</li>
-  <li><b>Aumento de población:</b> menor mortalidad, mejor alimentación, división del trabajo.</li>
-  <li><b>Nuevos oficios artesanales:</b> alfarería, textilería, herramientas (azadas, hoces, molinos, cerámica).</li>
-  <li><b>Estratificación social:</b> jerarquías para dirigir, repartir agua y resolver conflictos.</li>
-  <li><b>Domesticación</b> de plantas y animales.</li>
-</ul>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Por qué se llama 'revolución' a la aparición de la agricultura en el Neolítico?</div>
-  <button class="quiz-btn" data-idx="0">Porque provocó guerras entre tribus</button>
-<button class="quiz-btn" data-idx="1">Porque transformó radicalmente la economía y la organización humana</button>
-<button class="quiz-btn" data-idx="2">Porque inventó la escritura</button>
-<button class="quiz-btn" data-idx="3">Porque creó los primeros imperios</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD II · Jerarquización y Nacimiento de Instituciones</div>
-  <div class="card-body">
-    <h2>Jerarquización social y primeras instituciones</h2>
-    <p>El aumento de habitantes y la vida fija en aldeas obligó a las comunidades a dotarse de una <b>organización social compleja</b>.</p>
-<h3>La sociedad se jerarquizó para:</h3>
-<ul>
-  <li>Dirigir y realizar obras colectivas y rituales.</li>
-  <li>Repartir el agua entre agricultores.</li>
-  <li>Resolver desacuerdos y crear reglas mínimas de convivencia.</li>
-</ul>
-<h3>Primeras instituciones que nacieron</h3>
-<div class="destacado">
-  🏠 <b>La Familia</b> · ⚖️ <b>La Justicia</b> (venganza de sangre) · 🏛️ <b>Organización Política</b>
-</div>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue la primera forma de justicia que surgió en las aldeas neolíticas?</div>
-  <button class="quiz-btn" data-idx="0">El tribunal de magistrados</button>
-<button class="quiz-btn" data-idx="1">La venganza de sangre</button>
-<button class="quiz-btn" data-idx="2">El código escrito</button>
-<button class="quiz-btn" data-idx="3">El juicio ante el rey</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD II · Edad de los Metales e Historia <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Edad de los Metales e Historia</h2>
-    <h3>Edad de los Metales</h3>
-<p>La metalurgia comenzó con el <b>cobre</b> (~3.500 a.C.). Los metales se dominaron en orden:</p>
-<div class="destacado">🔶 Cobre → 🥉 Bronce → ⚙️ Hierro</div>
-<h3>La Historia</h3>
-<p class="cita">"La Historia comprende un registro e interpretación de las realizaciones y frustraciones, luchas y triunfos del hombre." (Edward Mc Nall Burns)</p>
-<p class="cita">"El principio es la parte más principal de cualquier cosa… Solo conociendo la historia se puede conocer el Derecho." (Gayo)</p>
-<p>Cecilio Báez también destacó la importancia del análisis histórico para quien estudia las ciencias jurídicas.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué afirmó Gayo sobre la relación entre historia y derecho?</div>
-  <button class="quiz-btn" data-idx="0">El Derecho moderno no necesita conocer el pasado</button>
-<button class="quiz-btn" data-idx="1">Solo conociendo la historia se puede conocer el Derecho</button>
-<button class="quiz-btn" data-idx="2">La historia solo importa a los filósofos</button>
-<button class="quiz-btn" data-idx="3">El Derecho es completamente independiente de la historia</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla portada">
-  <div class="card-body">
-    <h2>UNIDAD III</h2>
-    <div class="subtitulo">Las Primeras Civilizaciones</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD III · India <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>India: Mohenjo-Daro, Hinduismo y Castas</h2>
-    <h3>Ciudades del Valle del Indo</h3>
-<p><b>Mohenjo-Daro y Harappa</b> (2.500–1.500 a.C., actual Pakistán): ciudades amuralladas con calles en ángulo recto, casas de dos pisos con cañerías, comercio activo y sistemas de escritura.</p>
-<h3>Hinduismo</h3>
-<p>Religión politeísta que cree en la <b>reencarnación del alma</b> hasta alcanzar el <b>Nirvana</b>. La purificación del cuerpo en el río Ganges equivale a la purificación del espíritu.</p>
-<h3>Las Castas</h3>
-<p>La clase social se adquiere con el <b>nacimiento</b>: sistema sólido, rígido, inmóvil, inmutable, permanente y hereditario.</p>
-<table>
-<tr><th>Casta</th><th>Rol</th></tr>
-<tr><td>Brahmanes</td><td>Sacerdotes</td></tr>
-<tr><td>Chatrias</td><td>Guerreros / nobles</td></tr>
-<tr><td>Vaisias</td><td>Comerciantes</td></tr>
-<tr><td>Sudras</td><td>Sirvientes / campesinos</td></tr>
-<tr><td>Parias</td><td>Intocables (fuera del sistema)</td></tr>
-</table>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cómo se adquiere la casta en la sociedad india?</div>
-  <button class="quiz-btn" data-idx="0">Por mérito y esfuerzo personal</button>
-<button class="quiz-btn" data-idx="1">Con el nacimiento, de forma hereditaria e inmutable</button>
-<button class="quiz-btn" data-idx="2">Por decisión del sacerdote</button>
-<button class="quiz-btn" data-idx="3">Por riqueza acumulada durante la vida</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD III · Código de Manú <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Código de Manú</h2>
-    <p>Colección de preceptos <b>religiosos, morales, sociales y jurídicos</b> que regulaban el gobierno, la justicia, el ejército, la agricultura, el comercio y la condición de la mujer.</p>
-<p>Consagró la separación de castas dándole carácter de <b>inconmovible permanencia</b>. El Brahmanismo afirmó que cada casta provenía de una parte del cuerpo de Brahma.</p>
-<h3>Derecho Penal</h3>
-<ul>
-  <li>Penas muy severas para castas inferiores: aplastamiento por elefante, mutilación, marca con hierro incandescente.</li>
-  <li>El <b>Brahmán</b> no recibía castigo corporal, solo podía ser desterrado.</li>
-</ul>
-<h3>Derecho Civil — Levirato</h3>
-<p>Si el hombre era incapaz de tener hijos, podía autorizar a su mujer a engendrar con un pariente cercano (solo un hijo). En caso de muerte del marido, el hermano podía tomar a la viuda como esposa.</p>
-<p><b>Acto de inmolación Sati:</b> la viuda se inmolaba en la pira funeraria del esposo.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué distinguía el castigo del Brahmán respecto a las otras castas en el Código de Manú?</div>
-  <button class="quiz-btn" data-idx="0">Recibía la pena de muerte siempre</button>
-<button class="quiz-btn" data-idx="1">No recibía castigo corporal, solo podía ser desterrado</button>
-<button class="quiz-btn" data-idx="2">Era castigado igual que todos</button>
-<button class="quiz-btn" data-idx="3">Pagaba una multa económica como única pena</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD III · Egipto <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Egipto: Faraón, Sociedad y Cultura</h2>
-    <p>Egipto está rodeado de desierto; solo las orillas del <b>río Nilo</b> presentaban tierras fértiles, base de toda su civilización.</p>
-<h3>Gobierno Teocrático</h3>
-<p>La totalidad del poder político estaba concentrada en el <b>Faraón</b>, considerado figura divina → gobierno <b>teocrático</b>.</p>
-<h3>Sociedad Egipcia (pirámidal)</h3>
-<ol>
-  <li>Familia Real y Nobleza</li>
-  <li>Funcionarios de confianza del Faraón y profesionales</li>
-  <li>Artesanos, comerciantes y campesinos</li>
-  <li>Esclavos</li>
-</ol>
-<h3>Cultura y Ciencia</h3>
-<ul>
-  <li><b>Momificación:</b> creían en la vida después de la muerte; el destino eterno se decidía ante Osiris.</li>
-  <li>Desarrollaron conocimiento de anatomía, farmoquímica (aceites y esencias) para preservar cuerpos.</li>
-  <li><b>Jeroglíficos:</b> escritura que describe vida cotidiana, creencias y hechos históricos.</li>
-  <li>Grandes templos: Luxor, Karnak.</li>
-</ul>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Por qué se denomina 'teocrático' al gobierno del Antiguo Egipto?</div>
-  <button class="quiz-btn" data-idx="0">Porque lo dirigían varios sacerdotes en asamblea</button>
-<button class="quiz-btn" data-idx="1">Porque el Faraón era considerado una figura divina y concentraba todo el poder</button>
-<button class="quiz-btn" data-idx="2">Porque las leyes venían directamente de los dioses escritas</button>
-<button class="quiz-btn" data-idx="3">Porque el ejército era controlado por los templos</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD III · Mesopotamia — Sumerios <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Mesopotamia: Sumerios y Escritura Cuneiforme</h2>
-    <p><b>Mesopotamia</b> = «tierra entre ríos» (Tigris y Éufrates) → actual Irak. Junto con Egipto, parte de la <b>Media Luna Fértil</b>.</p>
-<h3>Los Sumerios (4.000 a.C.)</h3>
-<p>Establecieron las bases de la civilización mesopotámica. Se organizaron en <b>ciudades-Estado teocráticas</b> donde el rey era simultáneamente supremo gobernante y sacerdote.</p>
-<p>Primeras ciudades-Estado: <b>Ur, Uruk, Lagash y Eridu</b>.</p>
-<h3>El Zigurat</h3>
-<p>El templo no era solo centro religioso: era la sede del <b>gobierno</b> y el principal centro económico controlado por el rey.</p>
-<h3>Escritura Cuneiforme</h3>
-<p>Creada en Sumeria (~3.500 a.C.) en tablillas de arcilla húmeda con un tallo vegetal biselado en forma de cuña (<i>cuneus</i>). Sirvió para llevar contabilidad en templos, escribir leyes, textos literarios y religiosos.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Con qué propósito surgió originalmente la escritura cuneiforme?</div>
-  <button class="quiz-btn" data-idx="0">Para escribir textos religiosos y poemas épicos</button>
-<button class="quiz-btn" data-idx="1">Para llevar la contabilidad en los templos (cosechas, impuestos)</button>
-<button class="quiz-btn" data-idx="2">Para comunicarse entre ciudades-Estado enemigas</button>
-<button class="quiz-btn" data-idx="3">Para registrar victorias militares del rey</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD III · Hammurabi y Babilonia <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Babilonia y el Código de Hammurabi</h2>
-    <p>Hacia <b>1750 a.C.</b>, Hammurabi dominó toda la Mesopotamia inferior, con capital en <b>Babilonia</b>. Creó el primer código escrito de leyes (~1760 a.C.).</p>
-<h3>Áreas del Código</h3>
-<ul>
-  <li><b>Derecho Civil:</b> familia.</li>
-  <li><b>Derecho de Propiedad:</b> catastro.</li>
-  <li><b>Derecho Privado:</b> compraventa, préstamos, depósito, prenda.</li>
-  <li><b>Derecho Penal:</b> muy riguroso. Ley del Talión + Ordalias.</li>
-</ul>
-<div class="destacado">⚖️ <b>Ley del Talión:</b> "Ojo por ojo, diente por diente" — pena igual a la ofensa entre iguales. Si la contraparte era de categoría inferior: compensación en dinero.</div>
-<p>Se castigaban con muerte: adulterio, incesto, falso testimonio, sacrilegio, hurto. La mujer tenía derecho a la herencia del marido (mitad de bienes adquiridos).</p>
-<p>Mérito histórico: entregó al <b>Estado</b> la responsabilidad del cumplimiento de la ley, suprimiendo la venganza privada.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue el principal mérito histórico del Código de Hammurabi?</div>
-  <button class="quiz-btn" data-idx="0">Abolir la pena de muerte</button>
-<button class="quiz-btn" data-idx="1">Entregar al Estado la responsabilidad de hacer cumplir la ley, suprimiendo la venganza privada</button>
-<button class="quiz-btn" data-idx="2">Igualar los derechos de todas las clases sociales</button>
-<button class="quiz-btn" data-idx="3">Crear el primer sistema democrático</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD III · Hebreos — Biblia y Torá</div>
-  <div class="card-body">
-    <h2>Civilización Hebrea: Biblia y Torá</h2>
-    <p>El territorio hebreo es la antigua <b>Canaán</b> (Palestina), en el litoral oriental del Mar Mediterráneo, entre el río Jordán y el Mar Muerto.</p>
-<h3>Fuentes del Derecho Hebreo</h3>
-<p>La fuente principal es la <b>Biblia</b> (Antiguo Testamento), dividida en: <b>Ley (Torá) · Profetas (Neviim) · Hagiógrafos (Ketuvim)</b>.</p>
-<h3>La Torá — 5 libros del Pentateuco</h3>
-<table>
-<tr><th>Libro</th><th>Contenido</th></tr>
-<tr><td>Génesis</td><td>Creación del mundo</td></tr>
-<tr><td>Éxodo</td><td>Salida de Egipto</td></tr>
-<tr><td>Levítico</td><td>Culto en el tabernáculo</td></tr>
-<tr><td>Números</td><td>40 años en el desierto</td></tr>
-<tr><td>Deuteronomio</td><td>Mayor cantidad de leyes (Toráh)</td></tr>
-</table>
-    
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿En cuántos libros se divide la Torá (Pentateuco)?</div>
-  <button class="quiz-btn" data-idx="0">Tres</button>
-<button class="quiz-btn" data-idx="1">Diez</button>
-<button class="quiz-btn" data-idx="2">Cinco</button>
-<button class="quiz-btn" data-idx="3">Siete</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD III · Derecho Hebreo</div>
-  <div class="card-body">
-    <h2>Derecho Hebreo: Tratados y Derecho Civil</h2>
-    <h3>Tratados de la Torá</h3>
-<ul>
-  <li><b>El Decálogo:</b> 10 leyes escritas por Dios (derecho positivo y natural).</li>
-  <li><b>Código de la Alianza:</b> Derecho penal y civil.</li>
-  <li><b>Decálogo Ritual:</b> normas para sociedad sedentaria.</li>
-  <li><b>Código Deuteronomio:</b> derecho penal, familiar y social.</li>
-  <li><b>Código de Sanidad:</b> leyes morales y rituales.</li>
-</ul>
-<h3>Derecho Civil Hebreo</h3>
-<ul>
-  <li>Familia <b>patriarcal</b>, matrimonio monogámico.</li>
-  <li>El padre podía vender a su hijo a otro hebreo.</li>
-  <li><b>Levirato:</b> si muere el marido, el hermano puede tomar a la viuda como esposa.</li>
-  <li>El <b>primogénito</b> recibía doble herencia.</li>
-</ul>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué establece el Levirato en el Derecho Hebreo?</div>
-  <button class="quiz-btn" data-idx="0">El primogénito recibe doble herencia</button>
-<button class="quiz-btn" data-idx="1">El hermano del marido fallecido puede tomar a la viuda como esposa</button>
-<button class="quiz-btn" data-idx="2">El padre tiene potestad absoluta sobre sus hijos</button>
-<button class="quiz-btn" data-idx="3">El matrimonio hebreo era poligámico</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla portada">
-  <div class="card-body">
-    <h2>UNIDAD IV</h2>
-    <div class="subtitulo">Grecia: Democracia, Filosofía e Instituciones</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD IV · Grecia — Introducción y Geografía <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Grecia: Geografía e Ideales Políticos</h2>
-    <div class="cita">"La mayor parte de los ideales políticos modernos — la justicia, la libertad, el régimen constitucional y el respeto al Derecho — comenzaron con la reflexión de los pensadores griegos." (Sabine)</div>
-<h3>Geografía</h3>
-<p>La Antigua Grecia (Hélade) se extendió por tres espacios: la <b>Península de los Balcanes</b>, las islas del Mar Jónico y Egeo, y las costas occidentales de <b>Asia Menor</b> (actual Turquía).</p>
-<h3>Las dos grandes Polis</h3>
-<table>
-<tr><th>Atenas</th><th>Esparta</th></tr>
-<tr><td>Fundada por los Jonios</td><td>Fundada por los Dorios</td></tr>
-<tr><td>Península del Ática</td><td>Sur del Peloponeso</td></tr>
-<tr><td>Democrática, filosófica, individualista, artística</td><td>Militar, guerrera, disciplinada, patriótica</td></tr>
-</table>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué distinguía principalmente a Atenas de Esparta?</div>
-  <button class="quiz-btn" data-idx="0">Atenas era militar y Esparta democrática</button>
-<button class="quiz-btn" data-idx="1">Atenas era democrática y filosófica; Esparta era militar y guerrera</button>
-<button class="quiz-btn" data-idx="2">Ambas eran democráticas pero con distintas constituciones</button>
-<button class="quiz-btn" data-idx="3">Atenas usaba castas; Esparta era igualitaria</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD IV · Esparta</div>
-  <div class="card-body">
-    <h2>Esparta: Licurgo, Educación y Constitución</h2>
-    <h3>Licurgo y la Constitución de Esparta</h3>
-<p>En el siglo VIII a.C., el legislador <b>Licurgo</b> realizó la reforma política y social de Esparta, estableciendo su constitución, llamada <b>Retar (ley)</b>.</p>
-<h3>Sociedad y Gobierno</h3>
-<p>Sistema oligárquico-militar. Los ciudadanos plenos (<i>espartiatas</i>) eran guerreros de élite. Los <i>hilotas</i> (esclavos del Estado) trabajaban la tierra.</p>
-<h3>Educación Espartana (Agogé)</h3>
-<ul>
-  <li>Al nacer, los bebés eran examinados: si tenían defecto físico, eran arrojados desde un monte.</li>
-  <li>A los <b>7 años</b>, los niños eran apartados de sus hogares para recibir educación militar.</li>
-</ul>
-<h3>Las Guerras Médicas</h3>
-<p>Defensa de los griegos contra los persas (rey Darío y su hijo Jerjes). Batallas memorables: <b>Maratón, Termópilas, Salamina y Platea</b>. En Termópilas, 300 espartanos murieron conteniendo al ejército persa.</p>
-    
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cómo se llamó la constitución que estableció Licurgo en Esparta?</div>
-  <button class="quiz-btn" data-idx="0">La Isonomía</button>
-<button class="quiz-btn" data-idx="1">La Éclesía</button>
-<button class="quiz-btn" data-idx="2">La Retar</button>
-<button class="quiz-btn" data-idx="3">La Acropolis</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD IV · Olimpiadas <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Las Primeras Olimpiadas</h2>
-    <div class="destacado">🏟️ Año 776 a.C. — Primeros Juegos Olímpicos: el «año 0» del calendario griego.</div>
-<p>Los juegos olímpicos se celebraban en <b>Olimpia</b> cada cuatro años en honor a Zeus. Eran un evento panhelénico: todos los griegos, incluso en guerra, hacían una tregua sagrada para participar.</p>
-<p>Las competencias incluían atletismo, lucha, lanzamiento de disco y jabalina, carreras de carros y pentatlon. Los vencedores recibían una corona de olivo y gloria eterna.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿En qué año se celebraron los primeros Juegos Olímpicos?</div>
-  <button class="quiz-btn" data-idx="0">509 a.C.</button>
-<button class="quiz-btn" data-idx="1">776 a.C.</button>
-<button class="quiz-btn" data-idx="2">594 a.C.</button>
-<button class="quiz-btn" data-idx="3">753 a.C.</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD IV · Evolución Política de Atenas <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Evolución Política de Atenas</h2>
-    <p>Atenas pasó por cuatro etapas políticas principales:</p>
-<ol>
-  <li><b>Monarquía:</b> gobernada por un rey.</li>
-  <li><b>Gobierno de los Eupátridas (nobles):</b> los Arcontes administraban, la religión, el ejército y la justicia.</li>
-  <li><b>Aristocracia:</b> gobierno de los mejores / nobles. El pueblo (demos) comenzó a reclamar derechos.</li>
-  <li><b>Democracia:</b> Clístenes realizó reformas que dieron origen al gobierno del pueblo.</li>
-</ol>
-<div class="destacado">Demo = pueblo · Kratos = gobierno → <b>Democracia</b> = Gobierno del pueblo</div>
-<h3>Dracón (621 a.C.)</h3>
-<p>Primer legislador que codificó las leyes de Atenas por escrito, aunque eran extremadamente severas ("draconiana").</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuáles son las 4 etapas de la evolución política de Atenas en orden?</div>
-  <button class="quiz-btn" data-idx="0">Democracia, aristocracia, monarquía, tiranía</button>
-<button class="quiz-btn" data-idx="1">Monarquía, gobierno de nobles, aristocracia, democracia</button>
-<button class="quiz-btn" data-idx="2">República, monarquía, tiranía, democracia</button>
-<button class="quiz-btn" data-idx="3">Teocracia, oligarquía, aristocracia, democracia</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD IV · Solón y Clístenes <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Solón, Clístenes y la Democracia Ateniense</h2>
-    <h3>Solón (594 a.C.)</h3>
-<p>Nombrado arconte con poder para establecer una nueva constitución. Introdujo la <b>isonomía</b> (igualdad por la ley y ante la ley) → considerado <b>Padre de la Democracia</b>.</p>
-<h3>Clístenes (561–527 a.C.)</h3>
-<p>Aristócrata que llegó al gobierno de Atenas a fines del siglo VI a.C. Sus reformas consolidaron la democracia:</p>
-<ul>
-  <li>Dividió la población en <b>10 tribus</b> de 50 ciudadanos c/u (500 en total en la Asamblea).</li>
-  <li>Todos con <b>iguales derechos</b> para participar en el gobierno.</li>
-  <li>Cada tribu elegía un <b>Estratega</b> (ejército, flota, impuestos) y un <b>Arconte</b> (administración y religión).</li>
-</ul>
-<h3>Pericles (461–429 a.C.)</h3>
-<p>Profundizó las reformas: decidió que todos los cargos públicos recibieran <b>compensación económica</b>, permitiendo así la participación de los ciudadanos más pobres. La asamblea del pueblo se llamaba <b>Eclesía</b>; el lugar de reunión era el <b>Ágora</b>.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué innovación introdujo Clístenes para ampliar la participación política?</div>
-  <button class="quiz-btn" data-idx="0">Pagó a los ciudadanos por ocupar cargos</button>
-<button class="quiz-btn" data-idx="1">Dividió la población en 10 tribus de 50 ciudadanos c/u con iguales derechos</button>
-<button class="quiz-btn" data-idx="2">Eliminó a los nobles del gobierno</button>
-<button class="quiz-btn" data-idx="3">Creó el tribunal del pueblo</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD IV · Sofistas y Sócrates <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Sofistas vs. Sócrates</h2>
-    <table>
-<tr><th></th><th>Sofistas</th><th>Sócrates</th></tr>
-<tr><td><b>Conocimiento</b></td><td>Relativo ("el hombre es la medida de todas las cosas")</td><td>Universal (a través de la definición)</td></tr>
-<tr><td><b>Método</b></td><td>Monólogo y retórica (persuadir emociones)</td><td>Diálogo (buscar la verdad con la razón)</td></tr>
-<tr><td><b>Objetivo</b></td><td>Capacitar para la vida política (oratoria y erística)</td><td>Conocer la virtud universal del alma</td></tr>
-<tr><td><b>Ética</b></td><td>Relativismo: los valores son solo opiniones</td><td>Existe una moral universal</td></tr>
-</table>
-<h3>Representantes Sofistas</h3>
-<p>Protágoras (481–411 a.C.) · Gorgias (483–375 a.C.) · Pródico de Ceos</p>
-<h3>Platón y Aristóteles</h3>
-<p><b>Platón</b> (discípulo de Sócrates): teoría de las ideas, la República ideal. <b>Aristóteles</b> (discípulo de Platón): política, lógica, ética — "el hombre es un animal político".</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál era el objetivo principal de la educación sofística?</div>
-  <button class="quiz-btn" data-idx="0">Enseñar la virtud universal y la ética</button>
-<button class="quiz-btn" data-idx="1">Capacitar a los jóvenes para la participación política mediante oratoria y erística</button>
-<button class="quiz-btn" data-idx="2">Transmitir el conocimiento de la naturaleza</button>
-<button class="quiz-btn" data-idx="3">Formar filósofos que gobernaran la polis</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla portada">
-  <div class="card-body">
-    <h2>UNIDAD V</h2>
-    <div class="subtitulo">Roma: Monarquía, República e Imperio</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · Fundación de Roma <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Fundación de Roma y Sociedad</h2>
-    <div class="destacado">🏛️ Roma se fundó el <b>21 de abril del año 753 a.C.</b> — fundadores míticos: Rómulo y Remo.</div>
-<p><b>Roma Quadrata</b>: conjunto de pueblos latinos, etruscos y sabinos que vivían a orillas del río Tíber.</p>
-<h3>Sociedad Romana</h3>
-<table>
-<tr><th>Grupo</th><th>Características</th></tr>
-<tr><td><b>Patricios</b></td><td>Aristocracia, descendientes de los "padres fundadores". Cargos políticos, militares y religiosos. Terratenientes. Agrupados en "gens".</td></tr>
-<tr><td><b>Plebeyos</b></td><td>Personas libres, no ciudadanos. Excluidos de la vida política y religiosa. Campesinos, comerciantes y artesanos. Pagaban impuestos.</td></tr>
-<tr><td><b>Esclavos</b></td><td>Sin ningún derecho. Propiedad de sus amos.</td></tr>
-</table>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué caracterizaba a los Patricios en la sociedad romana?</div>
-  <button class="quiz-btn" data-idx="0">Eran personas libres que pagaban impuestos sin derechos políticos</button>
-<button class="quiz-btn" data-idx="1">Eran la aristocracia descendiente de los padres fundadores con plenos derechos</button>
-<button class="quiz-btn" data-idx="2">Eran esclavos liberados con derechos limitados</button>
-<button class="quiz-btn" data-idx="3">Eran comerciantes extranjeros con privilegios especiales</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · Monarquía Romana <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>La Monarquía Romana (753–509 a.C.)</h2>
-    <h3>Instituciones Políticas de la Monarquía</h3>
-<ul>
-  <li><b>El Rey:</b> elegido por la Asamblea, duraba en su cargo de por vida. A su muerte el poder volvía al Estado; el Senado designaba un rey interino.</li>
-  <li><b>El Senado:</b> integrado por los jefes de familias patricias. Funciones consultivas: asesoraba al rey.</li>
-  <li><b>La Asamblea (Comicios por Curias):</b> solo ciudadanos. Funciones legislativas (votar leyes, declarar la guerra), judiciales y electorales.</li>
-</ul>
-<h3>Mos Maiorum</h3>
-<p>Hasta la Ley de las XII Tablas, el derecho romano era <b>no escrito y consuetudinario</b>, regido por el <i>mos maiorum</i> (costumbre de los antepasados) con fuerte peso de la religión.</p>
-<p>El <b>paterfamilias</b> era el jefe absoluto de la familia y su sacerdote. El <b>rex</b>, jefe absoluto de la ciudad, era el sumo sacerdote del Estado.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué era el 'mos maiorum' en el derecho romano temprano?</div>
-  <button class="quiz-btn" data-idx="0">El primer código escrito de Roma</button>
-<button class="quiz-btn" data-idx="1">La costumbre de los antepasados que regía el derecho no escrito</button>
-<button class="quiz-btn" data-idx="2">La constitución del rey Servio Tulio</button>
-<button class="quiz-btn" data-idx="3">El conjunto de leyes aprobadas por el Senado</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · Reformas de Servio Tulio</div>
-  <div class="card-body">
-    <h2>Reformas de Servio Tulio</h2>
-    <h3>El Muro Serviano</h3>
-<p>Durante el reinado de <b>Servio Tulio</b> se construyó la muralla de la ciudad: 11 km de longitud, 3,6 m de ancho, protegiendo 427 hectáreas.</p>
-<h3>Primera Constitución Política de Roma</h3>
-<p>Servio Tulio introdujo un nuevo modelo de organización con dos objetivos:</p>
-<ul>
-  <li>Facilitar el pago de <b>impuestos</b>.</li>
-  <li>Mejorar el <b>reclutamiento del ejército</b>.</li>
-</ul>
-<p>Organizó la ciudad en <b>4 barrios</b> e implantó un censo basado en la <b>riqueza</b> (no solo en el nacimiento). Dividió la población en <b>5 clases</b> organizadas en <b>centurias</b> (compañías de 100 hombres), hasta un total de <b>193 centurias</b>.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue el criterio innovador del censo de Servio Tulio?</div>
-  <button class="quiz-btn" data-idx="0">Se basaba únicamente en el nacimiento y el linaje</button>
-<button class="quiz-btn" data-idx="1">Se basaba en la riqueza, no solo en el nacimiento</button>
-<button class="quiz-btn" data-idx="2">Se basaba en el mérito militar</button>
-<button class="quiz-btn" data-idx="3">Se basaba en la religión y el sacerdocio</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · La República y Magistraturas <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>La República Romana (509–27 a.C.)</h2>
-    <p>La República comenzó en <b>509 a.C.</b> con la expulsión del último rey etrusco.</p>
-<h3>Principales Magistraturas (Cursus Honorum)</h3>
-<table>
-<tr><th>Magistratura</th><th>Función</th></tr>
-<tr><td><b>Cónsul</b></td><td>2 cónsules anuales; máxima autoridad civil y militar</td></tr>
-<tr><td><b>Pretor</b></td><td>Administración de justicia</td></tr>
-<tr><td><b>Censor</b></td><td>Censo de ciudadanos y control de la moral pública</td></tr>
-<tr><td><b>Edil</b></td><td>Obras públicas, mercados, juegos</td></tr>
-<tr><td><b>Cuestor</b></td><td>Administración financiera del Estado</td></tr>
-</table>
-<p>El <b>Cursus Honorum</b> era la carrera política; los magistrados iban ascendiendo de cargo en cargo, todos electivos y anuales.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué era el 'Cursus Honorum' en Roma?</div>
-  <button class="quiz-btn" data-idx="0">El código de leyes de la República</button>
-<button class="quiz-btn" data-idx="1">La carrera política por la que un ciudadano ascendía de cargo en cargo</button>
-<button class="quiz-btn" data-idx="2">El nombre del ejército romano</button>
-<button class="quiz-btn" data-idx="3">El manual de ética para senadores</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · XII Tablas y Lucha de Clases <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Ley de las XII Tablas y las 4 Igualdades</h2>
-    <h3>La Lucha de Clases</h3>
-<p>Durante ~400 años los plebeyos, perjudicados por guerras de conquista que los obligaban a abandonar sus tierras, lucharon por conquistar igualdad. Su gran logro fue la <b>Ley de las XII Tablas (451–450 a.C.)</b>: primera ley escrita de Roma.</p>
-<h3>Las 4 Igualdades conquistadas</h3>
-<ul>
-  <li><b>Civil:</b> equivalencia entre patricios y plebeyos ante la ley (XII Tablas).</li>
-  <li><b>Social:</b> matrimonio entre patricios y plebeyos.</li>
-  <li><b>Política:</b> acceso de plebeyos a todos los cargos públicos (consulado, Senado).</li>
-  <li><b>Religiosa:</b> libertad de culto.</li>
-</ul>
-<h3>Contenido de las XII Tablas</h3>
-<p>Tablas I–II: procedimiento judicial · III: deudores · IV: patria potestad · V: tutela · VI: propiedad · VII: servidumbres · VIII: penal · IX: derecho público · X: sagrado · XI–XII: complementos.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué igualdad conquistaron los plebeyos con la Ley de las XII Tablas?</div>
-  <button class="quiz-btn" data-idx="0">Igualdad política (acceso a cargos)</button>
-<button class="quiz-btn" data-idx="1">Igualdad civil y social (ante la ley y el matrimonio mixto)</button>
-<button class="quiz-btn" data-idx="2">Igualdad religiosa (libertad de culto)</button>
-<button class="quiz-btn" data-idx="3">Igualdad económica (reparto de tierras)</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · Fuentes del Derecho en la República</div>
-  <div class="card-body">
-    <h2>Fuentes del Derecho en la República</h2>
-    <p>En la República, el Derecho romano tenía múltiples fuentes:</p>
-<ul>
-  <li><b>Ley:</b> aprobada por los Comicios.</li>
-  <li><b>Plebiscitos:</b> decisiones de la Asamblea plebeya.</li>
-  <li><b>Senadoconsultos:</b> decisiones del Senado.</li>
-  <li><b>Edicto de los Magistrados:</b> normas publicadas por pretores al inicio de su cargo.</li>
-  <li><b>Jurisprudencia:</b> opiniones de los juristas (ius respondendi).</li>
-</ul>
-<div class="destacado">El <b>Ius Honorarium</b> (derecho pretoriano) fue el conjunto de normas creadas por el pretor para corroborar, suplir o corregir el derecho civil existente.</div>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué era el Ius Honorarium o derecho pretoriano?</div>
-  <button class="quiz-btn" data-idx="0">El conjunto de leyes aprobadas por el Senado</button>
-<button class="quiz-btn" data-idx="1">El derecho creado por el pretor para corroborar, suplir o corregir el derecho civil</button>
-<button class="quiz-btn" data-idx="2">Las constituciones imperiales del emperador</button>
-<button class="quiz-btn" data-idx="3">Los plebiscitos votados por la Asamblea plebeya</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · El Imperio Romano <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>El Imperio Romano (27 a.C.–476 d.C.)</h2>
-    <h3>Organización del Imperio</h3>
-<p>El <b>Emperador</b> nombraba al Consejo del Príncipe y a miembros del orden senatorial y ecuestre, que tenían a su cargo las provincias imperiales, el ejército y la policía.</p>
-<p>Los Magistrados, elegidos por el Senado, controlaban las provincias senatoriales, las finanzas y la justicia en Roma.</p>
-<h3>Fuentes del Derecho en el Imperio</h3>
-<ul>
-  <li>Imperio Republicano: jurisprudencia (ius respondendi), Edicto Perpetuo, senadoconsultos, constituciones imperiales.</li>
-  <li>Imperio Absoluto: las <b>leges o constituciones de los emperadores</b> se convirtieron en la única fuente.</li>
-</ul>
-<h3>El Edicto Perpetuo de Adriano</h3>
-<p>Adriano ordenó al jurista <b>Salvio Juliano</b> reunir en un solo cuerpo las reglas publicadas cada año por el pretor urbano → codificación del derecho pretoriano → promulgado como <b>ley definitiva</b> (sin más modificaciones).</p>
-    
-<div class="quiz-section" data-correcta="3">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Quién codificó el Edicto Perpetuo por orden del Emperador Adriano?</div>
-  <button class="quiz-btn" data-idx="0">Cayo</button>
-<button class="quiz-btn" data-idx="1">Ulpiano</button>
-<button class="quiz-btn" data-idx="2">Justiniano</button>
-<button class="quiz-btn" data-idx="3">Salvio Juliano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · Crisis del s. III, Diocleciano y Constantino <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Crisis del s. III · Diocleciano · Constantino</h2>
-    <h3>Crisis del Siglo III</h3>
-<p>Revueltas sociales y militares, anarquía y sucesión de emperadores incapaces. Ataques de los pueblos germanos.</p>
-<h3>Diocleciano (s. IV)</h3>
-<p>Saneó la economía y reforzó las fronteras. Dividió el Imperio en dos sectores: Oriente y Occidente → <b>Tetrarquía</b>: cada sector gobernado por un <b>Augusto</b> con un vice-emperador llamado <b>César</b>.</p>
-<h3>Constantino</h3>
-<ul>
-  <li><b>Edicto de Milán (313 d.C.):</b> declaró la libertad de culto para los cristianos.</li>
-  <li>Trasladó la capital a <b>Constantinopla</b> (actual Estambul) para cohesión interna.</li>
-</ul>
-<h3>Teodosio (395 d.C.)</h3>
-<p>Dividió definitivamente el Imperio entre sus hijos Honorio (Occidente) y Arcadio (Oriente).</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué estableció el Edicto de Milán de Constantino en el año 313 d.C.?</div>
-  <button class="quiz-btn" data-idx="0">La división del Imperio en Oriente y Occidente</button>
-<button class="quiz-btn" data-idx="1">La libertad de culto para los cristianos</button>
-<button class="quiz-btn" data-idx="2">La codificación definitiva del derecho romano</button>
-<button class="quiz-btn" data-idx="3">El traslado de la capital a Roma</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · Codificaciones y Ley de Citas <span class="badge-ada">📋 Competencias · Prof. Ada</span></div>
-  <div class="card-body">
-    <h2>Codificaciones: Gregoriano, Hermogeniano, Teodosiano y Ley de Citas</h2>
-    <p>Ante la enorme cantidad de leyes romanas, desde el siglo II comenzó la codificación:</p>
-<table>
-<tr><th>Código</th><th>Período</th><th>Contenido</th></tr>
-<tr><td><b>Gregoriano</b></td><td>196–303 d.C.</td><td>Constituciones desde Adriano hasta Diocleciano</td></tr>
-<tr><td><b>Hermogeniano</b></td><td>291–324 d.C.</td><td>Completaba el Gregoriano con constituciones de Diocleciano</td></tr>
-<tr><td><b>Teodosiano</b></td><td>438 d.C.</td><td>Recopilación de constituciones imperiales</td></tr>
-</table>
-<div class="destacado">La <b>Ley de Citas</b>: estableció qué juristas podían ser citados como autoridad en los juicios (Papiniano, Paulo, Ulpiano, Modestino, Gayo).</div>
-<p>La codificación definitiva fue obra del Emperador <b>Justiniano</b> (529–533 d.C.) desde el Imperio de Oriente → <i>Corpus Iuris Civilis</i>.</p>
-    
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue la codificación definitiva del derecho romano y quién la realizó?</div>
-  <button class="quiz-btn" data-idx="0">El Código Teodosiano, por el Senado romano</button>
-<button class="quiz-btn" data-idx="1">El Corpus Iuris Civilis, por el Emperador Justiniano (529–533 d.C.)</button>
-<button class="quiz-btn" data-idx="2">El Código Gregoriano, por el jurista Salvio Juliano</button>
-<button class="quiz-btn" data-idx="3">La Ley de Citas, por el Emperador Diocleciano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-
-<div class="cartilla">
-  <div class="card-header">UNIDAD V · Caída del Imperio y Legado</div>
-  <div class="card-body">
-    <h2>Caída del Imperio y Legado Romano</h2>
-    <div class="destacado">⚔️ <b>476 d.C.</b> — Odoacro, rey de los hérulos, saqueó Roma → caída del Imperio Romano de Occidente.</div>
-<p>Previamente, Atila, rey de los hunos, había devastado grandes partes del Imperio.</p>
-<h3>Legado Político de Roma</h3>
-<ul>
-  <li>Carácter legislativo del Senado.</li>
-  <li>División administrativa: Provincias y Municipios.</li>
-  <li>Importancia de los centros urbanos.</li>
-  <li>Ciudadanía universal.</li>
-  <li>Burocracia para administrar el Estado.</li>
-  <li>El sistema legal, principios jurídicos (primacía de la ley) y derecho de apelación.</li>
-</ul>
-    
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿En qué año y quién produjo la caída del Imperio Romano de Occidente?</div>
-  <button class="quiz-btn" data-idx="0">395 d.C., cuando Teodosio dividió el Imperio</button>
-<button class="quiz-btn" data-idx="1">313 d.C., con el Edicto de Milán de Constantino</button>
-<button class="quiz-btn" data-idx="2">476 d.C., cuando Odoacro (rey de los hérulos) saqueó Roma</button>
-<button class="quiz-btn" data-idx="3">529 d.C., con la codificación de Justiniano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-</div>
-  </div>
-</div>
-  <div class="nav-buttons">
-    <button class="btn-nav" id="btnAnterior" onclick="cambiar(-1)">← Anterior</button>
-    <button class="btn-nav" id="btnIndice" onclick="abrirIndice()">☰ Índice</button>
-    <button class="btn-nav" id="btnSiguiente" onclick="cambiar(1)">Siguiente →</button>
-  </div>
-</div><!-- fin #vistaCartillas -->
-
-<div class="indice-overlay" id="indiceOverlay" onclick="cerrarIndice()"></div>
-<div class="indice-panel" id="indicePanel">
-  <div class="indice-titulo">
-    Índice de cartillas
-    <button class="btn-cerrar-indice" onclick="cerrarIndice()">✕</button>
-  </div>
-  <div id="indiceContenido" style="padding:.5rem;"></div>
-</div>
-<button class="menu-toggle" onclick="abrirIndice()" title="Ver índice">☰</button>
-
-<div id="vistaExamen" class="vista">
-  <div id="examenConfig" class="examen-config">
-    <h3>🧠 Modo Examen</h3>
-    <p style="font-size:.88rem;color:#5a7363;margin-bottom:1rem;">¿Cuántas preguntas querés responder?</p>
-    <div class="btn-num-wrap">
-      <button class="btn-num" data-n="5">5</button>
-      <button class="btn-num sel" data-n="10">10</button>
-      <button class="btn-num" data-n="15">15</button>
-      <button class="btn-num" data-n="20">20</button>
-      <button class="btn-num" data-n="999">Todas</button>
+  <footer>
+    Introducción a las Ciencias Jurídicas · Abog. Raúl Florentín · Universidad Nacional de Asunción
+  </footer>
+</div>
+
+<!-- ===== LESSON PAGES ===== -->
+
+  <section class="lesson-page" id="lesson-11" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">📜 Lección 11</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Normas Jurídicas</h1>
+      <p class="lesson-subtitle">Normas Religiosas, Morales, del Trato Social y Jurídicas</p>
     </div>
-    <button class="btn-iniciar" onclick="iniciarExamen()">Comenzar examen</button>
-  </div>
-
-  <div id="examenActivo" class="examen-activo">
-    <div class="ex-header">
-      <span class="ex-contador" id="exContador">Pregunta 1 / 10</span>
-      <span class="ex-puntaje"  id="exPuntaje">✓ 0 &nbsp; ✗ 0</span>
+    <div class="slideshow-container" id="slides-11">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 5</div>
+              <h2 class="slide-title">Normas Religiosas</h2>
+              <div class="slide-content">Las normas religiosas regulan el comportamiento del ser humano en sus relaciones con la divinidad. La palabra <em>religión</em> deriva de la voz latina <em>religio</em> que significa vínculo de unión del hombre con Dios.<br><br><strong>Caracteres:</strong> Espontaneidad · Heteronomía · Unilateralidad · Interioridad · Incoercibilidad<br><strong>Clasificación:</strong> Normas de Fe / Normas de la Razón<br><strong>Sanciones:</strong> Terrenales y Ultraterrenales · Premiales · Preventivas y represivas</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 5</div>
+              <h2 class="slide-title">Normas Morales y del Trato Social</h2>
+              <div class="slide-content"><strong>Normas Morales:</strong> Formulan imperativamente los deberes ordenados al bien personal del hombre. <em>Caracteres:</em> Autonomía · Unilateralidad · Subjetivo · Interioexterioridad · Incoercibilidad<br><br><strong>Normas del Trato Social:</strong> Reglas de naturaleza específicamente social y externa que imponen deberes de comportamiento decoroso derivados de las circunstancias. <em>Carácter:</em> Imperativo.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 5</div>
+              <h2 class="slide-title">Normas Jurídicas — Concepto y Caracteres</h2>
+              <div class="slide-content">La norma jurídica rige la conducta humana en sociedad, y su cumplimiento puede exigirse coactivamente o pedir que se aplique la sanción por los órganos del Estado, en caso de su inobservancia.<br><br><strong>Caracteres:</strong> Imperatividad · Autarquía · Heteronomía · Generalidad · Bilateralidad · Exteriointerioridad · <strong>Coercibilidad</strong></div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 5</div>
+              <h2 class="slide-title">Estructura y Clasificación de las Normas Jurídicas</h2>
+              <div class="slide-content">La estructura lógica de la norma jurídica se compone de: <strong>hipótesis o supuesto jurídico</strong> y <strong>disposición o consecuencia de derecho</strong>.<br><br><strong>Clasificación:</strong><br>• Por sanciones: Leyes perfectas, pluscuamperfectas, minuscuamperfectas, imperfectas<br>• Por ámbito: espacial, temporal, material y personal<br>• Por jerarquía: Norma Primaria, Secundaria, de Vigencia, Declarativa, Permisiva, Sancionadora</div>
+            </div>
+            <div class="slide " data-index="4">
+              <div class="slide-number">5 / 5</div>
+              <h2 class="slide-title">La Sanción — Sanciones prohibidas por la CN</h2>
+              <div class="slide-content">Las sanciones son las seguridades de que se rodean las normas jurídicas para hacer efectivo su cumplimiento.<br><br><strong>Sanciones prohibidas por la Constitución Nacional:</strong><br>• Las multas desmedidas (Art. 44 CN)<br>• La pena de muerte (Art. 4 CN)<br>• Prohibición de confiscación (Arts. 109 y 181 CN)<br>• Torturas y tratos crueles, inhumanos (Art. 5 CN)<br>• Ley N° 1557/2000 — Protocolo de abolición de la pena de muerte</div>
+            </div>
     </div>
-    <div class="ex-progbar-wrap"><div class="ex-progbar" id="exProgBar"></div></div>
-    <div class="ex-tag"      id="exTag"></div>
-    <div class="ex-pregunta" id="exPregunta"></div>
-    <div class="ex-opciones" id="exOpciones"></div>
-    <div class="ex-explicacion" id="exExplicacion"></div>
-    <button class="ex-siguiente" id="exSiguiente" onclick="siguientePregunta()">Siguiente →</button>
-  </div>
-
-  <div id="examenResultado" class="ex-resultado">
-    <div class="ex-score-num" id="exScoreNum"></div>
-    <div class="ex-score-txt" id="exScoreTxt"></div>
-    <div class="ex-detalle"   id="exDetalle"></div>
-    <button class="btn-reiniciar-ex" onclick="reiniciarExamen()">Volver a intentar</button>
-  </div>
-</div>
-
-<div id="vistaProfAda" class="vista">
-  <div style="max-width:700px;margin:0 auto;padding:1rem">
-    <h2 style="color:var(--verde1);text-align:center;margin-bottom:1rem">📝 Cuestionario – Prof. Ada</h2>
-    <p style="text-align:center;color:var(--gris2);font-size:.88rem;margin-bottom:1.5rem">
-      Historia de las Instituciones Jurídicas · Seleccioná la respuesta correcta
-    </p>
-    <div id="ada-quiz-container"></div>
-    <div id="ada-resultado" style="display:none;background:#fff;border-radius:14px;padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(27,110,61,.1);margin-top:1rem">
-      <div id="ada-score-num" style="font-size:3rem;font-weight:900;color:var(--verde1)"></div>
-      <div style="font-size:1.1rem;color:var(--gris2);margin-bottom:1rem">respuestas correctas</div>
-      <button onclick="reiniciarAdaQuiz()" style="background:var(--verde1);color:#fff;border:none;padding:.7rem 2rem;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:700">🔄 Reiniciar</button>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(11)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(11,0)"></button><button class="dot " onclick="goToSlide(11,1)"></button><button class="dot " onclick="goToSlide(11,2)"></button><button class="dot " onclick="goToSlide(11,3)"></button><button class="dot " onclick="goToSlide(11,4)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(11)">&#8594;</button>
     </div>
-  </div>
-</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-11"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-12" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🏛️ Lección 12</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Ordenamiento Jurídico</h1>
+      <p class="lesson-subtitle">Juricidad, Antijuricidad y Pirámide de Kelsen</p>
+    </div>
+    <div class="slideshow-container" id="slides-12">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 5</div>
+              <h2 class="slide-title">Ordenamiento Normativo</h2>
+              <div class="slide-content">Las normas reguladoras de la conducta humana no se encuentran aisladas, sino que constituyen conjuntos orgánico-sistematizados denominados <strong>ordenamientos normativos</strong>.<br><br>Ordenamiento normativo es el conjunto sistematizado de normas que regulan el obrar del hombre y tienen la misma razón de validez.<br><br><em>Especies:</em> religioso, moral, de trato social y jurídico.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 5</div>
+              <h2 class="slide-title">El Ordenamiento Jurídico — Juricidad</h2>
+              <div class="slide-content"><strong>Ordenamiento jurídico:</strong> conjunto sistematizado de normas cuya razón de validez deriva de la misma Constitución o norma superior fundamental.<br><br><strong>Juricidad:</strong> constituida por los hechos o fenómenos de la realidad social regulados por las normas jurídicas. Es el acontecer en la vida jurídica.<br><br><strong>Conducta lícita:</strong> la que corresponde a la ejecución de los actos ordenados y a la omisión de los prohibidos.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 5</div>
+              <h2 class="slide-title">Antijuricidad — Arbitrariedad — Injusticia</h2>
+              <div class="slide-content"><strong>Antijuricidad:</strong> conjunto de hechos que se oponen al orden jurídico, son hechos ilícitos o prohibidos. La <em>conducta ilícita</em> está representada por la omisión de los actos ordenados o la ejecución de los prohibidos.<br><br><strong>Arbitrariedad:</strong> conducta antijurídica de los órganos del Estado; la especie más grave de antijuridicidad.<br><br><strong>Injusticia:</strong> no atribuir a cada uno lo que le corresponde por el derecho natural y el derecho positivo.</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 5</div>
+              <h2 class="slide-title">Pirámide de Kelsen</h2>
+              <div class="slide-content">La prelación de normas determina la jerarquía e importancia de las mismas. Hans Kelsen estableció la jerarquización piramidal: cada norma superior constituye la razón de validez de la inferior.<br><br>La jerarquía en el <strong>Derecho Paraguayo</strong> está establecida en el <strong>Art. 137 CN</strong>:<br>1° Constitución Nacional<br>2° Tratados y convenios internacionales<br>3° Leyes del Congreso<br>4° Disposiciones jurídicas de inferior jerarquía</div>
+            </div>
+            <div class="slide " data-index="4">
+              <div class="slide-number">5 / 5</div>
+              <h2 class="slide-title">Fin del Ordenamiento Jurídico</h2>
+              <div class="slide-content">El ordenamiento jurídico debe ser estable pero contemplar las exigencias sociales.<br><br><strong>Caducidad de la norma fundamental — dos modos:</strong><br><br>• <strong>Muerte natural:</strong> cuando la Constitución vigente es reformada totalmente o se dicta una nueva conforme a sus propias disposiciones.<br><br>• <strong>Muerte violenta:</strong> ruptura de la lógica de los antecedentes causada por una <em>revolución</em>.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(12)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(12,0)"></button><button class="dot " onclick="goToSlide(12,1)"></button><button class="dot " onclick="goToSlide(12,2)"></button><button class="dot " onclick="goToSlide(12,3)"></button><button class="dot " onclick="goToSlide(12,4)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(12)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-12"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-13" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">⚖️ Lección 13</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">El Derecho Positivo</h1>
+      <p class="lesson-subtitle">Ramas, Estructura de la Constitución 1992</p>
+    </div>
+    <div class="slideshow-container" id="slides-13">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Concepto y Características del Derecho Positivo</h2>
+              <div class="slide-content">El derecho positivo es el conjunto de normas jurídicas que regulan la convivencia de las personas en un determinado territorio. Se desarrolla gracias a la <strong>Teoría del Normativismo</strong> de Hans Kelsen.<br><br><strong>Características:</strong> Expresable · Individual por país · De carácter obligatorio · Puede imponerse coactivamente · Tiene relatividad · Creado por voluntad del hombre · Puede ser temporal</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">Derecho Público y Derecho Privado</h2>
+              <div class="slide-content"><strong>Derecho Público:</strong> conjunto de normas que establecen la estructura y funciones del Estado como ente soberano y regulan sus relaciones con los particulares u otros Estados.<br><br><strong>Derecho Privado:</strong> conjunto de normas que regulan las relaciones jurídicas entre particulares o entre éstos y el Estado como persona jurídica.<br><br>Ambos se subdividen en <strong>interno</strong> y <strong>externo</strong>.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Ramas del Derecho Público Interno</h2>
+              <div class="slide-content">• <strong>Derecho Político:</strong> estudia la teoría general del Estado<br>• <strong>Derecho Constitucional:</strong> estudia la estructura jurídica establecida en la Constitución<br>• <strong>Derecho Administrativo:</strong> regula la actividad del Estado en los servicios públicos<br>• <strong>Derecho Financiero:</strong> normas que regulan la percepción y gestión de medios económicos del Estado<br>• <strong>Derecho Municipal:</strong> organización y funcionamiento de servicios públicos locales<br>• <strong>Derecho Aduanero, Penal, Penal Militar, Procesal</strong></div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Estructura de la Constitución de 1992</h2>
+              <div class="slide-content">La Constitución paraguaya fue sancionada por la Convención Nacional Constituyente el <strong>20 de junio de 1992</strong>. Se compone de:<br><br>• <strong>Preámbulo:</strong> declaración extranormativa de la voluntad de sus autores. No es la parte dominante.<br><br>• <strong>Parte Dogmática:</strong> trata de los derechos fundamentales del hombre. El Estado salvaguarda libertades individuales y el bien común.<br><br>• <strong>Parte Orgánica:</strong> se refiere a la organización y funcionamiento de los poderes del Estado.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(13)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(13,0)"></button><button class="dot " onclick="goToSlide(13,1)"></button><button class="dot " onclick="goToSlide(13,2)"></button><button class="dot " onclick="goToSlide(13,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(13)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-13"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-14" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🌐 Lección 14</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Derecho Internacional Público y Canónico</h1>
+      <p class="lesson-subtitle">Ramas del Derecho Público Externo</p>
+    </div>
+    <div class="slideshow-container" id="slides-14">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Derecho Internacional Público — Noción</h2>
+              <div class="slide-content">El derecho internacional público es el conjunto de principios y normas convencionales y consuetudinarias que regulan las relaciones jurídicas entre los Estados como entes soberanos y con otras organizaciones internacionales (ONU, OEA, OIT).<br><br><strong>Denominaciones alternativas:</strong> Derecho Interestatal · Derecho Supranacional · Derecho de Gentes<br><br><strong>División:</strong> General (válido para todos) y Particular (para algunos).</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">Bases Constitucionales del Derecho Internacional</h2>
+              <div class="slide-content"><strong>Art. 143 CN</strong> — El Paraguay acepta el derecho internacional y se ajusta a:<br>a) Independencia nacional; b) Autodeterminación de los pueblos; c) Igualdad jurídica entre Estados; d) Solidaridad y cooperación; e) Protección de los DDHH; f) Libre navegación de ríos internacionales; g) No intervención; h) Condena a dictadura, colonialismo e imperialismo.<br><br><strong>Art. 144 CN</strong> — Paraguay renuncia a la guerra pero sustenta la legítima defensa.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Derecho Canónico</h2>
+              <div class="slide-content"><strong>Noción:</strong> Conjunto de leyes dadas por Dios a través de la revelación o establecidas por la potestad eclesiástica para la organización, funcionamiento y disciplina de la Iglesia Católica.<br><br><strong>División:</strong> Público (constitución de la Iglesia y sus relaciones con el Estado — interno y externo) y Privado (derechos y obligaciones de los miembros).<br><br>El principal cuerpo legislativo es el <strong>Código de Derecho Canónico</strong> promulgado el 25 de enero de 1983.</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Derecho Canónico vs. Derecho Eclesiástico</h2>
+              <div class="slide-content"><strong>Derecho Canónico:</strong> dictado por la propia Iglesia Católica para regir su vida y disciplinar las relaciones con los fieles.<br><br><strong>Derecho Eclesiástico:</strong> emana del Estado y está destinado a regir la vida jurídica de las comunidades religiosas existentes en su territorio.<br><br><em>La distinción radica en las fuentes de producción de dichos órdenes normativos.</em></div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(14)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(14,0)"></button><button class="dot " onclick="goToSlide(14,1)"></button><button class="dot " onclick="goToSlide(14,2)"></button><button class="dot " onclick="goToSlide(14,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(14)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-14"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-15" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">📋 Lección 15</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">El Derecho Privado</h1>
+      <p class="lesson-subtitle">Ramas del Derecho Privado Interno</p>
+    </div>
+    <div class="slideshow-container" id="slides-15">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 5</div>
+              <h2 class="slide-title">¿Qué es el Derecho Privado?</h2>
+              <div class="slide-content">El Derecho Privado es el conjunto de normas que regulan las relaciones jurídicas <strong>entre particulares</strong> o entre éstos y el <strong>Estado como persona jurídica</strong>.<br><br><strong>División:</strong><br>• <strong>Interno:</strong> normas que dicta cada Estado para regir relaciones jurídicas entre particulares<br>• <strong>Externo (DIP):</strong> estudia principios aplicables a relaciones privadas con elementos extranjeros</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 5</div>
+              <h2 class="slide-title">Ramas del Derecho Privado Interno</h2>
+              <div class="slide-content">El Derecho Privado Interno comprende:<br><br>① Derecho Civil &nbsp;② Derecho Comercial &nbsp;③ Derecho Laboral o del Trabajo &nbsp;④ Derecho Rural &nbsp;⑤ Derecho Industrial &nbsp;⑥ Derecho de Minería &nbsp;⑦ Derecho Marítimo o de la Navegación</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 5</div>
+              <h2 class="slide-title">Derecho Civil — Columna Vertebral del Derecho Privado</h2>
+              <div class="slide-content">Conjunto de normas jurídicas que regulan la existencia de las personas privadas (individuales o colectivas) y sus relaciones familiares y patrimoniales. También denominado <strong>Derecho Común</strong>.<br><br><strong>Instituciones que regula:</strong> Las Personas · La Familia · La Propiedad Privada · Las Obligaciones · Los Contratos · Las Sucesiones<br><br><strong>Código Civil Paraguayo — Ley 1183/1985:</strong> vigente desde el 1° enero 1987. 2815 artículos, 5 libros.</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 5</div>
+              <h2 class="slide-title">Derecho Laboral — Ley 213/1993</h2>
+              <div class="slide-content">Regula las relaciones jurídicas entre empleadores y trabajadores originadas por la prestación voluntaria, subordinada y retribuida de la actividad humana.<br><br><strong>Art. 5°:</strong> mínimo de garantías a favor del trabajador. No pueden alterarse en su detrimento.<br><strong>Art. 9°:</strong> el trabajo es un derecho y un deber social. Prohíbe discriminación.<br><strong>Art. 90°:</strong> el empleador que no dé preaviso debe pagar al trabajador el salario equivalente.</div>
+            </div>
+            <div class="slide " data-index="4">
+              <div class="slide-number">5 / 5</div>
+              <h2 class="slide-title">Derecho Rural — Legislación</h2>
+              <div class="slide-content">Regula las relaciones jurídicas derivadas de la producción agrícola, ganadera, agroindustrial y forestal.<br><br><strong>Legislación vigente:</strong><br>• <strong>CN Art. 114</strong> — Reforma Agraria<br>• <strong>CN Art. 116</strong> — Latifundios improductivos<br>• <strong>Ley 1863/2002</strong> — Estatuto Agrario<br>• <strong>Ley 2419/2004</strong> — Crea el INDERT</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(15)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(15,0)"></button><button class="dot " onclick="goToSlide(15,1)"></button><button class="dot " onclick="goToSlide(15,2)"></button><button class="dot " onclick="goToSlide(15,3)"></button><button class="dot " onclick="goToSlide(15,4)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(15)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-15"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-16" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">👤 Lección 16</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Derecho Subjetivo</h1>
+      <p class="lesson-subtitle">Concepto, Fundamento y Derechos Fundamentales</p>
+    </div>
+    <div class="slideshow-container" id="slides-16">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Concepto y Origen del Derecho Subjetivo</h2>
+              <div class="slide-content">Es la <strong>facultad de querer y exigir</strong> atribuida a una persona por el ordenamiento jurídico, a la cual corresponde una obligación por parte de otro.<br><br><strong>Origen:</strong> Para algunos autores nació con el derecho natural. Esa facultad del hombre como persona no le viene de la ley sino de su naturaleza existencial, reconocida luego por el ordenamiento jurídico.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Teorías sobre el Derecho Subjetivo</h2>
+              <div class="slide-content"><strong>A) Teoría de la voluntad:</strong> el derecho subjetivo es un poder de la voluntad conferido por el ordenamiento jurídico.<br><strong>B) Teoría del interés:</strong> existen para asegurar al hombre la satisfacción de sus necesidades.<br><strong>C) Teoría ecléctica:</strong> interés tutelado por la Ley mediante el reconocimiento de la voluntad individual.<br><strong>D) Doctrina italiana moderna:</strong> posibilidad de actuar para la satisfacción de un interés lícito.<br><strong>E) Teoría unificadora de Kelsen:</strong> el derecho subjetivo es el mismo derecho objetivo en relación con el sujeto.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Derechos Subjetivos Fundamentales</h2>
+              <div class="slide-content">Los derechos subjetivos fundamentales comunes a todos los hombres son tres:<br><br>1. <strong>Derecho a la Igualdad</strong> — Art. 46 CN: todos son iguales en dignidad y derechos. Las 4 garantías de igualdad están en el Art. 47 CN.<br><br>2. <strong>Derecho a la Libertad</strong> — Art. 9 CN: libertad natural (poder de autodeterminación) y libertad jurídica o normativa (facultad de hacer u omitir lo no ordenado ni prohibido).<br><br>3. <strong>Derecho de Resistencia a la Opresión</strong></div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(16)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(16,0)"></button><button class="dot " onclick="goToSlide(16,1)"></button><button class="dot " onclick="goToSlide(16,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(16)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-16"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-17" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🔏 Lección 17</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Libertad Jurídica y Orden Público</h1>
+      <p class="lesson-subtitle">Abuso del Derecho y Leyes de Orden Público</p>
+    </div>
+    <div class="slideshow-container" id="slides-17">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Limitaciones de la Libertad Jurídica</h2>
+              <div class="slide-content">La libertad jurídica no constituye un derecho absoluto. Algunas limitaciones son:<br><br>• <strong>La institución:</strong> conjunto de normas jurídicas vinculadas por el mismo propósito (matrimonio, patria potestad, propiedad, contratos).<br>• <strong>La función social:</strong> el hombre debe usar sus libertades con miras al bien común.<br>• <strong>Art. 109 CN:</strong> propiedad privada inviolable pero sujeta a función económica y social.<br>• <strong>Art. 128 CN:</strong> el interés general prima sobre el particular.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Teoría del Abuso del Derecho</h2>
+              <div class="slide-content">Se da cuando una persona ejerce su derecho <strong>sin necesidad y con la intención de dañar a otro</strong>, excediendo los límites fijados.<br><br><strong>Ej:</strong> competencia desleal, oligopolios, abuso de la patria potestad.<br><br><strong>Consecuencias:</strong><br>1. Obligación de restaurar la situación anterior de abuso<br>2. Resarcir el daño material o moral causado intencionalmente o por negligencia<br><br><strong>Art. 372 CC:</strong> los derechos deben ser ejercidos de buena fe.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Orden Público y Leyes de Orden Público</h2>
+              <div class="slide-content"><strong>Orden Público:</strong> conjunto de principios superiores de naturaleza política, económica y moral, estructurados en normas jurídicas que determinan la existencia y conservación de una sociedad.<br><br><strong>Características de las Leyes de Orden Público:</strong><br>• No pueden ser renunciadas<br>• Su violación entraña <em>nulidad absoluta</em><br>• Son imperativas (no supletorias)<br>• No son retroactivas (salvo leyes penales más favorables — Art. 14 CN)<br>• Son aplicables de oficio por el juez</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(17)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(17,0)"></button><button class="dot " onclick="goToSlide(17,1)"></button><button class="dot " onclick="goToSlide(17,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(17)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-17"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-18" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🔗 Lección 18</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Relación Jurídica</h1>
+      <p class="lesson-subtitle">Personas, Capacidad y Domicilio</p>
+    </div>
+    <div class="slideshow-container" id="slides-18">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Concepto y Elementos de la Relación Jurídica</h2>
+              <div class="slide-content">Es el vínculo existente entre dos o más personas que generan derechos y obligaciones.<br><br><strong>Elementos:</strong><br>• <strong>Sujeto activo:</strong> quien puede ejercitar el poder-facultad que le confiere la norma<br>• <strong>Sujeto pasivo:</strong> constreñido a cumplir el deber jurídico u obligación<br>• <strong>Objeto:</strong> cosas inanimadas o animadas sobre las cuales recae el vínculo<br>• <strong>Hecho jurígeno:</strong> todos los acontecimientos que producen adquisición, modificación o extinción de derechos</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">Personas Físicas y Jurídicas</h2>
+              <div class="slide-content"><strong>Personas Físicas:</strong> por el solo hecho de existir, el ser humano es persona sujeto de derechos. Su existencia jurídica comienza desde la concepción y termina con la muerte.<br><br><strong>Personas Jurídicas:</strong> entidades abstractas, desprovistas de existencia material, en condiciones de adquirir derechos y contraer obligaciones. Son distintas e independientes de sus miembros, poseen patrimonio propio.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Capacidad Jurídica</h2>
+              <div class="slide-content"><strong>Capacidad de derecho:</strong> aptitud a la titularidad de facultades y deberes jurídicos.<br><strong>Capacidad de hecho:</strong> aptitud legal para adquirir derechos y contraer obligaciones por sí mismo.<br><br><strong>Art. 37 CC — Incapaces absolutos de hecho:</strong><br>a) Personas por nacer; b) Menores de 14 años; c) Enfermos mentales; d) Sordomudos que no saben darse a entender.</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Domicilio</h2>
+              <div class="slide-content">Es el asiento territorial que debe tener toda persona para el cumplimiento de sus obligaciones.<br><br>• <strong>Domicilio Real:</strong> lugar donde tienen establecido el asiento principal de su residencia o negocios (elementos objetivo e intencional).<br>• <strong>Domicilio Legal:</strong> lugar donde la ley presume que una persona reside de modo permanente (Art. 53 CC).<br>• <strong>Domicilio Especial:</strong> designado por los particulares en sus negocios jurídicos.<br>• <strong>Domicilio de Origen:</strong> lugar del domicilio de los padres al nacer el hijo.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(18)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(18,0)"></button><button class="dot " onclick="goToSlide(18,1)"></button><button class="dot " onclick="goToSlide(18,2)"></button><button class="dot " onclick="goToSlide(18,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(18)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-18"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-19" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">📝 Lección 19</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Hechos y Actos Jurídicos</h1>
+      <p class="lesson-subtitle">Objeto de la Relación Jurídica y Negocio Jurídico</p>
+    </div>
+    <div class="slideshow-container" id="slides-19">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Objeto de la Relación Jurídica — Cosas y Bienes</h2>
+              <div class="slide-content">El objeto de la relación jurídica es todo lo que puede estar sometido a la disposición del sujeto activo como medio para un fin lícito.<br><br><strong>Cosa (Art. 1872 CC):</strong> objetos corporales susceptibles de tener un valor.<br><strong>Bienes (Art. 1873 CC):</strong> en acepción amplia comprende cosas materiales e inmateriales. En acepción restringida son los objetos inmateriales susceptibles de valor (ej: un crédito, el derecho de propiedad).</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">Hechos Jurídicos — Clasificación</h2>
+              <div class="slide-content">La causa que da nacimiento a la relación jurídica se llama <strong>hecho jurídico o jurígeno</strong>.<br><br><strong>Clasificación primaria:</strong><br>• <strong>Hechos Naturales:</strong> producidos por causas extrañas al hombre (nacimiento, inundación)<br>• <strong>Hechos Humanos:</strong> resultado de la obra directa o indirecta del hombre<br><br><strong>Hechos Humanos:</strong><br>• <strong>Voluntarios:</strong> ejecutados con discernimiento, intención y libertad<br>• <strong>Involuntarios:</strong> sin esos requisitos — no producen obligación (Art. 277 CC)</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Condiciones de la Voluntad: Discernimiento, Intención, Libertad</h2>
+              <div class="slide-content"><strong>Discernimiento:</strong> consiste en juzgar nuestras acciones. Sin discernimiento: menores de 14 años, privados de razón, sujetos a interdicción (Art. 278 CC).<br><br><strong>Intención:</strong> propósito de realizar el acto. La excluyen el error (Art. 286 CC) y el dolo (Art. 290 CC).<br><br><strong>Libertad:</strong> poder de decidir por sí mismo. La excluye la violencia: fuerza irresistible e intimidación (Art. 293 CC).</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Actos Jurídicos y Negocio Jurídico</h2>
+              <div class="slide-content"><strong>Actos Lícitos:</strong> acciones voluntarias no prohibidas por la ley.<br><strong>Hechos Ilícitos:</strong> prohibidos por las leyes, con sanción penal.<br><br><strong>Acto Jurídico (Art. 296 CC):</strong> actos voluntarios lícitos que tienen por fin inmediato crear, modificar, transferir, conservar o extinguir derechos. Ej: contratos, testamento, reconocimiento de hijo.<br><br><strong>Negocio Jurídico:</strong> declaraciones de voluntad de los particulares encaminadas a la obtención de fines jurídicamente protegidos.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(19)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(19,0)"></button><button class="dot " onclick="goToSlide(19,1)"></button><button class="dot " onclick="goToSlide(19,2)"></button><button class="dot " onclick="goToSlide(19,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(19)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-19"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-20" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🗳️ Lección 20</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Democracia Participativa</h1>
+      <p class="lesson-subtitle">Referéndum, Iniciativa Popular y Estado Unitario</p>
+    </div>
+    <div class="slideshow-container" id="slides-20">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Democracia Participativa y Representativa</h2>
+              <div class="slide-content">La democracia participativa es un conjunto de instituciones complementarias de la clásica democracia representativa. Tiene como antecedente la democracia directa de Rousseau.<br><br>La democracia representativa se impuso desde el siglo XVIII. <strong>Art. 3 CN:</strong> "El pueblo ejerce el Poder Público por medio del sufragio".<br><br><strong>Democracia Pluralista:</strong> fundada en el reconocimiento y respeto a la diversidad cultural, ideológica e intereses.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Iniciativa Popular y Referéndum</h2>
+              <div class="slide-content"><strong>Art. 123 CN — Iniciativa Popular:</strong> los electores pueden proponer proyectos de ley al Congreso. Requiere firma del 2% de los electores inscriptos (~70.000 firmas).<br><br><strong>Art. 121 CN — Referéndum:</strong> el referéndum legislativo puede o no ser vinculante, decidido por ley.<br><br><strong>Art. 122 CN — Materias vedadas:</strong> relaciones internacionales, expropiaciones, defensa nacional, sistemas tributarios, monetarios y bancarios, elecciones.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Estado Unitario y Descentralizado</h2>
+              <div class="slide-content"><strong>Estado Unitario:</strong> existe unidad de poder sobre el territorio, personas y bienes. El Paraguay se constituye en Estado unitario (Art. 1 CN).<br><br><strong>Estado Federal:</strong> el poder se reparte en espacios territoriales con multiplicidad de organizaciones gubernamentales.<br><br><strong>Estado Confederado:</strong> unión de Estados soberanos e independientes mediante un pacto para fines determinados.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(20)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(20,0)"></button><button class="dot " onclick="goToSlide(20,1)"></button><button class="dot " onclick="goToSlide(20,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(20)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-20"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-21" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🏠 Lección 21</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Derechos Reales</h1>
+      <p class="lesson-subtitle">Dominio, Usufructo, Hipoteca y Servidumbre</p>
+    </div>
+    <div class="slideshow-container" id="slides-21">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Concepto y Caracteres de los Derechos Reales</h2>
+              <div class="slide-content">El <strong>derecho real</strong> es el poder jurídico que ejerce una persona sobre una cosa de manera directa e inmediata para un aprovechamiento total o parcial, siendo este derecho oponible a terceros (<em>erga omnes</em>).<br><br><strong>Caracteres:</strong><br>• El sujeto pasivo solo se determina por la violación del derecho<br>• Solo pueden versar sobre cosas<br>• Conceden persecución de la cosa (<em>jus persecuendi</em>)<br>• <strong>Solo pueden ser creados por ley</strong></div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">Dominio y Condominio</h2>
+              <div class="slide-content"><strong>Dominio:</strong> derecho que confiere al titular la facultad de usar, gozar y disponer de la cosa de modo amplio y exclusivo, dentro de los límites de la ley.<br><br><strong>Propiedad vs. Dominio:</strong> la propiedad se aplica a bienes materiales e inmateriales; el dominio solo a cosas materiales.<br><br><strong>Condominio:</strong> dos o más personas comparten el dominio sobre una parte indivisa de una misma cosa.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Usufructo — Uso — Habitación</h2>
+              <div class="slide-content"><strong>Usufructo:</strong> derecho real de usar y gozar de una cosa cuya propiedad pertenece a otro, sin alterar su sustancia.<br>• Perfecto: puede gozarse sin cambiar la sustancia<br>• Imperfecto (cuasiusufructo): cosas que serían inútiles si no se consumen<br><br><strong>Uso:</strong> facultad de servirse de la cosa sin fungirla, en la medida necesaria para el usuario y su familia.<br><strong>Habitación:</strong> derecho de uso sobre una casa para morar en ella.</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Hipoteca — Prenda — Servidumbre</h2>
+              <div class="slide-content"><strong>Hipoteca:</strong> derecho real constituido en seguridad de un crédito en dinero sobre bienes inmuebles que continúan en poder del deudor. También sobre buques y aeronaves.<br><br><strong>Prenda:</strong> derecho real que adquiere el acreedor sobre la cosa mueble ajena, en garantía del pago de su crédito.<br><br><strong>Servidumbre:</strong> derecho real para ejercer ciertos actos de disposición o de uso sobre un inmueble ajeno (Art. 2188 CC).</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(21)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(21,0)"></button><button class="dot " onclick="goToSlide(21,1)"></button><button class="dot " onclick="goToSlide(21,2)"></button><button class="dot " onclick="goToSlide(21,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(21)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-21"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-22" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">💼 Lección 22</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Derechos Obligacionales y Derecho Intelectual</h1>
+      <p class="lesson-subtitle">Derechos de Crédito, Fuentes de Obligaciones y Derecho de Autor</p>
+    </div>
+    <div class="slideshow-container" id="slides-22">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Derechos Obligacionales — Concepto y Elementos</h2>
+              <div class="slide-content">El <strong>derecho obligacional o de crédito</strong> es la relación jurídica en virtud de la cual el acreedor tiene la facultad de compeler al deudor a que dé, haga o deje de hacer algo.<br><br><strong>Elementos:</strong><br>① Sujeto activo o acreedor<br>② Sujeto pasivo o deudor<br>③ Relación de derecho o <em>vinculum juris</em><br>④ El objeto o la prestación (dar, hacer, no hacer)<br>⑤ La forma (escritura para contratos > 10 jornales)</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Fuentes de las Obligaciones</h2>
+              <div class="slide-content"><strong>Contratos:</strong> acuerdo de voluntades destinado a reglar derechos. Acto jurídico bilateral.<br><strong>Cuasi-contratos:</strong> acto lícito realizado sin convenio previo (ej: aceptación de herencia).<br><strong>Delito:</strong> acto ilícito cometido a sabiendas con intención de dañar.<br><strong>Cuasidelito:</strong> acto ilícito sin dolo pero con negligencia o culpa (ej: accidente de tránsito).<br><strong>La Ley:</strong> por virtud de la ley una persona puede ser acreedora o deudora (ej: obligación alimentaria).</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Derecho Intelectual — Derecho de Autor</h2>
+              <div class="slide-content">Es el poder reconocido a un autor para beneficiarse exclusivamente con su obra de creación intelectual e impedir que otro la copie sin consentimiento.<br><br><strong>Derechos morales:</strong> divulgación · paternidad · integridad · retiro de la obra.<br><strong>Derechos patrimoniales:</strong> derecho exclusivo de explotar la obra bajo cualquier forma.<br><br><strong>Art. 110 CN:</strong> protección de la propiedad intelectual.<br><strong>Ley 1328/98</strong> — Derecho de Autor · <strong>DINAPI</strong> — Ley 4798/13</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(22)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(22,0)"></button><button class="dot " onclick="goToSlide(22,1)"></button><button class="dot " onclick="goToSlide(22,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(22)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-22"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-23" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">™️ Lección 23</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Derecho Marcario y Propiedad Intelectual</h1>
+      <p class="lesson-subtitle">Marcas Comerciales, Propiedad Industrial y Derecho de Autor</p>
+    </div>
+    <div class="slideshow-container" id="slides-23">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Derecho Marcario — Concepto</h2>
+              <div class="slide-content">La <strong>Marca</strong> es cualquier signo o combinación de signos susceptibles de representación gráfica, apto para distinguir los productos o servicios de una empresa.<br><br><strong>Nace con:</strong> el registro.<br><strong>Se conserva:</strong> a través de renovación sucesiva del registro.<br><strong>Sirve para:</strong> Distinguir · Publicidad · Características propias.<br><br>Reglamentada por el <strong>Decreto-Ley 1294/98</strong>.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Propiedad Intelectual — División</h2>
+              <div class="slide-content"><strong>Propiedad Industrial:</strong> creaciones estéticas de los productos industriales. Incluye diseños industriales y marcas. Se protegen mediante <em>patentes</em> (útil, novedoso, materia patentable).<br><br><strong>Derechos de Autor:</strong> creaciones artísticas (poemas, obras musicales, pinturas). Abarcan copyright y beneficios.<br><br><strong>Legislación vigente:</strong><br>• Ley 1294/1998 — De marcas<br>• Ley 1630/2000 — De patentes<br>• Ley 4798/2012 — Crea la DINAPI</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Nombre Industrial y Emblema</h2>
+              <div class="slide-content"><strong>Nombre Industrial:</strong> uso exclusivo de la denominación que adopta una empresa industrial para distinguirse de otras. Tiene carácter patrimonial.<br><br><strong>Emblema:</strong> signo característico destinado a indicar gráficamente al titular o dueño de un establecimiento industrial o mercantil.<br><br><strong>Distinción con Derecho Intelectual:</strong> el derecho marcario se refiere a la individualización de productos para evitar confusión, no protege la originalidad intelectual de la marca.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(23)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(23,0)"></button><button class="dot " onclick="goToSlide(23,1)"></button><button class="dot " onclick="goToSlide(23,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(23)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-23"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-24" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🏺 Lección 24</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Derecho Hereditario</h1>
+      <p class="lesson-subtitle">Sucesión, Herederos Forzosos y Testamento</p>
+    </div>
+    <div class="slideshow-container" id="slides-24">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Concepto de Sucesión</h2>
+              <div class="slide-content">La <strong>sucesión</strong> es la transmisión de los derechos activos y pasivos que componen la herencia de una persona muerta a la persona que sobrevive, a la cual la ley o el testador llama para recibirla.<br><br>• <strong>Causante:</strong> la persona muerta<br>• <strong>Causahabiente / Heredero:</strong> sucesor universal — continúa la persona del causante<br>• <strong>Legatario:</strong> sucesor singular en los bienes (no en la persona del difunto)</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Especies de Sucesión</h2>
+              <div class="slide-content"><strong>Sucesión legítima o intestada:</strong> diferida solo por voluntad de la ley a los parientes del extinto.<br><strong>Sucesión testamentaria:</strong> se hace por voluntad del hombre manifestada en un testamento válido.<br><br><strong>Sucesión a título universal:</strong> sucesor a quien pasa todo o una parte alícuota del patrimonio.<br><strong>Sucesión a título singular:</strong> sucesor a quien se transmite un objeto particular.<br><br><em>Son llamados a heredar:</em> descendientes, ascendientes (hasta 4to grado), cónyuge, colaterales.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Herederos Forzosos y Testamento</h2>
+              <div class="slide-content"><strong>Art. 2598 CC — Legítimas:</strong><br>• Descendientes: 4/5 partes de la herencia<br>• Ascendientes: 2/3 de la herencia<br>• Cónyuge (sin descendientes ni ascendientes): la mitad<br>• Adoptante/adoptado: la mitad<br><br><strong>Testamento:</strong> acto escrito, celebrado con solemnidades de la ley por el cual una persona dispone de sus bienes para después de su muerte.<br><em>Caracteres:</em> voluntario · lícito · unilateral · escrito · solemne · personalísimo · eminentemente revocable</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(24)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(24,0)"></button><button class="dot " onclick="goToSlide(24,1)"></button><button class="dot " onclick="goToSlide(24,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(24)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-24"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-25" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">⚖️ Lección 25</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Función Jurisdiccional</h1>
+      <p class="lesson-subtitle">Derecho de Acción, Excepción y Poder Judicial</p>
+    </div>
+    <div class="slideshow-container" id="slides-25">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Función Jurisdiccional del Poder Judicial</h2>
+              <div class="slide-content"><strong>Art. 248 CN — Independencia del Poder Judicial:</strong> Solo el Poder Judicial puede conocer y decidir en actos de carácter contencioso. Ningún miembro de los otros poderes puede arrogarse atribuciones judiciales bajo pena de <em>nulidad insanable</em>.<br><br><strong>Art. 15 CN:</strong> nadie podrá hacerse justicia por sí mismo ni reclamar sus derechos con violencia. Se garantiza la legítima defensa.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Derecho de Acción y su Extinción</h2>
+              <div class="slide-content"><strong>Derecho de acción:</strong> facultad que tiene toda persona para solicitar legalmente la intervención de los órganos jurisdiccionales del Estado.<br><br><strong>Extinción de acciones:</strong><br>a) <strong>Prescripción:</strong> vencimiento del plazo legal sin ejercer la acción<br>b) <strong>Extinción del derecho:</strong> por cumplimiento efectivo, acuerdo liberatorio o imposibilidad de cumplimiento<br>c) <strong>Medios procesales:</strong> sentencia del juez o desistimiento del actor</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">De la Excepción — Clasificación</h2>
+              <div class="slide-content"><strong>Concepto amplio:</strong> toda defensa que el demandado opone a la acción.<br><strong>Concepto restringido:</strong> oposición que sin negar el fondo puede paralizar o extinguir la acción.<br><br><strong>Clasificación:</strong><br>• <strong>Dilatoria:</strong> tiende a postergar la contestación sobre el mérito sin destruir la acción<br>• <strong>Perentoria:</strong> extingue la acción deducida y pone fin al litigio<br><br><em>Excepciones en el CPC:</em> incompetencia · falta de personería · litispendencia · cosa juzgada · prescripción · etc.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(25)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(25,0)"></button><button class="dot " onclick="goToSlide(25,1)"></button><button class="dot " onclick="goToSlide(25,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(25)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-25"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-26" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">📚 Lección 26</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Fuentes del Derecho</h1>
+      <p class="lesson-subtitle">La Ley, Costumbre, Jurisprudencia, Doctrina y Codificación</p>
+    </div>
+    <div class="slideshow-container" id="slides-26">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Fuentes del Derecho — Concepto</h2>
+              <div class="slide-content">Son los <strong>modos como se originan y establecen las normas</strong> que integran el ordenamiento jurídico positivo.<br><br>• <strong>Fuentes reales o materiales:</strong> factores y elementos que producen normas jurídicas (políticos, sociales, económicos, morales).<br>• <strong>Fuentes formales:</strong> requisitos obligatorios y predeterminados que debe reunir toda norma jurídica.<br><br><strong>Fuentes jurídicas formales:</strong> La Ley · La Costumbre · La Jurisprudencia · La Doctrina</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">La Ley — Concepto y Clasificación</h2>
+              <div class="slide-content">La ley es la norma escrita general, obligatoria y estable que emana del Poder Público por motivo de interés general.<br><br><strong>Elementos:</strong> disposición · condicionalidad · generalidad · sanción<br><br><strong>Clasificación:</strong><br>• Leyes constitucionales y ordinarias<br>• Leyes materiales y formales<br>• Leyes generales y especiales<br>• Leyes de orden público, interpretativas, delegadas, marciales, secretas</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Proceso Formativo de las Leyes</h2>
+              <div class="slide-content"><strong>Etapas:</strong> Iniciativa → Discusión → Sanción → Promulgación → Publicación<br><br><strong>Art. 203 CN — Iniciativa:</strong> cualquiera de las Cámaras, el Poder Ejecutivo, iniciativa popular o la CSJ.<br><strong>Art. 205 CN — Promulgación automática:</strong> si el PE no objeta en 6, 12 o 20 días hábiles según la extensión de la ley.<br><strong>Art. 214 CN — Fórmulas:</strong> 'El Congreso de la Nación paraguaya sanciona con fuerza de ley.'</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Codificación — Ventajas e Inconvenientes</h2>
+              <div class="slide-content"><strong>Codificación:</strong> reunir el Derecho Positivo en un cuerpo de disposiciones legales ordenadas metódica y sistemáticamente.<br><br><strong>Ventajas:</strong> sistematiza el derecho · facilita su conocimiento y aplicación · prescinde de la costumbre imprecisa.<br><br><strong>Inconvenientes:</strong> causa impresión de condensación total · absolutismo normativo · estancamiento del derecho · dificultad de reforma.<br><br><strong>Comisión Nacional de Codificación:</strong> creada por Decreto-Ley N° 200 — 2 julio 1959.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(26)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(26,0)"></button><button class="dot " onclick="goToSlide(26,1)"></button><button class="dot " onclick="goToSlide(26,2)"></button><button class="dot " onclick="goToSlide(26,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(26)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-26"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-27" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🔍 Lección 27</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Técnica Jurídica e Interpretación</h1>
+      <p class="lesson-subtitle">Hermenéutica, Métodos de Interpretación y Derecho Paraguayo</p>
+    </div>
+    <div class="slideshow-container" id="slides-27">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Técnica Jurídica — Concepto</h2>
+              <div class="slide-content">En sentido amplio, es el conjunto de reglas que determinan los procedimientos adecuados para la elaboración y aplicación del derecho positivo a la realidad social.<br><br><strong>Técnica judicial:</strong> tarea obligatoria de los jueces para resolver casos bajo su jurisdicción. Comprende:<br>1. Interpretación de las normas jurídicas<br>2. Aplicación al caso concreto<br>3. Integración del ordenamiento jurídico para construir la norma ausente</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">Interpretación de las Normas Jurídicas</h2>
+              <div class="slide-content">Es la tarea de <strong>determinar el sentido y alcance</strong> con que las normas jurídicas regulan la conducta humana.<br><br><strong>Hermenéutica jurídica:</strong> arte de interpretar, desentrañando lo que encierra un vocablo o fenómeno.<br><br><strong>Elementos de la interpretación legal:</strong><br>a) Gramatical &nbsp; b) Lógico (<em>ratio legis</em>) &nbsp; c) Histórico &nbsp; d) Sistemático</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Clases de Interpretación y Métodos</h2>
+              <div class="slide-content"><strong>Subjetiva:</strong> Auténtica o legislativa · Judicial · Doctrinal<br><strong>Objetiva:</strong> Literal o estricta · Extensiva · Restrictiva · Abrogante<br><br><strong>Métodos tradicionales:</strong> Exegético · Dogmático · Ecléctico<br><strong>Métodos modernos:</strong> Evolución histórica · Libre investigación científfica (Gény)</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Reglas en el Derecho Paraguayo</h2>
+              <div class="slide-content"><strong>Art. 6 Código Civil:</strong> los jueces no pueden dejar de juzgar en caso de silencio, oscuridad o insuficiencia de las leyes. Se consideran casos análogos y principios generales.<br><br><strong>Art. 1 Código Penal — Principio de legalidad:</strong> nadie será sancionado sin que los presupuestos de punibilidad estén descritos en una ley vigente anterior al hecho.<br><br><strong>Código Procesal Penal:</strong> en caso de duda, siempre se decide lo más favorable para el imputado.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(27)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(27,0)"></button><button class="dot " onclick="goToSlide(27,1)"></button><button class="dot " onclick="goToSlide(27,2)"></button><button class="dot " onclick="goToSlide(27,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(27)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-27"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-28" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🧩 Lección 28</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Técnica Judicial e Integración</h1>
+      <p class="lesson-subtitle">Silogismo Jurídico, Lagunas y Analogía</p>
+    </div>
+    <div class="slideshow-container" id="slides-28">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 4</div>
+              <h2 class="slide-title">Aplicación de las Normas Jurídicas</h2>
+              <div class="slide-content">Aplicar las normas jurídicas es someter a su imperio los casos concretos que han de ser regulados. Es pasar de lo abstracto a lo concreto, de lo general a lo particular: una <strong>deducción</strong>.<br><br><strong>Silogismo jurídico:</strong><br>• Premisa mayor: la norma<br>• Premisa menor: el caso concreto a juzgarse<br>• Conclusión: el fallo del juez (imputación de consecuencias normativas)</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 4</div>
+              <h2 class="slide-title">Principios para la Aplicación del Derecho</h2>
+              <div class="slide-content">A) Los jueces deben tener jurisdicción en virtud de la ley.<br>B) El juez debe resolver siempre según la ley.<br>C) Sujeción a las normas positivas vigentes.<br>D) Observancia de la jerarquía de las fuentes jurídicas formales.<br>E) Los jueces no pueden dejar de juzgar bajo pretexto de silencio de las leyes.<br>F) Toda sentencia estará fundada en la Constitución y la ley.<br>G) Los juzgados actúan a instancia de parte salvo que la ley les faculte proceder de oficio.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 4</div>
+              <h2 class="slide-title">Integración de la Ley — Lagunas</h2>
+              <div class="slide-content"><strong>Integración de la ley:</strong> actividad técnica del juez para suplir la norma ausente, elaborando otra que se incorpora al orden jurídico.<br><br><strong>Lagunas de la ley:</strong> casos imprevistos o espacios vacíos que la ley dejó al ser sancionada.<br><br><strong>Integración interna (analogía):</strong> procedimiento comparativo que tiende a descubrir la norma aplicable a un supuesto imprevisto que guarda íntima semejanza con el supuesto legislado.<br><br><strong>Integración externa:</strong> los principios generales del derecho.</div>
+            </div>
+            <div class="slide " data-index="3">
+              <div class="slide-number">4 / 4</div>
+              <h2 class="slide-title">Proceso de Integración en el Derecho Paraguayo</h2>
+              <div class="slide-content">El proceso de integración comprende tres etapas de aplicación progresiva:<br><br><strong>1°</strong> Principios jurídicos de la legislación vigente en la materia respectiva.<br><strong>2°</strong> Principios particulares de las leyes análogas.<br><strong>3°</strong> Principios generales del Derecho.<br><br><em>(Verdades jurídicas de validez universal, elaboradas por la filosofía jurídica que sirven de fundamento y límite a toda la legislación positiva)</em></div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(28)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(28,0)"></button><button class="dot " onclick="goToSlide(28,1)"></button><button class="dot " onclick="goToSlide(28,2)"></button><button class="dot " onclick="goToSlide(28,3)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(28)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-28"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-29" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">⏳ Lección 29</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Aplicación de la Ley en el Tiempo</h1>
+      <p class="lesson-subtitle">Irretroactividad, Derecho Intertemporal y Excepciones</p>
+    </div>
+    <div class="slideshow-container" id="slides-29">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Derecho Intertemporal o Transitorio</h2>
+              <div class="slide-content">Problemas que pueden suscitarse:<br>1. La legislación vigente al pronunciar la sentencia es distinta a la que regía al constituirse la relación jurídica.<br>2. La jurisdicción del juez cambió durante el proceso.<br><br><strong>Derecho Intertemporal:</strong> adjetivo que denota el conjunto de reglas aplicables al intermedio jurídico entre una ley derogada y otra que comienza a regir.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Teoría de la Irretroactividad de la Ley</h2>
+              <div class="slide-content"><strong>Noción:</strong> en virtud del principio de irretroactividad, no se pueden alterar ni modificar los hechos producidos antes de la vigencia de la ley. Los hechos concluidos bajo el imperio de la ley anterior quedan exclusivamente regidos por ella.<br><br><strong>Fundamento:</strong><br>✔ No se concibe que una ley sea obligatoria antes de existir<br>✔ Se propende a la estabilidad de los derechos<br>✔ <strong>No tiene carácter absoluto:</strong> se admiten excepciones explícitas en las leyes</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Regulación en el Derecho Paraguayo</h2>
+              <div class="slide-content"><strong>Art. 14 CN:</strong> ninguna ley tendrá efecto retroactivo, salvo que sea más favorable al encausado o condenado.<br><br><strong>Art. 2 Código Civil:</strong> las leyes disponen para el futuro, no tienen efecto retroactivo ni pueden alterar los derechos adquiridos.<br><br><strong>Art. 5 Código Penal:</strong> las sanciones son regidas por la ley vigente al tiempo del hecho punible. Si la ley cambia antes de la sentencia, se aplica la más favorable al encausado.</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(29)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(29,0)"></button><button class="dot " onclick="goToSlide(29,1)"></button><button class="dot " onclick="goToSlide(29,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(29)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-29"></div></div>
+  </section>
+  <section class="lesson-page" id="lesson-30" style="display:none">
+    <header class="lesson-header">
+      <button class="back-btn" onclick="showHome()">&#8592; Volver al inicio</button>
+      <div class="lesson-badge">🗺️ Lección 30</div>
+    </header>
+    <div class="lesson-meta">
+      <h1 class="lesson-main-title">Aplicación de la Ley en el Territorio</h1>
+      <p class="lesson-subtitle">Territorialidad, Extraterritorialidad y Orden Público Internacional</p>
+    </div>
+    <div class="slideshow-container" id="slides-30">
+      
+            <div class="slide active" data-index="0">
+              <div class="slide-number">1 / 3</div>
+              <h2 class="slide-title">Principio de Territorialidad</h2>
+              <div class="slide-content"><strong>Territorialidad:</strong> las leyes deben regir en el territorio del Estado soberano de que emanan.<br><br><strong>Excepción — Validez extraterritorial:</strong> posibilidad de aplicar la ley nacional fuera del país, cuando los actos jurídicos incluyen elementos extranjeros (de orden personal, real o de conducta).<br><br>Las reglas de DIP están contenidas principalmente en los <strong>Tratados de Montevideo de 1889 y 1940</strong> y en el Código Civil paraguayo.</div>
+            </div>
+            <div class="slide " data-index="1">
+              <div class="slide-number">2 / 3</div>
+              <h2 class="slide-title">Extraterritorialidad en el Derecho Paraguayo</h2>
+              <div class="slide-content"><strong>Art. 11 CC:</strong> la capacidad de las personas físicas domiciliadas en la República se juzga por las disposiciones del CC, aunque los actos se realicen en el extranjero.<br><strong>Art. 12 CC:</strong> la capacidad de las personas domiciliadas fuera de la República se juzga por las leyes de su domicilio.<br><strong>Art. 16 CC (<em>lex rei sitae</em>):</strong> los bienes se regirán por la ley del lugar donde están situados.<br><strong>Art. 23 CC (<em>locus regit actum</em>):</strong> la forma de los actos jurídicos se rige por la ley del lugar de su celebración.</div>
+            </div>
+            <div class="slide " data-index="2">
+              <div class="slide-number">3 / 3</div>
+              <h2 class="slide-title">Límites y Orden Público Internacional</h2>
+              <div class="slide-content"><strong>Art. 22 CC:</strong> los jueces aplicarán de oficio las leyes extranjeras, siempre que no se opongan a las instituciones políticas, las leyes de orden público, la moral y las buenas costumbres.<br><br><strong>Orden Público Internacional:</strong> conjunto de principios y normas fundamentales que rigen la estructura y el funcionamiento de los Estados soberanos.<br><br><strong>Materia procesal:</strong> en ausencia de convenios internacionales, se aplica la ley del tribunal (<em>lex fori</em>).</div>
+            </div>
+    </div>
+    <div class="slide-controls">
+      <button class="ctrl-btn" onclick="prevSlide(30)">&#8592;</button>
+      <div class="dots-container"><button class="dot active" onclick="goToSlide(30,0)"></button><button class="dot " onclick="goToSlide(30,1)"></button><button class="dot " onclick="goToSlide(30,2)"></button></div>
+      <button class="ctrl-btn" onclick="nextSlide(30)">&#8594;</button>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-30"></div></div>
+  </section>
 
 <script>
+const TOTAL = {"11": 5, "12": 5, "13": 4, "14": 4, "15": 5, "16": 3, "17": 3, "18": 4, "19": 4, "20": 3, "21": 4, "22": 3, "23": 3, "24": 3, "25": 3, "26": 4, "27": 4, "28": 4, "29": 3, "30": 3};
+const state = {};
 
-const BANCO = [
-  // U1
-  {u:"U1",titulo:"Sociedad",pregunta:"¿Qué es la Sociedad según Macionis y Plummer?",opciones:["Una organización estatal con leyes escritas","Conjunto de personas que interactúa en un espacio determinado compartiendo una misma cultura","Un grupo familiar con idioma común","Una institución jurídica con normas formales"],correcta:1,explicacion:"La Sociedad es el conjunto de personas que interactúa en un espacio determinado y comparte una misma cultura, relacionándose según reglas jurídicas y costumbres."},
-  {u:"U1",titulo:"Estructura Social",pregunta:"¿Qué es la Estructura Social?",opciones:["El gobierno de un país","Conjunto de formas en que grupos e individuos se organizan y relacionan dentro de una sociedad","Las normas escritas de una constitución","La jerarquía religiosa de una civilización"],correcta:1,explicacion:"La estructura social es la constelación especial de grupos (castas, estamentos, clases) y sus relaciones dentro de una sociedad."},
-  {u:"U1",titulo:"Instituciones",pregunta:"¿Cuál es la característica clave de las instituciones sociales?",opciones:["Son organismos exclusivamente estatales","Cada miembro cumple un rol y se rigen por normas de la costumbre en una estructura formal","Son grupos informales sin organización","Solo existen en sociedades con escritura"],correcta:1,explicacion:"Las instituciones son relaciones sistematizadas en una estructura formal donde cada miembro cumple un rol y rigen normas consuetudinarias."},
-  {u:"U1",titulo:"Cultura",pregunta:"¿Qué incluye el concepto de Cultura?",opciones:["Solo las artes y la arquitectura","Bienes materiales y espirituales de un grupo transmitidos generacionalmente: lengua, costumbres, valores, herramientas","Solo las normas jurídicas escritas","El territorio y la población de un Estado"],correcta:1,explicacion:"La cultura incluye lengua, costumbres, tradiciones, hábitos, valores, herramientas y conocimiento transmitidos de generación en generación."},
-  {u:"U1",titulo:"Nación",pregunta:"¿Qué define a la Nación según Martyniuk?",opciones:["Un Estado con constitución escrita","Conjunto de individuos vinculados por caracteres comunes (idioma, religión, costumbres) y conciencia nacional","Una organización militar con territorio propio","Un grupo étnico sin gobierno propio"],correcta:1,explicacion:"La Nación es el conjunto de individuos con caracteres comunes vinculados por un pasado histórico y aspiraciones comunes que forman la conciencia nacional (Martyniuk, 2003)."},
-  {u:"U1",titulo:"Estado",pregunta:"¿Cuáles son los 3 elementos del Estado?",opciones:["Gobierno, leyes y ciudadanos","Territorio, población y poder (soberanía)","Nación, idioma y cultura","Constitución, ejército y justicia"],correcta:1,explicacion:"Los tres elementos del Estado son Territorio (espacio geográfico), Población (habitantes) y Poder con soberanía interna y externa."},
-  {u:"U1",titulo:"Soberanía",pregunta:"¿Qué expresa la Soberanía dentro del elemento 'Poder' del Estado?",opciones:["La capacidad de declarar guerras","Un poder supremo y máximo, tanto interno como externo","El control exclusivo del ejército","El derecho de voto de los ciudadanos"],correcta:1,explicacion:"La soberanía es una cualidad del Poder del Estado: expresa la idea de un poder supremo y máximo, superior en el ámbito interno y externo."},
-  // U2
-  {u:"U2",titulo:"Prehistoria",pregunta:"¿Qué período abarca la Prehistoria?",opciones:["Desde la agricultura hasta la escritura","Desde la aparición del hombre (~2.500.000 a.C.) hasta la invención de la escritura (~3.500 a.C.)","Desde el Paleolítico hasta el Imperio Romano","Desde la Edad de Bronce hasta la Edad de Hierro"],correcta:1,explicacion:"La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3.500 a.C.) en Sumeria."},
-  {u:"U2",titulo:"Paleolítico",pregunta:"¿Cuál es la característica principal del Paleolítico?",opciones:["Agricultura y sedentarización","Caza y recolección, nomadismo, organización en bandas y dominio del fuego","Uso de metales y ciudades amuralladas","Invención de la escritura cuneiforme"],correcta:1,explicacion:"El Paleolítico se caracterizó por la vida nómada de cazadores-recolectores organizados en bandas y clanes, con dominio del fuego."},
-  {u:"U2",titulo:"Revolución Agrícola",pregunta:"¿Por qué se llama 'revolución' a la aparición de la agricultura?",opciones:["Causó guerras entre tribus","Transformó radicalmente la economía: de cazador-recolector a productor sedentario","Inventó la escritura","Creó los primeros imperios"],correcta:1,explicacion:"Fue revolucionaria porque cambió completamente la economía humana: del nomadismo cazador al sedentarismo productor, generando estratificación social y crecimiento demográfico."},
-  {u:"U2",titulo:"Instituciones primitivas",pregunta:"¿Cuáles fueron las primeras instituciones que surgieron en el Neolítico?",opciones:["El parlamento, los tribunales y la policía","La familia, la organización política y la justicia (venganza de sangre)","Los gremios, los bancos y el Estado moderno","La iglesia, la monarquía y el ejército permanente"],correcta:1,explicacion:"Con la vida sedentaria en aldeas nacieron las primeras instituciones: la familia, la organización política y la justicia (venganza de sangre)."},
-  {u:"U2",titulo:"Historia y Derecho",pregunta:"¿Qué afirmó Gayo sobre historia y Derecho?",opciones:["El Derecho es independiente de la historia","Solo conociendo la historia se puede conocer el Derecho","La historia solo importa a los filósofos","El Derecho moderno no necesita el pasado"],correcta:1,explicacion:'Gayo afirmó que "el principio es la parte más principal de cualquier cosa" y que solo conociendo la historia se puede conocer el Derecho.'},
-  // U3
-  {u:"U3",titulo:"Castas India",pregunta:"¿Cómo se adquiere la casta en la sociedad india?",opciones:["Por mérito personal","Con el nacimiento, de forma hereditaria e inmutable","Por decisión del sacerdote","Por riqueza acumulada"],correcta:1,explicacion:"El sistema de castas es hereditario: la casta se determina al nacer y no puede cambiarse durante la vida."},
-  {u:"U3",titulo:"Código de Manú",pregunta:"¿Qué tipo de colección es el Código de Manú?",opciones:["Solo un código penal","Colección de preceptos religiosos, morales, sociales y jurídicos que regula toda la vida social","Un tratado filosófico sin valor jurídico","Un registro histórico de guerras"],correcta:1,explicacion:"El Código de Manú es una colección de preceptos religiosos, morales, sociales y jurídicos que regula el gobierno, la justicia, el ejército, el comercio y la familia."},
-  {u:"U3",titulo:"Penas Código Manú",pregunta:"¿Qué pena recibía el Brahmán en el Código de Manú?",opciones:["La pena de muerte siempre","No recibía castigo corporal, solo podía ser desterrado","Era castigado igual que todos","Solo pagaba una multa económica"],correcta:1,explicacion:"El Brahmán (sacerdote, casta más alta) estaba exento de castigos corporales; la única pena que podía recibir era el destierro."},
-  {u:"U3",titulo:"Egipto",pregunta:"¿Por qué se denomina 'teocrático' al gobierno del Antiguo Egipto?",opciones:["Porque lo dirigían varios sacerdotes","Porque el Faraón era considerado figura divina y concentraba todo el poder","Porque las leyes venían escritas de los dioses","Porque el ejército controlaba los templos"],correcta:1,explicacion:"El gobierno egipcio era teocrático porque el Faraón era visto como un dios viviente que concentraba todo el poder político y religioso."},
-  {u:"U3",titulo:"Sumerios",pregunta:"¿Cuáles fueron las primeras ciudades-Estado de Sumeria?",opciones:["Babilonia, Nínive, Asiria y Persia","Ur, Uruk, Lagash y Eridu","Menfis, Tebas, Alejandría y Luxor","Mohenjo-Daro, Harappa, Delhi y Bombay"],correcta:1,explicacion:"Las primeras ciudades-Estado de Sumeria (hacia el IV milenio a.C.) fueron Ur, Uruk, Lagash y Eridu."},
-  {u:"U3",titulo:"Escritura Cuneiforme",pregunta:"¿Con qué propósito surgió la escritura cuneiforme?",opciones:["Para escribir textos religiosos y épicos","Para llevar la contabilidad en los templos (cosechas, impuestos)","Para comunicarse entre ciudades enemigas","Para registrar victorias militares"],correcta:1,explicacion:"La escritura cuneiforme surgió como herramienta contable en los templos mesopotámicos (~3.500 a.C.) y luego se extendió a leyes y literatura."},
-  {u:"U3",titulo:"Hammurabi",pregunta:"¿Cuál fue el principal mérito del Código de Hammurabi?",opciones:["Abolir la pena de muerte","Entregar al Estado la responsabilidad de cumplir la ley, suprimiendo la venganza privada","Igualar los derechos de todas las clases","Crear el primer sistema democrático"],correcta:1,explicacion:"El Código de Hammurabi transfirió la justicia del ámbito privado al Estado, que pasó a ser el garante del cumplimiento de las leyes."},
-  {u:"U3",titulo:"Ley del Talión",pregunta:"¿Qué establece la Ley del Talión del Código de Hammurabi?",opciones:["Perdón obligatorio al primer delito","Pena igual a la ofensa entre iguales; compensación en dinero si la contraparte es de categoría inferior","Pena de muerte para todos los delitos","Solo penas económicas sin castigo corporal"],correcta:1,explicacion:'La Ley del Talión ("ojo por ojo") aplicaba pena igual a la ofensa entre personas de igual posición. Si la víctima era de categoría inferior, se pagaba compensación en dinero.'},
-  {u:"U3",titulo:"Torá Hebrea",pregunta:"¿En cuántos libros se divide la Torá (Pentateuco)?",opciones:["Tres","Diez","Cinco","Siete"],correcta:2,explicacion:"La Torá o Pentateuco comprende 5 libros: Génesis, Éxodo, Levítico, Números y Deuteronomio."},
-  {u:"U3",titulo:"Levirato",pregunta:"¿Qué establece el Levirato en el Derecho Hebreo?",opciones:["El primogénito recibe doble herencia","El hermano del marido fallecido puede tomar a la viuda como esposa","El padre tiene potestad absoluta sobre sus hijos","El matrimonio hebreo era poligámico"],correcta:1,explicacion:"El Levirato establece que al fallecer el esposo, su hermano puede tomar a la viuda como esposa para garantizar la continuidad del linaje familiar."},
-  // U4
-  {u:"U4",titulo:"Atenas vs. Esparta",pregunta:"¿Qué distinguía principalmente a Atenas de Esparta?",opciones:["Atenas era militar y Esparta democrática","Atenas era democrática y filosófica; Esparta era militar y guerrera","Ambas eran igualmente democráticas","Atenas tenía castas; Esparta era igualitaria"],correcta:1,explicacion:"Atenas (jonios): democrática, filosófica, individualista, artística. Esparta (dorios): militar, guerrera, disciplinada, patriótica."},
-  {u:"U4",titulo:"Licurgo",pregunta:"¿Cómo se llamó la constitución que estableció Licurgo en Esparta?",opciones:["La Isonomía","La Eclesía","La Retar","La Acropolis"],correcta:2,explicacion:"Licurgo estableció la constitución de Esparta en el siglo VIII a.C., cuya obra recibió el nombre de Retar (ley)."},
-  {u:"U4",titulo:"Olimpiadas",pregunta:"¿En qué año se celebraron los primeros Juegos Olímpicos?",opciones:["509 a.C.","776 a.C.","594 a.C.","753 a.C."],correcta:1,explicacion:"Los primeros Juegos Olímpicos se celebraron en el año 776 a.C. en Olimpia, en honor a Zeus, considerado el 'año 0' del calendario griego."},
-  {u:"U4",titulo:"Clístenes",pregunta:"¿Qué innovación política introdujo Clístenes en Atenas?",opciones:["Pagó a los ciudadanos por ocupar cargos","Dividió la población en 10 tribus de 50 ciudadanos c/u con iguales derechos en la Asamblea","Eliminó a los nobles del gobierno","Creó el tribunal popular"],correcta:1,explicacion:"Clístenes dividió a los ciudadanos en 10 tribus (500 en total en la Asamblea), todos con iguales derechos, rompiendo el poder de los clanes nobles."},
-  {u:"U4",titulo:"Pericles",pregunta:"¿Cuál fue la principal innovación de Pericles para la democracia?",opciones:["Creó la constitución escrita","Decidió que todos los cargos públicos recibieran compensación económica, permitiendo participar a los pobres","Amplió el territorio de Atenas","Fundó la Liga del Peloponeso"],correcta:1,explicacion:"Pericles estableció que todos los cargos públicos recibieran un sueldo, lo que permitió que ciudadanos sin recursos pudieran participar en el gobierno."},
-  {u:"U4",titulo:"Sofistas",pregunta:"¿Cuál era el objetivo principal de la educación sofística?",opciones:["Enseñar la virtud universal","Capacitar a jóvenes para la participación política mediante oratoria y erística","Transmitir el conocimiento de la naturaleza","Formar filósofos gobernantes"],correcta:1,explicacion:"Los Sofistas capacitaban a los jóvenes para la vida política mediante la oratoria y la erística (arte de la argumentación)."},
-  // U5
-  {u:"U5",titulo:"Sociedad romana",pregunta:"¿Cuáles eran los tres grupos sociales de la Roma antigua?",opciones:["Ciudadanos, extranjeros y libertos","Patricios, plebeyos y esclavos","Sacerdotes, guerreros y comerciantes","Cónsules, senadores y magistrados"],correcta:1,explicacion:"La sociedad romana se dividía en Patricios (aristocracia con plenos derechos), Plebeyos (libres sin derechos políticos) y Esclavos (sin ningún derecho)."},
-  {u:"U5",titulo:"Mos Maiorum",pregunta:"¿Qué era el 'mos maiorum' en el derecho romano temprano?",opciones:["El primer código escrito de Roma","La costumbre de los antepasados que regía el derecho no escrito","La constitución del rey Servio Tulio","El conjunto de leyes del Senado"],correcta:1,explicacion:"El mos maiorum (costumbre de los antepasados) fue el derecho consuetudinario no escrito que rigió Roma antes de las XII Tablas."},
-  {u:"U5",titulo:"Servio Tulio",pregunta:"¿Cuál fue el criterio innovador del censo de Servio Tulio?",opciones:["Se basaba en el nacimiento y el linaje","Se basaba en la riqueza, no solo en el nacimiento","Se basaba en el mérito militar","Se basaba en la religión"],correcta:1,explicacion:"Servio Tulio innovó al introducir un censo basado en la riqueza, organizando la población en 5 clases y 193 centurias."},
-  {u:"U5",titulo:"XII Tablas",pregunta:"¿Cuándo se creó la Ley de las XII Tablas y qué igualdades otorgó?",opciones:["509 a.C., igualdad política","451–450 a.C., igualdad civil y social","27 a.C., igualdad religiosa","476 d.C., igualdad económica"],correcta:1,explicacion:"Las XII Tablas (451–450 a.C.) otorgaron a los plebeyos la igualdad civil (ante la ley) y social (matrimonio mixto con patricios)."},
-  {u:"U5",titulo:"Cursus Honorum",pregunta:"¿Qué era el Cursus Honorum en Roma?",opciones:["El código de leyes de la República","La carrera política por la que un ciudadano ascendía de cargo en cargo","El nombre del ejército romano","El manual de ética para senadores"],correcta:1,explicacion:"El Cursus Honorum era la carrera política romana: una secuencia de magistraturas (cuestor, edil, pretor, cónsul) que un ciudadano debía recorrer."},
-  {u:"U5",titulo:"Ius Honorarium",pregunta:"¿Qué era el Ius Honorarium o derecho pretoriano?",opciones:["Las leyes del Senado","El derecho creado por el pretor para corroborar, suplir o corregir el derecho civil","Las constituciones del emperador","Los plebiscitos de la Asamblea"],correcta:1,explicacion:"El Ius Honorarium era el conjunto de normas que el pretor publicaba en su edicto para complementar y corregir el derecho civil existente."},
-  {u:"U5",titulo:"Edicto Perpetuo",pregunta:"¿Quién codificó el Edicto Perpetuo por orden del Emperador Adriano?",opciones:["Cayo","Ulpiano","Justiniano","Salvio Juliano"],correcta:3,explicacion:"El Emperador Adriano encargó al jurista Salvio Juliano reunir y sistematizar el Edicto Perpetuo, convirtiéndolo en ley definitiva."},
-  {u:"U5",titulo:"Diocleciano y Constantino",pregunta:"¿Qué estableció el Edicto de Milán de Constantino (313 d.C.)?",opciones:["La división del Imperio","La libertad de culto para los cristianos","La codificación del derecho romano","El traslado de la capital a Roma"],correcta:1,explicacion:"El Edicto de Milán (313 d.C.) declaró la libertad de culto para los cristianos, poniendo fin a su persecución."},
-  {u:"U5",titulo:"Códigos",pregunta:"¿Cuál fue la codificación definitiva del derecho romano?",opciones:["El Código Teodosiano","El Corpus Iuris Civilis de Justiniano (529–533 d.C.)","El Código Gregoriano","La Ley de Citas de Diocleciano"],correcta:1,explicacion:"La codificación definitiva fue el Corpus Iuris Civilis, ordenado por el Emperador Justiniano del Imperio Romano de Oriente entre el 529 y 533 d.C."},
-  {u:"U5",titulo:"Caída de Roma",pregunta:"¿En qué año y quién produjo la caída del Imperio Romano de Occidente?",opciones:["395 d.C., Teodosio dividió el Imperio","313 d.C., Edicto de Milán de Constantino","476 d.C., Odoacro (rey de los hérulos) saqueó Roma","529 d.C., codificación de Justiniano"],correcta:2,explicacion:"El Imperio Romano de Occidente cayó en el año 476 d.C., cuando Odoacro, rey de los hérulos, saqueó Roma y depuso al último emperador."},
-];
+Object.keys(TOTAL).forEach(n => { state[n] = 0; });
 
-const cards = document.querySelectorAll('.cartilla');
-let cur = 0;
-
-// Quiz por cartilla
-document.querySelectorAll('.quiz-section').forEach(sec => {
-  const correcta = parseInt(sec.dataset.correcta);
-  const btns     = sec.querySelectorAll('.quiz-btn');
-  const feedback = sec.querySelector('.quiz-feedback');
-  const resetBtn = sec.querySelector('.quiz-btn-reset');
-  btns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      if (this.classList.contains('correcto') || this.classList.contains('incorrecto')) return;
-      const idx = parseInt(this.dataset.idx);
-      btns.forEach(b => b.disabled = true);
-      if (idx === correcta) {
-        this.classList.add('correcto');
-        feedback.textContent = '✓ ¡Correcto!';
-        feedback.style.color = '#155724';
-      } else {
-        this.classList.add('incorrecto');
-        btns[correcta].classList.add('correcto');
-        feedback.textContent = '✗ Incorrecto. La respuesta correcta está marcada en verde.';
-        feedback.style.color = '#721c24';
-      }
-      resetBtn.classList.add('visible');
-    });
-  });
-  resetBtn.addEventListener('click', function() {
-    btns.forEach(b => { b.classList.remove('correcto','incorrecto'); b.disabled = false; });
-    feedback.textContent = '';
-    this.classList.remove('visible');
-  });
-});
-
-function render() {
-  cards.forEach((c, i) => {
-    c.classList.toggle('activa', i === cur);
-  });
-  document.getElementById('btnAnterior').disabled = cur === 0;
-  document.getElementById('btnSiguiente').disabled = cur === cards.length - 1;
-  const pct = Math.round((cur + 1) / cards.length * 100);
-  document.getElementById('pBar').style.width = pct + '%';
-  document.getElementById('pText').textContent = (cur + 1) + ' / ' + cards.length;
-  document.querySelectorAll('.indice-item').forEach((it, i) => {
-    it.classList.toggle('activo', i === cur);
-  });
+function showHome() {
+  document.getElementById('home-page').style.display = 'block';
+  document.querySelectorAll('.lesson-page').forEach(p => p.style.display = 'none');
+  window.scrollTo(0, 0);
 }
 
-function cambiar(d) { cur = Math.max(0, Math.min(cards.length-1, cur+d)); render(); window.scrollTo(0,0); }
-render();
-
-// Índice
-const indiceContenido = document.getElementById('indiceContenido');
-cards.forEach(function(c, i) {
-  const h2 = c.querySelector('h2');
-  const titulo = h2 ? h2.textContent : '';
-  const esPortada = /^UNIDAD /i.test(titulo) || c.classList.contains('portada');
-  const btn = document.createElement('button');
-  btn.className = 'indice-item' + (esPortada ? ' indice-portada' : '');
-  btn.innerHTML = '<span class="indice-num">' + (i+1) + '.</span>' + titulo;
-  btn.addEventListener('click', function() { cur = i; render(); cerrarIndice(); window.scrollTo(0,0); });
-  indiceContenido.appendChild(btn);
-});
-
-function abrirIndice()  { document.getElementById('indicePanel').classList.add('abierto'); document.getElementById('indiceOverlay').classList.add('visible'); }
-function cerrarIndice() { document.getElementById('indicePanel').classList.remove('abierto'); document.getElementById('indiceOverlay').classList.remove('visible'); }
-
-// Tabs
-document.querySelectorAll('.modo-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.modo-btn').forEach(b => b.classList.remove('activo'));
-    document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
-    this.classList.add('activo');
-    document.getElementById(this.dataset.vista).classList.add('activa');
-  });
-});
-
-// Modo examen
-let exPreguntas = [], exIdx = 0, exCorrectas = 0, exIncorrectas = 0, exHistorial = [];
-let exTotal = 10;
-
-document.querySelectorAll('.btn-num').forEach(b => {
-  b.addEventListener('click', function() {
-    document.querySelectorAll('.btn-num').forEach(x => x.classList.remove('sel'));
-    this.classList.add('sel');
-    exTotal = parseInt(this.dataset.n);
-  });
-});
-
-function mezclar(arr) { for (let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
-
-function iniciarExamen() {
-  const mezclado = mezclar([...BANCO]);
-  exPreguntas = mezclado.slice(0, Math.min(exTotal, BANCO.length));
-  exIdx=0; exCorrectas=0; exIncorrectas=0; exHistorial=[];
-  document.getElementById('examenConfig').style.display='none';
-  document.getElementById('examenResultado').classList.remove('visible');
-  document.getElementById('examenActivo').classList.add('visible');
-  mostrarPregunta();
-}
-
-function mostrarPregunta() {
-  const p = exPreguntas[exIdx];
-  document.getElementById('exContador').textContent = 'Pregunta ' + (exIdx+1) + ' / ' + exPreguntas.length;
-  document.getElementById('exPuntaje').textContent = '✓ ' + exCorrectas + '  ✗ ' + exIncorrectas;
-  document.getElementById('exProgBar').style.width = (exIdx/exPreguntas.length*100)+'%';
-  document.getElementById('exTag').textContent = '[' + p.u + '] ' + p.titulo;
-  document.getElementById('exPregunta').textContent = p.pregunta;
-  document.getElementById('exExplicacion').textContent = p.explicacion;
-  document.getElementById('exExplicacion').classList.remove('visible');
-  document.getElementById('exSiguiente').classList.remove('visible');
-  const opcDiv = document.getElementById('exOpciones');
-  opcDiv.innerHTML = '';
-  p.opciones.forEach(function(op, i) {
-    const b = document.createElement('button');
-    b.className = 'ex-btn'; b.textContent = op;
-    b.addEventListener('click', function() {
-      document.querySelectorAll('.ex-btn').forEach(x => x.disabled=true);
-      if (i === p.correcta) { b.classList.add('ex-correcto'); exCorrectas++; exHistorial.push({ok:true, pregunta:p.pregunta}); }
-      else { b.classList.add('ex-incorrecto'); opcDiv.querySelectorAll('.ex-btn')[p.correcta].classList.add('ex-correcto'); exIncorrectas++; exHistorial.push({ok:false, pregunta:p.pregunta}); }
-      document.getElementById('exExplicacion').classList.add('visible');
-      document.getElementById('exSiguiente').classList.add('visible');
-      document.getElementById('exPuntaje').textContent = '✓ ' + exCorrectas + '  ✗ ' + exIncorrectas;
-    });
-    opcDiv.appendChild(b);
-  });
-}
-
-function siguientePregunta() {
-  exIdx++;
-  if (exIdx >= exPreguntas.length) { mostrarResultado(); return; }
-  mostrarPregunta();
-}
-
-function mostrarResultado() {
-  document.getElementById('examenActivo').classList.remove('visible');
-  const res = document.getElementById('examenResultado');
-  res.classList.add('visible');
-  const pct = Math.round(exCorrectas/exPreguntas.length*100);
-  document.getElementById('exScoreNum').textContent = exCorrectas + '/' + exPreguntas.length;
-  let msg = pct>=80 ? '🎉 Excelente resultado' : pct>=60 ? '👍 Buen trabajo' : '📖 Seguí repasando';
-  document.getElementById('exScoreTxt').textContent = msg + ' (' + pct + '%)';
-  const det = document.getElementById('exDetalle');
-  det.innerHTML = '<p style="font-weight:700;margin-bottom:.5rem;font-size:.9rem;">Detalle:</p>';
-  exHistorial.forEach(function(h) {
-    const d = document.createElement('div');
-    d.className = 'ex-detalle-item ' + (h.ok ? 'ok' : 'mal');
-    d.textContent = (h.ok ? '✓ ' : '✗ ') + h.pregunta;
-    det.appendChild(d);
-  });
-}
-
-function reiniciarExamen() {
-  document.getElementById('examenResultado').classList.remove('visible');
-  document.getElementById('examenActivo').classList.remove('visible');
-  document.getElementById('examenConfig').style.display='block';
-}
-
-// ── Prof. Ada Quiz ──────────────────────────────────────────
-const ADA_PREGUNTAS = [
-  { p:"Código más antiguo de Babilonia:", ops:["Código de Hamurabi","Código de Manu"], c:0 },
-  { p:"Gobernante supremo egipcio:", ops:["El Rey","El Faraón"], c:1 },
-  { p:"Civilización de los Juegos Olímpicos:", ops:["Civilización de Grecia","Civilización Romana"], c:0 },
-  { p:"Sociedad organizada con soberanía:", ops:["Estado","Nación"], c:0 },
-  { p:"Código severo de leyes en India:", ops:["Código de Manu","Código Hamurabi"], c:0 },
-  { p:"Rey que mandó compilar el Código de Hammurabi:", ops:["El Rey Hammurabi","El Rey Tutankamon"], c:0 },
-  { p:"Sistema social hereditario en India:", ops:["Casta","Patricios y Plebeyos"], c:0 },
-  { p:"Conjunto de personas que interactúan organizadas con cultura común:", ops:["Sociedad","Dinámica cultural"], c:0 },
-  { p:"Fiesta deportiva griega:", ops:["Los Juegos Olímpicos","Los Juegos del Circo Romano"], c:0 },
-  { p:"Primer grupo social formado por hombre y mujer:", ops:["La familia","El Clan"], c:0 },
-  { p:"¿Cómo se denomina el estudio del pasado desde la aparición de la escritura?", ops:["La Historia","La Civilización"], c:0 },
-  { p:"Periodo de la revolución agrícola:", ops:["Paleolítico","Neolítico"], c:1 },
-  { p:"Códigos de compilación romana:", ops:["Código Gregoriano, Hermogeniano y Teodosiano","Edicto Salvio Juliano"], c:0 },
-  { p:"Clase privilegiada romana:", ops:["Los Patricios","Los Plebeyos"], c:0 },
-  { p:"Características del hombre del Paleolítico:", ops:["Eran nómadas, recolectores y cazadores","Eran sedentarios y agricultores"], c:0 },
-  { p:"Reforma de Diocleciano:", ops:["División del Imperio","Tetrarquía","La respuesta a y b son correctas"], c:2 },
-  { p:"Divinidad con control total en Roma:", ops:["El Senado","Los Magistrados","El Emperador"], c:2 },
-  { p:"Primera institución que perdura hasta hoy:", ops:["La familia","El Clan"], c:0 },
-  { p:"Ciudadanos amantes de la democracia y la filosofía:", ops:["Ateniense","Espartano"], c:0 },
-  { p:"El hombre por naturaleza es un ser:", ops:["Altruistas y cooperadores","Social y político"], c:1 },
-  { p:"Clase social sin privilegios en Roma:", ops:["Patricios","Plebeyos"], c:1 },
-  { p:"Primera ley escrita de Roma:", ops:["Edicto Salvio Juliano","La Ley de las XII Tablas"], c:1 },
-  { p:"Intelectuales engañosos:", ops:["Los Sofistas","Los Artistas"], c:0 },
-  { p:"Padre de la democracia ateniense:", ops:["Dracón","Clístenes"], c:1 },
-  { p:"Primer registro histórico:", ops:["La escritura cuneiforme","La escritura jeroglífica"], c:0 },
-  { p:"Primeras pinturas en cuevas:", ops:["Pintura Rupestre","Manifestación Cultural"], c:0 },
-  { p:"Grupo con idioma, religión y pasado histórico común:", ops:["Estado","Nación"], c:1 },
-  { p:"Primera escritura de Mesopotamia:", ops:["Escritura cuneiforme","Alfabeto Grecolatino"], c:0 },
-  { p:"Sistema social religioso de la India:", ops:["Las Castas","Patricios y Plebeyos"], c:0 },
-  { p:"Conjunto de bienes materiales y espirituales transmitidos de generación en generación:", ops:["Cultura","Civilización"], c:0 },
-  { p:"Institución política romana consejera:", ops:["Emperador","Senado"], c:1 },
-  { p:"Periodo político con cónsules:", ops:["Monarquía","República","Imperio"], c:1 },
-  { p:"Primer código mesopotámico:", ops:["Código de Hamurabi","Código de Manu"], c:0 },
-  { p:"Código penal indio antiguo:", ops:["Código de Manu","Código Hamurabi"], c:0 },
-  { p:"Comunidad con pasado histórico común:", ops:["Estado","Nación"], c:1 },
-  { p:"Origen de Roma:", ops:["De la leyenda de Rómulo y Remo","De la unión de latinos y sabinas","En el 753 a.C.","Todas las respuestas son correctas"], c:3 },
-  { p:"Periodo 509–27 a.C.:", ops:["Monarquía","República","Imperio"], c:1 },
-  { p:"Periodo 753–509 a.C.:", ops:["Monarquía","República","Imperio"], c:0 },
-  { p:"Periodo donde surge la revolución agrícola:", ops:["Paleolítico","Neolítico"], c:1 },
-  { p:"Gobernante supremo de Egipto:", ops:["Rey","Faraón"], c:1 },
-];
-
-let adaScore = 0;
-let adaRespondidas = 0;
-
-function renderAdaQuiz() {
-  adaScore = 0; adaRespondidas = 0;
-  const cont = document.getElementById('ada-quiz-container');
-  document.getElementById('ada-resultado').style.display = 'none';
-  cont.innerHTML = ADA_PREGUNTAS.map((q, i) => `
-    <div class="card" id="ada-q-${i}" style="margin-bottom:.8rem;padding:1rem">
-      <div style="font-size:.75rem;font-weight:700;color:var(--verde2);margin-bottom:.3rem">Pregunta ${i+1}</div>
-      <div style="font-size:.92rem;font-weight:700;margin-bottom:.7rem;line-height:1.5">${q.p}</div>
-      ${q.ops.map((op, j) => `
-        <button class="quiz-btn" onclick="responderAda(${i},${j})" id="ada-btn-${i}-${j}">${op}</button>
-      `).join('')}
-      <div class="quiz-feedback" id="ada-fb-${i}"></div>
-    </div>
-  `).join('');
-}
-
-function responderAda(qi, oi) {
-  const q = ADA_PREGUNTAS[qi];
-  const fb = document.getElementById(`ada-fb-${qi}`);
-  q.ops.forEach((_, j) => {
-    const btn = document.getElementById(`ada-btn-${qi}-${j}`);
-    btn.disabled = true;
-    if (j === q.c) btn.classList.add('correcto');
-  });
-  const elegido = document.getElementById(`ada-btn-${qi}-${oi}`);
-  if (oi === q.c) {
-    fb.textContent = '✅ ¡Correcto!';
-    fb.style.color = '#155724';
-    adaScore++;
-  } else {
-    elegido.classList.add('incorrecto');
-    fb.textContent = `❌ Incorrecto. Correcta: "${q.ops[q.c]}"`;
-    fb.style.color = '#721c24';
-  }
-  adaRespondidas++;
-  if (adaRespondidas === ADA_PREGUNTAS.length) {
-    document.getElementById('ada-score-num').textContent = `${adaScore} / ${ADA_PREGUNTAS.length}`;
-    document.getElementById('ada-resultado').style.display = 'block';
-    document.getElementById('ada-resultado').scrollIntoView({behavior:'smooth'});
+function showLesson(num) {
+  document.getElementById('home-page').style.display = 'none';
+  document.querySelectorAll('.lesson-page').forEach(p => p.style.display = 'none');
+  const page = document.getElementById('lesson-' + num);
+  if (page) {
+    page.style.display = 'flex';
+    updateProgress(num);
+    window.scrollTo(0, 0);
   }
 }
 
-function reiniciarAdaQuiz() { renderAdaQuiz(); }
+function goToSlide(num, idx) {
+  const container = document.getElementById('slides-' + num);
+  const slides = container.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('#lesson-' + num + ' .dot');
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  slides[idx].classList.add('active');
+  dots[idx].classList.add('active');
+  state[num] = idx;
+  updateProgress(num);
+}
 
-document.addEventListener('DOMContentLoaded', renderAdaQuiz);
-// ── Fin Prof. Ada Quiz ───────────────────────────────────────
+function nextSlide(num) {
+  const total = TOTAL[num];
+  const next = (state[num] + 1) % total;
+  goToSlide(num, next);
+}
 
+function prevSlide(num) {
+  const total = TOTAL[num];
+  const prev = (state[num] - 1 + total) % total;
+  goToSlide(num, prev);
+}
+
+function updateProgress(num) {
+  const total = TOTAL[num];
+  const pct = ((state[num] + 1) / total) * 100;
+  const bar = document.getElementById('prog-' + num);
+  if (bar) bar.style.width = pct + '%';
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  const activePage = document.querySelector('.lesson-page[style*="flex"]');
+  if (!activePage) return;
+  const num = activePage.id.replace('lesson-', '');
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide(parseInt(num));
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide(parseInt(num));
+  if (e.key === 'Escape') showHome();
+});
 </script>
 </body>
 </html>
-
-<details style="margin-top:1.2rem;border:1.5px solid #b2dfdb;border-radius:10px;overflow:hidden">
-  <summary style="background:#e8f5e9;color:#1b6e3d;font-weight:700;font-size:.82rem;padding:.6rem 1rem;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.4rem;text-transform:uppercase;letter-spacing:.04em">
-    <span>📅</span> <span>Línea del Tiempo — Unidad I · Prof. Ada</span>
-    <span style="margin-left:auto;font-size:.75rem;font-weight:400;color:#5a7363">▼ Ver tabla</span>
-  </summary>
-  <div style="padding:.8rem .6rem .6rem">
-
-<div style="overflow-x:auto">
-<table style="width:100%;border-collapse:collapse;font-size:.78rem;min-width:600px">
-  <thead>
-    <tr>
-      <th colspan="3" style="background:#e8f5e9;color:#1b6e3d;padding:.5rem .6rem;text-align:center;border:1.5px solid #b2dfdb;font-size:.8rem">🦴 PREHISTORIA</th>
-      <th colspan="4" style="background:#c8e6c9;color:#1b6e3d;padding:.5rem .6rem;text-align:center;border:1.5px solid #b2dfdb;font-size:.8rem">📜 HISTORIA</th>
-    </tr>
-    <tr>
-      <th style="border:1.5px solid #b2dfdb;padding:.45rem .5rem;text-align:center;color:#1b6e3d;background:#e8f5e9">Paleolítico</th>
-      <th style="border:1.5px solid #b2dfdb;padding:.45rem .5rem;text-align:center;color:#1b6e3d;background:#e8f5e9">Neolítico</th>
-      <th style="border:1.5px solid #b2dfdb;padding:.45rem .5rem;text-align:center;color:#1b6e3d;background:#e8f5e9">Edad de los Metales</th>
-      <th style="border:1.5px solid #b2dfdb;padding:.45rem .5rem;text-align:center;color:#1b6e3d;background:#c8e6c9">Edad Antigua</th>
-      <th style="border:1.5px solid #b2dfdb;padding:.45rem .5rem;text-align:center;color:#1b6e3d;background:#c8e6c9">Edad Media</th>
-      <th style="border:1.5px solid #b2dfdb;padding:.45rem .5rem;text-align:center;color:#1b6e3d;background:#c8e6c9">Edad Moderna</th>
-      <th style="border:1.5px solid #b2dfdb;padding:.45rem .5rem;text-align:center;color:#1b6e3d;background:#c8e6c9">Edad Contemporánea</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="text-align:center;font-weight:700;background:#fff">
-      <td style="border:1.5px solid #b2dfdb;padding:.4rem .5rem">Hace 4.000.000 años<br>↓<br>10.000 a.C.</td>
-      <td style="border:1.5px solid #b2dfdb;padding:.4rem .5rem">10.000 a.C.<br>↓<br>6.000 a.C.</td>
-      <td style="border:1.5px solid #b2dfdb;padding:.4rem .5rem">6.000 a.C.<br>↓<br>3.500 a.C.<br><span style="font-weight:400;font-size:.73rem">(Cobre → Bronce → Hierro)</span></td>
-      <td style="border:1.5px solid #b2dfdb;padding:.4rem .5rem">3.500 a.C.<br>↓<br>476 d.C.</td>
-      <td style="border:1.5px solid #b2dfdb;padding:.4rem .5rem">476<br>↓<br>1453 / 1492</td>
-      <td style="border:1.5px solid #b2dfdb;padding:.4rem .5rem">1453 / 1492<br>↓<br>1789</td>
-      <td style="border:1.5px solid #b2dfdb;padding:.4rem .5rem">1789<br>↓<br>Hoy</td>
-    </tr>
-    <tr style="vertical-align:top;background:#f9fffe">
-      <td style="border:1.5px solid #b2dfdb;padding:.45rem .55rem">
-        <ul style="margin:0;padding-left:1rem;line-height:1.7">
-          <li>Vivían en cuevas</li>
-          <li>Caza, pesca y recolección</li>
-          <li>Herramientas de piedra</li>
-          <li>Eran nómadas</li>
-          <li>Dominio del fuego</li>
-        </ul>
-      </td>
-      <td style="border:1.5px solid #b2dfdb;padding:.45rem .55rem">
-        <ul style="margin:0;padding-left:1rem;line-height:1.7">
-          <li>Nace la agricultura 🌾</li>
-          <li>Domestican animales</li>
-          <li>Estratificación social</li>
-          <li>Fabricación de armas</li>
-          <li>Sedentarios</li>
-        </ul>
-      </td>
-      <td style="border:1.5px solid #b2dfdb;padding:.45rem .55rem">
-        <ul style="margin:0;padding-left:1rem;line-height:1.7">
-          <li>Fabricación de armas metálicas</li>
-          <li>Surgimiento de ciudades</li>
-          <li>Economía (trueque)</li>
-          <li>Mayor estratificación social</li>
-        </ul>
-      </td>
-      <td style="border:1.5px solid #b2dfdb;padding:.45rem .55rem">
-        <ul style="margin:0;padding-left:1rem;line-height:1.7">
-          <li>Escritura cuneiforme 📝</li>
-          <li>Calendario</li>
-          <li>Código de Hammurabi</li>
-          <li>Ley del Talión</li>
-          <li>Nacimiento de Jesucristo</li>
-          <li>Civilización hebrea</li>
-          <li>Democracia griega</li>
-          <li>Juegos Olímpicos</li>
-        </ul>
-      </td>
-      <td style="border:1.5px solid #b2dfdb;padding:.45rem .55rem">
-        <ul style="margin:0;padding-left:1rem;line-height:1.7">
-          <li>Caída del Imperio Romano (476)</li>
-          <li>India — sistema de castas</li>
-          <li>Código de Manú</li>
-          <li>Feudalismo</li>
-        </ul>
-      </td>
-      <td style="border:1.5px solid #b2dfdb;padding:.45rem .55rem">
-        <ul style="margin:0;padding-left:1rem;line-height:1.7">
-          <li>Senado y consulado romano</li>
-          <li>Sistemas de gobierno</li>
-          <li>Organización política</li>
-          <li>Renacimiento</li>
-        </ul>
-      </td>
-      <td style="border:1.5px solid #b2dfdb;padding:.45rem .55rem">
-        <ul style="margin:0;padding-left:1rem;line-height:1.7">
-          <li>Revolución Francesa 🗽</li>
-          <li>Constituciones modernas</li>
-          <li>Derechos del hombre</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<p style="font-size:.73rem;color:var(--gris2);text-align:center;margin-top:.5rem">
-  ✂️ Hito clave: la <b>escritura cuneiforme</b> (~3.500 a.C.) marca el paso de la Prehistoria a la Historia.
-</p>
-
-  </div>
-</details>
-
