@@ -240,6 +240,46 @@
   .nav-buttons-secondary { margin-top:-.4rem; }
   .btn-examen { background: var(--grad); font-weight:700; box-shadow: 0 3px 10px rgba(67,56,202,.35); }
   .btn-examen:hover { filter: brightness(1.08); }
+
+  /* ── Repaso Espaciado ── */
+  .btn-repaso { background: linear-gradient(135deg,#0891b2,#0369a1); font-weight:700; box-shadow: 0 3px 10px rgba(3,105,161,.35); position:relative; }
+  .btn-repaso:hover { filter: brightness(1.08); }
+  .btn-repaso .badge-pendientes { position:absolute; top:-8px; right:-8px; background:#dc3545; color:#fff; font-size:.65rem; font-weight:800; min-width:20px; height:20px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 4px; box-shadow:0 1px 4px rgba(0,0,0,.3); }
+
+  .repaso-card { max-width:640px; margin:1.2rem auto; padding:0 .8rem; }
+  .repaso-stats-bar { display:flex; justify-content:space-around; background: var(--panel-bg,#f1edff); border-radius:12px; padding:.8rem; margin-bottom:1rem; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+  .repaso-stat { text-align:center; }
+  .repaso-stat b { display:block; font-size:1.3rem; color:#0369a1; }
+  .repaso-stat span { font-size:.72rem; color:#675f82; }
+
+  .repaso-unidad-tag { display:inline-block; background:#e0f2fe; color:#0369a1; font-size:.7rem; font-weight:700; padding:.25rem .7rem; border-radius:999px; margin-bottom:.7rem; }
+  .repaso-pregunta-box { background:#fff; border-radius:14px; padding:1.2rem 1.3rem; box-shadow:0 4px 16px rgba(0,0,0,.08); border:1px solid #ded4ff; }
+  .repaso-pregunta-txt { font-size:1rem; font-weight:700; margin-bottom:1rem; line-height:1.45; }
+  .repaso-opciones { display:flex; flex-direction:column; gap:.55rem; }
+  .repaso-op { text-align:left; padding:.7rem 1rem; border-radius:10px; border:1.5px solid #ded4ff; background:#fff; cursor:pointer; font-size:.87rem; transition:all .15s; }
+  .repaso-op:hover { border-color:#0891b2; background:#f0fbfd; }
+  .repaso-op.correcta { background:#eafbef; border-color:#28a745; color:#155724; font-weight:700; }
+  .repaso-op.incorrecta { background:#fdeeee; border-color:#dc3545; color:#721c24; }
+  .repaso-op:disabled { cursor:default; pointer-events:none; }
+
+  .repaso-feedback { margin-top:1rem; padding:.9rem 1rem; border-radius:10px; font-size:.85rem; display:none; line-height:1.5; }
+  .repaso-feedback.show { display:block; }
+  .repaso-feedback.ok { background:#eafbef; border-left:4px solid #28a745; color:#155724; }
+  .repaso-feedback.bad { background:#fdeeee; border-left:4px solid #dc3545; color:#721c24; }
+  .repaso-intervalo-info { margin-top:.6rem; font-size:.75rem; color:#9a92c0; text-align:center; }
+
+  .repaso-acciones { display:flex; gap:.6rem; margin-top:1.1rem; justify-content:center; flex-wrap:wrap; }
+  .btn-repaso-next { padding:.6rem 1.3rem; border-radius:9px; border:none; font-size:.85rem; font-weight:700; cursor:pointer; background:linear-gradient(135deg,#0891b2,#0369a1); color:#fff; display:none; }
+  .btn-repaso-next.show { display:inline-block; }
+  .btn-repaso-next:hover { opacity:.9; }
+  .btn-repaso-volver { padding:.55rem 1.1rem; border-radius:9px; border:1.5px solid #ded4ff; font-size:.82rem; font-weight:700; cursor:pointer; background:#f1edff; color:#4338ca; }
+
+  .repaso-empty { text-align:center; padding:2.5rem 1rem; color:#675f82; }
+  .repaso-empty .emoji { font-size:2.8rem; margin-bottom:.7rem; }
+
+  .repaso-cola-preview { margin-top:1.3rem; padding-top:1rem; border-top:1px dashed #ded4ff; font-size:.74rem; color:#9a92c0; }
+  .repaso-cola-item { display:flex; justify-content:space-between; gap:.5rem; padding:.3rem 0; }
+  .repaso-cola-item b { color:#675f82; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -2466,6 +2506,7 @@
   </div>
   <div class="nav-buttons nav-buttons-secondary">
     <button class="btn-nav btn-examen" onclick="irAExamen()">🧠 Modo Examen</button>
+    <button class="btn-nav btn-repaso" onclick="irARepaso()">🔁 Repaso Espaciado<span class="badge-pendientes" id="badgeRepasoPendientes" style="display:none">0</span></button>
   </div>
 </div><!-- fin #vistaCartillas -->
 
@@ -2522,6 +2563,23 @@
 </div>
 
 
+
+
+<div id="vistaRepaso" class="vista">
+  <div class="repaso-card">
+    <div class="repaso-stats-bar">
+      <div class="repaso-stat"><b id="repasoStatHoy">0</b><span>Para hoy</span></div>
+      <div class="repaso-stat"><b id="repasoStatRacha">0</b><span>Racha</span></div>
+      <div class="repaso-stat"><b id="repasoStatDominadas">0</b><span>Dominadas</span></div>
+    </div>
+    <div id="repasoZonaPregunta"></div>
+    <div class="repaso-acciones">
+      <button class="btn-repaso-next" id="repasoBtnNext" onclick="repasoSiguiente()">Siguiente pregunta →</button>
+      <button class="btn-repaso-volver" onclick="activarVista('vistaCartillas')">← Volver a las cartillas</button>
+    </div>
+    <div class="repaso-cola-preview" id="repasoColaPreview"></div>
+  </div>
+</div>
 
 <script>
 
@@ -3207,6 +3265,175 @@ function reiniciarAdaQuiz() { renderAdaQuiz(); }
 document.addEventListener('DOMContentLoaded', renderAdaQuiz);
 // ── Fin Prof. Ada Quiz ───────────────────────────────────────
 
+</script>
+
+<script>
+// ── Repaso Espaciado (usa BANCO ya definido) ──────────────────
+const REPASO_INTERVALOS = [0, 1, 3, 7, 16, 35]; // días de espera por nivel
+
+function repasoHoyISO() { return new Date().toISOString().slice(0,10); }
+function repasoSumarDias(fecha, dias) {
+  const d = new Date(fecha);
+  d.setDate(d.getDate() + dias);
+  return d.toISOString().slice(0,10);
+}
+
+// ID estable por pregunta (unidad + título)
+function repasoIdPregunta(p) { return p.u + '::' + p.titulo; }
+
+function repasoDiasHastaSabado() {
+  // 0=domingo,1=lunes,...,6=sábado
+  const hoyDia = new Date().getDay();
+  return hoyDia <= 6 ? (6 - hoyDia) : 0; // días restantes hasta el próximo sábado (0 si hoy es sábado)
+}
+
+function repasoCargarEstado() {
+  const raw = localStorage.getItem('repasoEspaciadoEstado');
+  let estado = raw ? JSON.parse(raw) : {};
+  const rangoDias = repasoDiasHastaSabado(); // hoy..sábado
+  let idx = 0;
+  BANCO.forEach(p => {
+    const id = repasoIdPregunta(p);
+    if (!estado[id]) {
+      // Distribuye las preguntas nuevas (primera vez) entre hoy y el sábado, en lugar de amontonarlas todas "para hoy"
+      const offset = rangoDias > 0 ? (idx % (rangoDias + 1)) : 0;
+      estado[id] = { nivel: 0, proxima: repasoSumarDias(repasoHoyISO(), offset), racha: 0 };
+    }
+    idx++;
+  });
+  return estado;
+}
+function repasoGuardarEstado() { localStorage.setItem('repasoEspaciadoEstado', JSON.stringify(repasoEstado)); }
+
+let repasoEstado = repasoCargarEstado();
+let repasoCola = [];
+let repasoActual = null;
+let repasoRachaGlobal = parseInt(localStorage.getItem('repasoRachaGlobal') || '0');
+
+function repasoMezclar(arr) { const a=[...arr]; for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+function repasoConstruirCola() {
+  const hoy = repasoHoyISO();
+  repasoCola = repasoMezclar(BANCO.filter(p => repasoEstado[repasoIdPregunta(p)].proxima <= hoy));
+}
+
+function repasoActualizarStats() {
+  document.getElementById('repasoStatHoy').textContent = repasoCola.length;
+  document.getElementById('repasoStatRacha').textContent = repasoRachaGlobal;
+  const dominadas = Object.values(repasoEstado).filter(e => e.nivel >= REPASO_INTERVALOS.length - 1).length;
+  document.getElementById('repasoStatDominadas').textContent = dominadas;
+
+  const badge = document.getElementById('badgeRepasoPendientes');
+  const hoy = repasoHoyISO();
+  const pendientesHoy = BANCO.filter(p => repasoEstado[repasoIdPregunta(p)].proxima <= hoy).length;
+  if (pendientesHoy > 0) { badge.style.display='flex'; badge.textContent = pendientesHoy; }
+  else { badge.style.display='none'; }
+}
+
+function repasoActualizarColaPreview() {
+  const prev = document.getElementById('repasoColaPreview');
+  const hoy = repasoHoyISO();
+  const items = BANCO.map(p => {
+    const e = repasoEstado[repasoIdPregunta(p)];
+    const dias = Math.max(0, Math.ceil((new Date(e.proxima) - new Date(hoy)) / 86400000));
+    const texto = dias === 0 ? 'hoy' : 'en ' + dias + ' día' + (dias>1?'s':'');
+    return '<div class="repaso-cola-item"><span>[' + p.u + '] ' + p.titulo + '</span><b>' + texto + '</b></div>';
+  }).join('');
+  prev.innerHTML = '<div style="margin-bottom:.5rem;font-weight:700;color:#675f82">📅 Próximos repasos programados (' + BANCO.length + ' preguntas en total)</div>' + items;
+}
+
+function repasoMostrarPregunta() {
+  const zona = document.getElementById('repasoZonaPregunta');
+  const btnNext = document.getElementById('repasoBtnNext');
+  btnNext.classList.remove('show');
+
+  if (repasoCola.length === 0) {
+    zona.innerHTML = '<div class="repaso-empty"><div class="emoji">🎉</div><b>¡Sin repasos pendientes por ahora!</b><br>Volvé más tarde — el sistema te avisará cuándo repasar cada tema según tu desempeño anterior.</div>';
+    repasoActualizarColaPreview();
+    return;
+  }
+
+  repasoActual = repasoCola[0];
+  const p = repasoActual;
+  const id = repasoIdPregunta(p);
+  const nivel = repasoEstado[id].nivel;
+
+  zona.innerHTML = `
+    <div class="repaso-unidad-tag">[${p.u}] ${p.titulo} · dominio ${nivel}/${REPASO_INTERVALOS.length-1}</div>
+    <div class="repaso-pregunta-box">
+      <div class="repaso-pregunta-txt">${p.pregunta}</div>
+      <div class="repaso-opciones" id="repasoOpcionesWrap">
+        ${p.opciones.map((op,i) => `<button class="repaso-op" data-idx="${i}">${op}</button>`).join('')}
+      </div>
+      <div class="repaso-feedback" id="repasoFeedbackBox"></div>
+      <div class="repaso-intervalo-info" id="repasoIntervaloInfo"></div>
+    </div>
+  `;
+
+  document.querySelectorAll('.repaso-op').forEach(btn => {
+    btn.addEventListener('click', () => repasoResponder(parseInt(btn.dataset.idx)));
+  });
+}
+
+function repasoResponder(idx) {
+  const p = repasoActual;
+  const id = repasoIdPregunta(p);
+  const botones = document.querySelectorAll('.repaso-op');
+  botones.forEach(b => b.disabled = true);
+  const esCorrecta = idx === p.correcta;
+
+  botones[p.correcta].classList.add('correcta');
+  if (!esCorrecta) botones[idx].classList.add('incorrecta');
+
+  const e = repasoEstado[id];
+  const fb = document.getElementById('repasoFeedbackBox');
+  const info = document.getElementById('repasoIntervaloInfo');
+
+  if (esCorrecta) {
+    e.nivel = Math.min(e.nivel + 1, REPASO_INTERVALOS.length - 1);
+    e.racha += 1;
+    repasoRachaGlobal += 1;
+    fb.className = 'repaso-feedback show ok';
+    fb.textContent = '✅ ¡Correcto! ' + (p.explicacion || '');
+  } else {
+    e.nivel = Math.max(0, e.nivel - 1);
+    e.racha = 0;
+    repasoRachaGlobal = 0;
+    fb.className = 'repaso-feedback show bad';
+    fb.textContent = '❌ Incorrecto. Respuesta correcta: "' + p.opciones[p.correcta] + '". ' + (p.explicacion || '');
+  }
+
+  const diasEspera = REPASO_INTERVALOS[e.nivel];
+  e.proxima = repasoSumarDias(repasoHoyISO(), diasEspera);
+  info.textContent = diasEspera === 0
+    ? '⏱️ Volverá a preguntarse en la próxima sesión (nivel reiniciado).'
+    : '⏱️ Próximo repaso programado en ' + diasEspera + ' día' + (diasEspera>1?'s':'') + ' (nivel ' + e.nivel + '/' + (REPASO_INTERVALOS.length-1) + ').';
+
+  repasoGuardarEstado();
+  localStorage.setItem('repasoRachaGlobal', repasoRachaGlobal);
+  document.getElementById('repasoBtnNext').classList.add('show');
+  repasoActualizarStats();
+}
+
+function repasoSiguiente() {
+  repasoCola.shift();
+  repasoMostrarPregunta();
+  repasoActualizarStats();
+}
+
+function irARepaso() {
+  activarVista('vistaRepaso');
+  repasoConstruirCola();
+  repasoActualizarStats();
+  repasoMostrarPregunta();
+  repasoActualizarColaPreview();
+}
+
+// Badge de pendientes visible desde el arranque
+document.addEventListener('DOMContentLoaded', () => {
+  repasoActualizarStats();
+});
+// ── Fin Repaso Espaciado ───────────────────────────────────────
 </script>
 </body>
 </html>
