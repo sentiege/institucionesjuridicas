@@ -229,12 +229,77 @@
   .lectura-unidad-titulo { font-family: inherit; font-size:1.1rem; font-weight:800; color: var(--verde1); margin: 1.6rem 0 .6rem; padding-bottom:.3rem; border-bottom: 3px solid var(--verde2); }
   .lectura-unidad-titulo:first-child { margin-top: .4rem; }
 
-  /* ── Panel de voz para escuchar página ── */
-  .voz-panel { display:none; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; font-size:.75rem; color:#fff; }
-  .voz-panel.visible { display:flex; }
-  .voz-panel label { opacity:.85; }
-  .voz-panel select { font-size:.75rem; padding:.25rem .5rem; border-radius:8px; border:1.5px solid rgba(255,255,255,.5); background: rgba(255,255,255,.15); color:#fff; }
-  .voz-panel select option { color:#1a1a1a; }
+  /* ── Panel de control de Lectura continua/Leída (sticky, siempre visible) ── */
+  .lectura-panel-sticky {
+    position: sticky; top: 0; z-index: 40;
+    background: linear-gradient(135deg,#4338ca,#6d28d9);
+    padding: .7rem .9rem; box-shadow: 0 3px 14px rgba(67,56,202,.35);
+    border-bottom: 1px solid rgba(255,255,255,.15);
+  }
+  .lectura-panel-fila {
+    display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+    max-width: 760px; margin: 0 auto;
+  }
+  .lectura-panel-fila-principal { justify-content: space-between; }
+  .lectura-panel-fila-voz { margin-top: .55rem; font-size: .76rem; color: rgba(255,255,255,.92); justify-content: center; }
+  .lectura-panel-fila-voz label { opacity: .9; font-weight: 600; }
+  .lectura-panel-fila-voz select {
+    font-size: .76rem; padding: .3rem .55rem; border-radius: 8px;
+    border: 1.5px solid rgba(255,255,255,.5); background: rgba(255,255,255,.15); color: #fff;
+  }
+  .lectura-panel-fila-voz select option { color: #1a1a1a; }
+
+  .lectura-cap-dropdown { position: relative; flex: 1 1 auto; min-width: 0; max-width: 420px; }
+  .lectura-cap-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+    font-size: .82rem; font-weight: 600; padding: .55rem .8rem;
+    border-radius: 10px; border: 1.5px solid rgba(255,255,255,.5);
+    background: rgba(255,255,255,.18); color: #fff; cursor: pointer; text-align: left;
+    transition: background .15s;
+  }
+  .lectura-cap-btn:hover { background: rgba(255,255,255,.28); }
+  .lectura-cap-caret { transition: transform .2s; flex-shrink: 0; }
+  .lectura-cap-dropdown.abierto .lectura-cap-caret { transform: rotate(180deg); }
+
+  .lectura-cap-menu {
+    display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    max-height: 62vh; overflow-y: auto; z-index: 60; border: 1px solid #ded4ff;
+  }
+  .lectura-cap-dropdown.abierto .lectura-cap-menu { display: block; }
+
+  .lectura-cap-unidad-header {
+    display: flex; align-items: center; gap: .6rem; width: 100%;
+    padding: .65rem .9rem; background: #f8f6ff; border: none; cursor: pointer;
+    font-size: .83rem; font-weight: 700; color: #4338ca; text-align: left;
+    border-bottom: 1px solid #ede9fe; transition: background .15s;
+  }
+  .lectura-cap-unidad-header:hover { background: #f1edff; }
+  .lectura-cap-unidad-header.activa-unidad { background: #ede4ff; }
+  .lectura-cap-unidad-icon { font-size: 1.05rem; flex-shrink: 0; }
+  .lectura-cap-unidad-nombre { flex: 1; }
+  .lectura-cap-unidad-caret { font-size: .75rem; opacity: .6; transition: transform .2s; flex-shrink: 0; }
+  .lectura-cap-unidad-header.expandida .lectura-cap-unidad-caret { transform: rotate(180deg); }
+
+  .lectura-cap-items { display: none; flex-direction: column; }
+  .lectura-cap-items.expandida { display: flex; }
+  .lectura-cap-item {
+    display: block; width: 100%; text-align: left; padding: .55rem 1rem .55rem 2.6rem;
+    background: #fff; border: none; border-bottom: 1px solid #f3f0ff; cursor: pointer;
+    font-size: .8rem; color: #4a4360; transition: background .15s;
+  }
+  .lectura-cap-item:hover { background: #f8f6ff; color: #4338ca; }
+  .lectura-cap-item.activo-item { background: #ede4ff; color: #4338ca; font-weight: 700; }
+
+  .lectura-play-controls { display: flex; gap: .5rem; flex-shrink: 0; }
+  .btn-lectura-play, .btn-lectura-stop {
+    width: 42px; height: 42px; border-radius: 50%; border: none;
+    font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.22); color: #fff; transition: all .18s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .btn-lectura-play:hover, .btn-lectura-stop:hover { background: rgba(255,255,255,.35); transform: scale(1.06); }
+  .btn-lectura-play.reproduciendo { background: #fff; color: #4338ca; }
 
   /* ── Botón Modo Examen (footer de cartilla) ── */
   .nav-buttons-secondary { margin-top:-.4rem; }
@@ -290,19 +355,9 @@
   <p>Fac. de Derecho y Ciencias Sociales · UNA · Prof. Dra. Ana de la Luz Cuellar</p>
   <div class="modo-tabs">
     <button class="modo-btn activo" data-vista="vistaCartillas">📚 Cartillas</button>
-    <button id="btnLecturaEscucha" class="modo-btn modo-btn-alt" onclick="toggleLecturaEscucha()">📖🔊 Lectura continua/Escucha</button>
+    <button id="btnLecturaEscucha" class="modo-btn modo-btn-alt" onclick="toggleLecturaEscucha()">📖🔊 Lectura continua/Leída</button>
   </div>
-  <div id="vozPanel" class="voz-panel">
-    <label for="selectVoz">Voz:</label>
-    <select id="selectVoz"></select>
-    <label for="selectVelocidad">Velocidad:</label>
-    <select id="selectVelocidad">
-      <option value="0.75">Lenta</option>
-      <option value="0.98" selected>Normal</option>
-      <option value="1.25">Rápida</option>
-      <option value="1.5">Muy rápida</option>
-    </select>
-  </div>
+
 </div>
 
 <div id="vistaCartillas" class="vista activa">
@@ -2511,6 +2566,32 @@
 </div><!-- fin #vistaCartillas -->
 
 <div id="vistaLecturaContinua" class="vista">
+  <div class="lectura-panel-sticky" id="lecturaPanelControl">
+    <div class="lectura-panel-fila lectura-panel-fila-principal">
+      <div class="lectura-cap-dropdown" id="lecturaCapDropdown">
+        <button class="lectura-cap-btn" id="btnLecturaCapToggle" onclick="toggleMenuCapitulos()">
+          <span id="lecturaCapBtnTexto">Elegir capítulo</span>
+          <span class="lectura-cap-caret">▾</span>
+        </button>
+        <div class="lectura-cap-menu" id="lecturaCapMenu"></div>
+      </div>
+      <div class="lectura-play-controls">
+        <button id="btnLecturaPlayPause" class="btn-lectura-play" onclick="toggleLecturaPlayPause()" title="Reproducir/Pausar">▶️</button>
+        <button id="btnLecturaStop" class="btn-lectura-stop" onclick="detenerLecturaManual()" title="Detener">⏹️</button>
+      </div>
+    </div>
+    <div class="lectura-panel-fila lectura-panel-fila-voz">
+      <label for="selectVoz">🗣️ Voz</label>
+      <select id="selectVoz"></select>
+      <label for="selectVelocidad">⚡ Velocidad</label>
+      <select id="selectVelocidad">
+        <option value="0.75">Lenta</option>
+        <option value="0.98" selected>Normal</option>
+        <option value="1.25">Rápida</option>
+        <option value="1.5">Muy rápida</option>
+      </select>
+    </div>
+  </div>
   <div style="max-width:760px;margin:0 auto;padding:.8rem .8rem 0">
     <div class="timeline-wrap" id="timelineWrapLectura"></div>
   </div>
@@ -2833,11 +2914,7 @@ function renderTimeline() {
   if (wrapLectura) {
     if (wrapLectura.dataset.built !== '1') {
       buildTimelineWrap(wrapLectura, (u) => {
-        cur = firstCardIndexOfUnit(u);
-        if (speechActiva) detenerLectura();
-        buildLecturaContinua(u);
-        render();
-        window.scrollTo(0,0);
+        irACapituloLectura(u);
       });
     }
     updateTimelineWrap(wrapLectura, curUnitPos);
@@ -2887,19 +2964,158 @@ function toggleTheme() {
 
 // ── Lectura continua (todas las cartillas de la unidad activa en un solo scroll) ──
 let lecturaActiva = false;
+let lecturaScrollObserver = null;
+let lecturaObserverSuspendido = false;
 function buildLecturaContinua(unit) {
   const cont = document.getElementById('lecturaContenido');
   cont.innerHTML = '';
-  const unitCards = Array.from(cards).filter(c => c.dataset.unit === unit);
-  unitCards.forEach(c => {
+  cards.forEach((c, i) => {
+    if (c.dataset.unit !== unit) return;
     const clone = c.cloneNode(true);
     clone.classList.add('activa');
     clone.removeAttribute('style');
     clone.style.setProperty('--accent', c.style.getPropertyValue('--accent'));
+    clone.dataset.origIdx = i;
     cont.appendChild(clone);
   });
   rebindClonedQuizzes(cont);
+
+  if (lecturaScrollObserver) lecturaScrollObserver.disconnect();
+  lecturaScrollObserver = new IntersectionObserver((entries) => {
+    if (lecturaObserverSuspendido) return;
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+        const idx = parseInt(entry.target.dataset.origIdx);
+        if (!isNaN(idx) && idx !== cur) {
+          cur = idx;
+          actualizarResaltadoMenuCapitulos();
+        }
+      }
+    });
+  }, { threshold: [0.4], rootMargin: '-80px 0px -60% 0px' });
+  cont.querySelectorAll('[data-orig-idx]').forEach(el => lecturaScrollObserver.observe(el));
 }
+function poblarSelectorCapitulos() {
+  const menu = document.getElementById('lecturaCapMenu');
+  if (!menu) return;
+  menu.innerHTML = '';
+  UNIT_ORDER.forEach(u => {
+    const theme = UNIT_THEME[u] || {icon:'📖'};
+    const unitCardIndices = [];
+    cards.forEach((c, i) => { if (c.dataset.unit === u) unitCardIndices.push(i); });
+
+    const header = document.createElement('button');
+    header.className = 'lectura-cap-unidad-header';
+    header.dataset.unit = u;
+    header.innerHTML = '<span class="lectura-cap-unidad-icon">' + theme.icon + '</span>' +
+      '<span class="lectura-cap-unidad-nombre">Unidad ' + u + '</span>' +
+      '<span class="lectura-cap-unidad-caret">▾</span>';
+    menu.appendChild(header);
+
+    const itemsWrap = document.createElement('div');
+    itemsWrap.className = 'lectura-cap-items';
+    itemsWrap.dataset.unit = u;
+
+    unitCardIndices.forEach(idx => {
+      const card = cards[idx];
+      const h2 = card.querySelector('h2');
+      const esPortada = card.classList.contains('portada') || (h2 && /^UNIDAD /i.test(h2.textContent));
+      if (esPortada) return;
+      const titulo = h2 ? h2.textContent : ('Tema ' + (idx+1));
+      const item = document.createElement('button');
+      item.className = 'lectura-cap-item';
+      item.dataset.unit = u;
+      item.dataset.idx = idx;
+      item.textContent = titulo;
+      item.addEventListener('click', () => irACapituloLectura(u, idx));
+      itemsWrap.appendChild(item);
+    });
+
+    menu.appendChild(itemsWrap);
+
+    header.addEventListener('click', () => {
+      const yaExpandida = header.classList.contains('expandida');
+      menu.querySelectorAll('.lectura-cap-unidad-header').forEach(h => h.classList.remove('expandida'));
+      menu.querySelectorAll('.lectura-cap-items').forEach(it => it.classList.remove('expandida'));
+      if (!yaExpandida) {
+        header.classList.add('expandida');
+        itemsWrap.classList.add('expandida');
+      }
+    });
+  });
+  actualizarResaltadoMenuCapitulos();
+}
+
+function actualizarResaltadoMenuCapitulos() {
+  const menu = document.getElementById('lecturaCapMenu');
+  if (!menu) return;
+  const curUnit = cards[cur] ? cards[cur].dataset.unit : null;
+  menu.querySelectorAll('.lectura-cap-unidad-header').forEach(h => {
+    h.classList.toggle('activa-unidad', h.dataset.unit === curUnit);
+  });
+  menu.querySelectorAll('.lectura-cap-item').forEach(it => {
+    it.classList.toggle('activo-item', parseInt(it.dataset.idx) === cur);
+  });
+  const btnTexto = document.getElementById('lecturaCapBtnTexto');
+  if (btnTexto && cards[cur]) {
+    const h2 = cards[cur].querySelector('h2');
+    const theme = UNIT_THEME[curUnit] || {icon:'📖'};
+    btnTexto.textContent = theme.icon + ' ' + (h2 ? h2.textContent : ('Unidad ' + curUnit));
+  }
+}
+
+function toggleMenuCapitulos() {
+  const dropdown = document.getElementById('lecturaCapDropdown');
+  if (!dropdown) return;
+  const abrir = !dropdown.classList.contains('abierto');
+  dropdown.classList.toggle('abierto', abrir);
+  if (abrir) {
+    const curUnit = cards[cur] ? cards[cur].dataset.unit : null;
+    const header = dropdown.querySelector('.lectura-cap-unidad-header[data-unit="' + curUnit + '"]');
+    const itemsWrap = dropdown.querySelector('.lectura-cap-items[data-unit="' + curUnit + '"]');
+    dropdown.querySelectorAll('.lectura-cap-unidad-header').forEach(h => h.classList.remove('expandida'));
+    dropdown.querySelectorAll('.lectura-cap-items').forEach(it => it.classList.remove('expandida'));
+    if (header) header.classList.add('expandida');
+    if (itemsWrap) itemsWrap.classList.add('expandida');
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('lecturaCapDropdown');
+  if (dropdown && dropdown.classList.contains('abierto') && !dropdown.contains(e.target)) {
+    dropdown.classList.remove('abierto');
+  }
+});
+
+function irACapituloLectura(u, idxEspecifico) {
+  const cambioDeUnidad = cards[cur] ? cards[cur].dataset.unit !== u : true;
+  cur = (typeof idxEspecifico === 'number') ? idxEspecifico : firstCardIndexOfUnit(u);
+  if (speechActiva) detenerLectura();
+  lecturaObserverSuspendido = true;
+  if (cambioDeUnidad) buildLecturaContinua(u);
+  render();
+  renderTimeline();
+  actualizarResaltadoMenuCapitulos();
+  const dropdown = document.getElementById('lecturaCapDropdown');
+  if (dropdown) dropdown.classList.remove('abierto');
+
+  if (typeof idxEspecifico === 'number') {
+    const target = document.querySelector('#lecturaContenido [data-orig-idx="' + idxEspecifico + '"]');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo(0,0);
+    }
+  } else {
+    window.scrollTo(0,0);
+  }
+
+  clearTimeout(window._lecturaObsResumeTimer);
+  window._lecturaObsResumeTimer = setTimeout(() => {
+    lecturaObserverSuspendido = false;
+  }, 900);
+}
+
 function rebindClonedQuizzes(cont) {
   cont.querySelectorAll('.quiz-section').forEach(section => {
     const correcta = parseInt(section.dataset.correcta);
@@ -2949,13 +3165,14 @@ function toggleLecturaEscucha() {
     btn.classList.add('activo');
     btn.textContent = '📚 Volver a cartillas';
     renderTimeline();
+    poblarSelectorCapitulos();
     iniciarLectura();
   } else {
     detenerLectura();
     vistaLectura.classList.remove('activa');
     vistaCartillas.classList.add('activa');
     btn.classList.remove('activo');
-    btn.textContent = '📖🔊 Lectura continua/Escucha';
+    btn.textContent = '📖🔊 Lectura continua/Leída';
     renderTimeline();
   }
 }
@@ -2965,13 +3182,20 @@ function toggleLecturaEscucha() {
 
 // ── Escuchar página (Text-to-Speech) ──
 let speechActiva = false;
+let speechPausada = false;
 let speechUtterance = null;
 let vocesDisponibles = [];
 
 function getTextoParaLeer() {
   if (lecturaActiva) {
+    // Lee desde el tema actualmente seleccionado en adelante (no desde el inicio de toda la unidad)
     const cont = document.getElementById('lecturaContenido');
-    return limpiarTextoLectura(cont);
+    const bloques = Array.from(cont.querySelectorAll('[data-orig-idx]'));
+    const bloquesDesdeActual = bloques.filter(b => parseInt(b.dataset.origIdx) >= cur);
+    const objetivo = bloquesDesdeActual.length > 0 ? bloquesDesdeActual : bloques;
+    const wrapperTemp = document.createElement('div');
+    objetivo.forEach(b => wrapperTemp.appendChild(b.cloneNode(true)));
+    return limpiarTextoLectura(wrapperTemp);
   }
   const cardActiva = cards[cur];
   return limpiarTextoLectura(cardActiva);
@@ -3023,6 +3247,20 @@ function getVozSeleccionada() {
   return vocesDisponibles.find(v => v.lang && v.lang.toLowerCase().startsWith('es')) || vocesDisponibles[0] || null;
 }
 
+function actualizarBotonPlayPause() {
+  const btn = document.getElementById('btnLecturaPlayPause');
+  if (!btn) return;
+  if (speechActiva && !speechPausada) {
+    btn.textContent = '⏸️';
+    btn.classList.add('reproduciendo');
+    btn.title = 'Pausar';
+  } else {
+    btn.textContent = '▶️';
+    btn.classList.remove('reproduciendo');
+    btn.title = 'Reproducir';
+  }
+}
+
 function iniciarLectura() {
   if (!('speechSynthesis' in window)) {
     alert('Tu navegador no soporta lectura en voz alta.');
@@ -3030,7 +3268,7 @@ function iniciarLectura() {
   }
   window.speechSynthesis.cancel();
   const texto = getTextoParaLeer();
-  if (!texto) return;
+  if (!texto) { speechActiva = false; actualizarBotonPlayPause(); return; }
   speechUtterance = new SpeechSynthesisUtterance(texto);
   const voz = getVozSeleccionada();
   if (voz) { speechUtterance.voice = voz; speechUtterance.lang = voz.lang; }
@@ -3039,20 +3277,43 @@ function iniciarLectura() {
   speechUtterance.rate = velocidadSel ? parseFloat(velocidadSel.value) : 0.98;
   speechUtterance.onend = () => {
     speechActiva = false;
-    const panel = document.getElementById('vozPanel');
-    if (panel) panel.classList.remove('visible');
+    speechPausada = false;
+    actualizarBotonPlayPause();
   };
   window.speechSynthesis.speak(speechUtterance);
   speechActiva = true;
-  const panel = document.getElementById('vozPanel');
-  if (panel) panel.classList.add('visible');
+  speechPausada = false;
+  actualizarBotonPlayPause();
 }
 
 function detenerLectura() {
   window.speechSynthesis.cancel();
   speechActiva = false;
-  const panel = document.getElementById('vozPanel');
-  if (panel) panel.classList.remove('visible');
+  speechPausada = false;
+  actualizarBotonPlayPause();
+}
+
+function detenerLecturaManual() {
+  detenerLectura();
+}
+
+function toggleLecturaPlayPause() {
+  if (!('speechSynthesis' in window)) {
+    alert('Tu navegador no soporta lectura en voz alta.');
+    return;
+  }
+  if (!speechActiva) {
+    iniciarLectura();
+    return;
+  }
+  if (speechPausada) {
+    window.speechSynthesis.resume();
+    speechPausada = false;
+  } else {
+    window.speechSynthesis.pause();
+    speechPausada = true;
+  }
+  actualizarBotonPlayPause();
 }
 
 if ('speechSynthesis' in window) {
@@ -3064,6 +3325,7 @@ if ('speechSynthesis' in window) {
 
 document.getElementById('selectVoz').addEventListener('change', () => { if (speechActiva) iniciarLectura(); });
 document.getElementById('selectVelocidad').addEventListener('change', () => { if (speechActiva) iniciarLectura(); });
+
 
 document.querySelectorAll('.modo-btn[data-vista]').forEach(btn => {
   btn.addEventListener('click', function() {
@@ -3077,7 +3339,7 @@ function activarVista(vista) {
     lecturaEscuchaActiva = false;
     lecturaActiva = false;
     const lb = document.getElementById('btnLecturaEscucha');
-    if (lb) { lb.classList.remove('activo'); lb.textContent = '📖🔊 Lectura continua/Escucha'; }
+    if (lb) { lb.classList.remove('activo'); lb.textContent = '📖🔊 Lectura continua/Leída'; }
   }
   document.querySelectorAll('.modo-btn[data-vista]').forEach(b => b.classList.remove('activo'));
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
