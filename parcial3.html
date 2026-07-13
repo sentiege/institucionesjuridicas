@@ -237,6 +237,73 @@
     }
     .mode-btn .btn-icon { font-size: 1rem; }
 
+    /* ====== LECTOR DE VOZ (TTS) ====== */
+    .tts-player {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      background: var(--parchment);
+      border-bottom: 1px solid var(--border-warm);
+      padding: 10px 20px;
+    }
+    .tts-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-warm);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .tts-btn:hover { background: var(--gold-muted); border-color: var(--gold); }
+    .tts-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .tts-btn.tts-btn-main { background: var(--gold); color: var(--paper); border-color: var(--gold); }
+    .tts-btn.tts-btn-main:hover { background: var(--gold-light); }
+    .tts-sep { width: 1px; height: 22px; background: var(--border-warm); flex-shrink: 0; }
+    .tts-rate-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #7a6040;
+      letter-spacing: 0.02em;
+    }
+    .tts-rate-wrap input[type="range"] { accent-color: var(--gold); width: 80px; }
+    .tts-voice-select {
+      font-family: var(--serif);
+      font-size: 0.75rem;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1.5px solid var(--border-warm);
+      border-radius: 6px;
+      padding: 5px 8px;
+      max-width: 190px;
+      cursor: pointer;
+    }
+    .tts-status {
+      font-size: 0.75rem;
+      color: #7a6040;
+      font-style: italic;
+      min-width: 90px;
+    }
+    .tts-active-highlight {
+      background: rgba(184,134,11,0.16);
+      box-shadow: 0 0 0 2px var(--gold-muted);
+      border-radius: 4px;
+      transition: background 0.25s;
+    }
+    @media (max-width: 640px) {
+      .tts-player { padding: 8px 14px; }
+      .tts-rate-wrap { display: none; }
+    }
+
     /* ====== CONTENT PANEL ====== */
     .content-panel {
       padding: 32px 36px 40px;
@@ -1094,6 +1161,21 @@
       <button class="mode-btn" data-mode="quiz" id="btnQuiz">
         <span class="btn-icon">⚖️</span> Ejercicios interactivos
       </button>
+    </div>
+
+    <div class="tts-player" id="ttsPlayer">
+      <button class="tts-btn" id="ttsPrev" title="Ítem anterior">⏮</button>
+      <button class="tts-btn tts-btn-main" id="ttsPlay" title="Reproducir">▶</button>
+      <button class="tts-btn" id="ttsStop" title="Detener">⏹</button>
+      <button class="tts-btn" id="ttsNext" title="Ítem siguiente">⏭</button>
+      <div class="tts-sep"></div>
+      <select class="tts-voice-select" id="ttsVoice" title="Voz"></select>
+      <div class="tts-rate-wrap">
+        <span>🐢</span>
+        <input type="range" id="ttsRate" min="0.6" max="1.6" step="0.1" value="1">
+        <span>🐇</span>
+      </div>
+      <span class="tts-status" id="ttsStatus">Lector listo</span>
     </div>
 
     <div class="content-panel" id="contentPanel">
@@ -3156,6 +3238,8 @@ function renderUnit(unitKey, mode) {
   // force reflow for animation
   void panel.offsetWidth;
 
+  if (typeof ttsStop === 'function') ttsStop();
+
   if (mode === 'lectura') {
     panel.innerHTML = u.lectura;
   } else if (mode === 'resumen') {
@@ -3270,6 +3354,193 @@ function selectAnswer(qi, selectedOpt, unitKey) {
 function retryQuiz(unitKey) {
   initQuizState(unitKey);
   renderQuiz(document.getElementById('contentPanel'), unitKey);
+}
+
+// ============================================================
+//  LECTOR DE VOZ (TTS) — lee los ítems del panel actual
+// ============================================================
+const ttsSupported = ('speechSynthesis' in window);
+
+const ttsState = {
+  items: [],       // [{el, text}]
+  index: -1,
+  playing: false,
+  paused: false,
+  voice: null,
+  rate: 1
+};
+
+function ttsSelectableSelector() {
+  // Elementos "leíbles" en cualquiera de los 3 modos (lectura / resumen / quiz)
+  return [
+    'span.section-tag', 'h2', 'h3', 'h4', 'p', 'li',
+    'div.destacado', 'p.cita', 'blockquote',
+    'div.summary-card',
+    'div.question-header', 'div.feedback-box.show'
+  ].join(', ');
+}
+
+function ttsBuildItems() {
+  const panel = document.getElementById('contentPanel');
+  const nodes = panel.querySelectorAll(ttsSelectableSelector());
+  const items = [];
+  nodes.forEach(el => {
+    // Evitar leer dos veces contenido anidado (p.ej. options-list dentro de question-header no aplica aquí)
+    const text = el.textContent.replace(/\s+/g, ' ').trim();
+    if (text.length > 1) items.push({ el, text });
+  });
+  return items;
+}
+
+function ttsPopulateVoices() {
+  if (!ttsSupported) return;
+  const select = document.getElementById('ttsVoice');
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return;
+  const esVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('es'));
+  const list = esVoices.length ? esVoices : voices;
+  select.innerHTML = '';
+  list.forEach((v, i) => {
+    const opt = document.createElement('option');
+    opt.value = v.name;
+    opt.textContent = `${v.name} (${v.lang})`;
+    select.appendChild(opt);
+  });
+  ttsState.voice = list[0] || null;
+}
+
+if (ttsSupported) {
+  ttsPopulateVoices();
+  speechSynthesis.onvoiceschanged = ttsPopulateVoices;
+}
+
+function ttsSetStatus(msg) {
+  const el = document.getElementById('ttsStatus');
+  if (el) el.textContent = msg;
+}
+
+function ttsClearHighlight() {
+  document.querySelectorAll('.tts-active-highlight').forEach(el => el.classList.remove('tts-active-highlight'));
+}
+
+function ttsUpdatePlayIcon() {
+  const btn = document.getElementById('ttsPlay');
+  if (!btn) return;
+  btn.textContent = ttsState.playing && !ttsState.paused ? '⏸' : '▶';
+  btn.title = ttsState.playing && !ttsState.paused ? 'Pausar' : 'Reproducir';
+}
+
+function ttsSpeakIndex(i) {
+  if (!ttsSupported) return;
+  if (i < 0 || i >= ttsState.items.length) {
+    ttsStop();
+    ttsSetStatus('Lectura finalizada');
+    return;
+  }
+  speechSynthesis.cancel();
+  ttsClearHighlight();
+
+  ttsState.index = i;
+  const item = ttsState.items[i];
+  item.el.classList.add('tts-active-highlight');
+  item.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const utter = new SpeechSynthesisUtterance(item.text);
+  utter.lang = 'es-ES';
+  if (ttsState.voice) utter.voice = ttsState.voice;
+  utter.rate = ttsState.rate;
+
+  utter.onend = () => {
+    if (ttsState.playing && !ttsState.paused) {
+      ttsSpeakIndex(ttsState.index + 1);
+    }
+  };
+  utter.onerror = () => { /* ignorar interrupciones al cancelar */ };
+
+  ttsSetStatus(`Leyendo ítem ${i + 1} / ${ttsState.items.length}`);
+  speechSynthesis.speak(utter);
+}
+
+function ttsPlay() {
+  if (!ttsSupported) { ttsSetStatus('Lector no disponible en este navegador'); return; }
+
+  const voiceName = document.getElementById('ttsVoice').value;
+  const voices = speechSynthesis.getVoices();
+  ttsState.voice = voices.find(v => v.name === voiceName) || ttsState.voice;
+  ttsState.rate = parseFloat(document.getElementById('ttsRate').value) || 1;
+
+  if (ttsState.paused && ttsState.playing) {
+    speechSynthesis.resume();
+    ttsState.paused = false;
+    ttsSetStatus(`Leyendo ítem ${ttsState.index + 1} / ${ttsState.items.length}`);
+    ttsUpdatePlayIcon();
+    return;
+  }
+
+  ttsState.items = ttsBuildItems();
+  if (!ttsState.items.length) {
+    ttsSetStatus('No hay contenido para leer aquí');
+    return;
+  }
+  ttsState.playing = true;
+  ttsState.paused = false;
+  ttsUpdatePlayIcon();
+  ttsSpeakIndex(ttsState.index >= 0 ? ttsState.index : 0);
+}
+
+function ttsPause() {
+  if (!ttsSupported || !ttsState.playing) return;
+  speechSynthesis.pause();
+  ttsState.paused = true;
+  ttsSetStatus('En pausa');
+  ttsUpdatePlayIcon();
+}
+
+function ttsStop() {
+  if (ttsSupported) speechSynthesis.cancel();
+  ttsState.playing = false;
+  ttsState.paused = false;
+  ttsState.index = -1;
+  ttsState.items = [];
+  ttsClearHighlight();
+  ttsUpdatePlayIcon();
+  ttsSetStatus('Lector listo');
+}
+
+function ttsNext() {
+  if (!ttsSupported) return;
+  if (!ttsState.items.length) ttsState.items = ttsBuildItems();
+  if (!ttsState.items.length) return;
+  ttsState.playing = true;
+  ttsState.paused = false;
+  ttsUpdatePlayIcon();
+  ttsSpeakIndex(Math.min(ttsState.index + 1, ttsState.items.length - 1));
+}
+
+function ttsPrev() {
+  if (!ttsSupported) return;
+  if (!ttsState.items.length) ttsState.items = ttsBuildItems();
+  if (!ttsState.items.length) return;
+  ttsState.playing = true;
+  ttsState.paused = false;
+  ttsUpdatePlayIcon();
+  ttsSpeakIndex(Math.max(ttsState.index - 1, 0));
+}
+
+document.getElementById('ttsPlay').addEventListener('click', () => {
+  if (ttsState.playing && !ttsState.paused) ttsPause();
+  else ttsPlay();
+});
+document.getElementById('ttsStop').addEventListener('click', ttsStop);
+document.getElementById('ttsNext').addEventListener('click', ttsNext);
+document.getElementById('ttsPrev').addEventListener('click', ttsPrev);
+document.getElementById('ttsRate').addEventListener('input', (e) => {
+  ttsState.rate = parseFloat(e.target.value) || 1;
+});
+
+if (!ttsSupported) {
+  document.getElementById('ttsPlayer').querySelectorAll('button, select, input').forEach(el => el.disabled = true);
+  ttsSetStatus('Lector no disponible en este navegador');
 }
 
 // Event listeners
