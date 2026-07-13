@@ -24,6 +24,11 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* tablas mejoradas para unidades I–V */
+  table { border-collapse: collapse; width: 100%; margin: .75rem 0; }
+  table th, table td { border: 1.5px solid rgba(184,134,11,0.35); padding: .45rem .55rem; }
+  table thead th { background: rgba(184,134,11,0.12); font-weight: 600; }
+
 
     body {
       font-family: var(--serif);
@@ -1109,7 +1114,6 @@ const units = {
 
 <span class="section-tag">1. Sociedad y Grupos Sociales</span>
 
-
     <h2>Sociedad y Grupos Sociales</h2>
     <p><b>Sociedad</b> es el conjunto de personas que interactúa en un espacio determinado y comparte una misma cultura, relacionándose según reglas jurídicas y costumbres. <span style="font-size:.8rem;color:#5a7363">(Macionis & Plummer)</span></p>
 <h3>Grupos Sociales</h3>
@@ -1118,20 +1122,8 @@ const units = {
 <h3>Estructura Social</h3>
 <p>Conjunto de formas en que grupos e individuos se organizan y relacionan dentro de una sociedad. Incluye la "constelación especial" de castas, estamentos y clases.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué es un grupo social según Macionis y Plummer?</div>
-  <button class="quiz-btn" data-idx="0">Un conjunto de personas sin vínculos formales</button>
-<button class="quiz-btn" data-idx="1">Grupo de dos o más personas con identidad reconocida y vínculo entre sí</button>
-<button class="quiz-btn" data-idx="2">Una institución del Estado</button>
-<button class="quiz-btn" data-idx="3">Una organización exclusivamente laboral</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">2. Instituciones y Cultura</span>
-
 
     <h2>Instituciones y Cultura</h2>
     <h3>Instituciones</h3>
@@ -1141,20 +1133,8 @@ const units = {
 <p>Conjunto de <b>bienes materiales y espirituales</b> de un grupo social, transmitidos de generación en generación para orientar prácticas individuales y colectivas. Incluye: lengua, costumbres, tradiciones, valores, herramientas y conocimiento.</p>
 <p class="cita">"La cultura se ha ido formando conforme el ser humano se ha desarrollado en un entorno específico."</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué caracteriza principalmente a las instituciones sociales?</div>
-  <button class="quiz-btn" data-idx="0">Son organismos exclusivamente estatales</button>
-<button class="quiz-btn" data-idx="1">Cada miembro cumple un rol y se rigen por normas de la costumbre</button>
-<button class="quiz-btn" data-idx="2">Son grupos informales sin estructura</button>
-<button class="quiz-btn" data-idx="3">Solo existen en sociedades modernas</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">3. Nación y Estado</span>
-
 
     <h2>Nación y Estado</h2>
     <h3>Nación</h3>
@@ -1169,37 +1149,14 @@ const units = {
   <li><b>Poder:</b> autoridad soberana que gobierna según el ordenamiento jurídico. La <b>soberanía</b> = poder supremo, máximo y superior, interno y externo.</li>
 </ul>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuáles son los 3 elementos del Estado?</div>
-  <button class="quiz-btn" data-idx="0">Gobierno, leyes y ciudadanos</button>
-<button class="quiz-btn" data-idx="1">Territorio, población y poder</button>
-<button class="quiz-btn" data-idx="2">Nación, idioma y cultura</button>
-<button class="quiz-btn" data-idx="3">Constitución, ejército y justicia</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">4. Gobierno</span>
-
 
     <h2>Gobierno</h2>
     <p>El <b>gobierno</b> es el modo en que se expresa, concreta y organiza el Poder del Estado. No puede existir ni funcionar sin órganos.</p>
 <div class="destacado">Comprende tres poderes: <b>Ejecutivo · Legislativo · Judicial</b></div>
 <p>Desde el gobierno se ejerce el poder político sobre la sociedad, ejecutando las leyes, legislando y administrando justicia.</p>
     
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuántos y cuáles son los poderes del gobierno?</div>
-  <button class="quiz-btn" data-idx="0">Dos: ejecutivo y legislativo</button>
-<button class="quiz-btn" data-idx="1">Cuatro: ejecutivo, legislativo, judicial y militar</button>
-<button class="quiz-btn" data-idx="2">Tres: ejecutivo, legislativo y judicial</button>
-<button class="quiz-btn" data-idx="3">Uno: el poder soberano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 `,
     resumen: [
@@ -1261,7 +1218,6 @@ const units = {
 
 <span class="section-tag">1. Línea del Tiempo</span>
 
-
     <h2>Línea del Tiempo General</h2>
     <table>
 <tr><th>Período</th><th>Tiempo aprox.</th><th>Hito clave</th></tr>
@@ -1273,20 +1229,8 @@ const units = {
 </table>
 <div class="destacado">La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3.500 a.C.).</div>
     
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué marca el inicio de la Historia (fin de la Prehistoria)?</div>
-  <button class="quiz-btn" data-idx="0">La aparición del fuego</button>
-<button class="quiz-btn" data-idx="1">La invención de la agricultura</button>
-<button class="quiz-btn" data-idx="2">El descubrimiento de la escritura (~3.500 a.C.)</button>
-<button class="quiz-btn" data-idx="3">La fundación de Roma</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">2. Paleolítico</span>
-
 
     <h2>El Paleolítico</h2>
     <div class="tag">4.000.000 – 10.000 a.C.</div>
@@ -1299,20 +1243,8 @@ const units = {
   <li>Vivían en cuevas o chozas; dejaron pinturas rupestres (Altamira, Lascaux).</li>
 </ul>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál es la característica principal del modo de vida en el Paleolítico?</div>
-  <button class="quiz-btn" data-idx="0">Agricultura y vida sedentaria en aldeas</button>
-<button class="quiz-btn" data-idx="1">Caza y recolección, vida nómada en bandas y clanes</button>
-<button class="quiz-btn" data-idx="2">Comercio y metalurgia</button>
-<button class="quiz-btn" data-idx="3">Uso del bronce y construcción de ciudades</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">3. Neolítico y Revolución Agrícola</span>
-
 
     <h2>Neolítico y Revolución Agrícola</h2>
     <div class="tag">10.000 – 6.000 a.C.</div>
@@ -1326,20 +1258,8 @@ const units = {
   <li><b>Domesticación</b> de plantas y animales.</li>
 </ul>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Por qué se llama 'revolución' a la aparición de la agricultura en el Neolítico?</div>
-  <button class="quiz-btn" data-idx="0">Porque provocó guerras entre tribus</button>
-<button class="quiz-btn" data-idx="1">Porque transformó radicalmente la economía y la organización humana</button>
-<button class="quiz-btn" data-idx="2">Porque inventó la escritura</button>
-<button class="quiz-btn" data-idx="3">Porque creó los primeros imperios</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">4. Jerarquización y Nacimiento de Instituciones</span>
-
 
     <h2>Jerarquización social y primeras instituciones</h2>
     <p>El aumento de habitantes y la vida fija en aldeas obligó a las comunidades a dotarse de una <b>organización social compleja</b>.</p>
@@ -1354,20 +1274,8 @@ const units = {
   🏠 <b>La Familia</b> · ⚖️ <b>La Justicia</b> (venganza de sangre) · 🏛️ <b>Organización Política</b>
 </div>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue la primera forma de justicia que surgió en las aldeas neolíticas?</div>
-  <button class="quiz-btn" data-idx="0">El tribunal de magistrados</button>
-<button class="quiz-btn" data-idx="1">La venganza de sangre</button>
-<button class="quiz-btn" data-idx="2">El código escrito</button>
-<button class="quiz-btn" data-idx="3">El juicio ante el rey</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">5. Edad de los Metales e Historia</span>
-
 
     <h2>Edad de los Metales e Historia</h2>
     <h3>Edad de los Metales</h3>
@@ -1378,17 +1286,6 @@ const units = {
 <p class="cita">"El principio es la parte más principal de cualquier cosa… Solo conociendo la historia se puede conocer el Derecho." (Gayo)</p>
 <p>Cecilio Báez también destacó la importancia del análisis histórico para quien estudia las ciencias jurídicas.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué afirmó Gayo sobre la relación entre historia y derecho?</div>
-  <button class="quiz-btn" data-idx="0">El Derecho moderno no necesita conocer el pasado</button>
-<button class="quiz-btn" data-idx="1">Solo conociendo la historia se puede conocer el Derecho</button>
-<button class="quiz-btn" data-idx="2">La historia solo importa a los filósofos</button>
-<button class="quiz-btn" data-idx="3">El Derecho es completamente independiente de la historia</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 `,
     resumen: [
@@ -1439,7 +1336,6 @@ const units = {
 
 <span class="section-tag">1. India</span>
 
-
     <h2>India: Mohenjo-Daro, Hinduismo y Castas</h2>
     <h3>Ciudades del Valle del Indo</h3>
 <p><b>Mohenjo-Daro y Harappa</b> (2.500–1.500 a.C., actual Pakistán): ciudades amuralladas con calles en ángulo recto, casas de dos pisos con cañerías, comercio activo y sistemas de escritura.</p>
@@ -1456,20 +1352,8 @@ const units = {
 <tr><td>Parias</td><td>Intocables (fuera del sistema)</td></tr>
 </table>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cómo se adquiere la casta en la sociedad india?</div>
-  <button class="quiz-btn" data-idx="0">Por mérito y esfuerzo personal</button>
-<button class="quiz-btn" data-idx="1">Con el nacimiento, de forma hereditaria e inmutable</button>
-<button class="quiz-btn" data-idx="2">Por decisión del sacerdote</button>
-<button class="quiz-btn" data-idx="3">Por riqueza acumulada durante la vida</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">2. Código de Manú</span>
-
 
     <h2>Código de Manú</h2>
     <p>Colección de preceptos <b>religiosos, morales, sociales y jurídicos</b> que regulaban el gobierno, la justicia, el ejército, la agricultura, el comercio y la condición de la mujer.</p>
@@ -1483,20 +1367,8 @@ const units = {
 <p>Si el hombre era incapaz de tener hijos, podía autorizar a su mujer a engendrar con un pariente cercano (solo un hijo). En caso de muerte del marido, el hermano podía tomar a la viuda como esposa.</p>
 <p><b>Acto de inmolación Sati:</b> la viuda se inmolaba en la pira funeraria del esposo.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué distinguía el castigo del Brahmán respecto a las otras castas en el Código de Manú?</div>
-  <button class="quiz-btn" data-idx="0">Recibía la pena de muerte siempre</button>
-<button class="quiz-btn" data-idx="1">No recibía castigo corporal, solo podía ser desterrado</button>
-<button class="quiz-btn" data-idx="2">Era castigado igual que todos</button>
-<button class="quiz-btn" data-idx="3">Pagaba una multa económica como única pena</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">3. Egipto</span>
-
 
     <h2>Egipto: Faraón, Sociedad y Cultura</h2>
     <p>Egipto está rodeado de desierto; solo las orillas del <b>río Nilo</b> presentaban tierras fértiles, base de toda su civilización.</p>
@@ -1517,20 +1389,8 @@ const units = {
   <li>Grandes templos: Luxor, Karnak.</li>
 </ul>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Por qué se denomina 'teocrático' al gobierno del Antiguo Egipto?</div>
-  <button class="quiz-btn" data-idx="0">Porque lo dirigían varios sacerdotes en asamblea</button>
-<button class="quiz-btn" data-idx="1">Porque el Faraón era considerado una figura divina y concentraba todo el poder</button>
-<button class="quiz-btn" data-idx="2">Porque las leyes venían directamente de los dioses escritas</button>
-<button class="quiz-btn" data-idx="3">Porque el ejército era controlado por los templos</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">4. Mesopotamia — Sumerios</span>
-
 
     <h2>Mesopotamia: Sumerios y Escritura Cuneiforme</h2>
     <p><b>Mesopotamia</b> = «tierra entre ríos» (Tigris y Éufrates) → actual Irak. Junto con Egipto, parte de la <b>Media Luna Fértil</b>.</p>
@@ -1542,20 +1402,8 @@ const units = {
 <h3>Escritura Cuneiforme</h3>
 <p>Creada en Sumeria (~3.500 a.C.) en tablillas de arcilla húmeda con un tallo vegetal biselado en forma de cuña (<i>cuneus</i>). Sirvió para llevar contabilidad en templos, escribir leyes, textos literarios y religiosos.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Con qué propósito surgió originalmente la escritura cuneiforme?</div>
-  <button class="quiz-btn" data-idx="0">Para escribir textos religiosos y poemas épicos</button>
-<button class="quiz-btn" data-idx="1">Para llevar la contabilidad en los templos (cosechas, impuestos)</button>
-<button class="quiz-btn" data-idx="2">Para comunicarse entre ciudades-Estado enemigas</button>
-<button class="quiz-btn" data-idx="3">Para registrar victorias militares del rey</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">5. Hammurabi y Babilonia</span>
-
 
     <h2>Babilonia y el Código de Hammurabi</h2>
     <p>Hacia <b>1750 a.C.</b>, Hammurabi dominó toda la Mesopotamia inferior, con capital en <b>Babilonia</b>. Creó el primer código escrito de leyes (~1760 a.C.).</p>
@@ -1570,20 +1418,8 @@ const units = {
 <p>Se castigaban con muerte: adulterio, incesto, falso testimonio, sacrilegio, hurto. La mujer tenía derecho a la herencia del marido (mitad de bienes adquiridos).</p>
 <p>Mérito histórico: entregó al <b>Estado</b> la responsabilidad del cumplimiento de la ley, suprimiendo la venganza privada.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue el principal mérito histórico del Código de Hammurabi?</div>
-  <button class="quiz-btn" data-idx="0">Abolir la pena de muerte</button>
-<button class="quiz-btn" data-idx="1">Entregar al Estado la responsabilidad de hacer cumplir la ley, suprimiendo la venganza privada</button>
-<button class="quiz-btn" data-idx="2">Igualar los derechos de todas las clases sociales</button>
-<button class="quiz-btn" data-idx="3">Crear el primer sistema democrático</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">6. Hebreos — Biblia y Torá</span>
-
 
     <h2>Civilización Hebrea: Biblia y Torá</h2>
     <p>El territorio hebreo es la antigua <b>Canaán</b> (Palestina), en el litoral oriental del Mar Mediterráneo, entre el río Jordán y el Mar Muerto.</p>
@@ -1599,20 +1435,8 @@ const units = {
 <tr><td>Deuteronomio</td><td>Mayor cantidad de leyes (Toráh)</td></tr>
 </table>
     
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿En cuántos libros se divide la Torá (Pentateuco)?</div>
-  <button class="quiz-btn" data-idx="0">Tres</button>
-<button class="quiz-btn" data-idx="1">Diez</button>
-<button class="quiz-btn" data-idx="2">Cinco</button>
-<button class="quiz-btn" data-idx="3">Siete</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">7. Derecho Hebreo</span>
-
 
     <h2>Derecho Hebreo: Tratados y Derecho Civil</h2>
     <h3>Tratados de la Torá</h3>
@@ -1631,17 +1455,6 @@ const units = {
   <li>El <b>primogénito</b> recibía doble herencia.</li>
 </ul>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué establece el Levirato en el Derecho Hebreo?</div>
-  <button class="quiz-btn" data-idx="0">El primogénito recibe doble herencia</button>
-<button class="quiz-btn" data-idx="1">El hermano del marido fallecido puede tomar a la viuda como esposa</button>
-<button class="quiz-btn" data-idx="2">El padre tiene potestad absoluta sobre sus hijos</button>
-<button class="quiz-btn" data-idx="3">El matrimonio hebreo era poligámico</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 `,
     resumen: [
@@ -1712,7 +1525,6 @@ const units = {
 
 <span class="section-tag">1. Grecia — Introducción y Geografía</span>
 
-
     <h2>Grecia: Geografía e Ideales Políticos</h2>
     <div class="cita">"La mayor parte de los ideales políticos modernos — la justicia, la libertad, el régimen constitucional y el respeto al Derecho — comenzaron con la reflexión de los pensadores griegos." (Sabine)</div>
 <h3>Geografía</h3>
@@ -1725,20 +1537,8 @@ const units = {
 <tr><td>Democrática, filosófica, individualista, artística</td><td>Militar, guerrera, disciplinada, patriótica</td></tr>
 </table>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué distinguía principalmente a Atenas de Esparta?</div>
-  <button class="quiz-btn" data-idx="0">Atenas era militar y Esparta democrática</button>
-<button class="quiz-btn" data-idx="1">Atenas era democrática y filosófica; Esparta era militar y guerrera</button>
-<button class="quiz-btn" data-idx="2">Ambas eran democráticas pero con distintas constituciones</button>
-<button class="quiz-btn" data-idx="3">Atenas usaba castas; Esparta era igualitaria</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">2. Esparta</span>
-
 
     <h2>Esparta: Licurgo, Educación y Constitución</h2>
     <h3>Licurgo y la Constitución de Esparta</h3>
@@ -1753,40 +1553,16 @@ const units = {
 <h3>Las Guerras Médicas</h3>
 <p>Defensa de los griegos contra los persas (rey Darío y su hijo Jerjes). Batallas memorables: <b>Maratón, Termópilas, Salamina y Platea</b>. En Termópilas, 300 espartanos murieron conteniendo al ejército persa.</p>
     
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cómo se llamó la constitución que estableció Licurgo en Esparta?</div>
-  <button class="quiz-btn" data-idx="0">La Isonomía</button>
-<button class="quiz-btn" data-idx="1">La Éclesía</button>
-<button class="quiz-btn" data-idx="2">La Retar</button>
-<button class="quiz-btn" data-idx="3">La Acropolis</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">3. Olimpiadas</span>
-
 
     <h2>Las Primeras Olimpiadas</h2>
     <div class="destacado">🏟️ Año 776 a.C. — Primeros Juegos Olímpicos: el «año 0» del calendario griego.</div>
 <p>Los juegos olímpicos se celebraban en <b>Olimpia</b> cada cuatro años en honor a Zeus. Eran un evento panhelénico: todos los griegos, incluso en guerra, hacían una tregua sagrada para participar.</p>
 <p>Las competencias incluían atletismo, lucha, lanzamiento de disco y jabalina, carreras de carros y pentatlon. Los vencedores recibían una corona de olivo y gloria eterna.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿En qué año se celebraron los primeros Juegos Olímpicos?</div>
-  <button class="quiz-btn" data-idx="0">509 a.C.</button>
-<button class="quiz-btn" data-idx="1">776 a.C.</button>
-<button class="quiz-btn" data-idx="2">594 a.C.</button>
-<button class="quiz-btn" data-idx="3">753 a.C.</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">4. Evolución Política de Atenas</span>
-
 
     <h2>Evolución Política de Atenas</h2>
     <p>Atenas pasó por cuatro etapas políticas principales:</p>
@@ -1800,20 +1576,8 @@ const units = {
 <h3>Dracón (621 a.C.)</h3>
 <p>Primer legislador que codificó las leyes de Atenas por escrito, aunque eran extremadamente severas ("draconiana").</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuáles son las 4 etapas de la evolución política de Atenas en orden?</div>
-  <button class="quiz-btn" data-idx="0">Democracia, aristocracia, monarquía, tiranía</button>
-<button class="quiz-btn" data-idx="1">Monarquía, gobierno de nobles, aristocracia, democracia</button>
-<button class="quiz-btn" data-idx="2">República, monarquía, tiranía, democracia</button>
-<button class="quiz-btn" data-idx="3">Teocracia, oligarquía, aristocracia, democracia</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">5. Solón y Clístenes</span>
-
 
     <h2>Solón, Clístenes y la Democracia Ateniense</h2>
     <h3>Solón (594 a.C.)</h3>
@@ -1828,20 +1592,8 @@ const units = {
 <h3>Pericles (461–429 a.C.)</h3>
 <p>Profundizó las reformas: decidió que todos los cargos públicos recibieran <b>compensación económica</b>, permitiendo así la participación de los ciudadanos más pobres. La asamblea del pueblo se llamaba <b>Eclesía</b>; el lugar de reunión era el <b>Ágora</b>.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué innovación introdujo Clístenes para ampliar la participación política?</div>
-  <button class="quiz-btn" data-idx="0">Pagó a los ciudadanos por ocupar cargos</button>
-<button class="quiz-btn" data-idx="1">Dividió la población en 10 tribus de 50 ciudadanos c/u con iguales derechos</button>
-<button class="quiz-btn" data-idx="2">Eliminó a los nobles del gobierno</button>
-<button class="quiz-btn" data-idx="3">Creó el tribunal del pueblo</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">6. Sofistas y Sócrates</span>
-
 
     <h2>Sofistas vs. Sócrates</h2>
     <table>
@@ -1856,17 +1608,6 @@ const units = {
 <h3>Platón y Aristóteles</h3>
 <p><b>Platón</b> (discípulo de Sócrates): teoría de las ideas, la República ideal. <b>Aristóteles</b> (discípulo de Platón): política, lógica, ética — "el hombre es un animal político".</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál era el objetivo principal de la educación sofística?</div>
-  <button class="quiz-btn" data-idx="0">Enseñar la virtud universal y la ética</button>
-<button class="quiz-btn" data-idx="1">Capacitar a los jóvenes para la participación política mediante oratoria y erística</button>
-<button class="quiz-btn" data-idx="2">Transmitir el conocimiento de la naturaleza</button>
-<button class="quiz-btn" data-idx="3">Formar filósofos que gobernaran la polis</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 `,
     resumen: [
@@ -1924,7 +1665,6 @@ const units = {
 
 <span class="section-tag">1. Fundación de Roma</span>
 
-
     <h2>Fundación de Roma y Sociedad</h2>
     <div class="destacado">🏛️ Roma se fundó el <b>21 de abril del año 753 a.C.</b> — fundadores míticos: Rómulo y Remo.</div>
 <p><b>Roma Quadrata</b>: conjunto de pueblos latinos, etruscos y sabinos que vivían a orillas del río Tíber.</p>
@@ -1936,20 +1676,8 @@ const units = {
 <tr><td><b>Esclavos</b></td><td>Sin ningún derecho. Propiedad de sus amos.</td></tr>
 </table>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué caracterizaba a los Patricios en la sociedad romana?</div>
-  <button class="quiz-btn" data-idx="0">Eran personas libres que pagaban impuestos sin derechos políticos</button>
-<button class="quiz-btn" data-idx="1">Eran la aristocracia descendiente de los padres fundadores con plenos derechos</button>
-<button class="quiz-btn" data-idx="2">Eran esclavos liberados con derechos limitados</button>
-<button class="quiz-btn" data-idx="3">Eran comerciantes extranjeros con privilegios especiales</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">2. Monarquía Romana</span>
-
 
     <h2>La Monarquía Romana (753–509 a.C.)</h2>
     <h3>Instituciones Políticas de la Monarquía</h3>
@@ -1962,20 +1690,8 @@ const units = {
 <p>Hasta la Ley de las XII Tablas, el derecho romano era <b>no escrito y consuetudinario</b>, regido por el <i>mos maiorum</i> (costumbre de los antepasados) con fuerte peso de la religión.</p>
 <p>El <b>paterfamilias</b> era el jefe absoluto de la familia y su sacerdote. El <b>rex</b>, jefe absoluto de la ciudad, era el sumo sacerdote del Estado.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué era el 'mos maiorum' en el derecho romano temprano?</div>
-  <button class="quiz-btn" data-idx="0">El primer código escrito de Roma</button>
-<button class="quiz-btn" data-idx="1">La costumbre de los antepasados que regía el derecho no escrito</button>
-<button class="quiz-btn" data-idx="2">La constitución del rey Servio Tulio</button>
-<button class="quiz-btn" data-idx="3">El conjunto de leyes aprobadas por el Senado</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">3. Reformas de Servio Tulio</span>
-
 
     <h2>Reformas de Servio Tulio</h2>
     <h3>El Muro Serviano</h3>
@@ -1988,20 +1704,8 @@ const units = {
 </ul>
 <p>Organizó la ciudad en <b>4 barrios</b> e implantó un censo basado en la <b>riqueza</b> (no solo en el nacimiento). Dividió la población en <b>5 clases</b> organizadas en <b>centurias</b> (compañías de 100 hombres), hasta un total de <b>193 centurias</b>.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue el criterio innovador del censo de Servio Tulio?</div>
-  <button class="quiz-btn" data-idx="0">Se basaba únicamente en el nacimiento y el linaje</button>
-<button class="quiz-btn" data-idx="1">Se basaba en la riqueza, no solo en el nacimiento</button>
-<button class="quiz-btn" data-idx="2">Se basaba en el mérito militar</button>
-<button class="quiz-btn" data-idx="3">Se basaba en la religión y el sacerdocio</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">4. La República y Magistraturas</span>
-
 
     <h2>La República Romana (509–27 a.C.)</h2>
     <p>La República comenzó en <b>509 a.C.</b> con la expulsión del último rey etrusco.</p>
@@ -2016,20 +1720,8 @@ const units = {
 </table>
 <p>El <b>Cursus Honorum</b> era la carrera política; los magistrados iban ascendiendo de cargo en cargo, todos electivos y anuales.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué era el 'Cursus Honorum' en Roma?</div>
-  <button class="quiz-btn" data-idx="0">El código de leyes de la República</button>
-<button class="quiz-btn" data-idx="1">La carrera política por la que un ciudadano ascendía de cargo en cargo</button>
-<button class="quiz-btn" data-idx="2">El nombre del ejército romano</button>
-<button class="quiz-btn" data-idx="3">El manual de ética para senadores</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">5. XII Tablas y Lucha de Clases</span>
-
 
     <h2>Ley de las XII Tablas y las 4 Igualdades</h2>
     <h3>La Lucha de Clases</h3>
@@ -2044,20 +1736,8 @@ const units = {
 <h3>Contenido de las XII Tablas</h3>
 <p>Tablas I–II: procedimiento judicial · III: deudores · IV: patria potestad · V: tutela · VI: propiedad · VII: servidumbres · VIII: penal · IX: derecho público · X: sagrado · XI–XII: complementos.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué igualdad conquistaron los plebeyos con la Ley de las XII Tablas?</div>
-  <button class="quiz-btn" data-idx="0">Igualdad política (acceso a cargos)</button>
-<button class="quiz-btn" data-idx="1">Igualdad civil y social (ante la ley y el matrimonio mixto)</button>
-<button class="quiz-btn" data-idx="2">Igualdad religiosa (libertad de culto)</button>
-<button class="quiz-btn" data-idx="3">Igualdad económica (reparto de tierras)</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">6. Fuentes del Derecho en la República</span>
-
 
     <h2>Fuentes del Derecho en la República</h2>
     <p>En la República, el Derecho romano tenía múltiples fuentes:</p>
@@ -2070,20 +1750,8 @@ const units = {
 </ul>
 <div class="destacado">El <b>Ius Honorarium</b> (derecho pretoriano) fue el conjunto de normas creadas por el pretor para corroborar, suplir o corregir el derecho civil existente.</div>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué era el Ius Honorarium o derecho pretoriano?</div>
-  <button class="quiz-btn" data-idx="0">El conjunto de leyes aprobadas por el Senado</button>
-<button class="quiz-btn" data-idx="1">El derecho creado por el pretor para corroborar, suplir o corregir el derecho civil</button>
-<button class="quiz-btn" data-idx="2">Las constituciones imperiales del emperador</button>
-<button class="quiz-btn" data-idx="3">Los plebiscitos votados por la Asamblea plebeya</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">7. El Imperio Romano</span>
-
 
     <h2>El Imperio Romano (27 a.C.–476 d.C.)</h2>
     <h3>Organización del Imperio</h3>
@@ -2097,20 +1765,8 @@ const units = {
 <h3>El Edicto Perpetuo de Adriano</h3>
 <p>Adriano ordenó al jurista <b>Salvio Juliano</b> reunir en un solo cuerpo las reglas publicadas cada año por el pretor urbano → codificación del derecho pretoriano → promulgado como <b>ley definitiva</b> (sin más modificaciones).</p>
     
-<div class="quiz-section" data-correcta="3">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Quién codificó el Edicto Perpetuo por orden del Emperador Adriano?</div>
-  <button class="quiz-btn" data-idx="0">Cayo</button>
-<button class="quiz-btn" data-idx="1">Ulpiano</button>
-<button class="quiz-btn" data-idx="2">Justiniano</button>
-<button class="quiz-btn" data-idx="3">Salvio Juliano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">8. Crisis del s. III, Diocleciano y Constantino</span>
-
 
     <h2>Crisis del s. III · Diocleciano · Constantino</h2>
     <h3>Crisis del Siglo III</h3>
@@ -2125,20 +1781,8 @@ const units = {
 <h3>Teodosio (395 d.C.)</h3>
 <p>Dividió definitivamente el Imperio entre sus hijos Honorio (Occidente) y Arcadio (Oriente).</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Qué estableció el Edicto de Milán de Constantino en el año 313 d.C.?</div>
-  <button class="quiz-btn" data-idx="0">La división del Imperio en Oriente y Occidente</button>
-<button class="quiz-btn" data-idx="1">La libertad de culto para los cristianos</button>
-<button class="quiz-btn" data-idx="2">La codificación definitiva del derecho romano</button>
-<button class="quiz-btn" data-idx="3">El traslado de la capital a Roma</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">9. Codificaciones y Ley de Citas</span>
-
 
     <h2>Codificaciones: Gregoriano, Hermogeniano, Teodosiano y Ley de Citas</h2>
     <p>Ante la enorme cantidad de leyes romanas, desde el siglo II comenzó la codificación:</p>
@@ -2151,20 +1795,8 @@ const units = {
 <div class="destacado">La <b>Ley de Citas</b>: estableció qué juristas podían ser citados como autoridad en los juicios (Papiniano, Paulo, Ulpiano, Modestino, Gayo).</div>
 <p>La codificación definitiva fue obra del Emperador <b>Justiniano</b> (529–533 d.C.) desde el Imperio de Oriente → <i>Corpus Iuris Civilis</i>.</p>
     
-<div class="quiz-section" data-correcta="1">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿Cuál fue la codificación definitiva del derecho romano y quién la realizó?</div>
-  <button class="quiz-btn" data-idx="0">El Código Teodosiano, por el Senado romano</button>
-<button class="quiz-btn" data-idx="1">El Corpus Iuris Civilis, por el Emperador Justiniano (529–533 d.C.)</button>
-<button class="quiz-btn" data-idx="2">El Código Gregoriano, por el jurista Salvio Juliano</button>
-<button class="quiz-btn" data-idx="3">La Ley de Citas, por el Emperador Diocleciano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 <span class="section-tag">10. Caída del Imperio y Legado</span>
-
 
     <h2>Caída del Imperio y Legado Romano</h2>
     <div class="destacado">⚔️ <b>476 d.C.</b> — Odoacro, rey de los hérulos, saqueó Roma → caída del Imperio Romano de Occidente.</div>
@@ -2179,17 +1811,6 @@ const units = {
   <li>El sistema legal, principios jurídicos (primacía de la ley) y derecho de apelación.</li>
 </ul>
     
-<div class="quiz-section" data-correcta="2">
-  <div class="quiz-label">🔎 Pregunta rápida</div>
-  <div class="quiz-pregunta">¿En qué año y quién produjo la caída del Imperio Romano de Occidente?</div>
-  <button class="quiz-btn" data-idx="0">395 d.C., cuando Teodosio dividió el Imperio</button>
-<button class="quiz-btn" data-idx="1">313 d.C., con el Edicto de Milán de Constantino</button>
-<button class="quiz-btn" data-idx="2">476 d.C., cuando Odoacro (rey de los hérulos) saqueó Roma</button>
-<button class="quiz-btn" data-idx="3">529 d.C., con la codificación de Justiniano</button>
-
-  <div class="quiz-feedback"></div>
-  <button class="quiz-btn-reset">↺ Reintentar</button>
-
 
 `,
     resumen: [
