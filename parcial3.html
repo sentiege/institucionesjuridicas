@@ -237,73 +237,6 @@
     }
     .mode-btn .btn-icon { font-size: 1rem; }
 
-    /* ====== LECTOR DE VOZ (TTS) ====== */
-    .tts-player {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      background: var(--parchment);
-      border-bottom: 1px solid var(--border-warm);
-      padding: 10px 20px;
-    }
-    .tts-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border-warm);
-      background: var(--paper);
-      color: var(--ink);
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    }
-    .tts-btn:hover { background: var(--gold-muted); border-color: var(--gold); }
-    .tts-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .tts-btn.tts-btn-main { background: var(--gold); color: var(--paper); border-color: var(--gold); }
-    .tts-btn.tts-btn-main:hover { background: var(--gold-light); }
-    .tts-sep { width: 1px; height: 22px; background: var(--border-warm); flex-shrink: 0; }
-    .tts-rate-wrap {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      color: #7a6040;
-      letter-spacing: 0.02em;
-    }
-    .tts-rate-wrap input[type="range"] { accent-color: var(--gold); width: 80px; }
-    .tts-voice-select {
-      font-family: var(--serif);
-      font-size: 0.75rem;
-      color: var(--ink);
-      background: var(--paper);
-      border: 1.5px solid var(--border-warm);
-      border-radius: 6px;
-      padding: 5px 8px;
-      max-width: 190px;
-      cursor: pointer;
-    }
-    .tts-status {
-      font-size: 0.75rem;
-      color: #7a6040;
-      font-style: italic;
-      min-width: 90px;
-    }
-    .tts-active-highlight {
-      background: rgba(184,134,11,0.16);
-      box-shadow: 0 0 0 2px var(--gold-muted);
-      border-radius: 4px;
-      transition: background 0.25s;
-    }
-    @media (max-width: 640px) {
-      .tts-player { padding: 8px 14px; }
-      .tts-rate-wrap { display: none; }
-    }
-
     /* ====== CONTENT PANEL ====== */
     .content-panel {
       padding: 32px 36px 40px;
@@ -1163,21 +1096,6 @@
       </button>
     </div>
 
-    <div class="tts-player" id="ttsPlayer">
-      <button class="tts-btn" id="ttsPrev" title="Ítem anterior">⏮</button>
-      <button class="tts-btn tts-btn-main" id="ttsPlay" title="Reproducir">▶</button>
-      <button class="tts-btn" id="ttsStop" title="Detener">⏹</button>
-      <button class="tts-btn" id="ttsNext" title="Ítem siguiente">⏭</button>
-      <div class="tts-sep"></div>
-      <select class="tts-voice-select" id="ttsVoice" title="Voz"></select>
-      <div class="tts-rate-wrap">
-        <span>🐢</span>
-        <input type="range" id="ttsRate" min="0.6" max="1.6" step="0.1" value="1">
-        <span>🐇</span>
-      </div>
-      <span class="tts-status" id="ttsStatus">Lector listo</span>
-    </div>
-
     <div class="content-panel" id="contentPanel">
       <!-- renderizado dinámico -->
     </div>
@@ -1196,6 +1114,7 @@ const units = {
 
 <span class="section-tag">1. Sociedad y Grupos Sociales</span>
 
+
     <h2>Sociedad y Grupos Sociales</h2>
     <p><b>Sociedad</b> es el conjunto de personas que interactúa en un espacio determinado y comparte una misma cultura, relacionándose según reglas jurídicas y costumbres. <span style="font-size:.8rem;color:#5a7363">(Macionis & Plummer)</span></p>
 <h3>Grupos Sociales</h3>
@@ -1205,7 +1124,12 @@ const units = {
 <p>Conjunto de formas en que grupos e individuos se organizan y relacionan dentro de una sociedad. Incluye la "constelación especial" de castas, estamentos y clases.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">2. Instituciones y Cultura</span>
+
 
     <h2>Instituciones y Cultura</h2>
     <h3>Instituciones</h3>
@@ -1216,7 +1140,12 @@ const units = {
 <p class="cita">"La cultura se ha ido formando conforme el ser humano se ha desarrollado en un entorno específico."</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">3. Nación y Estado</span>
+
 
     <h2>Nación y Estado</h2>
     <h3>Nación</h3>
@@ -1232,7 +1161,12 @@ const units = {
 </ul>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">4. Gobierno</span>
+
 
     <h2>Gobierno</h2>
     <p>El <b>gobierno</b> es el modo en que se expresa, concreta y organiza el Poder del Estado. No puede existir ni funcionar sin órganos.</p>
@@ -1240,12 +1174,23 @@ const units = {
 <p>Desde el gobierno se ejerce el poder político sobre la sociedad, ejecutando las leyes, legislando y administrando justicia.</p>
     
 
-`,
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
+
+
+<span class="section-tag">5. Formas de Estado y de Gobierno</span>
+<h2>Formas de Estado</h2>
+<p>El Estado puede adoptar distintas formas según cómo organiza su territorio y poder político. Las principales son el Estado unitario, con un solo centro de poder político, y el Estado federal, donde el poder se reparte entre un gobierno central y entidades federadas.</p>
+<h2>Formas de Gobierno</h2>
+<p>Las formas de gobierno se refieren a cómo se distribuye el poder dentro del Estado. Entre las más relevantes están la monarquía, donde el jefe de Estado es un rey o reina, y la república, donde el jefe de Estado es elegido. Según la relación entre poderes, pueden ser parlamentarios, presidenciales o mixtos.</p>`,
     resumen: [
       { key: "Sociedad y Grupos Sociales", val: "Ejemplos: la familia, el trabajo, la universidad, la iglesia." },
       { key: "Instituciones y Cultura", val: "Son relaciones entre personas sistematizadas en una estructura más o menos formal. Ej.: la familia." },
       { key: "Nación y Estado", val: "El término <b>Estado</b> aparece en el Renacimiento con Maquiavelo (<i>El Príncipe</i>): «STATO» = organización política suprema. Antes se llamaba Polis (Grecia), Civitas/Imperio/República (Roma)." },
-      { key: "Gobierno", val: "Comprende tres poderes: <b>Ejecutivo · Legislativo · Judicial</b>" }
+      { key: "Gobierno", val: "Comprende tres poderes: <b>Ejecutivo · Legislativo · Judicial</b>" },
+      { key: "Formas de Estado y Gobierno", val: "Diferencia entre Estado unitario y federal, y entre monarquía y república como formas de gobierno." }
     ],
     quiz: [
       {
@@ -1300,6 +1245,7 @@ const units = {
 
 <span class="section-tag">1. Línea del Tiempo</span>
 
+
     <h2>Línea del Tiempo General</h2>
     <table>
 <tr><th>Período</th><th>Tiempo aprox.</th><th>Hito clave</th></tr>
@@ -1312,7 +1258,12 @@ const units = {
 <div class="destacado">La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3.500 a.C.).</div>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">2. Paleolítico</span>
+
 
     <h2>El Paleolítico</h2>
     <div class="tag">4.000.000 – 10.000 a.C.</div>
@@ -1326,7 +1277,12 @@ const units = {
 </ul>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">3. Neolítico y Revolución Agrícola</span>
+
 
     <h2>Neolítico y Revolución Agrícola</h2>
     <div class="tag">10.000 – 6.000 a.C.</div>
@@ -1341,7 +1297,12 @@ const units = {
 </ul>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">4. Jerarquización y Nacimiento de Instituciones</span>
+
 
     <h2>Jerarquización social y primeras instituciones</h2>
     <p>El aumento de habitantes y la vida fija en aldeas obligó a las comunidades a dotarse de una <b>organización social compleja</b>.</p>
@@ -1357,7 +1318,12 @@ const units = {
 </div>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">5. Edad de los Metales e Historia</span>
+
 
     <h2>Edad de los Metales e Historia</h2>
     <h3>Edad de los Metales</h3>
@@ -1369,13 +1335,30 @@ const units = {
 <p>Cecilio Báez también destacó la importancia del análisis histórico para quien estudia las ciencias jurídicas.</p>
     
 
-`,
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
+
+
+<span class="section-tag">3. Las edades de la Historia y la línea del tiempo</span>
+<h2>Las edades de la Historia</h2>
+<p>La Historia se organiza en grandes etapas: <strong>Prehistoria</strong> (desde la aparición del hombre hasta la invención de la escritura), <strong>Edad Antigua</strong> (civilizaciones como Mesopotamia, Egipto, India, China, Grecia y Roma), <strong>Edad Media</strong> (desde la caída del Imperio Romano de Occidente en 476 hasta el siglo XV), <strong>Edad Moderna</strong> (desde el descubrimiento de América en 1492) y <strong>Edad Contemporánea</strong> (desde la Revolución Francesa de 1789 hasta nuestros días).</p>
+<h2>La línea del tiempo</h2>
+<p>Una <strong>línea del tiempo</strong> permite visualizar cronológicamente los principales hitos históricos: hace 10.000 a.C. el Neolítico, hacia 3.500 a.C. la invención de la escritura, el año 0 como referencia del nacimiento de Jesucristo, el año 476 como caída del Imperio Romano de Occidente, 1492 como descubrimiento de América y 1789 como inicio de la Edad Contemporánea con la Revolución Francesa.</p>
+
+<span class="section-tag">4. Vida en el Paleolítico y en el Neolítico</span>
+<h2>Vida durante el Paleolítico</h2>
+<p>En el Paleolítico, los grupos humanos eran <strong>nómadas</strong>, cazadores y recolectores. Fabricaban utensilios de piedra y hueso, vivían en cuevas o chozas y desarrollaron creencias religiosas y pinturas rupestres como las de Altamira y Lascaux.</p>
+<h2>La revolución agrícola del Neolítico</h2>
+<p>En el Neolítico se produjo la primera gran revolución de la historia humana: la <strong>agricultura</strong>. La domesticación de plantas y animales permitió la sedentarización, el crecimiento demográfico, la estratificación social y la especialización del trabajo, dando origen a aldeas agrícolas y formas más complejas de organización social.</p>`,
     resumen: [
       { key: "Línea del Tiempo General", val: "La Prehistoria abarca desde la aparición del hombre (~2.500.000 a.C.) hasta el descubrimiento de la escritura (~3.500 a.C.)." },
       { key: "El Paleolítico", val: "<b>Paleolítico</b> = «piedra antigua o tallada». Es el período más largo de la prehistoria." },
       { key: "Neolítico y Revolución Agrícola", val: "Se inicia con la aparición de la <b>agricultura</b>: la primera gran revolución de la humanidad." },
       { key: "Jerarquización social y primeras instituciones", val: "🏠 <b>La Familia</b> · ⚖️ <b>La Justicia</b> (venganza de sangre) · 🏛️ <b>Organización Política</b>" },
-      { key: "Edad de los Metales e Historia", val: "🔶 Cobre → 🥉 Bronce → ⚙️ Hierro" }
+      { key: "Edad de los Metales e Historia", val: "🔶 Cobre → 🥉 Bronce → ⚙️ Hierro" },
+      { key: "Edades de la Historia", val: "Prehistoria, Edad Antigua, Media, Moderna y Contemporánea organizadas en una línea del tiempo de hitos clave." }
     ],
     quiz: [
       {
@@ -1418,6 +1401,7 @@ const units = {
 
 <span class="section-tag">1. India</span>
 
+
     <h2>India: Mohenjo-Daro, Hinduismo y Castas</h2>
     <h3>Ciudades del Valle del Indo</h3>
 <p><b>Mohenjo-Daro y Harappa</b> (2.500–1.500 a.C., actual Pakistán): ciudades amuralladas con calles en ángulo recto, casas de dos pisos con cañerías, comercio activo y sistemas de escritura.</p>
@@ -1435,7 +1419,12 @@ const units = {
 </table>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">2. Código de Manú</span>
+
 
     <h2>Código de Manú</h2>
     <p>Colección de preceptos <b>religiosos, morales, sociales y jurídicos</b> que regulaban el gobierno, la justicia, el ejército, la agricultura, el comercio y la condición de la mujer.</p>
@@ -1450,7 +1439,12 @@ const units = {
 <p><b>Acto de inmolación Sati:</b> la viuda se inmolaba en la pira funeraria del esposo.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">3. Egipto</span>
+
 
     <h2>Egipto: Faraón, Sociedad y Cultura</h2>
     <p>Egipto está rodeado de desierto; solo las orillas del <b>río Nilo</b> presentaban tierras fértiles, base de toda su civilización.</p>
@@ -1472,7 +1466,12 @@ const units = {
 </ul>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">4. Mesopotamia — Sumerios</span>
+
 
     <h2>Mesopotamia: Sumerios y Escritura Cuneiforme</h2>
     <p><b>Mesopotamia</b> = «tierra entre ríos» (Tigris y Éufrates) → actual Irak. Junto con Egipto, parte de la <b>Media Luna Fértil</b>.</p>
@@ -1485,7 +1484,12 @@ const units = {
 <p>Creada en Sumeria (~3.500 a.C.) en tablillas de arcilla húmeda con un tallo vegetal biselado en forma de cuña (<i>cuneus</i>). Sirvió para llevar contabilidad en templos, escribir leyes, textos literarios y religiosos.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">5. Hammurabi y Babilonia</span>
+
 
     <h2>Babilonia y el Código de Hammurabi</h2>
     <p>Hacia <b>1750 a.C.</b>, Hammurabi dominó toda la Mesopotamia inferior, con capital en <b>Babilonia</b>. Creó el primer código escrito de leyes (~1760 a.C.).</p>
@@ -1501,7 +1505,12 @@ const units = {
 <p>Mérito histórico: entregó al <b>Estado</b> la responsabilidad del cumplimiento de la ley, suprimiendo la venganza privada.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">6. Hebreos — Biblia y Torá</span>
+
 
     <h2>Civilización Hebrea: Biblia y Torá</h2>
     <p>El territorio hebreo es la antigua <b>Canaán</b> (Palestina), en el litoral oriental del Mar Mediterráneo, entre el río Jordán y el Mar Muerto.</p>
@@ -1518,7 +1527,12 @@ const units = {
 </table>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">7. Derecho Hebreo</span>
+
 
     <h2>Derecho Hebreo: Tratados y Derecho Civil</h2>
     <h3>Tratados de la Torá</h3>
@@ -1537,6 +1551,10 @@ const units = {
   <li>El <b>primogénito</b> recibía doble herencia.</li>
 </ul>
     
+
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
 
 `,
     resumen: [
@@ -1607,6 +1625,7 @@ const units = {
 
 <span class="section-tag">1. Grecia — Introducción y Geografía</span>
 
+
     <h2>Grecia: Geografía e Ideales Políticos</h2>
     <div class="cita">"La mayor parte de los ideales políticos modernos — la justicia, la libertad, el régimen constitucional y el respeto al Derecho — comenzaron con la reflexión de los pensadores griegos." (Sabine)</div>
 <h3>Geografía</h3>
@@ -1620,7 +1639,12 @@ const units = {
 </table>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">2. Esparta</span>
+
 
     <h2>Esparta: Licurgo, Educación y Constitución</h2>
     <h3>Licurgo y la Constitución de Esparta</h3>
@@ -1636,7 +1660,12 @@ const units = {
 <p>Defensa de los griegos contra los persas (rey Darío y su hijo Jerjes). Batallas memorables: <b>Maratón, Termópilas, Salamina y Platea</b>. En Termópilas, 300 espartanos murieron conteniendo al ejército persa.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">3. Olimpiadas</span>
+
 
     <h2>Las Primeras Olimpiadas</h2>
     <div class="destacado">🏟️ Año 776 a.C. — Primeros Juegos Olímpicos: el «año 0» del calendario griego.</div>
@@ -1644,7 +1673,12 @@ const units = {
 <p>Las competencias incluían atletismo, lucha, lanzamiento de disco y jabalina, carreras de carros y pentatlon. Los vencedores recibían una corona de olivo y gloria eterna.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">4. Evolución Política de Atenas</span>
+
 
     <h2>Evolución Política de Atenas</h2>
     <p>Atenas pasó por cuatro etapas políticas principales:</p>
@@ -1659,7 +1693,12 @@ const units = {
 <p>Primer legislador que codificó las leyes de Atenas por escrito, aunque eran extremadamente severas ("draconiana").</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">5. Solón y Clístenes</span>
+
 
     <h2>Solón, Clístenes y la Democracia Ateniense</h2>
     <h3>Solón (594 a.C.)</h3>
@@ -1675,7 +1714,12 @@ const units = {
 <p>Profundizó las reformas: decidió que todos los cargos públicos recibieran <b>compensación económica</b>, permitiendo así la participación de los ciudadanos más pobres. La asamblea del pueblo se llamaba <b>Eclesía</b>; el lugar de reunión era el <b>Ágora</b>.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">6. Sofistas y Sócrates</span>
+
 
     <h2>Sofistas vs. Sócrates</h2>
     <table>
@@ -1690,6 +1734,10 @@ const units = {
 <h3>Platón y Aristóteles</h3>
 <p><b>Platón</b> (discípulo de Sócrates): teoría de las ideas, la República ideal. <b>Aristóteles</b> (discípulo de Platón): política, lógica, ética — "el hombre es un animal político".</p>
     
+
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
 
 `,
     resumen: [
@@ -1747,6 +1795,7 @@ const units = {
 
 <span class="section-tag">1. Fundación de Roma</span>
 
+
     <h2>Fundación de Roma y Sociedad</h2>
     <div class="destacado">🏛️ Roma se fundó el <b>21 de abril del año 753 a.C.</b> — fundadores míticos: Rómulo y Remo.</div>
 <p><b>Roma Quadrata</b>: conjunto de pueblos latinos, etruscos y sabinos que vivían a orillas del río Tíber.</p>
@@ -1759,7 +1808,12 @@ const units = {
 </table>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">2. Monarquía Romana</span>
+
 
     <h2>La Monarquía Romana (753–509 a.C.)</h2>
     <h3>Instituciones Políticas de la Monarquía</h3>
@@ -1773,7 +1827,12 @@ const units = {
 <p>El <b>paterfamilias</b> era el jefe absoluto de la familia y su sacerdote. El <b>rex</b>, jefe absoluto de la ciudad, era el sumo sacerdote del Estado.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">3. Reformas de Servio Tulio</span>
+
 
     <h2>Reformas de Servio Tulio</h2>
     <h3>El Muro Serviano</h3>
@@ -1787,7 +1846,12 @@ const units = {
 <p>Organizó la ciudad en <b>4 barrios</b> e implantó un censo basado en la <b>riqueza</b> (no solo en el nacimiento). Dividió la población en <b>5 clases</b> organizadas en <b>centurias</b> (compañías de 100 hombres), hasta un total de <b>193 centurias</b>.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">4. La República y Magistraturas</span>
+
 
     <h2>La República Romana (509–27 a.C.)</h2>
     <p>La República comenzó en <b>509 a.C.</b> con la expulsión del último rey etrusco.</p>
@@ -1803,7 +1867,12 @@ const units = {
 <p>El <b>Cursus Honorum</b> era la carrera política; los magistrados iban ascendiendo de cargo en cargo, todos electivos y anuales.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">5. XII Tablas y Lucha de Clases</span>
+
 
     <h2>Ley de las XII Tablas y las 4 Igualdades</h2>
     <h3>La Lucha de Clases</h3>
@@ -1819,7 +1888,12 @@ const units = {
 <p>Tablas I–II: procedimiento judicial · III: deudores · IV: patria potestad · V: tutela · VI: propiedad · VII: servidumbres · VIII: penal · IX: derecho público · X: sagrado · XI–XII: complementos.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">6. Fuentes del Derecho en la República</span>
+
 
     <h2>Fuentes del Derecho en la República</h2>
     <p>En la República, el Derecho romano tenía múltiples fuentes:</p>
@@ -1833,7 +1907,12 @@ const units = {
 <div class="destacado">El <b>Ius Honorarium</b> (derecho pretoriano) fue el conjunto de normas creadas por el pretor para corroborar, suplir o corregir el derecho civil existente.</div>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">7. El Imperio Romano</span>
+
 
     <h2>El Imperio Romano (27 a.C.–476 d.C.)</h2>
     <h3>Organización del Imperio</h3>
@@ -1848,7 +1927,12 @@ const units = {
 <p>Adriano ordenó al jurista <b>Salvio Juliano</b> reunir en un solo cuerpo las reglas publicadas cada año por el pretor urbano → codificación del derecho pretoriano → promulgado como <b>ley definitiva</b> (sin más modificaciones).</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">8. Crisis del s. III, Diocleciano y Constantino</span>
+
 
     <h2>Crisis del s. III · Diocleciano · Constantino</h2>
     <h3>Crisis del Siglo III</h3>
@@ -1864,7 +1948,12 @@ const units = {
 <p>Dividió definitivamente el Imperio entre sus hijos Honorio (Occidente) y Arcadio (Oriente).</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">9. Codificaciones y Ley de Citas</span>
+
 
     <h2>Codificaciones: Gregoriano, Hermogeniano, Teodosiano y Ley de Citas</h2>
     <p>Ante la enorme cantidad de leyes romanas, desde el siglo II comenzó la codificación:</p>
@@ -1878,7 +1967,12 @@ const units = {
 <p>La codificación definitiva fue obra del Emperador <b>Justiniano</b> (529–533 d.C.) desde el Imperio de Oriente → <i>Corpus Iuris Civilis</i>.</p>
     
 
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
 <span class="section-tag">10. Caída del Imperio y Legado</span>
+
 
     <h2>Caída del Imperio y Legado Romano</h2>
     <div class="destacado">⚔️ <b>476 d.C.</b> — Odoacro, rey de los hérulos, saqueó Roma → caída del Imperio Romano de Occidente.</div>
@@ -1894,7 +1988,22 @@ const units = {
 </ul>
     
 
-`,
+  
+  <button class="quiz-btn-reset">↺ Reintentar</button>
+
+
+
+
+<span class="section-tag">4. Organización del gobierno imperial</span>
+<h2>El gobierno del Imperio Romano</h2>
+<p>En el Imperio, el <strong>Emperador</strong> concentraba poderes legislativos, militares y religiosos. El Senado, el Consejo del Príncipe y los miembros del orden senatorial y ecuestre administraban las provincias imperiales, las finanzas y la justicia en Roma.</p>
+<p>El emperador dictaba leyes mediante <strong>constituciones imperiales</strong> y designaba funcionarios que gobernaban las provincias senatoriales y el ejército. Aunque poseía gran autoridad, se esperaba que gobernara en interés del pueblo; los malos emperadores podían ser removidos mediante conspiraciones y asesinatos.</p>
+
+<span class="section-tag">5. Constituciones imperiales y fuentes del Derecho</span>
+<h2>Constituciones Imperiales</h2>
+<p>Las constituciones imperiales se manifestaban como <strong>edicta</strong> (edictos generales), <strong>decreta</strong> (sentencias en procesos), <strong>mandata</strong> (órdenes administrativas) y <strong>rescripta</strong> (respuestas a consultas jurídicas). Estas formas expresaban la voluntad normativa del emperador sobre funcionarios y súbditos.</p>
+<h2>El Edicto de Salvio Juliano</h2>
+<p>El emperador Adriano encargó al jurista <strong>Salvio Juliano</strong> la sistematización del <em>Edicto Perpetuo</em>, que fijó el Derecho pretoriano en un cuerpo único. Este edicto representa una codificación del <em>ius honorarium</em>, el Derecho creado por el pretor para corroborar, suplir o corregir el Derecho civil romano.</p>`,
     resumen: [
       { key: "Fundación de Roma y Sociedad", val: "🏛️ Roma se fundó el <b>21 de abril del año 753 a.C.</b> — fundadores míticos: Rómulo y Remo." },
       { key: "La Monarquía Romana (753–509 a.C.)", val: "Hasta la Ley de las XII Tablas, el derecho romano era <b>no escrito y consuetudinario</b>, regido por el <i>mos maiorum</i> (costumbre de los antepasados) con fuerte peso de la religión." },
@@ -1905,7 +2014,8 @@ const units = {
       { key: "El Imperio Romano (27 a.C.–476 d.C.)", val: "El <b>Emperador</b> nombraba al Consejo del Príncipe y a miembros del orden senatorial y ecuestre, que tenían a su cargo las provincias imperiales, el ejército y la policía." },
       { key: "Crisis del s. III · Diocleciano · Constantino", val: "Revueltas sociales y militares, anarquía y sucesión de emperadores incapaces. Ataques de los pueblos germanos." },
       { key: "Codificaciones: Gregoriano, Hermogeniano, Teodosiano y Ley de Citas", val: "La <b>Ley de Citas</b>: estableció qué juristas podían ser citados como autoridad en los juicios (Papiniano, Paulo, Ulpiano, Modestino, Gayo)." },
-      { key: "Caída del Imperio y Legado Romano", val: "⚔️ <b>476 d.C.</b> — Odoacro, rey de los hérulos, saqueó Roma → caída del Imperio Romano de Occidente." }
+      { key: "Caída del Imperio y Legado Romano", val: "⚔️ <b>476 d.C.</b> — Odoacro, rey de los hérulos, saqueó Roma → caída del Imperio Romano de Occidente." },
+      { key: "Gobierno imperial y constituciones", val: "El emperador concentra poderes y crea constituciones imperiales como edicta, decreta, mandata y rescripta, codificadas por Salvio Juliano." }
     ],
     quiz: [
       {
@@ -3238,8 +3348,6 @@ function renderUnit(unitKey, mode) {
   // force reflow for animation
   void panel.offsetWidth;
 
-  if (typeof ttsStop === 'function') ttsStop();
-
   if (mode === 'lectura') {
     panel.innerHTML = u.lectura;
   } else if (mode === 'resumen') {
@@ -3327,6 +3435,11 @@ function renderQuiz(panel, unitKey) {
   panel.innerHTML = html;
 }
 
+
+// Auto-init first unit view
+window.addEventListener('load', () => {
+  renderUnit('i', 'lectura');
+});
 // ============================================================
 //  INTERACTIONS
 // ============================================================
@@ -3354,193 +3467,6 @@ function selectAnswer(qi, selectedOpt, unitKey) {
 function retryQuiz(unitKey) {
   initQuizState(unitKey);
   renderQuiz(document.getElementById('contentPanel'), unitKey);
-}
-
-// ============================================================
-//  LECTOR DE VOZ (TTS) — lee los ítems del panel actual
-// ============================================================
-const ttsSupported = ('speechSynthesis' in window);
-
-const ttsState = {
-  items: [],       // [{el, text}]
-  index: -1,
-  playing: false,
-  paused: false,
-  voice: null,
-  rate: 1
-};
-
-function ttsSelectableSelector() {
-  // Elementos "leíbles" en cualquiera de los 3 modos (lectura / resumen / quiz)
-  return [
-    'span.section-tag', 'h2', 'h3', 'h4', 'p', 'li',
-    'div.destacado', 'p.cita', 'blockquote',
-    'div.summary-card',
-    'div.question-header', 'div.feedback-box.show'
-  ].join(', ');
-}
-
-function ttsBuildItems() {
-  const panel = document.getElementById('contentPanel');
-  const nodes = panel.querySelectorAll(ttsSelectableSelector());
-  const items = [];
-  nodes.forEach(el => {
-    // Evitar leer dos veces contenido anidado (p.ej. options-list dentro de question-header no aplica aquí)
-    const text = el.textContent.replace(/\s+/g, ' ').trim();
-    if (text.length > 1) items.push({ el, text });
-  });
-  return items;
-}
-
-function ttsPopulateVoices() {
-  if (!ttsSupported) return;
-  const select = document.getElementById('ttsVoice');
-  const voices = speechSynthesis.getVoices();
-  if (!voices.length) return;
-  const esVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('es'));
-  const list = esVoices.length ? esVoices : voices;
-  select.innerHTML = '';
-  list.forEach((v, i) => {
-    const opt = document.createElement('option');
-    opt.value = v.name;
-    opt.textContent = `${v.name} (${v.lang})`;
-    select.appendChild(opt);
-  });
-  ttsState.voice = list[0] || null;
-}
-
-if (ttsSupported) {
-  ttsPopulateVoices();
-  speechSynthesis.onvoiceschanged = ttsPopulateVoices;
-}
-
-function ttsSetStatus(msg) {
-  const el = document.getElementById('ttsStatus');
-  if (el) el.textContent = msg;
-}
-
-function ttsClearHighlight() {
-  document.querySelectorAll('.tts-active-highlight').forEach(el => el.classList.remove('tts-active-highlight'));
-}
-
-function ttsUpdatePlayIcon() {
-  const btn = document.getElementById('ttsPlay');
-  if (!btn) return;
-  btn.textContent = ttsState.playing && !ttsState.paused ? '⏸' : '▶';
-  btn.title = ttsState.playing && !ttsState.paused ? 'Pausar' : 'Reproducir';
-}
-
-function ttsSpeakIndex(i) {
-  if (!ttsSupported) return;
-  if (i < 0 || i >= ttsState.items.length) {
-    ttsStop();
-    ttsSetStatus('Lectura finalizada');
-    return;
-  }
-  speechSynthesis.cancel();
-  ttsClearHighlight();
-
-  ttsState.index = i;
-  const item = ttsState.items[i];
-  item.el.classList.add('tts-active-highlight');
-  item.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-  const utter = new SpeechSynthesisUtterance(item.text);
-  utter.lang = 'es-ES';
-  if (ttsState.voice) utter.voice = ttsState.voice;
-  utter.rate = ttsState.rate;
-
-  utter.onend = () => {
-    if (ttsState.playing && !ttsState.paused) {
-      ttsSpeakIndex(ttsState.index + 1);
-    }
-  };
-  utter.onerror = () => { /* ignorar interrupciones al cancelar */ };
-
-  ttsSetStatus(`Leyendo ítem ${i + 1} / ${ttsState.items.length}`);
-  speechSynthesis.speak(utter);
-}
-
-function ttsPlay() {
-  if (!ttsSupported) { ttsSetStatus('Lector no disponible en este navegador'); return; }
-
-  const voiceName = document.getElementById('ttsVoice').value;
-  const voices = speechSynthesis.getVoices();
-  ttsState.voice = voices.find(v => v.name === voiceName) || ttsState.voice;
-  ttsState.rate = parseFloat(document.getElementById('ttsRate').value) || 1;
-
-  if (ttsState.paused && ttsState.playing) {
-    speechSynthesis.resume();
-    ttsState.paused = false;
-    ttsSetStatus(`Leyendo ítem ${ttsState.index + 1} / ${ttsState.items.length}`);
-    ttsUpdatePlayIcon();
-    return;
-  }
-
-  ttsState.items = ttsBuildItems();
-  if (!ttsState.items.length) {
-    ttsSetStatus('No hay contenido para leer aquí');
-    return;
-  }
-  ttsState.playing = true;
-  ttsState.paused = false;
-  ttsUpdatePlayIcon();
-  ttsSpeakIndex(ttsState.index >= 0 ? ttsState.index : 0);
-}
-
-function ttsPause() {
-  if (!ttsSupported || !ttsState.playing) return;
-  speechSynthesis.pause();
-  ttsState.paused = true;
-  ttsSetStatus('En pausa');
-  ttsUpdatePlayIcon();
-}
-
-function ttsStop() {
-  if (ttsSupported) speechSynthesis.cancel();
-  ttsState.playing = false;
-  ttsState.paused = false;
-  ttsState.index = -1;
-  ttsState.items = [];
-  ttsClearHighlight();
-  ttsUpdatePlayIcon();
-  ttsSetStatus('Lector listo');
-}
-
-function ttsNext() {
-  if (!ttsSupported) return;
-  if (!ttsState.items.length) ttsState.items = ttsBuildItems();
-  if (!ttsState.items.length) return;
-  ttsState.playing = true;
-  ttsState.paused = false;
-  ttsUpdatePlayIcon();
-  ttsSpeakIndex(Math.min(ttsState.index + 1, ttsState.items.length - 1));
-}
-
-function ttsPrev() {
-  if (!ttsSupported) return;
-  if (!ttsState.items.length) ttsState.items = ttsBuildItems();
-  if (!ttsState.items.length) return;
-  ttsState.playing = true;
-  ttsState.paused = false;
-  ttsUpdatePlayIcon();
-  ttsSpeakIndex(Math.max(ttsState.index - 1, 0));
-}
-
-document.getElementById('ttsPlay').addEventListener('click', () => {
-  if (ttsState.playing && !ttsState.paused) ttsPause();
-  else ttsPlay();
-});
-document.getElementById('ttsStop').addEventListener('click', ttsStop);
-document.getElementById('ttsNext').addEventListener('click', ttsNext);
-document.getElementById('ttsPrev').addEventListener('click', ttsPrev);
-document.getElementById('ttsRate').addEventListener('input', (e) => {
-  ttsState.rate = parseFloat(e.target.value) || 1;
-});
-
-if (!ttsSupported) {
-  document.getElementById('ttsPlayer').querySelectorAll('button, select, input').forEach(el => el.disabled = true);
-  ttsSetStatus('Lector no disponible en este navegador');
 }
 
 // Event listeners
